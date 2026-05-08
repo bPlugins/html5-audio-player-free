@@ -1,0 +1,12 @@
+node_modules
+node_moduless
+dist/*
+!dist/*.php
+bundled
+dist
+/build
+zip
+bplugins_sdk_working
+/audio-player
+/vendor/
+languages/

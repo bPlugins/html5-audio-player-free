@@ -1,0 +1,327 @@
+$thumb-color: #fff;
+$thumb-radius: 50%;
+$thumb-height: 15px;
+$thumb-width: 15px;
+
+$track-width: 100%;
+$track-height: 7.5px;
+$track-radius: 5px;
+
+@mixin thumb() {
+  appearance: none;
+  background: $thumb-color;
+  width: $thumb-width;
+  height: $thumb-height;
+  border: none;
+  border-radius: $thumb-radius;
+  box-shadow: none;
+  cursor: pointer;
+  // margin-top: -($track-height / 2);
+}
+@mixin track() {
+  appearance: none;
+  background: transparent !important;
+  box-shadow: 0 0 0 0 transparent;
+  height: 100%;
+}
+@mixin thumbVolume() {
+  background: transparent;
+  background-image: url("img/sound-control.png");
+  width: 24px;
+  height: 31px;
+  border: none;
+  border-radius: 35%;
+  box-shadow: none;
+  cursor: pointer;
+  margin-top: -(31px / 2 - 10px / 2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 1140px;
+  max-width: 100%;
+  padding: 0 15px;
+  margin: 50px auto;
+
+  @media (max-width: 576px) {
+    padding: 0 5px;
+  }
+}
+
+.StampAudioPlayerSkin {
+  width: 500px;
+  max-width: 100%;
+  margin: 0 auto;
+  background: linear-gradient(to bottom, #636363, #363636);
+  border: 1px solid #1d1d1d;
+  border-radius: 10px;
+  position: relative;
+  padding: 25px 0;
+
+  button {
+    background: none;
+    display: flex;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    &:hover {
+      background: none !important;
+    }
+
+    svg {
+      fill: #fff;
+    }
+  }
+
+  input[type="range"] {
+    appearance: none;
+    width: $track-width;
+    height: $track-height;
+    background: radial-gradient(#545454, #1b1b1b);
+    border-radius: $track-radius;
+    outline: none;
+    box-shadow: none;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::-webkit-slider-runnable-track {
+      @include track();
+    }
+    // &::-webkit-slider-thumb {
+    //   @include thumb();
+    // }
+
+    &::-moz-range-track {
+      @include track();
+    }
+    &::-moz-range-thumb {
+      @include thumb();
+    }
+
+    &::-ms-track {
+      @include track();
+    }
+    &::-ms-thumb {
+      @include thumb();
+    }
+  }
+
+  .mainOptions {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    padding: 10px 40px;
+
+    @media (max-width: 576px) {
+      padding: 10px 15px;
+      padding-bottom: 5px;
+    }
+
+    .leftAudio,
+    .rightAudio {
+      position: absolute;
+      border: 1px solid #1d1d1d;
+      bottom: 50%;
+      transform: translateY(50%);
+      border-radius: 50px;
+      color: inherit;
+
+      @media (max-width: 576px) {
+        bottom: 0;
+        transform: translateY(0);
+      }
+    }
+
+    .leftAudio {
+      left: -19px;
+      padding: 10px 5px 10px 20px;
+    }
+    .rightAudio {
+      right: -19px;
+      padding: 10px 20px 10px 5px;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      @media (max-width: 576px) {
+        flex-direction: column-reverse;
+      }
+
+      .playPauseAudio {
+        border: 2px solid #fff;
+        background: linear-gradient(to bottom, #636363, #363636);
+        border-radius: 50%;
+        padding: 8.5px;
+        margin-right: 20px;
+        box-shadow: 0 0 0px 1.5px #1d1d1d;
+
+        @media (max-width: 576px) {
+          margin-right: 0;
+        }
+      }
+
+      .audioProgressView {
+        width: 100%;
+
+        .progressWrap {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          @media (max-width: 576px) {
+            position: relative;
+            padding-bottom: 25px;
+            margin-bottom: 10px;
+          }
+
+          #audioProgress {
+            width: 100%;
+            margin: none;
+          }
+
+          .currentTime,
+          .totalTime {
+            font-size: 14px;
+            color: #fff;
+
+            @media (max-width: 576px) {
+              position: absolute;
+              bottom: 0;
+            }
+          }
+          .currentTime {
+            margin-right: 10px;
+            left: 0;
+          }
+          .totalTime {
+            margin-left: 10px;
+            right: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .extraOptions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 80px 0 40px;
+    margin: 0 auto 20px auto;
+
+    @media (max-width: 576px) {
+      padding: 0 25px;
+      flex-direction: column-reverse;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .audioTitle {
+      color: #fff;
+      font-size: 20px;
+      margin-bottom: 0;
+    }
+
+    .audioSound {
+      position: relative;
+
+      @media (max-width: 576px) {
+        margin-left: auto;
+        margin-right: 30px;
+        margin-bottom: 25px;
+      }
+
+      #audioRange[type="range"] {
+        height: 10px;
+
+        &::-webkit-slider-runnable-track {
+          height: 10px;
+        }
+        &::-webkit-slider-thumb {
+          @include thumbVolume();
+        }
+
+        &::-moz-range-track {
+          height: 10px;
+        }
+        &::-moz-range-thumb {
+          @include thumbVolume();
+        }
+
+        &::-ms-track {
+          height: 10px;
+        }
+        &::-ms-thumb {
+          @include thumbVolume();
+        }
+      }
+    }
+  }
+
+  .muteUnmute {
+    font-size: 20px;
+    background-color: transparent;
+    position: absolute;
+    right: 35px;
+    top: 9px;
+
+    @media (max-width: 576px) {
+      right: 15px;
+      top: 14px;
+    }
+  }
+}
+
+// Plyr io settings
+.plyr--full-ui input[type="range"] {
+  color: transparent;
+}
+
+// Overwrite
+.StampAudioPlayerSkin button svg {
+  fill: skyblue;
+}
+// .StampAudioPlayerSkin input[type="range"]::-webkit-slider-thumb {
+//   background: #ffffff;
+// }
+// .StampAudioPlayerSkin input[type="range"]::-moz-range-thumb {
+//   background: #ffffff;
+// }
+// .StampAudioPlayerSkin input[type="range"]::-ms-thumb {
+//   background: #ffffff;
+// }
+.StampAudioPlayerSkin .mainOptions .controls .playPauseAudio {
+  border-color: skyblue;
+}
+.StampAudioPlayerSkin .mainOptions .controls .audioProgressView .progressWrap .currentTime,
+.StampAudioPlayerSkin .mainOptions .controls .audioProgressView .progressWrap .totalTime {
+  color: skyblue;
+}
+.StampAudioPlayerSkin .extraOptions .audioTitle {
+  color: skyblue;
+}
+
+// this is my code
+
+.plyr__controls__item.plyr__progress__container {
+  width: 100%;
+}
+.StampAudioPlayerSkin .plyr__progress {
+  width: 100%;
+}
+// .plyr__control svg {
+//   width: 15px;
+//   height: 15px;
+// }

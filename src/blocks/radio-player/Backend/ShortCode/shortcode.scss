@@ -1,0 +1,179 @@
+$primaryColor: #146ef5;
+$bgLight: #f3f6f9;
+$borderColor: #e2e8f0;
+$textColor: #64748b;
+$inputBg: #ffffff;
+$shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+
+.radioShortCode {
+    padding: 6px;
+    background: $bgLight;
+    border: 1px solid rgba($borderColor, 0.4);
+    border-radius: 12px;
+    margin: 25px auto 20px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    max-width: 100%;
+    box-sizing: border-box;
+
+    .radioShortCodeInner {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 15px;
+        width: 100%;
+    }
+
+    &.is-stacked {
+        padding: 12px;
+        margin: 10px 0;
+        width: 100%;
+
+        .radioShortCodeInner {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 8px;
+        }
+
+        .radioShortCodeHeader {
+            span {
+                text-align: left;
+                font-size: 13px;
+                margin-bottom: 0;
+                white-space: normal;
+                line-height: 1.4;
+                text-wrap: nowrap;
+            }
+        }
+
+        .radioShortCodeInputWrapper {
+            min-width: 100%;
+        }
+    }
+
+    .radioShortCodeHeader {
+        margin-bottom: 0px;
+        flex-shrink: 0;
+
+        span {
+            font-size: 15px;
+            font-weight: 400;
+            color: $textColor;
+            display: block;
+            text-align: left;
+            white-space: nowrap;
+        }
+    }
+
+    .radioShortCodeInputWrapper {
+        display: flex;
+        align-items: center;
+        background: $inputBg;
+        border: 1px solid $borderColor;
+        border-radius: 10px;
+        padding: 4px;
+        transition: all 0.2s ease;
+        position: relative;
+        min-width: 240px;
+        box-sizing: border-box;
+        margin: 0;
+
+        &:hover {
+            border-color: $primaryColor;
+        }
+
+        .tooltip {
+            visibility: hidden;
+            background-color: #1e293b;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 6px 14px;
+            position: absolute;
+            z-index: 99999;
+            bottom: calc(100% + 15px);
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 13px;
+            font-weight: 500;
+            white-space: nowrap;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+            pointer-events: none;
+
+            &::after {
+                content: "";
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                border-width: 6px;
+                border-style: solid;
+                border-color: #1e293b transparent transparent transparent;
+            }
+        }
+
+        &:hover .tooltip,
+        .tooltip.copied {
+            visibility: visible;
+            opacity: 1;
+            bottom: calc(100% + 10px);
+        }
+
+        .tooltip.copied {
+            background-color: #00a32a;
+
+            &::after {
+                border-color: #00a32a transparent transparent transparent;
+            }
+        }
+    }
+
+    .radioShortCodeInput {
+        flex-grow: 1;
+        box-sizing: border-box;
+        min-width: 0;
+
+        input {
+            cursor: pointer;
+            text-align: left;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            color: #1e293b;
+            padding: 6px 10px;
+            width: 100%;
+            font-family: inherit;
+            font-size: 14px;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-weight: 500;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+
+    .radioShortCodeCopyBtn {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        background: rgba($primaryColor, 0.1);
+        color: $primaryColor;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+            background: $primaryColor;
+            color: #fff;
+        }
+
+        svg {
+            display: block;
+        }
+    }
+}

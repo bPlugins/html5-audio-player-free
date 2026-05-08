@@ -1,0 +1,48 @@
+{
+  "name": "audio-player",
+  "version": "2.6.0",
+  "description": "",
+  "main": "src/player.js",
+  "scripts": {
+    "packages-update": "wp-scripts packages-update",
+    "lint": "eslint src",
+    "lint:css": "wp-scripts lint-style",
+    "lint:js": "wp-scripts lint-js",
+    "format": "wp-scripts format",
+    "start": "wp-scripts start --webpack-copy-php",
+    "build": "wp-scripts build --webpack-copy-php && npm run i18n && npm run zip",
+    "i18n-pot": "wp i18n make-pot . languages/h5ap.pot --exclude=\"src\" && cp ./languages/h5ap.pot ./languages/h5ap-en_US.po",
+    "i18n-json": "wp i18n make-json languages/ --no-purge",
+    "i18n-mo": "wp i18n make-mo languages/",
+    "i18n": "npm run i18n-pot && npm run i18n-json && npm run i18n-mo",
+    "bundle": "gulp bundle",
+    "zip": "gulp zip",
+    "deploy": "wp-scripts build --webpack-copy-php && gulp bundle && gulp zip && gulp freemius-deploy",
+    "start:css": "NODE_ENV=production npx tailwindcss -o ./src/blocks/audioplayer/Common/output.css --watch"
+  },
+  "keywords": [],
+  "author": "Md. Shamim Islam",
+  "license": "ISC",
+  "devDependencies": {
+    "@wordpress/scripts": "^27.9.0",
+    "autoprefixer": "^10.4.21",
+    "browser-sync": "^3.0.4",
+    "eslint": "^8.57.1",
+    "gulp": "^4.0.2",
+    "gulp-freemius-deploy": "^1.0.11",
+    "gulp-zip": "^5.1.0",
+    "mini-css-extract-plugin": "^1.6.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "dependencies": {
+    "@svgr/webpack": "^8.1.0",
+    "crypto-js": "^4.1.1",
+    "eslint-webpack-plugin": "^3.2.0",
+    "immer": "^10.1.1",
+    "lucide-react": "^0.482.0",
+    "react-hot-toast": "^2.5.2",
+    "react-router-dom": "^7.7.0",
+    "url-loader": "^4.1.1"
+  }
+}

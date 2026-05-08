@@ -1,0 +1,48 @@
+.bMediaUpload .components-panel__row input[type="text"] {
+  // width: calc(100% - 39px);
+  max-width: 100%;
+  padding: 5px 8px;
+}
+
+.h5vpUrlInput h3 {
+  margin: 0 10px;
+  text-transform: uppercase;
+  display: inline;
+}
+.h5vpUrlInput input {
+  width: 300px;
+  padding: 8.5px 15px;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  line-height: 0;
+}
+.h5vpUrlInput {
+  margin: -4px;
+}
+
+.h5vpUrlInput button {
+  margin-left: 20px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.bMediaUpload {
+  position: relative;
+  .components-base-control {
+    width: 100%;
+  }
+}
+
+.bMediaUpload button {
+  position: absolute;
+  right: 0px;
+  height: 15px;
+  padding: 3px !important;
+  color: #fff !important;
+  outline: 0;
+}
+
+.bMediaUpload button:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0px #007cba !important;
+}

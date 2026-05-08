@@ -1,0 +1,202 @@
+.h5ap_player .audioPlaylist a {
+  box-shadow: none;
+}
+.audioPlaylist {
+  border-radius: 5px;
+  padding: 5px 0;
+  .plyr__control {
+    height: auto;
+  }
+
+  &.simplePlaylist {
+    // background-color: var(--theme-custom-bg);
+  }
+  a {
+    box-shadow: none;
+  }
+  .plyr {
+    height: auto;
+  }
+  ul {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+  }
+  ul li {
+    padding: 3px 10px;
+    position: relative;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    &.item-active {
+      &.item-playing {
+        .icon--not-pressed {
+          display: none;
+        }
+        .icon--pressed {
+          display: block;
+        }
+      }
+      // .icon--pressed {
+      //   display: block;
+      // }
+      // .icon--not-pressed {
+      //   display: none;
+      // }
+    }
+    .artist {
+      opacity: 0.5;
+      font-size: 90%;
+    }
+    .title {
+      height: auto;
+      line-height: 1.35em;
+    }
+    .download {
+      position: absolute;
+      top: 1px;
+      right: 10px;
+      text-decoration: none;
+      opacity: 0.5;
+      color: inherit;
+      width: 25px;
+      height: 25px;
+      svg {
+        width: 20px;
+        height: 20px;
+        margin: 4px 0 0 3px;
+        fill: inherit;
+      }
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+  .plyr__control:focus {
+    background: transparent;
+  }
+  &.theme-dark {
+    & .plyr .plyr__controls {
+      background: #333 !important;
+      & .plyr__control {
+        color: #fff !important;
+      }
+      & .plyr__time {
+        color: #fff !important;
+      }
+    }
+    & ul li {
+      background: #2f3038;
+      color: #fff;
+      fill: #fff;
+      &:nth-child(odd) {
+        background: #4a4a51;
+      }
+      &.item-active {
+        background: #1aafff;
+        color: #fff;
+        fill: #fff;
+      }
+      &:hover {
+        background: #1aafff;
+        color: #fff;
+        fill: #fff;
+      }
+    }
+  }
+  &.theme-light {
+    // background: #f3f5f7;
+    box-shadow: 0px 20px 70px -5px rgb(0 0 0 / 15%), 0 10px 10px -5px rgb(0 0 0 / 3%);
+    & .plyr .plyr__controls {
+      background: #f3f5f7 !important;
+      & .plyr__control {
+        color: #333 !important;
+      }
+      & .plyr__time {
+        color: #333 !important;
+      }
+    }
+    & ul li {
+      background: #ffffff;
+      color: #333;
+      fill: #333;
+      &:nth-child(odd) {
+        background: #e6e9f1;
+      }
+      &.item-active {
+        background: #1aafff;
+        color: #fff;
+        fill: #fff;
+      }
+      &:hover {
+        background: #1aafff;
+        color: #fff;
+        fill: #fff;
+      }
+    }
+  }
+  &.theme-custom {
+    // background: var(--theme-custom-bg);
+    & .plyr .plyr__controls {
+      background: var(--theme-custom-bg) !important;
+      border-radius: var(--theme-custom-radius);
+      & .plyr__control {
+        color: #fff;
+        &:hover {
+          background: var(--theme-custom-brand-color);
+          // color: var(--theme-custom-bg);
+        }
+      }
+      & .plyr__time {
+        color: #fff;
+      }
+    }
+    & li {
+      background: var(--theme-custom-bg);
+      color: var(--theme-custom-color);
+      fill: var(--theme-custom-color);
+      &:nth-child(odd) {
+        background: var(--theme-custom-bg);
+      }
+
+      // &:hover {
+      //   background: var(--theme-custom-hover-bg);
+      //   color: var(--theme-custom-hover-color);
+      //   fill: var(--theme-custom-hover-color);
+      // }
+    }
+    ul li {
+      &.active,
+      &.item-active,
+      &:hover {
+        background: var(--theme-custom-hover-bg) !important;
+        color: var(--theme-custom-hover-color);
+        fill: var(--theme-custom-hover-color);
+      }
+      
+    }
+    .plyr--full-ui input[type="range"] {
+      color: var(--theme-custom-brand-color);
+    }
+  }
+}
+
+.h5ap_player {
+  display: flex;
+  height: auto;
+  overflow: hidden;
+  float: none;
+  .radius {
+    overflow: hidden;
+  }
+  &.alignright {
+    float: none;
+  }
+  &.aligncenter {
+    text-align: initial;
+  }
+  &.alignleft {
+    float: none;
+  }
+}

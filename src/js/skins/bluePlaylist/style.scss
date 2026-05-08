@@ -1,0 +1,364 @@
+/* blue playlist */
+// :root {
+//   --plyr-color-main: #00a0ff;
+// }
+.h5ap_playlist {
+  text-align: initial;
+}
+
+.hextensive {
+  display: flex;
+  width: 100%;
+  max-height: 550px;
+
+  [data-index] {
+    margin: initial;
+    transform: initial;
+  }
+
+  .plyr {
+    height: auto;
+  }
+
+  & button {
+    background: transparent;
+  }
+
+  & .left {
+    height: 100%;
+
+    & .poster {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    & .plyr__controls {
+      background: #f1f1f1;
+
+      & .repeat-shuffle {
+        display: flex;
+        justify-content: space-between;
+        width: 20%;
+        max-width: 70px;
+      }
+    }
+
+    .plyr__control[data-active="true"] {
+      background: var(--plyr-audio-control-background-hover, var(--plyr-color-main, var(--plyr-color-main, #00b2ff)));
+      color: var(--plyr-audio-control-color-hover, #fff);
+    }
+
+    & .plyr__meta {
+      text-align: center;
+      margin: 30px 10px 50px;
+
+      & h2 {
+        font-size: 23px;
+        margin-bottom: 8px;
+        font-weight: 600;
+        height: auto;
+      }
+
+      & h3 {
+        font-size: 20px;
+        color: #607d8b;
+        margin: 0;
+        font-weight: 600;
+      }
+    }
+  }
+
+  & .plyr__controls.controls {
+    padding: 0;
+    display: block;
+  }
+
+  & button:focus {
+    background: transparent;
+  }
+
+  & .progressbar {
+    justify-content: space-between;
+
+    & .plyr__progress {
+      width: calc(100% - 110px);
+    }
+  }
+
+  & .main-controls {
+    justify-content: space-between;
+
+    & .dashicons {
+      cursor: pointer;
+      font-size: 23px;
+
+      &[active="true"] {
+        color: #1aafff;
+      }
+
+      &:hover {
+        background: transparent;
+        color: inherit;
+      }
+    }
+
+    & .volume {
+      max-width: 33%;
+      display: flex;
+
+      & .plyr__volume {
+        min-width: 50px;
+        width: 100%;
+        max-width: 80px;
+      }
+    }
+
+    & .re-ply-fast {
+      width: 55%;
+      max-width: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      margin-left: 10px;
+
+      & [data-plyr="play"] svg {
+        height: 30px;
+        width: 30px;
+      }
+    }
+  }
+
+  & .right {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+
+    & .hsong-item {
+      cursor: pointer;
+      padding: 5px 2px;
+      position: relative;
+
+      &.item-playing {
+        .icon--pressed {
+          display: block;
+        }
+
+        .icon--not-pressed {
+          display: none;
+        }
+      }
+
+      & h3 {
+        color: inherit;
+      }
+    }
+
+    & .ply_icon {
+      width: 35px;
+      height: 100%;
+      float: left;
+      overflow: hidden;
+      display: flex;
+    }
+
+    & .meta-data {
+      width: calc(100% - 90px);
+      float: left;
+      overflow: hidden;
+      text-align: left;
+
+      & h3 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 20px;
+        margin: 0;
+        // margin-bottom: -6px;
+        height: auto;
+        text-align: left;
+      }
+
+      & span {
+        font-size: 16px;
+      }
+    }
+
+    & .time {
+      margin-top: 12px;
+      display: inline-block;
+      margin-left: 10px;
+      font-size: 16px;
+    }
+  }
+}
+
+.hextensive .right::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+.hextensive .right::-webkit-scrollbar-track {
+  background: #fff;
+}
+
+/* Handle */
+.hextensive .right::-webkit-scrollbar-thumb {
+  background: #b9b9b9;
+}
+
+/* Handle on hover */
+.hextensive .right::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.hextensive .left,
+.hextensive .right {
+  width: 50%;
+}
+
+.hextensive-dark {
+  background: #1f1f1f;
+  box-shadow: 0px 20px 70px -5px rgb(0 0 0 / 15%), 0 10px 10px -5px rgb(0 0 0 / 3%);
+
+  & button:not(:hover):not(:active):not(.has-background) {
+    color: #fff;
+  }
+
+  & span.dashicons {
+    color: #fff;
+  }
+
+  & .plyr__controls {
+    background: #1f1f1f !important;
+  }
+
+  & .left {
+    & .plyr__controls {
+      background: #1f1f1f !important;
+    }
+
+    & .plyr__meta {
+      & h2 {
+        color: #fff;
+      }
+
+      & h3 {
+        color: #9fbfce;
+      }
+    }
+
+    & .plyr__time {
+      color: #fff;
+    }
+  }
+
+  & .right {
+    background: #1f1f1f;
+
+    & .hsong-item {
+      color: #fff;
+
+      &:nth-child(odd) {
+        background: #4c505d;
+      }
+
+      &:hover {
+        background: var(--plyr-color-main, #00b2ff);
+        color: #ffffff;
+
+        & svg {
+          color: #fff;
+          fill: #fff;
+        }
+      }
+
+      &.item-active {
+        background: var(--plyr-color-main, #00b2ff);
+        color: #ffffff;
+
+        & svg {
+          color: #fff;
+          fill: #fff;
+        }
+      }
+    }
+  }
+}
+
+.hextensive-light {
+  background: #f1f1f1;
+  box-shadow: 0px 20px 70px -5px rgb(0 0 0 / 15%), 0 10px 10px -5px rgb(0 0 0 / 3%);
+
+  & button:not(:hover):not(:active):not(.has-background) {
+    color: #4a5764;
+  }
+
+  & .plyr__controls {
+    background: #f1f1f1 !important;
+  }
+
+  & .right {
+    background: #ffffff;
+
+    & .hsong-item {
+      &:nth-child(odd) {
+        background: #f0f5f7;
+      }
+
+      &:hover {
+        background: var(--plyr-color-main, #00b2ff);
+        color: #ffffff;
+
+        & svg {
+          color: #fff;
+          fill: #fff;
+        }
+      }
+
+      &.item-active {
+        background: var(--plyr-color-main, #00b2ff);
+        color: #ffffff;
+
+        & svg {
+          color: #fff;
+          fill: #fff;
+        }
+      }
+    }
+  }
+}
+
+.bluePlaylist [data-plyr="download"] {
+  display: inline-block;
+  font-size: 16px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+}
+
+.hextensive-custom {
+  box-shadow: 0px 20px 70px -5px rgb(0 0 0 / 15%), 0 10px 10px -5px rgb(0 0 0 / 3%);
+
+  .plyr__controls {
+    background: #f1f1f1
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .hextensive {
+    flex-direction: column;
+    max-height: 800px;
+
+    & .left,
+    .right {
+      width: 100%;
+    }
+
+    & .right {
+      max-height: 300px;
+    }
+  }
+}

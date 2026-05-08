@@ -1,0 +1,118 @@
+:root {
+    --h5ap-radio-bg: #232323;
+    --h5ap-radio-primary-color: #232323;
+}
+
+
+.wp-block-h5ap-radio-player {
+
+    .plyr___control.plyr__control--pressed .icon--not-pressed,
+    .plyr___control.plyr__control--pressed .label--not-pressed,
+    .plyr___control:not(.plyr__control--pressed) .icon--pressed,
+    .plyr___control:not(.plyr__control--pressed) .label--pressed,
+    a.plyr___control:after,
+    a.plyr___control:before {
+        display: none;
+    }
+
+    .subtitle {
+        padding-left: 0;
+    }
+
+    .radio_skin_compacthorizontal {
+        .plyr--audio button:focus {
+            background-color: #fff;
+        }
+
+        p {
+            margin: 0 !important;
+        }
+    }
+
+    .lucide-radio {
+        stroke: var(--h5ap-radio-icon-color);
+    }
+
+    .plyr input[type="range"] {
+        color: var(--h5ap-radio-progress-color);
+    }
+
+    .plyr .svg-icon {
+        color: var(--h5ap-radio-icons-color);
+    }
+
+    button[data-plyr="mute"] {
+        background-color: transparent !important;
+    }
+
+    .radio_skin_dashboardstyle {
+
+        // .lucide-volume2 {
+        //     stroke: var(--h5ap-radio-primary-color);
+        // }
+
+        // [data-plyr="play"],
+        // [data-plyr="play"]:hover {
+        //     background-color: var(--h5ap-radio-primary-color);
+        // }
+
+
+        // .secondary-container {
+        //     background-color: var(--h5ap-radio-secondary-background);
+        // }
+    }
+
+    .radio_skin_soft {}
+
+    /* Remove outline and border for all browsers */
+    input[type="range"] {
+        outline: none;
+        border: none;
+        background: transparent;
+        width: 80px;
+    }
+
+    input[type="range"]::-webkit-slider-runnable-track {
+        height: 4px;
+        border-radius: 10px;
+        box-shadow: none;
+    }
+
+    /* Track: Mozilla Firefox */
+    input[type="range"]::-moz-range-track {
+        height: 4px;
+        box-shadow: none;
+    }
+
+    /* Track: IE */
+    input[type="range"]::-ms-fill-lower,
+    input[type="range"]::-ms-fill-upper {
+        height: 4px;
+        border-radius: 10px;
+        box-shadow: none;
+    }
+
+    .no-thumb {
+
+        /* Thumb: webkit browsers */
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 0;
+            height: 0;
+            margin-top: -4px; // Adjust for vertical alignment
+        }
+
+        /* Thumb: Mozilla Firefox */
+        input[type="range"]::-moz-range-thumb {
+            width: 0;
+            height: 0;
+        }
+
+        /* Thumb: IE */
+        input[type="range"]::-ms-thumb {
+            width: 0;
+            height: 0;
+        }
+    }
+}

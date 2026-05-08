@@ -1,0 +1,333 @@
+:root {
+    --theme-custom-bg: #6ab04c;
+    --theme-custom-color: #fff;
+    --theme-custom-hover-bg: #30336b;
+    --theme-custom-hover-color: #fff;
+    --theme-custom-radius: 0px;
+    --theme-custom-brand-color: #00b3ff;
+    // --plyr-color-main: red;
+    --theme-skin-wave-color: #fff;
+    --theme-skin-card-color: #f2f2f2;
+    --plyr-color-bg: #232323;
+    --tw-gradient-to: #1297a5 var(--tw-gradient-to-position);
+}
+
+.editor-styles-wrapper .block-editor-block-list__layout h2 {
+    color: inherit;
+}
+
+.sticky-close {
+    display: none;
+}
+
+.h5ap-sticky {
+    position: fixed !important;
+    bottom: 0;
+    z-index: 9999;
+    left: 50%;
+    right: 50%;
+    transform: translateX(-50%);
+
+    .sticky-close {
+        position: absolute;
+        top: -27px;
+        right: -7px;
+        cursor: pointer;
+        background-color: #fff;
+        padding: 1px;
+        border-radius: 3px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 31px;
+        font-weight: 400;
+        color: #000000;
+        opacity: 0;
+        transition: all 0.3s ease-in-out;
+        z-index: 999;
+        outline: none;
+        border: none;
+        background-color: transparent;
+    }
+
+    &:hover {
+        .sticky-close {
+            opacity: 1;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .plyr .plyr__time+.plyr__time:not(.skin_default .plyr__time+.plyr__time) {
+        display: block;
+    }
+}
+
+.plyr button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: inherit;
+    line-height: 0;
+}
+
+.wp-block-h5ap-audioplayer {
+    position: relative;
+    z-index: 999999 !important;
+
+    input[type="range"]::-webkit-slider-runnable-track {
+        height: 4px;
+        border-radius: 10px;
+        box-shadow: none;
+    }
+
+    /* Track: Mozilla Firefox */
+    input[type="range"]::-moz-range-track {
+        height: 4px;
+        box-shadow: none;
+    }
+
+    /* Track: IE */
+    input[type="range"]::-ms-fill-lower,
+    input[type="range"]::-ms-fill-upper {
+        height: 4px;
+        border-radius: 10px;
+        box-shadow: none;
+    }
+}
+
+.wp-block-h5ap-audioplayer .plyr--audio button:focus {
+    background-color: transparent;
+}
+
+.skin_default .plyr.plyr--audio button:focus,
+.h5ap_all.plyr--audio button:focus,
+.skin_playlist1 .plyr.plyr--audio button:focus {
+    background-color: var(--plyr-color-main, #00b2ff);
+    color: #fff;
+}
+
+
+:root {
+    --loader-width: 100%;
+}
+
+.h5ap_lp {
+    width: var(--loader-width);
+    padding: 1rem;
+    border: 1px solid #ddd;
+    // margin-bottom: 1rem;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.bar {
+    position: relative;
+    width: 100%;
+    height: 0.5rem;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+    border-radius: 5px;
+    background-color: #d0d8dd;
+}
+
+.bar:last-child {
+    margin-bottom: 0;
+}
+
+.bar:after {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 6rem;
+    top: 0;
+    animation: load 2s cubic-bezier(0.2, 0.7, 0.3, 1) infinite;
+    background-image: linear-gradient(to right,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.5) 50%,
+            rgba(255, 255, 255, 0) 100%);
+}
+
+@keyframes load {
+    from {
+        left: -100px;
+    }
+
+    to {
+        left: 100%;
+    }
+}
+
+.skin_default {
+    position: relative;
+    z-index: 999999 !important; // Bring the WHOLE player above headers so nested popups aren't clipped by the header's z-index!
+
+    .plyr--audio .plyr__control:hover {
+        font-weight: bold;
+        text-shadow: 0px 0px 15px #676767;
+    }
+
+    // ── Premium Playback Speed Menu (Solid Background) ──
+    .plyr__menu__container {
+        // Completely solid background so text below is NOT visible!
+        --plyr-menu-background: #ffffff !important;
+        background: #ffffff !important;
+        background-color: #ffffff !important;
+        opacity: 1 !important;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+        border-radius: 12px !important;
+        padding: 8px !important;
+        min-width: 150px !important;
+        z-index: 2147483647 !important; // Max z-index to stay above headers!
+        bottom: 100% !important;
+        margin-bottom: 15px !important;
+
+        &::after {
+            border-top-color: #ffffff !important;
+        }
+
+        [role="menu"] {
+            padding: 0 !important;
+            background: #ffffff !important;
+            background-color: #ffffff !important;
+            opacity: 1 !important;
+
+            // Prevent overflowing the browser window
+            max-height: 240px !important;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+
+            // Custom Premium Scrollbar
+            &::-webkit-scrollbar {
+                width: 5px !important;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: #f8f9fa !important;
+                border-radius: 4px !important;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: #d1d5db !important;
+                border-radius: 4px !important;
+
+                &:hover {
+                    background: #9ca3af !important;
+                }
+            }
+        }
+
+        .plyr__control[role="menuitemradio"] {
+            padding: 8px 12px !important;
+            border-radius: 6px !important;
+            font-size: 14px !important;
+            display: flex !important;
+            align-items: center !important;
+            color: #333 !important;
+            background: #ffffff !important;
+            transition: background 0.2s, color 0.2s !important;
+            margin: 2px 0 !important;
+            width: 100% !important;
+
+            &:hover {
+                background: #eef8ff !important;
+                color: #00b2ff !important;
+                text-shadow: none !important;
+            }
+
+            // The Radio Circle
+            &::before {
+                background: #ffffff !important;
+                border: 2px solid #ccc !important;
+                box-shadow: none !important;
+                height: 16px !important;
+                width: 16px !important;
+                margin-right: 12px !important;
+                flex-shrink: 0 !important;
+                transition: border-color 0.2s !important;
+            }
+
+            // The Radio Dot (hidden by default)
+            &::after {
+                background: #00b2ff !important;
+                height: 8px !important;
+                width: 8px !important;
+                left: 16px !important;
+                opacity: 0 !important;
+                transform: translateY(-50%) scale(0) !important;
+                transition: transform 0.2s, opacity 0.2s !important;
+            }
+
+            // Active/Checked State
+            &[aria-checked="true"] {
+                color: #00b2ff !important;
+                background: #eef8ff !important;
+                font-weight: 600 !important;
+
+                &::before {
+                    border-color: #00b2ff !important;
+                }
+
+                &::after {
+                    opacity: 1 !important;
+                    transform: translateY(-50%) scale(1) !important;
+                }
+            }
+        }
+
+        // Back button / Speed Title inside Menu
+        .plyr__control--back {
+            padding: 8px 12px 8px 28px !important; // 28px left padding gives space for the back arrow!
+            margin-bottom: 8px !important;
+            font-weight: 600 !important;
+            font-size: 14px !important;
+            color: #111 !important;
+            background: #ffffff !important;
+            border-bottom: 1px solid #eee !important;
+            border-radius: 6px !important;
+            position: relative !important;
+
+            &::before {
+                box-shadow: none !important;
+            }
+
+            &::after {
+                border-right-color: #555 !important; // Subtle dark gray arrow instead of bright blue
+                left: 10px !important; // Position arrow nicely to the left
+            }
+
+            &:hover {
+                background: #f8f8f8 !important;
+                text-shadow: none !important;
+
+                &::after {
+                    border-right-color: #111 !important;
+                }
+            }
+        }
+
+        .plyr__control--forward {
+            padding: 8px 12px !important;
+            font-weight: 500 !important;
+            background: #ffffff !important;
+            border-radius: 6px !important;
+
+            &:hover {
+                background: #f8f8f8 !important;
+                color: #00b2ff !important;
+                text-shadow: none !important;
+            }
+
+            &::after {
+                border-left-color: #00b2ff !important;
+            }
+
+            .plyr__menu__value {
+                color: #00b2ff !important;
+                font-weight: 600 !important;
+            }
+        }
+    }
+}

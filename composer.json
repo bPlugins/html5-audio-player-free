@@ -1,0 +1,17 @@
+{
+  "name": "bplugins/html5-audio-player-free",
+  "autoload": {
+    "psr-4": {
+      "H5APPlayer\\": "inc/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Md. Shamim Islam",
+      "email": "shamimbplugins@gmail.com"
+    }
+  ],
+  "require": {
+    "freemius/wordpress-sdk": "^2.13.1"
+  }
+}

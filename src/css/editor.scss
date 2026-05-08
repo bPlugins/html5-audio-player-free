@@ -1,0 +1,100 @@
+.bPSS {
+  .trash {
+    background: #c01212;
+    color: #fff;
+    border-radius: 3px;
+    padding: 7px;
+    height: 30px;
+    margin-left: auto;
+  }
+
+  .components-base-control {
+    width: 100%;
+  }
+
+  hr {
+    margin: 1rem 0;
+  }
+
+  .components-radio-control__group-wrapper {
+    gap: 4px;
+  }
+
+  .d-flex {
+    display: flex;
+  }
+
+  .components-panel__body .components-base-control__field {
+    padding: 0;
+  }
+
+  .bPlPanelBody .mb5 {
+    margin-bottom: 5px !important;
+  }
+
+  .components-button.has-icon {
+    border-radius: 0;
+  }
+}
+
+
+
+.components-modal__content{
+  .right {
+    text-align: left !important;
+  }
+}
+
+.h5ap-block-wrapper {
+  overflow: hidden;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.wp-block-h5ap-audioplayer .h5ap-sticky {
+  bottom: 25px;
+}
+
+.wp-block-h5ap-audioplayer .h5ap-sticky.full-width .plyr,
+.skin_fusion .plyr .plyr__controls .infos {
+  width: calc(100% - 370px) !important;
+}
+
+.bPlTabPanel.mini .components-tab-panel__tabs button {
+  font-size: 12px;
+  height: 25px !important;
+  padding: 3px;
+}
+
+.h5ap-snackbar {
+  position: fixed;
+  z-index: 999;
+  bottom: 30px;
+  left: 20px;
+}
+
+.h5ap-radio-player-skins {
+  h3 {
+    margin-bottom: 5px;
+  }
+
+  img {
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+}
+
+// .wp-block-h5ap-radio-player{
+//   .bPlBlockBeforeSelect {
+//       width: 100%;
+//       height: 100%;
+//       position: absolute;
+//       top: 0;
+//       right: 0;
+//       bottom: 0;
+//       left: 0;
+//       z-index: 10;
+//     }
+// }

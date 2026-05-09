@@ -29,6 +29,17 @@ if ($standard_skin === 'default' && $primary_color === '#195FF5') {
     $control_color = $settings_primary_color;
 }
 
+$controls = $meta('controls', []);
+
+if (!is_array($controls)) {
+    $controls = [];
+}
+
+// force play always ON
+$controls[] = 'play';
+
+$controls = array_unique($controls);
+
 $block = [
     'blockName' => 'h5ap/audioplayer',
     'attrs' => [
@@ -60,7 +71,7 @@ $block = [
         'download'      => $download,
         'width'         => $width['width'] . $width['unit'],
         'radius'        => $type === 'opt-3' ? 0 : $meta('radius', '5') . 'px',
-        'controls'      => array_fill_keys($meta('controls', ['play', 'progress', 'current-time', 'duration', 'mute', 'volume']), true),
+        'controls' => array_fill_keys(array_unique($controls), true),
         'options'       => [
             'volume' => $meta('volume'),
         ],

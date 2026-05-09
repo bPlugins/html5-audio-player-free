@@ -1,7 +1,7 @@
 const slug = 'html5-audio-player';
 
 export const dashboardInfo = (info) => {
-    const { version, isPremium, hasPro } = info;
+    const { version, isPremium, hasPro, deleteDataOnUninstall, uninstallNonce } = info;
 
     const proSuffix = isPremium ? ' Pro' : '';
 
@@ -14,6 +14,8 @@ export const dashboardInfo = (info) => {
         version,
         isPremium,
         hasPro,
+        deleteDataOnUninstall,
+        uninstallNonce,
         displayOurPlugins: true,
         media: {
             logo: `https://ps.w.org/${slug}/assets/icon-128x128.png`,

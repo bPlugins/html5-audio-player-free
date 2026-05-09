@@ -214,7 +214,7 @@ class AudioPlayer
               'settings'
             ),
             'help' => 'Click on the item to turn ON/OFF',
-            'desc' => 'Enable/Disable audio player controls.',
+            'desc' => 'Enable/Disable audio player controls. Note: Play button is mandatory and always enabled for proper player functionality.',
             'dependency' => array(
               'h5ap_player_type|standard_skin',
               '==|==',

@@ -15,9 +15,9 @@ if (!class_exists('H5APAdmin')) {
 
 				wp_enqueue_script('h5ap-admin-script', H5AP_PRO_PLUGIN_DIR . 'build/dashboard.js', ['react', 'react-dom',  'wp-components', 'wp-i18n', 'wp-api', 'wp-util', 'lodash', 'wp-media-utils', 'wp-data', 'wp-core-data', 'wp-api-request'], H5AP_PRO_VERSION, true);
 				
-				wp_localize_script('h5ap-admin-script', 'h5apDashboard', [
+				wp_localize_script( 'h5ap-admin-script', 'h5apDashboard', [
 					'dir' => H5AP_PRO_PLUGIN_DIR,
-				]);
+				] );
 			}
 		}
 		
@@ -71,12 +71,16 @@ if (!class_exists('H5APAdmin')) {
 			<div
 				id='h5apAdminDashboard'
 				data-info='<?php echo esc_attr(wp_json_encode([
-								'version' => H5AP_PRO_VERSION,
-								'isPremium' => false,
-								'hasPro' => false
+								'version'               => H5AP_PRO_VERSION,
+								'isPremium'             => false,
+								'hasPro'                => false,
+								'deleteDataOnUninstall' => (bool) get_option( 'h5ap_delete_data_on_uninstall', false ),
+								'uninstallNonce'        => wp_create_nonce( 'h5ap_uninstall_nonce' ),
 							])); ?>'></div>
 		 <?php 
 		}
+
+
 		
 		function redirectToAddNew()
 				{

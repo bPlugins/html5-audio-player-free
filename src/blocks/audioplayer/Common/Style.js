@@ -5,8 +5,6 @@ const Style = ({ attributes, id }) => {
   const [CSS, setCSS] = useState();
 
   useEffect(() => {
-
-    // --plyr-color-background: ${bgColor};
     const CSS = `
     #${id}{
       display: flex;
@@ -20,10 +18,11 @@ const Style = ({ attributes, id }) => {
     }
     #${id} .plyr{
       --plyr-color-main: ${primaryColor};
-      --plyr-color-bg: ${bgColor};
+      --plyr-color-bg: black;
       --theme-skin-wave-color: ${controlColor};
       --plyr-color-text: ${textColor};
       --plyr-color-control: ${controlColor};
+      --plyr-color-background: black;
     }
     #${id} .h5ap_standard_player,#${id} .h5ap-sticky,#${id} .h5ap_skin
      {

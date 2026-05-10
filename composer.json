@@ -1,5 +1,5 @@
 {
-  "name": "bplugins/html5-audio-player-free",
+  "name": "bplugins/html5-audio-player",
   "autoload": {
     "psr-4": {
       "H5APPlayer\\": "inc/"

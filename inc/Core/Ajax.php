@@ -65,8 +65,8 @@ class Ajax
         wp_send_json_success( [
             'enabled' => $enabled,
             'message' => $enabled
-                ? __( 'Setting saved. Data will be deleted on uninstall.', 'h5ap' )
-                : __( 'Setting saved. Data will be preserved on uninstall.', 'h5ap' ),
+                ? __( 'Setting saved. Data will be deleted on uninstall.', 'html5-audio-player' )
+                : __( 'Setting saved. Data will be preserved on uninstall.', 'html5-audio-player' ),
         ] );
     }
 }

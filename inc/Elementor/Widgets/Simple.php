@@ -25,7 +25,7 @@ class Simple extends Widget_Base
 
 	public function get_title()
 	{
-		return __('Simple Audio Player', 'h5ap');
+		return __('Simple Audio Player', 'html5-audio-player');
 	}
 
 	public function get_icon()
@@ -56,14 +56,14 @@ class Simple extends Widget_Base
 		$this->start_controls_section(
 			'section_content',
 			[
-				'label' => esc_html__('Simple Audio Player', 'h5ap'),
+				'label' => esc_html__('Simple Audio Player', 'html5-audio-player'),
 				'tab' 	=> Controls_Manager::TAB_CONTENT,
 			]
 		);
 		$this->add_control(
 			'baudio_url',
 			[
-				'label' 		=> esc_html__('Upload or paste audio file', 'h5ap'),
+				'label' 		=> esc_html__('Upload or paste audio file', 'html5-audio-player'),
 				'type' 			=> 'b-select-file',
 				'separator' 	=> 'before',
 			]
@@ -71,7 +71,7 @@ class Simple extends Widget_Base
 		$this->add_control(
 			'baudio_audio_title',
 			[
-				'label' 		=> esc_html__('Title', 'h5ap'),
+				'label' 		=> esc_html__('Title', 'html5-audio-player'),
 				'type' 			=> Controls_Manager::TEXT,
 				'separator' 	=> 'before',
 				'default' => 'Audio Title Will go here',
@@ -82,10 +82,10 @@ class Simple extends Widget_Base
 		$this->add_control(
 			'baudio_muted',
 			[
-				'label' => __('Muted', 'h5ap'),
+				'label' => __('Muted', 'html5-audio-player'),
 				'type' => Controls_Manager::SWITCHER,
-				'label_on' => __('Yes', 'h5ap'),
-				'label_off' => __('No', 'h5ap'),
+				'label_on' => __('Yes', 'html5-audio-player'),
+				'label_off' => __('No', 'html5-audio-player'),
 				'return_value' => 'true',
 				'default' => '',
 				'separator' 	=> 'before',
@@ -95,10 +95,10 @@ class Simple extends Widget_Base
 		$this->add_control(
 			'baudio_repeat',
 			[
-				'label' => __('Repeat', 'h5ap'),
+				'label' => __('Repeat', 'html5-audio-player'),
 				'type' => Controls_Manager::SWITCHER,
-				'label_on' => __('Yes', 'h5ap'),
-				'label_off' => __('No', 'h5ap'),
+				'label_on' => __('Yes', 'html5-audio-player'),
+				'label_off' => __('No', 'html5-audio-player'),
 				'return_value' => 'true',
 				'default' => '',
 				'separator' 	=> 'before',
@@ -107,10 +107,10 @@ class Simple extends Widget_Base
 		$this->add_control(
 			'baudio_autoplay',
 			[
-				'label' => __('Autoplay', 'h5ap'),
+				'label' => __('Autoplay', 'html5-audio-player'),
 				'type' => Controls_Manager::SWITCHER,
-				'label_on' => __('Yes', 'h5ap'),
-				'label_off' => __('No', 'h5ap'),
+				'label_on' => __('Yes', 'html5-audio-player'),
+				'label_off' => __('No', 'html5-audio-player'),
 				'return_value' => 'true',
 				'default' => '',
 				'separator' 	=> 'before',
@@ -120,9 +120,9 @@ class Simple extends Widget_Base
 		$this->add_control(
 			'baudio_seek_time',
 			[
-				'label' 		=> esc_html__('Seek Time', 'h5ap'),
+				'label' 		=> esc_html__('Seek Time', 'html5-audio-player'),
 				'type' 			=> Controls_Manager::NUMBER,
-				'placeholder'	=> esc_attr__('Input seek time here', 'h5ap'),
+				'placeholder'	=> esc_attr__('Input seek time here', 'html5-audio-player'),
 				'default'		=> 15,
 				'label_block'	=> false,
 			]
@@ -132,14 +132,14 @@ class Simple extends Widget_Base
 		$this->end_controls_section();
 
 		$this->start_controls_section('style', [
-			'label' => esc_html__("Style", "h5ap"),
+			'label' => esc_html__("Style", "html5-audio-player"),
 			'tab' => Controls_Manager::TAB_STYLE
 		]);
 
 		$this->add_control(
 			'baudio_width',
 			[
-				'label' 		=> __('Width', 'h5ap'),
+				'label' 		=> __('Width', 'html5-audio-player'),
 				'type'			=> Controls_Manager::SLIDER,
 				'size_units' 	=> ['px', '%', 'em'],
 				'range' => [
@@ -172,7 +172,7 @@ class Simple extends Widget_Base
 		$this->add_control(
 			'primary',
 			[
-				'label' 		=> esc_html__('Primary Color', 'h5ap'),
+				'label' 		=> esc_html__('Primary Color', 'html5-audio-player'),
 				'type' => Controls_Manager::COLOR,
 				// 'scheme' => [
 				// 	'type' => Color::get_type(),
@@ -190,7 +190,7 @@ class Simple extends Widget_Base
 		$this->add_control(
 			'background',
 			[
-				'label' 		=> esc_html__('Background Color', 'h5ap'),
+				'label' 		=> esc_html__('Background Color', 'html5-audio-player'),
 				'type' => Controls_Manager::COLOR,
 				// 'scheme' => [
 				// 	'type' => Color::get_type(),

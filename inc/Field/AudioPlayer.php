@@ -68,20 +68,20 @@ class AudioPlayer
           'id' => 'poster_sticky',
           'type' => 'upload',
           'library' => 'image',
-          'title' => \__('Poster', 'h5ap'),
-          'button_title' => \__('Add or Upload Poster Image', 'h5ap'),
-          'remove_title' => \__('Remove', 'h5ap'),
-          'desc' => \__('100x100 px photo is the standard poster size, accepted file type .png, .jpeg, .jpg ', 'h5ap'),
+          'title' => \__('Poster', 'html5-audio-player'),
+          'button_title' => \__('Add or Upload Poster Image', 'html5-audio-player'),
+          'remove_title' => \__('Remove', 'html5-audio-player'),
+          'desc' => \__('100x100 px photo is the standard poster size, accepted file type .png, .jpeg, .jpg ', 'html5-audio-player'),
           'dependency' => array('h5ap_player_type', '==', 'opt-3'),
         ),
         array(
           'id' => 'sticky_poster',
           'type' => 'upload',
           'library' => 'image',
-          'title' => \__('Poster', 'h5ap'),
-          'button_title' => \__('Add or Upload Poster Image', 'h5ap'),
-          'remove_title' => \__('Remove', 'h5ap'),
-          'desc' => \__('100x100 px photo is the standard poster size, accepted file type .png, .jpeg, .jpg ', 'h5ap'),
+          'title' => \__('Poster', 'html5-audio-player'),
+          'button_title' => \__('Add or Upload Poster Image', 'html5-audio-player'),
+          'remove_title' => \__('Remove', 'html5-audio-player'),
+          'desc' => \__('100x100 px photo is the standard poster size, accepted file type .png, .jpeg, .jpg ', 'html5-audio-player'),
           'dependency' => array(
             array('h5ap_player_type', '==', 'opt-1'),
             array('standard_skin', 'not-any', 'default,stamp,Simple-1'),
@@ -90,17 +90,17 @@ class AudioPlayer
         array(
           'id' => 'title_sticky',
           'type' => 'text',
-          'title' => \__('Title', 'h5ap'),
+          'title' => \__('Title', 'html5-audio-player'),
           'default' => 'Audio Title',
-          'desc' => \__('Enter the title of the audio', 'h5ap'),
+          'desc' => \__('Enter the title of the audio', 'html5-audio-player'),
           'dependency' => array('h5ap_player_type', '==', 'opt-3'),
         ),
         array(
           'id' => 'title',
           'type' => 'text',
-          'title' => \__('Title', 'h5ap'),
+          'title' => \__('Title', 'html5-audio-player'),
           'default' => 'Audio Title',
-          'desc' => \__('Enter the title of the audio', 'h5ap'),
+          'desc' => \__('Enter the title of the audio', 'html5-audio-player'),
           'dependency' => array(
             array('h5ap_player_type', '==', 'opt-1'),
             array('standard_skin', 'not-any', 'default,Simple-1,Simple-2'),
@@ -110,9 +110,9 @@ class AudioPlayer
         array(
           'id' => 'author',
           'type' => 'text',
-          'title' => \__('Author', 'h5ap'),
+          'title' => \__('Author', 'html5-audio-player'),
           'default' => 'Author Name',
-          'desc' => \__('Enter the author of the audio', 'h5ap'),
+          'desc' => \__('Enter the author of the audio', 'html5-audio-player'),
           'dependency' => array(
             array('h5ap_player_type', '==', 'opt-1'),
             array('standard_skin', 'any', 'wave'),
@@ -155,7 +155,7 @@ class AudioPlayer
         array(
           'id' => 'autoplay',
           'type' => 'switcher',
-          'title' => \__('AutoPlay', 'h5ap'),
+          'title' => \__('AutoPlay', 'html5-audio-player'),
           'desc' => 'AutoPlay will only work if you keep the player muted according the the latest autoplay policy. <a href="https://developers.google.com/web/updates/2017/09/autoplay-policy-changes" target="_blank" >Read More</a>',
           'default' => false,
           'dependency' => array('h5ap_player_type', '==', 'opt-1')
@@ -163,7 +163,7 @@ class AudioPlayer
         array(
           'id' => 'muted',
           'type' => 'switcher',
-          'title' => \__('Muted', 'h5ap'),
+          'title' => \__('Muted', 'html5-audio-player'),
           'desc' => 'Start playback muted. Some browsers may handle autoplay more smoothly when audio is muted.',
           'default' => false,
           'dependency' => array('h5ap_player_type', '==', 'opt-1')
@@ -226,7 +226,7 @@ class AudioPlayer
         array(
           'id' => 'repeat',
           'type' => 'switcher',
-          'title' => \__('Repeat', 'h5ap'),
+          'title' => \__('Repeat', 'html5-audio-player'),
           'desc' => 'Enable this to automatically loop the audio playback once it finishes.',
           'default' => '0',
           'dependency' => array(
@@ -298,7 +298,7 @@ class AudioPlayer
         array(
           'id' => 'disable_loader',
           'type' => 'switcher',
-          'title' => \__('Disable Loading', 'h5ap'),
+          'title' => \__('Disable Loading', 'html5-audio-player'),
           'desc' => 'Enable this option if you want to disable the loading animation',
           'default' => '0',
           'dependency' => array('h5ap_player_type', '==', 'opt-1')
@@ -311,7 +311,7 @@ class AudioPlayer
         array(
           'id' => 'enable_sticky',
           'type' => 'switcher',
-          'title' => \__('Enable Sticky', 'h5ap'),
+          'title' => \__('Enable Sticky', 'html5-audio-player'),
           'desc' => 'Enable this to attach a sticky version of the player to the page so it remains visible while scrolling.',
           'default' => false,
           'dependency' => array(
@@ -367,14 +367,10 @@ class AudioPlayer
     ));
 
     \CSF::createSection('_h5ap_plyr_skins', array(
-      'title' => \__(' ', 'h5ap'),
+      'title' => \__('The following skins are available in the pro version.', 'html5-audio-player'),
       'post_type' => 'audioplayer',
       'context' => 'side',
       'fields' => array(
-        array(
-          'type' => 'content',
-          'content' => '<p style="margin-top: -5px; font-weight: 600; margin-bottom: 10px; color: #646970; font-size: 13px;">' . \__('The following skins are available in the pro version.', 'h5ap') . '</p>',
-        ),
         array(
           'id' => 'standard_skin',
           'type' => 'content',

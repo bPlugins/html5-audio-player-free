@@ -84,8 +84,8 @@ const Settings = ({ attributes, siteUrl, setAttributes, isPremium }) => {
                               lineHeight: '1.5'
                             }}
                           >
-                            <strong>{__('Note:', 'h5ap')}</strong>{' '}
-                            {__('To fetch stream metadata correctly, make sure this stream URL is added to the whitelist in your', 'h5ap')}{' '}
+                            <strong>{__('Note:', 'html5-audio-player')}</strong>{' '}
+                            {__('To fetch stream metadata correctly, make sure this stream URL is added to the whitelist in your', 'html5-audio-player')}{' '}
                             <a
                               rel="noreferrer"
                               href={`${window.location.origin}/wp-admin/admin.php?page=html5-audio-player-settings#tab=white-list-stream-url`}
@@ -95,7 +95,7 @@ const Settings = ({ attributes, siteUrl, setAttributes, isPremium }) => {
                                 textDecoration: 'none'
                               }}
                             >
-                              {__('plugin settings', 'h5ap')}
+                              {__('plugin settings', 'html5-audio-player')}
                             </a>.
                           </div>
                         </>
@@ -162,9 +162,9 @@ const Settings = ({ attributes, siteUrl, setAttributes, isPremium }) => {
 
       <BlockControls>
         <AlignmentToolbar value={alignment} onChange={val => setAttributes({ alignment: val })} describedBy={__('Alignment')} alignmentControls={[
-          { title: __('Left', 'h5ap'), align: 'left', icon: 'align-left' },
-          { title: __('Center', 'h5ap'), align: 'center', icon: 'align-center' },
-          { title: __('Right', 'h5ap'), align: 'right', icon: 'align-right' }
+          { title: __('Left', 'html5-audio-player'), align: 'left', icon: 'align-left' },
+          { title: __('Center', 'html5-audio-player'), align: 'center', icon: 'align-center' },
+          { title: __('Right', 'html5-audio-player'), align: 'right', icon: 'align-right' }
         ]} />
       </BlockControls>
 

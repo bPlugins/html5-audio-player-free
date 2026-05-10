@@ -1,6 +1,6 @@
 <?php
 /*
- * Plugin Name: Html5 Audio Player
+ * Plugin Name: Html5 Audio Player Free
  * Plugin URI:  https://bplugins.com/products/html5-audio-player/
  * Description: You can easily integrate html5 audio player in your WordPress website using this plugin.
  * Version: 2.6.0
@@ -10,7 +10,7 @@
  * Author: bPlugins
  * Author URI: http://bPlugins.com
  * License: GPLv3
- * Text Domain: h5ap
+ * Text Domain: html5-audio-player
  */
 
 if (!defined('ABSPATH')) {
@@ -39,43 +39,41 @@ if (function_exists('h5ap_fs')) {
 	}
 
 	if (! function_exists('h5ap_fs')) {
-		if (! function_exists('h5ap_fs')) {
-			// Create a helper function for easy SDK access.
-			function h5ap_fs(){
-				global $h5ap_fs;
+		// Create a helper function for easy SDK access.
+		function h5ap_fs(){
+			global $h5ap_fs;
 
-				if (! isset($h5ap_fs)) {
-				// Include Freemius SDK.
-                // SDK is auto-loaded through composer
-					$h5ap_fs = fs_dynamic_init(array(
-						'id'                  => '14260',
-						'slug'                => 'html5-audio-player',
-						'type'                => 'plugin',
-						'public_key'          => 'pk_ea4da01be073820a5edf59346b675',
-						'is_premium'          => false,
-						'premium_slug'        => 'html5-audio-player-pro',
-						'premium_suffix'      => 'Pro',
-						'has_premium_version' => true,
-						'has_addons'          => false,
-						'has_paid_plans'      => true,
-						'has_affiliation'     => 'selected',
-						'menu'                => array(
-							'slug'           => 'html5-audio-player',
-							'support'        => false,
-							'contact'        => false,
-							'affiliation'      => false,
-						),
-					));
-				}
-
-				return $h5ap_fs;
+			if (! isset($h5ap_fs)) {
+			// Include Freemius SDK.
+			// SDK is auto-loaded through composer
+				$h5ap_fs = fs_dynamic_init(array(
+					'id'                  => '14260',
+					'slug'                => 'html5-audio-player',
+					'type'                => 'plugin',
+					'public_key'          => 'pk_ea4da01be073820a5edf59346b675',
+					'is_premium'          => false,
+					'premium_slug'        => 'html5-audio-player-pro',
+					'premium_suffix'      => 'Pro',
+					'has_premium_version' => true,
+					'has_addons'          => false,
+					'has_paid_plans'      => true,
+					'has_affiliation'     => 'selected',
+					'menu'                => array(
+						'slug'           => 'html5-audio-player',
+						'support'        => false,
+						'contact'        => false,
+						'affiliation'      => false,
+					),
+				));
 			}
 
-			// Init Freemius.
-			h5ap_fs();
-			// Signal that SDK was initiated.
-			do_action('h5ap_fs_loaded');
+			return $h5ap_fs;
 		}
+
+		// Init Freemius.
+		h5ap_fs();
+		// Signal that SDK was initiated.
+		do_action('h5ap_fs_loaded');
 	}
 
 	if (class_exists('H5APPlayer\\Init')) {
@@ -83,7 +81,7 @@ if (function_exists('h5ap_fs')) {
 	}
 
 	add_action('plugins_loaded', function () {
-		load_plugin_textdomain('h5ap', false, dirname(plugin_basename(__FILE__)) . '/languages');
+		load_plugin_textdomain('html5-audio-player', false, dirname(plugin_basename(__FILE__)) . '/languages');
 
 		require_once 'shortcode/player.php';
 		require_once 'inc/admin.php';

@@ -25,8 +25,8 @@ if (!class_exists('H5APAdmin')) {
 		function adminMenu() {
 
 			add_menu_page(
-				__('HTML5 Audio Player', 'h5ap'),
-				__('HTML5 Audio Player', 'h5ap'),
+				__('HTML5 Audio Player', 'html5-audio-player'),
+				__('HTML5 Audio Player', 'html5-audio-player'),
 				'manage_options',
 				'html5-audio-player',
 				 [$this, 'dashboardPage'],
@@ -36,7 +36,7 @@ if (!class_exists('H5APAdmin')) {
 
 			add_submenu_page(
 				'html5-audio-player',
-				__('Help & Demos', 'h5ap'),
+				__('Help & Demos', 'html5-audio-player'),
 				'<span style="color: #f18500; font-weight: 600;">Help & Demos</span>', 
 				'manage_options',
 				'html5-audio-player-help-demo',
@@ -46,8 +46,8 @@ if (!class_exists('H5APAdmin')) {
 
 			add_submenu_page(
 				'html5-audio-player',
-				__('Add New', 'h5ap'),
-				__(' &#8627; Add New', 'h5ap'),
+				__('Add New', 'html5-audio-player'),
+				__(' &#8627; Add New', 'html5-audio-player'),
 				'edit_posts',
 				'html5-audio-player-add-new',
 				[$this, 'redirectToAddNew'],
@@ -56,8 +56,8 @@ if (!class_exists('H5APAdmin')) {
 
 			add_submenu_page(
 				'html5-audio-player',
-				__('Add New', 'h5ap'),
-				__(' &#8627; Add New', 'h5ap'),
+				__('Add New', 'html5-audio-player'),
+				__(' &#8627; Add New', 'html5-audio-player'),
 				'edit_posts',
 				'html5-radio-player-add-new',
 				[$this, 'redirectToAddNewRadio'],
@@ -91,7 +91,7 @@ if (!class_exists('H5APAdmin')) {
 						</script>
 					<?php
 					} else {
-						wp_redirect(admin_url('post-new.php?post_type=audioplayer'));
+						wp_safe_redirect(admin_url('post-new.php?post_type=audioplayer'));
 					}
 				}
 
@@ -106,7 +106,7 @@ if (!class_exists('H5APAdmin')) {
 						</script>
 		<?php
 			} else {
-				wp_redirect(admin_url('post-new.php?post_type=radioplayer'));
+				wp_safe_redirect(admin_url('post-new.php?post_type=radioplayer'));
 			}
 		}
 	}

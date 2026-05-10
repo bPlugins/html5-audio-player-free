@@ -18,7 +18,7 @@ const Settings = ({ deleteDataOnUninstall, uninstallNonce }) => {
 
     useEffect(() => {
         if (error) {
-            setNotice(__('Failed to save setting.', 'h5ap'));
+            setNotice(__('Failed to save setting.', 'html5-audio-player'));
         }
     }, [error]);
 
@@ -28,7 +28,7 @@ const Settings = ({ deleteDataOnUninstall, uninstallNonce }) => {
         // Show confirm dialog when enabling (destructive action)
         if (newValue) {
             const confirmed = window.confirm(
-                __('Are you sure? This will permanently delete all HTML5 Audio Player data (audio players, radio players, playlists, and all settings) when the plugin is uninstalled.', 'h5ap')
+                __('Are you sure? This will permanently delete all HTML5 Audio Player data (audio players, radio players, playlists, and all settings) when the plugin is uninstalled.', 'html5-audio-player')
             );
 
             if (!confirmed) return;
@@ -39,20 +39,20 @@ const Settings = ({ deleteDataOnUninstall, uninstallNonce }) => {
     };
 
     return <div className='bPlDashboardSettings bPlDashboardCard'>
-        <h2>{__('Delete Data on Uninstall', 'h5ap')}</h2>
+        <h2>{__('Delete Data on Uninstall', 'html5-audio-player')}</h2>
 
-        <p>{__('When enabled, all plugin data will be permanently deleted when you uninstall (delete) the plugin. This includes:', 'h5ap')}</p>
+        <p>{__('When enabled, all plugin data will be permanently deleted when you uninstall (delete) the plugin. This includes:', 'html5-audio-player')}</p>
 
         <ul>
-            <li>{__('All Audio Player posts (audioplayer post type)', 'h5ap')}</li>
-            <li>{__('All Radio Player posts (radioplayer post type)', 'h5ap')}</li>
-            <li>{__('All player configuration and meta data', 'h5ap')}</li>
-            <li>{__('All taxonomy terms (categories & tags)', 'h5ap')}</li>
-            <li>{__('All plugin settings and options', 'h5ap')}</li>
+            <li>{__('All Audio Player posts (audioplayer post type)', 'html5-audio-player')}</li>
+            <li>{__('All Radio Player posts (radioplayer post type)', 'html5-audio-player')}</li>
+            <li>{__('All player configuration and meta data', 'html5-audio-player')}</li>
+            <li>{__('All taxonomy terms (categories & tags)', 'html5-audio-player')}</li>
+            <li>{__('All plugin settings and options', 'html5-audio-player')}</li>
         </ul>
 
         <p className='settingsWarning'>
-            {__('⚠️ This action cannot be undone. Your data will be safe if you only deactivate the plugin.', 'h5ap')}
+            {__('⚠️ This action cannot be undone. Your data will be safe if you only deactivate the plugin.', 'html5-audio-player')}
         </p>
 
         <div className='settingsControl'>
@@ -64,8 +64,8 @@ const Settings = ({ deleteDataOnUninstall, uninstallNonce }) => {
 
             <span className='toggleLabel'>
                 {enabled
-                    ? __('Data will be deleted on uninstall', 'h5ap')
-                    : __('Data will be preserved on uninstall', 'h5ap')
+                    ? __('Data will be deleted on uninstall', 'html5-audio-player')
+                    : __('Data will be preserved on uninstall', 'html5-audio-player')
                 }
             </span>
         </div>

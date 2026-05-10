@@ -1,3 +1,9 @@
+#_h5ap_plyr_skins .csf-section-title,
+#_h5ap_plyr_skins h3 {
+  text-transform: none !important;
+  font-weight: 500 !important;
+}
+
 .center,
 .container {
   margin-left: auto;

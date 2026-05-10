@@ -39,15 +39,15 @@ class AudioPlayer
             'audioplayer',
             array(
                 'labels' => array(
-                    'name' => __('Audio Player'),
-                    'singular_name' => __('Audio Player'),
-                    'add_new' => __('Add Audio Player'),
-                    'add_new_item' => __('Add New Player'),
-                    'edit_item' => __('Edit Player'),
-                    'new_item' => __('New Player'),
-                    'view_item' => __('View Player'),
-                    'search_items'       => __('Search Player'),
-                    'not_found' => __('Sorry, we couldn\'t find the Player you are looking for.')
+                    'name' => __('Audio Player', 'html5-audio-player'),
+                    'singular_name' => __('Audio Player', 'html5-audio-player'),
+                    'add_new' => __('Add Audio Player', 'html5-audio-player'),
+                    'add_new_item' => __('Add New Player', 'html5-audio-player'),
+                    'edit_item' => __('Edit Player', 'html5-audio-player'),
+                    'new_item' => __('New Player', 'html5-audio-player'),
+                    'view_item' => __('View Player', 'html5-audio-player'),
+                    'search_items'       => __('Search Player', 'html5-audio-player'),
+                    'not_found' => __('Sorry, we couldn\'t find the Player you are looking for.', 'html5-audio-player')
                 ),
                 'public' => false,
                 'show_ui' => true,
@@ -131,7 +131,7 @@ class AudioPlayer
             </style>
             <div class="h5ap_shortcode">
                 <p class="shortcode_desc">
-                    <?php echo esc_html__("Copy this shortcode and paste it into your post, page, or text widget content:", "h5ap") ?>
+                    <?php echo esc_html__("Copy this shortcode and paste it into your post, page, or text widget content:", "html5-audio-player") ?>
                 </p>
                  <code 
                     class="shortcode_copy" 
@@ -145,7 +145,7 @@ class AudioPlayer
 
     function h5ap_updated_messages($messages)
     {
-        $messages['audioplayer'][1] = __('Player updated ');
+        $messages['audioplayer'][1] = __('Player updated ', 'html5-audio-player');
         return $messages;
     }
 
@@ -246,7 +246,7 @@ class AudioPlayer
             /*
             * finally, redirect to the edit post screen for the new draft
             */
-            wp_redirect(admin_url('post.php?action=edit&post=' . $new_post_id));
+            wp_safe_redirect(admin_url('post.php?action=edit&post=' . $new_post_id));
             exit;
         } else {
             wp_die('Post creation failed, could not find original post: ' . esc_html($post_id));

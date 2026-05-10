@@ -16,19 +16,19 @@ const Style = ({ attributes, setAttributes }) => {
     }
 
     const getPremiumNoticeText = () => {
-        const typo = [__('Title', 'h5ap')];
-        if (["DashboardStyle"].includes(skin)) typo.push(__('Sub Title', 'h5ap'));
-        if (sourceType === "stream" && skin !== "CompactHorizontal") typo.push(__('Track', 'h5ap'));
+        const typo = [__('Title', 'html5-audio-player')];
+        if (["DashboardStyle"].includes(skin)) typo.push(__('Sub Title', 'html5-audio-player'));
+        if (sourceType === "stream" && skin !== "CompactHorizontal") typo.push(__('Track', 'html5-audio-player'));
 
         const icons = [];
-        if (["DashboardStyle", "GlassMorphism"].includes(skin)) icons.push(__('Radio', 'h5ap'));
-        icons.push(__('Play', 'h5ap'), __('Volume', 'h5ap'));
+        if (["DashboardStyle", "GlassMorphism"].includes(skin)) icons.push(__('Radio', 'html5-audio-player'));
+        icons.push(__('Play', 'html5-audio-player'), __('Volume', 'html5-audio-player'));
 
-        return __('Custom Border styling, Advanced Typography (', 'h5ap') +
+        return __('Custom Border styling, Advanced Typography (', 'html5-audio-player') +
             typo.join(', ') +
-            __('), and Icon Color customizations (', 'h5ap') +
+            __('), and Icon Color customizations (', 'html5-audio-player') +
             icons.join(', ') +
-            __(', etc.) are available in the Pro version.', 'h5ap');
+            __(', etc.) are available in the Pro version.', 'html5-audio-player');
     };
 
     return (

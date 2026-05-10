@@ -35,31 +35,31 @@ const Settings = ({ attributes, setAttributes, siteUrl }) => {
     const features = [];
 
     if (["Default", "Simple 1", "Simple 2", "Player11", "Player10", "Player9", "Card 2", "Card 1"].includes(skin.replace("-", " "))) {
-      features.push(__('Primary / Progress Color', 'h5ap'));
+      features.push(__('Primary / Progress Color', 'html5-audio-player'));
     }
 
     if (["Default", "Wave", "Card 1", "Card 2", "Simple 1", "Simple 2", "Player11", "Player10", "Player9", "Stamp", "Fusion"].includes(skin.replace("-", " "))) {
-      features.push(__('Background Color', 'h5ap'));
+      features.push(__('Background Color', 'html5-audio-player'));
     }
 
     if (["Player11", "Player10", "Player9", "Card 2", "Card 1", "Wave", "Simple 1"].includes(skin.replace("-", " "))) {
-      features.push(__('Text Color', 'h5ap'));
+      features.push(__('Text Color', 'html5-audio-player'));
     }
 
-    return __('Advanced styling options like ', 'h5ap') +
+    return __('Advanced styling options like ', 'html5-audio-player') +
       features.join(', ') +
-      __(' and more are available in the Pro version.', 'h5ap');
+      __(' and more are available in the Pro version.', 'html5-audio-player');
   };
 
   const getSettingsPremiumNoticeText = () => {
-    const features = [__('7 More Pro Skins', 'h5ap'), __('Save State', 'h5ap'), __('Disable Pause', 'h5ap'), __('Seek Time', 'h5ap'), __('Start Time', 'h5ap')];
+    const features = [__('7 More Pro Skins', 'html5-audio-player'), __('Save State', 'html5-audio-player'), __('Disable Pause', 'html5-audio-player'), __('Seek Time', 'html5-audio-player'), __('Start Time', 'html5-audio-player')];
     if (skin === "Fusion") {
-      features.push(__('Initial Volume', 'h5ap'));
-      features.push(__('Download Button', 'h5ap'));
+      features.push(__('Initial Volume', 'html5-audio-player'));
+      features.push(__('Download Button', 'html5-audio-player'));
     }
-    return __('Features like ', 'h5ap') +
+    return __('Features like ', 'html5-audio-player') +
       features.join(', ') +
-      __(' and more are available in the Pro version.', 'h5ap');
+      __(' and more are available in the Pro version.', 'html5-audio-player');
   };
 
   return (
@@ -160,9 +160,9 @@ const Settings = ({ attributes, setAttributes, siteUrl }) => {
                             })}
 
                             <Notice status='premium' isIcon={true}>
-                              {__('Controls like ', 'h5ap')}
+                              {__('Controls like ', 'html5-audio-player')}
                               {controlSettings.filter(item => !["Play", "Progress", "Mute", "Volume", "Duration", "Current Time", "Settings"].includes(item)).join(', ')}
-                              {__(' are available in the Pro version.', 'h5ap')}
+                              {__(' are available in the Pro version.', 'html5-audio-player')}
                             </Notice>
                           </Fragment>
                         )
@@ -221,9 +221,9 @@ const Settings = ({ attributes, setAttributes, siteUrl }) => {
         </TabPanel>
         <BlockControls>
           <AlignmentToolbar value={alignment} onChange={val => setAttributes({ alignment: val })} describedBy={__('Alignment')} alignmentControls={[
-            { title: __('Left', 'h5ap'), align: 'left', icon: 'align-left' },
-            { title: __('Center', 'h5ap'), align: 'center', icon: 'align-center' },
-            { title: __('Right', 'h5ap'), align: 'right', icon: 'align-right' }
+            { title: __('Left', 'html5-audio-player'), align: 'left', icon: 'align-left' },
+            { title: __('Center', 'html5-audio-player'), align: 'center', icon: 'align-center' },
+            { title: __('Right', 'html5-audio-player'), align: 'right', icon: 'align-right' }
           ]} />
         </BlockControls>
 

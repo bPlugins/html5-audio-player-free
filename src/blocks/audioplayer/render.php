@@ -22,7 +22,7 @@ $wrapper_attributes = get_block_wrapper_attributes(['class' => 'wp-block-h5ap-ta
 <div
     id="<?php echo esc_attr($uniqueId); ?>"
     data-id="<?php echo esc_attr($uniqueId); ?>"
-    data-attributes="<?php echo $encoded_attributes; ?>"
+    data-attributes="<?php echo esc_attr($encoded_attributes); ?>"
     <?php echo $wrapper_attributes; ?>>
     <?php if ($loader) { ?>
         <div class='h5ap_lp'>

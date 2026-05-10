@@ -189,7 +189,7 @@ class Functions{
 
     static function isDomainAllowed($url, $allowed_domains) {
     // 1. Extract the host from the URL
-    $host = parse_url($url, PHP_URL_HOST);
+    $host = wp_parse_url($url, PHP_URL_HOST);
 
     // Handle cases where parse_url might fail (e.g., missing scheme in some older PHP versions)
     if ($host === false || $host === null) {

@@ -47,15 +47,15 @@ class RadioPlayer
             $this->post_type,
             array(
                 'labels' => array(
-                    'name' => __('Radio Player'),
-                    'singular_name' => __('Radio Player'),
-                    'add_new' => __('Add Radio Player'),
-                    'add_new_item' => __('Add New Player'),
-                    'edit_item' => __('Edit Player'),
-                    'new_item' => __('New Player'),
-                    'view_item' => __('View Player'),
-                    'search_items'       => __('Search Player'),
-                    'not_found' => __('Sorry, we couldn\'t find the Player you are looking for.')
+                    'name' => __('Radio Player', 'html5-audio-player'),
+                    'singular_name' => __('Radio Player', 'html5-audio-player'),
+                    'add_new' => __('Add Radio Player', 'html5-audio-player'),
+                    'add_new_item' => __('Add New Player', 'html5-audio-player'),
+                    'edit_item' => __('Edit Player', 'html5-audio-player'),
+                    'new_item' => __('New Player', 'html5-audio-player'),
+                    'view_item' => __('View Player', 'html5-audio-player'),
+                    'search_items'       => __('Search Player', 'html5-audio-player'),
+                    'not_found' => __('Sorry, we couldn\'t find the Player you are looking for.', 'html5-audio-player')
                 ),
                 'public' => false,
                 'show_ui' => true,
@@ -139,7 +139,7 @@ class RadioPlayer
 
     function h5ap_updated_messages($messages)
     {
-        $messages[$this->post_type][1] = __('Player updated ');
+        $messages[$this->post_type][1] = __('Player updated ', 'html5-audio-player');
         return $messages;
     }
 
@@ -224,6 +224,12 @@ class RadioPlayer
             * duplicate all post meta just in two SQL queries
             */
             $post_meta_infos = $wpdb->get_results("SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id=$post_id");
+            // $post_meta_infos = $wpdb->get_results(
+            //     $wpdb->prepare(
+            //         "SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id = %d",
+            //         $post_id
+            //     )
+            // );
 
             if (count($post_meta_infos) != 0) {
                 $sql_query = "INSERT INTO $wpdb->postmeta (post_id, meta_key, meta_value) ";
@@ -241,7 +247,7 @@ class RadioPlayer
             /*
             * finally, redirect to the edit post screen for the new draft
             */
-            wp_redirect(admin_url('post.php?action=edit&post=' . $new_post_id));
+            wp_safe_redirect(admin_url('post.php?action=edit&post=' . $new_post_id));
             exit;
         } else {
             wp_die('Post creation failed, could not find original post: ' . esc_html($post_id));

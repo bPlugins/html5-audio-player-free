@@ -68,7 +68,7 @@ class SelectFile extends \Elementor\Base_Data_Control {
 		<div class="elementor-control-field">
 			<label for="<?php echo esc_attr( $control_uid ); ?>" class="elementor-control-title">{{{ data.label }}}</label>
 			<div class="elementor-control-input-wrapper">
-				<a href="#" class="tnc-b-select-file elementor-button elementor-button-default elementor-button-go-pro" style="padding: 10px 15px; display: block;text-align: center;" id="select-file-<?php echo esc_attr( $control_uid ); ?>" ><?php echo esc_html__( '{{data.label}}', 'file-select-control-for-elementor' ); ?></a> <br />
+				<a href="#" class="tnc-b-select-file elementor-button elementor-button-default elementor-button-go-pro" style="padding: 10px 15px; display: block;text-align: center;" id="select-file-<?php echo esc_attr( $control_uid ); ?>" ><?php echo esc_html__( '{{data.label}}', 'html5-audio-player' ); ?></a> <br />
 
 				<input type="text" class="tnc-b-selected-fle-url" id="<?php echo esc_attr( $control_uid ); ?>" data-setting="{{ data.name }}" placeholder="{{ data.placeholder }}">
 			</div>

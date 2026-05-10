@@ -90,6 +90,30 @@ Enjoy crystal-clear audio in just a few clicks!
 [**Live Demo**](https://bplugins.com/products/html5-audio-player/#demos) | [**Upgrade to Pro**](https://bplugins.com/products/html5-audio-player/pricing)
 
 
+== Source Code ==
+
+You can find the source code, report bugs, and contribute to the development of this plugin on our GitHub repository: 
+[**HTML5 Audio Player on GitHub**](https://github.com/bPlugins/html5-audio-player-free)
+
+== Third-Party Libraries ==
+
+This plugin bundles the following third-party JavaScript/PHP libraries.
+
+= Codestar Framework =
+
+* **Source:** [http://codestarframework.com/](http://codestarframework.com/)
+* **GitHub:** [https://github.com/Codestar/codestar-framework](https://github.com/Codestar/codestar-framework)
+* **License:** GPLv2 or later – [https://github.com/Codestar/codestar-framework/blob/master/LICENSE.md](https://github.com/Codestar/codestar-framework/blob/master/LICENSE.md)
+* **Purpose:** Provides the options framework for the plugin's settings and shortcode generator.
+
+= Freemius SDK =
+
+* **Source:** [https://freemius.com/](https://freemius.com/)
+* **GitHub:** [https://github.com/Freemius/wordpress-sdk](https://github.com/Freemius/wordpress-sdk)
+* **License:** GPLv3 – [https://github.com/Freemius/wordpress-sdk/blob/master/LICENSE.txt](https://github.com/Freemius/wordpress-sdk/blob/master/LICENSE.txt)
+* **Purpose:** Provides opt-in usage tracking and analytics to help improve the plugin.
+
+
 ### User Feedback 
 
 ❛❛**_I bought a second license for another site because this plugin satisfied all my needs. I had a small problem on this new site and support solved the problem within hours of my request. Thank you so much. You are awesome._**❜❜
@@ -187,7 +211,7 @@ e.g.
 
 == Changelog ==
 
-= 2.6.0 - 09 May, 2026 =
+= 2.6.0 - 10 May, 2026 =
 * **New:** Users can now turn shuffle on or off from Gutenberg and dashboard settings.
 * **Update:** Massive structural update unlocking several previously PRO features to the Free version (Sticky player, standard skins, poster images, border radius, repeat, and more).
 * **Update:** Cleaned up the free dashboard to neatly present premium-only settings via intuitive notice cards.

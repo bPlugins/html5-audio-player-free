@@ -48,18 +48,18 @@ const Settings = ({ attributes, setAttributes, siteUrl }) => {
 
     return __('Advanced styling options like ', 'h5ap') +
       features.join(', ') +
-      __(' and more are available in the Premium version.', 'h5ap');
+      __(' and more are available in the Pro version.', 'h5ap');
   };
 
   const getSettingsPremiumNoticeText = () => {
-    const features = [__('7 More Premium Skins', 'h5ap'), __('Save State', 'h5ap'), __('Disable Pause', 'h5ap'), __('Seek Time', 'h5ap'), __('Start Time', 'h5ap')];
+    const features = [__('7 More Pro Skins', 'h5ap'), __('Save State', 'h5ap'), __('Disable Pause', 'h5ap'), __('Seek Time', 'h5ap'), __('Start Time', 'h5ap')];
     if (skin === "Fusion") {
       features.push(__('Initial Volume', 'h5ap'));
       features.push(__('Download Button', 'h5ap'));
     }
     return __('Features like ', 'h5ap') +
       features.join(', ') +
-      __(' and more are available in the Premium version.', 'h5ap');
+      __(' and more are available in the Pro version.', 'h5ap');
   };
 
   return (
@@ -162,7 +162,7 @@ const Settings = ({ attributes, setAttributes, siteUrl }) => {
                             <Notice status='premium' isIcon={true}>
                               {__('Controls like ', 'h5ap')}
                               {controlSettings.filter(item => !["Play", "Progress", "Mute", "Volume", "Duration", "Current Time", "Settings"].includes(item)).join(', ')}
-                              {__(' are available in the Premium version.', 'h5ap')}
+                              {__(' are available in the Pro version.', 'h5ap')}
                             </Notice>
                           </Fragment>
                         )

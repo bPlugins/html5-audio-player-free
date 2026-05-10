@@ -34,6 +34,10 @@ if (function_exists('h5ap_fs')) {
 		require_once(dirname(__FILE__) . '/inc/functions.php');
 	}
 
+	if (!class_exists('CSF')) {
+		require_once(dirname(__FILE__) . '/vendor/codestar-framework/codestar-framework.php');
+	}
+
 	if (! function_exists('h5ap_fs')) {
 		if (! function_exists('h5ap_fs')) {
 			// Create a helper function for easy SDK access.
@@ -72,10 +76,6 @@ if (function_exists('h5ap_fs')) {
 			// Signal that SDK was initiated.
 			do_action('h5ap_fs_loaded');
 		}
-	}
-
-	if (!class_exists('CSF')) {
-		require_once 'admin/codestar-framework/codestar-framework.php';
 	}
 
 	if (class_exists('H5APPlayer\\Init')) {

@@ -21,7 +21,7 @@ class AudioPlayer
     ));
 
     \CSF::createMetabox('_h5ap_plyr_skins', array(
-      'title' => 'Player Skins',
+      'title' => 'Pro Version Skins',       
       'post_type' => 'audioplayer',
       'context' => 'side',
     ));
@@ -255,8 +255,8 @@ class AudioPlayer
           'dependency' => array('h5ap_player_type', '==', 'opt-2'),
           'content' => '
                     <div class="h5ap-pro-notice-box">
-                        <h4 class="h5ap-pro-notice-title">🚀 Get More with Premium Version</h4>
-                        <p class="h5ap-pro-notice-desc">The Playlist Player and all of its powerful features are available exclusively in the Premium Version:</p>
+                        <h4 class="h5ap-pro-notice-title">🚀 Get More with Pro Version</h4>
+                        <p class="h5ap-pro-notice-desc">The Playlist Player and all of its powerful features are available exclusively in the Pro Version:</p>
                         
                         <div style="display: flex; align-items: center; gap: 30px; margin: 20px 0; flex-wrap: wrap;">
                             <div style="flex: 1; min-width: 250px;">
@@ -269,7 +269,7 @@ class AudioPlayer
                                 </ul>
                                 <div style="margin-top: 20px;">
                                     <a href="' . admin_url('admin.php?page=html5-audio-player-help-demo#/pricing') . '" 
-                                    class="h5ap-pro-notice-button" style="display: inline-block;"> ' . $h5ap_crown_icon . ' Get Premium</a>
+                                    class="h5ap-pro-notice-button" style="display: inline-block;"> ' . $h5ap_crown_icon . ' Get Pro</a>
                                 </div>
                             </div>
                             <div style="flex-shrink: 0; max-width: 400px; width: 100%; margin-top:-70px;">
@@ -324,21 +324,21 @@ class AudioPlayer
           'dependency' => array('h5ap_player_type', '==', 'opt-1'),
           'content' => '
                     <div class="h5ap-pro-notice-box">
-                        <h4 class="h5ap-pro-notice-title">🚀 Get More with Premium Version</h4>
-                        <p class="h5ap-pro-notice-desc">The following features are available in the Premium Version:</p>
+                        <h4 class="h5ap-pro-notice-title">🚀 Get More with Pro Version</h4>
+                        <p class="h5ap-pro-notice-desc">The following features are available in the Pro Version:</p>
                         <ul class="h5ap-pro-notice-list">
-                            <li><strong>Premium Skins:</strong> Unlock 7 additional beautifully designed premium player skins.</li>
+                            <li><strong>Pro Skins:</strong> Unlock 7 additional beautifully designed pro player skins.</li>
                             <li><strong>Primary Color:</strong> Set a custom primary theme color for your player.</li>
                             <li><strong>Background Color:</strong> Set a custom background color for your player.</li>
                             <li><strong>Text Color:</strong> Set a custom text color for your player.</li>
-                            <li><strong>Premium Controls:</strong> Access advanced controls like Restart, Rewind, Fast Forward and Download.</li>
+                            <li><strong>Pro Controls:</strong> Access advanced controls like Restart, Rewind, Fast Forward and Download.</li>
                             <li><strong>Seek Time:</strong> Set the time, in seconds, to seek when a user hits fast forward or rewind.</li>
                             <li><strong>Start Time:</strong> Set the specific time, in seconds, where the audio should start playing.</li>
                             <li><strong>Disable Pause:</strong> Prevent users from pausing the audio playback.</li>
                             <li><strong>Save State:</strong> Save the player\'s time state so it resumes from where the user left off.</li>
                         </ul>
                         <a href="' . admin_url('admin.php?page=html5-audio-player-help-demo#/pricing') . '" 
-                        class="h5ap-pro-notice-button"> ' . $h5ap_crown_icon . ' Get Premium</a>
+                        class="h5ap-pro-notice-button"> ' . $h5ap_crown_icon . ' Get Pro</a>
                     </div>
                 ',
         ),
@@ -347,10 +347,10 @@ class AudioPlayer
           'dependency' => array('h5ap_player_type', '==', 'opt-3'),
           'content' => '
                     <div class="h5ap-pro-notice-box">
-                        <h4 class="h5ap-pro-notice-title">🚀 Get More with Premium Version</h4>
-                        <p class="h5ap-pro-notice-desc">The following features are available in the Premium Version:</p>
+                        <h4 class="h5ap-pro-notice-title">🚀 Get More with Pro Version</h4>
+                        <p class="h5ap-pro-notice-desc">The following features are available in the Pro Version:</p>
                         <ul class="h5ap-pro-notice-list">
-                            <li><strong>Premium Skin:</strong> Unlock the clean and minimal Simple skin for your sticky player.</li>
+                            <li><strong>Pro Skin:</strong> Unlock the clean and minimal Simple skin for your sticky player.</li>
                             <li><strong>Background Color:</strong> Set a custom background color for your sticky player.</li>
                             <li><strong>Repeat:</strong> Loop the audio to play continuously.</li>
                             <li><strong>Save State:</strong> Save the player\'s time state so it resumes from where the user left off.</li>
@@ -358,7 +358,7 @@ class AudioPlayer
                             <li><strong>Initial Volume:</strong> Set the initial volume level of the player.</li>
                         </ul>
                         <a href="' . admin_url('admin.php?page=html5-audio-player-help-demo#/pricing') . '" 
-                        class="h5ap-pro-notice-button"> ' . $h5ap_crown_icon . ' Get Premium</a>
+                        class="h5ap-pro-notice-button"> ' . $h5ap_crown_icon . ' Get Pro</a>
                     </div>
                 ',
 			  ),
@@ -372,19 +372,15 @@ class AudioPlayer
       'context' => 'side',
       'fields' => array(
         array(
+          'type' => 'content',
+          'content' => '<p style="margin-top: -5px; font-weight: 600; margin-bottom: 10px; color: #646970; font-size: 13px;">' . \__('The following skins are available in the pro version.', 'h5ap') . '</p>',
+        ),
+        array(
           'id' => 'standard_skin',
           'type' => 'content',
           'content' => '
           <div class="h5ap-skin-box">
           <style>.h5ap-skin-box {text-align:center;} img{max-width:100%;} h3 {margin-bottom:5px;text-align:center;}</style>
-            <h3>Default</h3>
-            <img src="' . H5AP_PRO_PLUGIN_DIR . 'assets/images/skins/default.png" alt="Standard">
-            <h3>Fusion</h3>
-            <img src="' . H5AP_PRO_PLUGIN_DIR . 'assets/images/skins/fusion.png" alt="Standard">
-            <h3>Stamp</h3>
-            <img src="' . H5AP_PRO_PLUGIN_DIR . 'assets/images/skins/stamp.png" alt="Standard">
-            <h3>Wave</h3>
-            <img src="' . H5AP_PRO_PLUGIN_DIR . 'assets/images/skins/wave.png" alt="Standard">
             <h3>Card 1</h3>
             <img src="' . H5AP_PRO_PLUGIN_DIR . 'assets/images/skins/card-1.png" alt="Standard">
             <h3>Card 2</h3>

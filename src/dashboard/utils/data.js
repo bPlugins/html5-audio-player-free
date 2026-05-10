@@ -39,7 +39,7 @@ export const dashboardInfo = (info) => {
 
         changelogs: [
             {
-                version: '2.6.0 - 09 May, 2026',
+                version: '2.6.0 - 10 May, 2026',
                 type: 'new',
                 list: [
                     'New: Users can now turn shuffle on or off from Gutenberg and dashboard settings.',

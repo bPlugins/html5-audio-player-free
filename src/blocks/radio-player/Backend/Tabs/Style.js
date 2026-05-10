@@ -28,7 +28,7 @@ const Style = ({ attributes, setAttributes }) => {
             typo.join(', ') +
             __('), and Icon Color customizations (', 'h5ap') +
             icons.join(', ') +
-            __(', etc.) are available in the Premium version.', 'h5ap');
+            __(', etc.) are available in the Pro version.', 'h5ap');
     };
 
     return (

@@ -11,6 +11,18 @@ add_shortcode('player', function ($atts) {
     return '';
   }
 
+  // Enqueue necessary assets for the player to function
+  wp_enqueue_style('h5ap-public');
+  wp_enqueue_style('bplugins-plyrio');
+  wp_enqueue_script('bplugins-plyrio');
+  wp_enqueue_script('h5ap-all');
+
+  // Enqueue block assets manually as render_block doesn't handle it for shortcodes
+  wp_enqueue_script('h5ap-audioplayer-view-script');
+  wp_enqueue_style('h5ap-audioplayer-style');
+  wp_enqueue_script('h5ap-radio-player-view-script');
+  wp_enqueue_style('h5ap-radio-player-style');
+
   if (post_password_required($post)) {
     return get_the_password_form($post);
   }

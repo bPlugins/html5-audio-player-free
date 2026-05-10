@@ -377,7 +377,8 @@ class H5AP {
     });
 
     //set initial volume
-    player.volume = initialVolume / 100;
+    const safeInitialVolume = isNaN(parseFloat(initialVolume)) ? 50 : parseFloat(initialVolume);
+    player.volume = safeInitialVolume / 100;
 
     $(stickyPlayer)
       .find('[data-plyr="repeat"]')
@@ -534,7 +535,8 @@ class H5AP {
     });
 
     //set initial volume
-    player.volume = initialVolume / 100;
+    const safeInitialVolume = isNaN(parseFloat(initialVolume)) ? 50 : parseFloat(initialVolume);
+    player.volume = safeInitialVolume / 100;
 
     $(wrapper)
       .find('[data-plyr="repeat"]')

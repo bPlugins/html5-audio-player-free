@@ -63,7 +63,15 @@ class EnqueueAssets
 
         if (strpos($screen, 'html5-audio-player') !== false || $current_screen->post_type === 'audioplayer' || $current_screen->post_type === 'radioplayer' || $screen === 'plugins.php') {
             wp_enqueue_style('h5ap-admin', H5AP_PRO_PLUGIN_DIR . 'assets/css/style.css', array(), H5AP_PRO_VERSION);
+            
+            // player assets for preview and sticky player logic
+            wp_enqueue_style('bplugins-plyrio', H5AP_PRO_PLUGIN_DIR . 'assets/css/plyr-v3.7.2.css', array(), H5AP_PRO_VERSION);
+            wp_enqueue_style('h5ap-player', H5AP_PRO_PLUGIN_DIR . 'build/player.css', array(), H5AP_PRO_VERSION);
+
             wp_enqueue_script('h5ap-admin',  H5AP_PRO_PLUGIN_DIR . 'build/admin.js');
+            wp_enqueue_script('bplugins-plyrio', H5AP_PRO_PLUGIN_DIR . 'assets/js/plyr-v3.7.2.js', array('jquery'), H5AP_PRO_VERSION, false);
+            wp_enqueue_script('h5ap-player', H5AP_PRO_PLUGIN_DIR . 'build/player.js', array('jquery', 'bplugins-plyrio'), H5AP_PRO_VERSION, true);
+
             wp_localize_script('h5ap-admin', 'h5apAdmin', array(
                 'ajaxUrl' => admin_url('admin-ajax.php'),
                 'website' => site_url()

@@ -16,13 +16,14 @@ function Fusion(props) {
         if (!containerRef.current) {
             return;
         }
+        const safeVolume = isNaN(parseFloat(volume)) ? 0.5 : parseFloat(volume);
         const player = new Plyr(containerRef.current.querySelector('audio'), {
             controls: skinFusion(poster, title, source, { download, repeat: true }),
             loop: { active: repeat },
             autoplay,
             muted,
             seekTime,
-            volume: parseFloat(volume),
+            volume: safeVolume,
         })
 
 
@@ -40,7 +41,8 @@ function Fusion(props) {
         }
 
         player.on('ready', () => {
-            player.volume = parseFloat(volume);
+            const safeVolume = isNaN(parseFloat(volume)) ? 0.5 : parseFloat(volume);
+            player.volume = safeVolume;
         });
 
         return () => {

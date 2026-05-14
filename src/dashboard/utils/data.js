@@ -39,6 +39,13 @@ export const dashboardInfo = (info) => {
 
         changelogs: [
             {
+                version: '2.6.1 - 14 May, 2026',
+                type: 'fix',
+                list: [
+                    'Fix: Fixed the issue where the Fusion skin of the standard player was not appearing due to a NaN volume value issue.'
+                ]
+            },
+            {
                 version: '2.6.0 - 10 May, 2026',
                 type: 'new',
                 list: [

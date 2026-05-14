@@ -97,11 +97,14 @@ class Shortcode
                 'seekTime' => $stime,
                 'repeat' => (bool)$repeat,
                 'shuffle' => (bool)$shuffle,
-                'skin' => isset($atts['skin']) ? $skin : 'Default',
+                'skin' => isset($atts['skin']) ? ucfirst($atts['skin']) : 'Default',
                 'autoplay' => $autoplay,
                 'muted' => $muted,
                 'preload' => $preload,
-                'startTime' => (int)$start_time
+                'startTime' => (int)$start_time,
+                'options' => [
+                    'volume' => 0.5
+                ]
             ]
         ];
 

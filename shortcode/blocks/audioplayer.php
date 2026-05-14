@@ -73,7 +73,7 @@ $block = [
         'radius'        => $type === 'opt-3' ? 0 : $meta('radius', '5') . 'px',
         'controls' => array_fill_keys(array_unique($controls), true),
         'options'       => [
-            'volume' => (float) $meta('volume', 0.5),
+            'volume' => (float) $meta($type === 'opt-3' ? 'sticky_volume' : 'plp_volume', 0.5),
         ],
         'style'         => null,
         'CSS'           => '',

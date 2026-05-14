@@ -86,11 +86,12 @@ HTML5 Audio Player utilizes the following high-quality libraries to deliver a pr
 
 ### Development Workflow
 1. **Clone the repository** into your local WordPress `plugins` directory.
-2. **Install dependencies**:
+2. **Clone [bpl-tools](https://github.com/bPlugins/bpl-tools)** into the same `plugins` directory (required for shared components and dashboard logic).
+3. **Install dependencies**:
 	```bash
 	npm install
 	```
-3. **Start development watch mode**:
+4. **Start development watch mode**:
 	```bash
 	npm start
 	```

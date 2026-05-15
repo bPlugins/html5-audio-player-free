@@ -217,7 +217,7 @@ e.g.
 
 == Changelog ==
 
-= 2.6.1 - 14 May, 2026 =
+= 2.6.1 - 15 May, 2026 =
 * **Fix:** Fixed the issue where the Fusion skin of the standard player was not appearing due to a NaN volume value issue.
 
 = 2.6.0 - 10 May, 2026 =

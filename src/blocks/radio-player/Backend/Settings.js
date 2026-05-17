@@ -168,7 +168,7 @@ const Settings = ({ attributes, siteUrl, setAttributes, isPremium }) => {
         ]} />
       </BlockControls>
 
-      <AdvertiseCard planLink={pricingURL || 'https://bplugins.com/products/html5-audio-player/pricing'} />
+      <AdvertiseCard planLink={pricingURL || 'https://bplugins.com/products/panorama/pricing'} />
     </InspectorControls>
   );
 };

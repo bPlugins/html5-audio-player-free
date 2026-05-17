@@ -39,6 +39,13 @@ export const dashboardInfo = (info) => {
 
         changelogs: [
             {
+                version: '2.6.2 - 17 May, 2026',
+                type: 'fix',
+                list: [
+                    'Fix: Fixed the issue where the audio players showed 00:00 duration.'
+                ]
+            },
+            {
                 version: '2.6.1 - 15 May, 2026',
                 type: 'fix',
                 list: [

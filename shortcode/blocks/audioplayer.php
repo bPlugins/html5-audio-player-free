@@ -67,7 +67,7 @@ $block = [
         'disablePause'  => $meta('disable_pause', false, true),
         'seekTime'      => (int) $meta('seektime', 10),
         'startTime'     => (int)$meta('startTime', 0),
-        'preload'       => $meta('preload', 'metadata', true),
+        'preload'       => $meta('preload', 'metadata'),
         'download'      => $download,
         'width'         => $width['width'] . $width['unit'],
         'radius'        => $type === 'opt-3' ? 0 : $meta('radius', '5') . 'px',

@@ -4,7 +4,7 @@ Tags: mp3 player, audio, audio player, player, podcast
 Donate link: https://www.buymeacoffee.com/abuhayat/  
 Requires at least: 5.8
 Tested up to: 6.9.4
-Stable tag: 2.6.1
+Stable tag: 2.6.2
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -216,6 +216,9 @@ e.g.
 
 
 == Changelog ==
+
+= 2.6.2 - 17 May, 2026 =
+* **Fix:** Fixed the issue where the audio players showed 00:00 duration.
 
 = 2.6.1 - 15 May, 2026 =
 * **Fix:** Fixed the issue where the Fusion skin of the standard player was not appearing due to a NaN volume value issue.

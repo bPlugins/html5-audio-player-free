@@ -5,12 +5,14 @@ import "./fusion.scss";
 import CloseStickyIcon from "../../../Components/CloseStickyIcon";
 import fadeOut from "../../../../../utils/fadeOut";
 import PlyrExtend from "../../../../../utils/PlyrExtend";
+import { resolveAudioSrc } from "../../../../../utils/gDriveProxy";
 
 
 function Fusion(props) {
     const { attributes, containerRef, className } = props;
-    const { source, title, poster, download, repeat, autoplay, muted, seekTime, disablePause, startTime, saveState, preload, options = {} } = attributes;
+    const { source: rawSource, title, poster, download, repeat, autoplay, muted, seekTime, disablePause, startTime, saveState, preload, options = {} } = attributes;
     const { volume } = options;
+    const source = resolveAudioSrc(rawSource);
 
     useEffect(() => {
         if (!containerRef.current) {

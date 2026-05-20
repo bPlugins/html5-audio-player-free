@@ -4,7 +4,7 @@ Tags: mp3 player, audio, audio player, player, podcast
 Donate link: https://www.buymeacoffee.com/abuhayat/  
 Requires at least: 5.8
 Tested up to: 6.9.4
-Stable tag: 2.6.2
+Stable tag: 2.6.3
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -216,6 +216,11 @@ e.g.
 
 
 == Changelog ==
+
+= 2.6.3 - 20 May, 2026 =
+* **Fix:** Resolved an issue where Google Drive audio links displayed 00:00 duration by implementing a robust Range-request proxy.
+* **Fix:** Fixed server connection hanging and PHP session locking issues caused by uninterrupted background downloads in the proxy endpoint.
+* **Fix:** Improved compatibility and stable playback for Google Drive URLs across all audio player skins and playlist blocks.
 
 = 2.6.2 - 17 May, 2026 =
 * **Fix:** Fixed the issue where the audio players showed 00:00 duration.

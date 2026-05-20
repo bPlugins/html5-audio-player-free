@@ -1,9 +1,13 @@
 import { toHHMMSS } from "../js/utils";
+import { resolveAudioSrc } from "./gDriveProxy";
 
 class PlyrPlaylist {
     constructor(player, audios, options = {}) {
         this.player = player;
-        this.audios = audios;
+        this.audios = audios.map(audio => ({
+            ...audio,
+            source: audio.source ? resolveAudioSrc(audio.source) : audio.source
+        }));
         if (!player.elements.container) return;
 
         this.shuffle = options.shuffle || false;

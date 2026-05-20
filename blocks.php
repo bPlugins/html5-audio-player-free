@@ -22,7 +22,8 @@ if (!class_exists('H5AP_Block')) {
                 'multipleAudio' => (bool) Functions::getSetting('multipleAudio', false),
                 'plyrio_js' => H5AP_PRO_PLUGIN_DIR . 'assets/js/plyr-v3.7.2.js',
                 'plyr_js' => H5AP_PRO_PLUGIN_DIR . 'build/player.js',
-                'isPipe' => false
+                'isPipe' => false,
+                'ajaxUrl' => admin_url('admin-ajax.php')
             ]);
         }
 

@@ -13,6 +13,19 @@ class H5AP {
     }
     let { controls, seekTime, i18n, title, artist, disablePause, poster, muted, autoplay, startTime, source, skin, disableDownload, fusionDownload, color, background, repeat, primaryColor, saveState = false } = options;
 
+    // Google Drive proxy: googleapis.com/drive URLs cannot be streamed directly in the browser
+    // due to CORS/Range-request limitations. Route them through the WordPress proxy endpoint.
+    // NOTE: We must also update the <audio src=""> attribute directly because Plyr reads the
+    // existing DOM attribute (set by PHP at render time), not the JS `source` variable.
+    if (source && typeof source === 'string' && source.includes('googleapis.com/drive')) {
+      const ajaxUrl = (window.h5apPlayer && window.h5apPlayer.ajaxUrl) ? window.h5apPlayer.ajaxUrl : '';
+      if (ajaxUrl) {
+        source = ajaxUrl + '?action=h5ap_gdrive_proxy&url=' + encodeURIComponent(source);
+        // Update the <audio> element src BEFORE Plyr initializes so it uses the proxy URL
+        $(audioPlayer).find('audio').attr('src', source);
+      }
+    }
+
     if (skin === "default" && disableDownload === false) {
       otherControls.download = true;
     }

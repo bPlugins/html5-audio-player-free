@@ -39,6 +39,15 @@ export const dashboardInfo = (info) => {
 
         changelogs: [
             {
+                version: '2.6.3 - 20 May, 2026',
+                type: 'fix',
+                list: [
+                    'Fix: Resolved an issue where Google Drive audio links displayed 00:00 duration by implementing a robust Range-request proxy.',
+                    'Fix: Fixed server connection hanging and PHP session locking issues caused by uninterrupted background downloads in the proxy endpoint.',
+                    'Fix: Improved compatibility and stable playback for Google Drive URLs across all audio player skins and playlist blocks.'
+                ]
+            },
+            {
                 version: '2.6.2 - 17 May, 2026',
                 type: 'fix',
                 list: [

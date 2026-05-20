@@ -45,6 +45,7 @@ class EnqueueAssets
             'multipleAudio' => (bool) Functions::getSetting('multipleAudio', false),
             'plyrio_js' => H5AP_PRO_PLUGIN_DIR . 'assets/js/plyr-v3.7.2.js',
             'plyrio_css' => H5AP_PRO_PLUGIN_DIR . 'assets/css/plyr-v3.7.2.css',
+            'ajaxUrl' => admin_url('admin-ajax.php'),
             'options' => [
                 'controls' => Functions::getSetting('h5ap_controls', []),
                 'preload' => Functions::getSetting('h5ap_preload', 'metadata'),

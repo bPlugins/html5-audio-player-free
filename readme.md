@@ -23,6 +23,7 @@ Everything you need to build a professional audio experience on your site:
 - **Title & Author Support:** Display custom audio titles and author metadata directly on the player.
 - **Playback Controls:** Autoplay, Preload, Mute, and Repeat options out-of-the-box.
 - **MP3 & OGG Support:** Automatically loads the right format based on the user’s device capabilities.
+- **Google Drive Audio Support:** Seamlessly play audio files directly from Google Drive. Our built-in smart proxy bypasses Google's restrictions and CORS errors, ensuring smooth playback and accurate duration display.
 
 ### 👑 Premium Power (Pro)
 Unlock advanced functionality for high-performing podcasts, music sites, and audio courses:

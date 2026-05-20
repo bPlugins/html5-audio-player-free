@@ -36,6 +36,7 @@ Built with modern HTML5 technology, this plugin works across all major browsers 
 - **Great for Podcasts**: Perfect for embedding podcast episodes or audio courses.
 - **MP3 & OGG Support**: Automatically loads the right format based on user’s device.
 - **Cross-Browser Support**: Works smoothly on Chrome, Firefox, Safari, Edge, IE7–IE9, and more.
+- **Google Drive Audio Support**: Seamlessly play audio files directly from Google Drive. Our built-in smart proxy bypasses Google's restrictions and CORS errors, ensuring smooth playback and accurate duration display.
 
 ### Pro Version – Unlock Premium Audio Controls
 Upgrade to the [**Pro version**](https://bplugins.com/products/html5-audio-player/pricing) for more control over design, behavior, and playback settings.

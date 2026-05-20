@@ -12,7 +12,6 @@ const entry = {
   ...defaultConfig.entry(),
   admin: "./src/js/admin.js",
   dashboard: "./src/dashboard/admin.js",
-  license: "./src/js/license.js",
   player: "./src/js/player.js",
   "h5ap-all": "./src/js/h5ap-all.js",
 };

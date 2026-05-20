@@ -100,7 +100,6 @@ foreach ( $h5ap_taxonomies as $taxonomy ) {
 $h5ap_options = array(
 	'h5ap_settings',
 	'h5ap-notice-import',
-	'bpllch5ap',
 	'h5ap_delete_data_on_uninstall', // The setting itself.
 );
 

@@ -15,7 +15,6 @@ class Init {
             Field\Settings::class,
             Core\Ajax::class,
             Core\Page::class,
-            Services\AdminNotice::class,
             Services\Shortcode::class,
             Services\EnqueueAssets::class,
             Model\GlobalChanges::class,

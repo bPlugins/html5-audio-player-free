@@ -14,18 +14,24 @@ export function resolveAudioSrc(src) {
         return src;
     }
 
-    if (src.includes('googleapis.com/drive')) {
-        const ajaxUrl =
-            (window.h5apPlayer && window.h5apPlayer.ajaxUrl)
-                ? window.h5apPlayer.ajaxUrl
-                : (window.h5apAll && window.h5apAll.ajaxUrl)
-                    ? window.h5apAll.ajaxUrl
-                    : '';
+    let normalizedSrc = src.trim();
 
-        if (ajaxUrl) {
-            return ajaxUrl + '?action=h5ap_gdrive_proxy&url=' + encodeURIComponent(src);
+    const ajaxUrl =
+        (window.h5apPlayer && window.h5apPlayer.ajaxUrl)
+            ? window.h5apPlayer.ajaxUrl
+            : (window.h5apAll && window.h5apAll.ajaxUrl)
+                ? window.h5apAll.ajaxUrl
+                : '';
+
+    if (ajaxUrl) {
+        if (normalizedSrc.includes('googleapis.com/drive')) {
+            return ajaxUrl + '?action=h5ap_gdrive_proxy&url=' + encodeURIComponent(normalizedSrc);
+        }
+
+        if (normalizedSrc.includes('soundcloud.com') && !normalizedSrc.includes('api.soundcloud.com') && !normalizedSrc.includes('h5ap_soundcloud_stream')) {
+            return ajaxUrl + '?action=h5ap_soundcloud_stream&sc_url=' + encodeURIComponent(normalizedSrc);
         }
     }
 
-    return src;
+    return normalizedSrc;
 }

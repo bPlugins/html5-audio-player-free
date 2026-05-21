@@ -21,7 +21,6 @@ export const dashboardInfo = (info) => {
             logo: `https://ps.w.org/${slug}/assets/icon-128x128.png`,
             banner: `https://ps.w.org/${slug}/assets/banner-772x250.png`,
             thumbnail: `https://bplugins.com/wp-content/themes/b-technologies/assets/images/products/${slug}.png`,
-            // proThumbnail: `https://bplugins.com/wp-content/themes/b-technologies/assets/images/products/${slug}-pro.png`,
             video: 'https://youtu.be/n3B4SpbDS30',
             isYoutube: true
         },
@@ -38,6 +37,15 @@ export const dashboardInfo = (info) => {
         },
 
         changelogs: [
+            {
+                version: '2.6.4 - 21 May, 2026',
+                type: 'fix',
+                list: [
+                    'Fix: Resolved SoundCloud track URL playback issues for standard players, shortcodes, and Gutenberg Block Editor.',
+                    'Fix: Implemented secure internal SoundCloud API v2 progressive stream proxying to bypass restricted/temporary CDN stream URL expirations.',
+                    'Fix: Fixed block settings panel URL updates and block preview rendering issues for SoundCloud track links.'
+                ]
+            },
             {
                 version: '2.6.3 - 20 May, 2026',
                 type: 'fix',
@@ -106,7 +114,10 @@ export const dashboardInfo = (info) => {
             'Fast Forward & Rewind Buttons',
             'Download & Playback Controls',
             'Start Time & Disable Pause',
+            'Post Playlist Controls',
             'Ad-Free Experience',
+            'Google Drive Audio Support',
+            'SoundCloud Streaming Support',
         ],
         startButton: {
             label: 'Start Now',

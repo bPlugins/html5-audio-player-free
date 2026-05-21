@@ -6,13 +6,19 @@ import Fusion from "./players/fusion/Fusion";
 import Stamp from "./players/stamp/Stamp";
 
 import Style from "./Style";
+import { resolveAudioSrc } from "../../../utils/gDriveProxy";
 
 const AudioPlayer = ({ attributes, id }) => {
     const containerRef = useRef(null);
     const skins = { Default, Fusion, Stamp, Wave };
-    const { isSticky, skin, width, multiple_audio} = attributes
 
-    const SkinComponent = skins[attributes.skin] || null;
+    const resolvedAttributes = {
+        ...attributes,
+        source: resolveAudioSrc(attributes.source)
+    };
+    const { isSticky, skin, width, multiple_audio} = resolvedAttributes;
+
+    const SkinComponent = skins[skin] || null;
 
     useEffect(() => {
         if (!multiple_audio) {
@@ -34,8 +40,8 @@ const AudioPlayer = ({ attributes, id }) => {
 
     return SkinComponent ? (
         <>
-            <Style attributes={attributes} id={id} />
-            <SkinComponent attributes={attributes} containerRef={containerRef} playerRef={playerRef} className={`h5ap_skin ${isSticky && ["Default", "Fusion", "Stamp", "Wave"].includes(skin) ? `h5ap-sticky${width === '100%' ? ' full-width' : ''}` : ''} `} />
+            <Style attributes={resolvedAttributes} id={id} />
+            <SkinComponent attributes={resolvedAttributes} containerRef={containerRef} playerRef={playerRef} className={`h5ap_skin ${isSticky && ["Default", "Fusion", "Stamp", "Wave"].includes(skin) ? `h5ap-sticky${width === '100%' ? ' full-width' : ''}` : ''} `} />
         </>
     ) : (
         <h2>Audio Player</h2>

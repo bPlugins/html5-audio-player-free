@@ -4,7 +4,7 @@ Tags: mp3 player, audio, audio player, player, podcast
 Donate link: https://www.buymeacoffee.com/abuhayat/  
 Requires at least: 5.8
 Tested up to: 6.9.4
-Stable tag: 2.6.3
+Stable tag: 2.6.4
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -35,8 +35,9 @@ Built with modern HTML5 technology, this plugin works across all major browsers 
 - **Repeat Control**: Loop your audio seamlessly.
 - **Great for Podcasts**: Perfect for embedding podcast episodes or audio courses.
 - **MP3 & OGG Support**: Automatically loads the right format based on user’s device.
-- **Cross-Browser Support**: Works smoothly on Chrome, Firefox, Safari, Edge, IE7–IE9, and more.
 - **Google Drive Audio Support**: Seamlessly play audio files directly from Google Drive. Our built-in smart proxy bypasses Google's restrictions and CORS errors, ensuring smooth playback and accurate duration display.
+- **SoundCloud Streaming Support**: Stream tracks seamlessly by pasting their page URLs directly. Bypasses strict access rules, authorization requirements, and expiring CDN URLs for a smooth visitor experience.
+- **Cross-Browser Support**: Works smoothly on Chrome, Firefox, Safari, Edge, IE7–IE9, and more.
 
 ### Pro Version – Unlock Premium Audio Controls
 Upgrade to the [**Pro version**](https://bplugins.com/products/html5-audio-player/pricing) for more control over design, behavior, and playback settings.
@@ -217,6 +218,11 @@ e.g.
 
 
 == Changelog ==
+
+= 2.6.4 - 21 May, 2026 =
+* **Fix:** Resolved SoundCloud track URL playback issues for standard players, shortcodes, and Gutenberg Block Editor.
+* **Fix:** Implemented secure internal SoundCloud API v2 progressive stream proxying to bypass restricted/temporary CDN stream URL expirations.
+* **Fix:** Fixed block settings panel URL updates and block preview rendering issues for SoundCloud track links.
 
 = 2.6.3 - 20 May, 2026 =
 * **Fix:** Resolved an issue where Google Drive audio links displayed 00:00 duration by implementing a robust Range-request proxy.

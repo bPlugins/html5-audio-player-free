@@ -47,7 +47,7 @@ $block = [
         'clientId'      => '',
         'align'         => '',
         'alignment'         => $meta('plp_align', 'left'),
-        'source'        => $h5vp_default_audio,
+        'source'        => h5ap_resolve_soundcloud_url($h5vp_default_audio),
         'poster'        => $type === 'opt-3' ? $meta('poster_sticky') : $meta('sticky_poster'),
         'title'         => $type === 'opt-3' ? $meta('title_sticky') : $meta('title'),
         'artist'        => $meta('author'),

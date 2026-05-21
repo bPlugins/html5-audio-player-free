@@ -15,10 +15,14 @@ class Ajax
         add_action('wp_ajax_nopriv_h5ap_get_stream_data', [$this, 'getStreamData']);
 
         add_action('wp_ajax_h5apSaveUninstallOption', [$this, 'saveUninstallOption']);
-        
-           // Google Drive audio proxy — allows browser to stream googleapis.com/drive audio
+
+        // Google Drive audio proxy — allows browser to stream googleapis.com/drive audio
         add_action('wp_ajax_h5ap_gdrive_proxy', [$this, 'gDriveProxy']);
         add_action('wp_ajax_nopriv_h5ap_gdrive_proxy', [$this, 'gDriveProxy']);
+
+        // SoundCloud audio stream redirect proxy
+        add_action('wp_ajax_h5ap_soundcloud_stream', [$this, 'soundcloudStream']);
+        add_action('wp_ajax_nopriv_h5ap_soundcloud_stream', [$this, 'soundcloudStream']);
     }
 
     public function getStreamData()  {
@@ -209,5 +213,121 @@ class Ajax
         
         curl_close($ch);
         exit;
+    }
+
+    /**
+     * SoundCloud Stream Proxy
+     *
+     * Resolves soundcloud track page URL to progressive stream URL and redirects 302
+     * to the direct temporary CDN mp3 stream URL.
+     */
+    public function soundcloudStream() {
+        $url = isset($_GET['sc_url']) ? esc_url_raw(wp_unslash($_GET['sc_url'])) : '';
+        $url = html_entity_decode($url);
+
+        if (empty($url)) {
+            status_header(400);
+            exit('Missing sc_url parameter.');
+        }
+
+
+        // Restrict proxy to soundcloud domains only for security
+        $parsed = wp_parse_url($url);
+        $host   = isset($parsed['host']) ? strtolower($parsed['host']) : '';
+        if (strpos($host, 'soundcloud.com') === false) {
+            status_header(403);
+            exit('Only soundcloud.com URLs are allowed.');
+        }
+
+        // Handle OPTIONS request for CORS (if any)
+        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+            header('Access-Control-Allow-Origin: *');
+            header('Access-Control-Allow-Methods: GET, OPTIONS');
+            exit;
+        }
+
+        // Close session if open to prevent blocking other concurrent requests
+        if (session_id()) {
+            session_write_close();
+        }
+
+        $cache_key = 'h5ap_sc_prog_url_' . md5($url);
+        $prog_url = get_transient($cache_key);
+        $client_id = h5ap_get_soundcloud_client_id();
+
+        if (empty($prog_url)) {
+            $resolve_url = 'https://api-v2.soundcloud.com/resolve?url=' . urlencode($url) . '&client_id=' . $client_id;
+            $response = wp_safe_remote_get($resolve_url, [
+                'timeout'    => 15,
+                'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
+            ]);
+
+            $response_code = wp_remote_retrieve_response_code($response);
+            if ($response_code === 401 || $response_code === 403) {
+                delete_transient('h5ap_soundcloud_client_id');
+                $client_id = h5ap_get_soundcloud_client_id();
+                $resolve_url = 'https://api-v2.soundcloud.com/resolve?url=' . urlencode($url) . '&client_id=' . $client_id;
+                $response = wp_safe_remote_get($resolve_url, [
+                    'timeout'    => 15,
+                    'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
+                ]);
+            }
+
+            if (!is_wp_error($response)) {
+                $body = wp_remote_retrieve_body($response);
+                $data = json_decode($body, true);
+                if (isset($data['media']['transcodings']) && is_array($data['media']['transcodings'])) {
+                    foreach ($data['media']['transcodings'] as $transcoding) {
+                        if (isset($transcoding['format']['protocol']) && $transcoding['format']['protocol'] === 'progressive') {
+                            $prog_url = $transcoding['url'];
+                            break;
+                        }
+                    }
+                }
+
+                if (!empty($prog_url)) {
+                    set_transient($cache_key, $prog_url, 30 * DAY_IN_SECONDS);
+                }
+            }
+        }
+
+        if (empty($prog_url)) {
+            status_header(404);
+            exit('Could not resolve progressive stream for this URL.');
+        }
+
+        // Now fetch the actual CDN URL
+        $stream_url = $prog_url . '?client_id=' . $client_id;
+        $response = wp_safe_remote_get($stream_url, [
+            'timeout'    => 15,
+            'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
+        ]);
+
+        $response_code = wp_remote_retrieve_response_code($response);
+        if ($response_code === 401 || $response_code === 403) {
+            // client_id might be expired/invalid. Delete cache and fetch new client_id.
+            delete_transient('h5ap_soundcloud_client_id');
+            $client_id = h5ap_get_soundcloud_client_id();
+            
+            $stream_url = $prog_url . '?client_id=' . $client_id;
+            $response = wp_safe_remote_get($stream_url, [
+                'timeout'    => 15,
+                'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
+            ]);
+        }
+
+        if (!is_wp_error($response)) {
+            $body = wp_remote_retrieve_body($response);
+            $stream_data = json_decode($body, true);
+            if (isset($stream_data['url'])) {
+                $cdn_url = $stream_data['url'];
+                header('Access-Control-Allow-Origin: *');
+                header('Location: ' . $cdn_url, true, 302);
+                exit;
+            }
+        }
+
+        status_header(502);
+        exit('Failed to fetch CDN streaming URL from SoundCloud.');
     }
 }

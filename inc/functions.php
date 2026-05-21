@@ -65,7 +65,6 @@ if (!function_exists('h5ap_get_post_meta')) {
     }
 }
 
-
 if (!function_exists('h5ap_get_settings')) {
     function h5ap_get_settings($key, $default = null)
     {
@@ -78,3 +77,92 @@ if (!function_exists('h5ap_get_settings')) {
         };
     }
 }
+
+if (!function_exists('h5ap_get_soundcloud_client_id')) {
+    function h5ap_get_soundcloud_client_id()
+    {
+        $cached_client_id = get_transient('h5ap_soundcloud_client_id');
+        if ($cached_client_id) {
+            return $cached_client_id;
+        }
+
+        $fallback_client_id = 'tUy37JutyVy6r6JSMLnScSmBwA5DoTXE';
+        $homepage_url = 'https://soundcloud.com';
+        $response = wp_safe_remote_get($homepage_url, [
+            'timeout'    => 10,
+            'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
+        ]);
+
+        if (is_wp_error($response)) {
+            return $fallback_client_id;
+        }
+
+        $html = wp_remote_retrieve_body($response);
+        if (empty($html)) {
+            return $fallback_client_id;
+        }
+
+        // Find script tags
+        preg_match_all('/<script[^>]+src="([^"]+)"/i', $html, $matches);
+        $scripts = isset($matches[1]) ? $matches[1] : [];
+
+        // Sort to prioritize scripts with 'assets/'
+        usort($scripts, function($a, $b) {
+            $a_asset = strpos($a, 'assets/') !== false;
+            $b_asset = strpos($b, 'assets/') !== false;
+            if ($a_asset && !$b_asset) return -1;
+            if (!$a_asset && $b_asset) return 1;
+            return 0;
+        });
+
+        foreach ($scripts as $script_url) {
+            if (strpos($script_url, 'sndcdn.com') === false && strpos($script_url, 'soundcloud.com') === false) {
+                continue;
+            }
+
+            $script_res = wp_safe_remote_get($script_url, [
+                'timeout'    => 10,
+                'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
+            ]);
+
+            if (is_wp_error($script_res)) {
+                continue;
+            }
+
+            $content = wp_remote_retrieve_body($script_res);
+            if (!empty($content)) {
+                if (preg_match('/client_id\s*:\s*["\']([a-zA-Z0-9]{32})["\']/i', $content, $m)) {
+                    $client_id = $m[1];
+                    set_transient('h5ap_soundcloud_client_id', $client_id, DAY_IN_SECONDS);
+                    return $client_id;
+                }
+                if (preg_match('/client_id\s*=\s*["\']([a-zA-Z0-9]{32})["\']/i', $content, $m)) {
+                    $client_id = $m[1];
+                    set_transient('h5ap_soundcloud_client_id', $client_id, DAY_IN_SECONDS);
+                    return $client_id;
+                }
+            }
+        }
+
+        // Return fallback if extraction fails but do not cache it long term
+        return $fallback_client_id;
+    }
+}
+
+if (!function_exists('h5ap_resolve_soundcloud_url')) {
+    function h5ap_resolve_soundcloud_url($url)
+    {
+        if (empty($url) || !is_string($url)) {
+            return $url;
+        }
+
+        $url = trim($url);
+
+        if (stripos($url, 'soundcloud.com') !== false && stripos($url, 'api.soundcloud.com') === false && stripos($url, 'h5ap_soundcloud_stream') === false) {
+            return admin_url('admin-ajax.php?action=h5ap_soundcloud_stream&sc_url=' . urlencode($url));
+        }
+
+        return $url;
+    }
+}
+

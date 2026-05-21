@@ -78,7 +78,7 @@ if (!function_exists('h5ap_player_shortcode_content')) {
         foreach ($playlist_ids as $audios) {
           foreach ($audios as $audio) {
             if ($audio['audio'] !== '') {
-              $tracks[] = wp_parse_args(['source' => $audio['audio']], $audio);
+              $tracks[] = wp_parse_args(['source' => h5ap_resolve_soundcloud_url($audio['audio'])], $audio);
             }
           }
         }
@@ -88,7 +88,7 @@ if (!function_exists('h5ap_player_shortcode_content')) {
         foreach ($playlist_in_metabox as $audio) {
           $tracks[] = [
             'title' => $audio['pl_audio_title'],
-            'source' => $audio['pl_audio_file'],
+            'source' => h5ap_resolve_soundcloud_url($audio['pl_audio_file']),
             'poster' => $audio['pl_audio_poster'],
             'artist' => $audio['pl_audio_artist']
           ];

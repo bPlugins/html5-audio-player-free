@@ -2,6 +2,10 @@
 
 use H5APPlayer\Helper\LocalizeScript;
 
+if (isset($attributes['source'])) {
+    $attributes['source'] = h5ap_resolve_soundcloud_url($attributes['source']);
+}
+
 extract($attributes);
 
 $uniqueId = wp_unique_id('h5ap-player-');

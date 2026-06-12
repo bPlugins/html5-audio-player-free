@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 add_action('init', function () {
     // Register block editor script for backend.
@@ -6,7 +9,7 @@ add_action('init', function () {
         'h5ap_block_free-js', 
         H5AP_PRO_PLUGIN_DIR . '/blocks/dist/blocks.build.js', 
         array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor'), 
-        null, 
+        H5AP_PRO_VERSION, 
         true
     );
 

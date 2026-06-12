@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 
 use H5APPlayer\Helper\LocalizeScript;
 
@@ -27,7 +31,7 @@ $wrapper_attributes = get_block_wrapper_attributes(['class' => 'wp-block-h5ap-ta
     id="<?php echo esc_attr($uniqueId); ?>"
     data-id="<?php echo esc_attr($uniqueId); ?>"
     data-attributes="<?php echo esc_attr($encoded_attributes); ?>"
-    <?php echo $wrapper_attributes; ?>>
+    <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
     <?php if ($loader) { ?>
         <div class='h5ap_lp'>
             <div class='bar bar-1'></div>

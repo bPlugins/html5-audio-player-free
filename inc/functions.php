@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if (!function_exists('h5ap_register_taxonomy')) {
     function h5ap_register_taxonomy($slug, $post_type, $is_hierarchical, $title)

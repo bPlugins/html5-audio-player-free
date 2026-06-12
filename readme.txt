@@ -2,9 +2,9 @@
 Contributors: bplugins, abuhayat, freemius, shamim10, farazi1
 Tags: mp3 player, audio, audio player, player, podcast
 Donate link: https://www.buymeacoffee.com/abuhayat/  
-Requires at least: 5.8
-Tested up to: 6.9.4
-Stable tag: 2.6.4
+Requires at least: 6.5
+Tested up to: 7.0
+Stable tag: 2.7.0
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -24,7 +24,8 @@ https://youtube.com/watch?v=6ZHKarDpllQ
 Built with modern HTML5 technology, this plugin works across all major browsers and iOS devices, ensuring reliable playback on any screen size. Its shortcode-based setup gives you full control over placement and player settings, making it suitable for podcasts, music tracks, audio previews, or online courses.
 
 ### Key Features – Free Version
-- **Advanced Player Types**: Choose from Standard or Sticky Player (New in Free!).
+- **Advanced Player Types**: Choose from Standard, Sticky Player, or Audio Playlist Player (New in Free!).
+- **Audio Playlist Block**: Create and embed fully-featured audio playlists with custom tracks directly in the block editor (Previously a PRO-only block!).
 - **Standard Player Skins**: Access Default, Fusion, Stamp, and Wave skins for free.
 - **Sticky Player Skins**: Access Simple and Fusion skins for free.
 - **Embed Anywhere**: Add audio to posts, pages, widgets, and theme templates using shortcodes.
@@ -43,7 +44,7 @@ Built with modern HTML5 technology, this plugin works across all major browsers 
 Upgrade to the [**Pro version**](https://bplugins.com/products/html5-audio-player/pricing) for more control over design, behavior, and playback settings.
 
 **What’s Included in Pro:**
-- **The Playlist Player**: Unlock the fully-featured Playlist Player with Narrow and Extensive list designs.
+- **Advanced Playlist Designs & Custom Skins**: Unlock additional premium designs (like Narrow and Extensive playlist skins) and custom settings.
 - **7 Additional Premium Skins**: Access Card 1, Card 2, Simple 1, Simple 2, Player 9, Player 10, and Player 11.
 - **Color Customization**: Set custom primary and background colors to perfectly fit your site’s branding.
 - **Download buttons**: Add download buttons to your player.
@@ -218,6 +219,11 @@ e.g.
 
 
 == Changelog ==
+
+= 2.7.0 - 13 June, 2026 =
+* **New:** Moved the Audio Playlist Gutenberg Block from the Pro version to the Free version, allowing all users to create and display custom audio playlists.
+* **New:** Added End Time (Excerpt) settings for limiting audio playback duration.
+* **Update:** Completely redesigned and modernized the admin dashboard welcome screen with dynamic builder integration tabs (Gutenberg, Shortcode, Elementor) and status checks.
 
 = 2.6.4 - 21 May, 2026 =
 * **Fix:** Resolved SoundCloud track URL playback issues for standard players, shortcodes, and Gutenberg Block Editor.

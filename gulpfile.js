@@ -15,7 +15,6 @@ function bundle() {
       "!node_modules/**",
       "!src/**",
       "!zip/**",
-      "!composer.json",
       "!composer.lock",
       "!bundled/**",
       "!gulpfile.js",

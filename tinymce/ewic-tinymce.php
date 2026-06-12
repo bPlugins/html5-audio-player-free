@@ -49,14 +49,15 @@ add_action('wp_ajax_ewic_grab_slider_list_ajax', 'ewic_grab_slider_list_ajax');
 /*-------------------------------------------------------------------------------*/
 function ewic_reg_script()
 {
-	wp_register_style('ewic-tinymcecss', plugins_url('tinymce/tinymce.css', dirname(__FILE__)), false, 'all');
-	wp_register_script('ewic-tinymcejs', plugins_url('tinymce/tinymce.js', dirname(__FILE__)), false);
+	wp_register_style('ewic-tinymcecss', plugins_url('tinymce/tinymce.css', dirname(__FILE__)), array(), H5AP_PRO_VERSION, 'all');
+	wp_register_script('ewic-tinymcejs', plugins_url('tinymce/tinymce.js', dirname(__FILE__)), array('jquery'), H5AP_PRO_VERSION, true);
 }
 add_action('admin_init', 'ewic_reg_script');
 
 
 //-------------------------------------------------------------------------------------------------	
-if (strstr($_SERVER['REQUEST_URI'], 'wp-admin/post-new.php') || strstr($_SERVER['REQUEST_URI'], 'wp-admin/post.php')) {
+$ewic_request_uri = isset($_SERVER['REQUEST_URI']) ? esc_url_raw(wp_unslash($_SERVER['REQUEST_URI'])) : '';
+if (strstr($ewic_request_uri, 'wp-admin/post-new.php') || strstr($ewic_request_uri, 'wp-admin/post.php')) {
 
 	// ADD STYLE & SCRIPT
 	add_action('admin_head', 'ewic_editor_add_init');
@@ -94,8 +95,8 @@ if (strstr($_SERVER['REQUEST_URI'], 'wp-admin/post-new.php') || strstr($_SERVER[
 add_action('admin_footer', 'ewic_popup_content');
 function ewic_popup_content()
 {
-
-	if (strstr($_SERVER['REQUEST_URI'], 'wp-admin/post-new.php') || strstr($_SERVER['REQUEST_URI'], 'wp-admin/post.php')) {
+	$ewic_request_uri = isset($_SERVER['REQUEST_URI']) ? esc_url_raw(wp_unslash($_SERVER['REQUEST_URI'])) : '';
+	if (strstr($ewic_request_uri, 'wp-admin/post-new.php') || strstr($ewic_request_uri, 'wp-admin/post.php')) {
 
 		if (get_post_type(get_the_ID()) != 'audioplayer') {
 			// START GENERATE POPUP CONTENT

@@ -26,13 +26,13 @@ class Ajax
     }
 
     public function getStreamData()  {
-        $nonce = sanitize_text_field(wp_unslash($_POST['nonce']));
+        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
 
         if (!wp_verify_nonce($nonce, 'h5ap_radio_player_rest')) {
             wp_send_json_error('Invalid nonce');
         }
 
-        $streamUrl = sanitize_url(wp_unslash($_POST['url']));
+        $streamUrl = isset($_POST['url']) ? sanitize_url(wp_unslash($_POST['url'])) : '';
 
         $settings = get_option('h5ap_settings', []);
         $allowed_domains = isset($settings['white_listed_stream_url']) ? $settings['white_listed_stream_url'] : [];
@@ -87,6 +87,7 @@ class Ajax
      */
     public function gDriveProxy() {
         // Only allow googleapis.com/drive URLs — block everything else
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         $url = isset($_GET['url']) ? esc_url_raw(wp_unslash($_GET['url'])) : '';
         $url = html_entity_decode($url); // Fix user pasted &amp; instead of &
 
@@ -111,7 +112,7 @@ class Ajax
         }
 
         // Handle OPTIONS request for CORS
-        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+        if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
             header('Access-Control-Allow-Origin: *');
             header('Access-Control-Allow-Methods: GET, HEAD, OPTIONS');
             header('Access-Control-Allow-Headers: Range');
@@ -127,6 +128,7 @@ class Ajax
             $request_headers[] = 'Range: ' . sanitize_text_field(wp_unslash($_SERVER['HTTP_RANGE']));
         }
 
+        // phpcs:disable WordPress.WP.AlternativeFunctions
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $request_headers);
         curl_setopt($ch, CURLOPT_HEADER, false);
@@ -188,6 +190,7 @@ class Ajax
                 return strlen($data);
             }
             
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo $data;
             flush();
             ob_flush(); // Ensure output buffers are also flushed
@@ -208,10 +211,11 @@ class Ajax
         
         if(curl_errno($ch)) {
             status_header(502);
-            echo 'Proxy Error: ' . curl_error($ch);
+            echo esc_html('Proxy Error: ' . curl_error($ch));
         }
         
         curl_close($ch);
+        // phpcs:enable WordPress.WP.AlternativeFunctions
         exit;
     }
 
@@ -222,6 +226,7 @@ class Ajax
      * to the direct temporary CDN mp3 stream URL.
      */
     public function soundcloudStream() {
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         $url = isset($_GET['sc_url']) ? esc_url_raw(wp_unslash($_GET['sc_url'])) : '';
         $url = html_entity_decode($url);
 
@@ -240,7 +245,7 @@ class Ajax
         }
 
         // Handle OPTIONS request for CORS (if any)
-        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+        if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
             header('Access-Control-Allow-Origin: *');
             header('Access-Control-Allow-Methods: GET, OPTIONS');
             exit;

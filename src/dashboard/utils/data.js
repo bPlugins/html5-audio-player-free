@@ -1,7 +1,9 @@
+import { gutenbergTabIcon, shortcodeTabIcon, elementorTabIcon } from "./icons";
+
 const slug = 'html5-audio-player';
 
 export const dashboardInfo = (info) => {
-    const { version, isPremium, hasPro, deleteDataOnUninstall, uninstallNonce } = info;
+    const { version, isPremium, hasPro, deleteDataOnUninstall, uninstallNonce, adminUrl = '', isElementorActive } = info;
 
     const proSuffix = isPremium ? ' Pro' : '';
 
@@ -9,13 +11,15 @@ export const dashboardInfo = (info) => {
         name: `HTML5 Audio Player${proSuffix}`,
         displayName: `HTML5 Audio Player${proSuffix} - The Ultimate No-Code Podcast, MP3 & Audio Player`,
         description:
-            "HTML5 Audio Player is a powerful and flexible block plugin that allows you to display posts, display blog posts, and embed custom posts in a fully customizable and responsive layout.",
+            "HTML5 Audio Player is a powerful, highly customizable audio player plugin that allows you to embed single audio tracks, playlists, podcasts, and radio streams into any page or post.",
         slug,
         version,
         isPremium,
         hasPro,
         deleteDataOnUninstall,
         uninstallNonce,
+        adminUrl,
+        isElementorActive,
         displayOurPlugins: true,
         media: {
             logo: `https://ps.w.org/${slug}/assets/icon-128x128.png`,
@@ -37,6 +41,28 @@ export const dashboardInfo = (info) => {
         },
 
         changelogs: [
+            {
+                version: '2.7.0 - 12 June, 2026',
+                type: 'new',
+                list: [
+                    'New: Moved the Audio Playlist Block from Pro to the Free version, allowing all users to build and display custom audio playlists.',
+                    'Update: Completely redesigned and modernized the admin dashboard welcome screen with dynamic builder integration tabs (Gutenberg, Shortcode, Elementor) and status checks.'
+                ]
+            },
+            {
+                version: '2.6.6 - 09 June, 2026',
+                type: 'new',
+                list: [
+                    'New: Added End Time (Excerpt) settings for limiting audio playback duration.',
+                ]
+            },
+            {
+                version: '2.6.5 - 02 June, 2026',
+                type: 'fix',
+                list: [
+                    'Fix: Resolved block compatibility issues in Gutenberg Editor for legacy "h5ap/existing" blocks by registering the block on the editor side.',
+                ]
+            },
             {
                 version: '2.6.4 - 21 May, 2026',
                 type: 'fix',
@@ -105,7 +131,7 @@ export const dashboardInfo = (info) => {
             }
         ],
         proFeatures: [
-            'Advanced Playlist Player',
+            'Premium Playlist Skins',
             '7 Additional Premium Skins',
             'Save State Functionality',
             'Single Button Player',
@@ -121,7 +147,7 @@ export const dashboardInfo = (info) => {
         ],
         startButton: {
             label: 'Start Now',
-            url: 'wp-admin/post-new.php?post_type=radioplayer'
+            url: `${adminUrl}post-new.php?post_type=audioplayer`
         }
     }
 }
@@ -328,6 +354,137 @@ export const demoInfo = {
         }
     ]
 }
+
+export const welcomeInfo = (adminUrl, isElementorActive) => ({
+    keywords: ['Audio Player', 'Gutenberg Block', 'Shortcode', 'Playlist', 'Podcast', 'Radio Player'],
+    keywordsLabel: 'Features',
+    gettingStarted: {
+        tabs: [
+            {
+                key: 'gutenberg',
+                label: 'Gutenberg',
+                icon: gutenbergTabIcon,
+                steps: [
+                    {
+                        num: 1,
+                        title: 'Add the Audio Player Block',
+                        body: 'Open the block editor on any page or post. Click the <strong>+</strong> icon in the top-left corner or type <strong>/Audio Player</strong> to search for and insert the <strong>HTML5 Audio Player</strong> block.',
+                        link: { url: `${adminUrl}post-new.php?post_type=page`, label: 'Open Editor' }
+                    },
+                    {
+                        num: 2,
+                        title: 'Select Audio Source',
+                        body: 'Choose your audio source inside the block settings. You can upload an audio file, select one from your Media Library, or use an external URL (like Google Drive or SoundCloud).'
+                    },
+                    {
+                        num: 3,
+                        title: 'Configure Styles & Publish',
+                        body: 'Customize player skins (Default, Fusion, Wave, etc.), colors, autoplay, repeat, and controls in the sidebar settings. Save and publish your post/page.'
+                    }
+                ]
+            },
+            {
+                key: 'shortcode',
+                label: 'Shortcode',
+                icon: shortcodeTabIcon,
+                steps: [
+                    {
+                        num: 1,
+                        title: 'Create a New Player',
+                        body: 'Navigate to <strong>HTML5 Audio Player -> Add Audio Player</strong>. Give your player a title and configure your audio tracks and options.',
+                        link: { url: `${adminUrl}post-new.php?post_type=audioplayer`, label: 'Add New Player' }
+                    },
+                    {
+                        num: 2,
+                        title: 'Configure Settings',
+                        body: 'Customize skins, colors, playlist options, playback speed, and download settings. Click <strong>Publish</strong> to save the player.'
+                    },
+                    {
+                        num: 3,
+                        title: 'Copy & Paste Shortcode',
+                        body: 'Copy the generated shortcode (e.g. <code>[player id="123"]</code>) from the player editing screen or the player list, and paste it into any page, post, or widget.'
+                    }
+                ]
+            },
+            isElementorActive ? {
+                key: 'elementor',
+                label: 'Elementor',
+                icon: elementorTabIcon,
+                steps: [
+                    {
+                        num: 1,
+                        title: 'Create a Page & Launch Elementor',
+                        body: 'Click the button below to create a new page, then click the blue <strong>Edit with Elementor</strong> button at the top of the editor to launch the Elementor page builder.',
+                        link: { url: `${adminUrl}post-new.php?post_type=page`, label: 'Create New Page' }
+                    },
+                    {
+                        num: 2,
+                        title: 'Drag & Drop Audio Player Widget',
+                        body: 'Once inside the Elementor editor, search for the <strong>HTML5 Audio Player</strong> widget in the sidebar widget list, and drag and drop it into your page layout.'
+                    },
+                    {
+                        num: 3,
+                        title: 'Configure Settings & Save',
+                        body: 'In the widget settings, select your audio source (Media Library or URL), choose your preferred player layout skin (Simple, Fusion, Stamp, etc.), customize colors, and click <strong>Update</strong> to save.'
+                    }
+                ]
+            } : {
+                key: 'elementor',
+                label: 'Elementor',
+                icon: elementorTabIcon,
+                steps: [
+                    {
+                        num: 1,
+                        title: 'Elementor is Not Active',
+                        body: `<div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 16px; margin: 10px 0; border-radius: 4px; color: #856404; font-size: 14px; line-height: 1.5;">
+                            <strong>Notice:</strong> Elementor Page Builder plugin is either not installed or not active. Please install and activate Elementor to use the HTML5 Audio Player Elementor widgets.
+                            <br/>
+                            <a href="${adminUrl}plugin-install.php?tab=search&s=elementor" style="color: #0073aa; text-decoration: underline; font-weight: bold; display: inline-block; margin-top: 8px;">Install & Activate Elementor →</a>
+                        </div>`
+                    }
+                ]
+            }
+        ]
+    },
+    changelogs: [
+        {
+            version: '2.7.0 - 13 June, 2026',
+            type: 'new',
+            list: [
+                'New: Moved the Audio Playlist Block from Pro to the Free version, allowing all users to build and display custom audio playlists.',
+                'New: Added End Time (Excerpt) settings for limiting audio playback duration.',
+                'Update: Completely redesigned and modernized the admin dashboard welcome screen with dynamic builder integration tabs (Gutenberg, Shortcode, Elementor) and status checks.'
+            ]
+        },
+        {
+            version: '2.6.4 - 21 May, 2026',
+            type: 'fix',
+            list: [
+                'Fix: Resolved SoundCloud track URL playback issues for standard players, shortcodes, and Gutenberg Block Editor.',
+                'Fix: Implemented secure internal SoundCloud API v2 progressive stream proxying to bypass restricted/temporary CDN stream URL expirations.',
+                'Fix: Fixed block settings panel URL updates and block preview rendering issues for SoundCloud track links.'
+            ]
+        }
+    ],
+    changelogsLimit: 5,
+    changelogsReadMoreLabel: 'View More Changelogs',
+    proFeatures: [
+        'Premium Playlist Skins',
+        '7 Additional Premium Skins',
+        'Save State Functionality',
+        'Single Button Player',
+        'Premium Sticky Player Features',
+        'Color Customization',
+        'Fast Forward & Rewind Buttons',
+        'Download & Playback Controls',
+        'Start Time & Disable Pause',
+        'Post Playlist Controls',
+        'Ad-Free Experience',
+        'Google Drive Audio Support',
+        'SoundCloud Streaming Support',
+
+    ]
+})
 
 export const pricingInfo = {
     logo: `https://ps.w.org/${slug}/assets/icon-128x128.png`, // Optional

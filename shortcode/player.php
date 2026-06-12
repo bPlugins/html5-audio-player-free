@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 add_shortcode('player', function ($atts) {
   extract(shortcode_atts(array(
     'id' => null,

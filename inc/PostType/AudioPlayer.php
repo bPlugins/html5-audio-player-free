@@ -169,7 +169,8 @@ class AudioPlayer
         /*
         * Nonce verification
         */
-        if (!isset($_GET['duplicate_nonce']) || !wp_verify_nonce($_GET['duplicate_nonce'], basename(__FILE__)))
+        $duplicate_nonce = isset($_GET['duplicate_nonce']) ? sanitize_text_field(wp_unslash($_GET['duplicate_nonce'])) : '';
+        if (empty($duplicate_nonce) || !wp_verify_nonce($duplicate_nonce, basename(__FILE__)))
             return;
 
         /*
@@ -229,17 +230,20 @@ class AudioPlayer
             /*
             * duplicate all post meta just in two SQL queries
             */
-            $post_meta_infos = $wpdb->get_results("SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id=$post_id");
-            if (count($post_meta_infos) != 0) {
+            $post_meta_infos = $wpdb->get_results($wpdb->prepare("SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id = %d", $post_id)); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery
+            if (!empty($post_meta_infos)) {
                 $sql_query = "INSERT INTO $wpdb->postmeta (post_id, meta_key, meta_value) ";
+                $sql_query_sel = array();
                 foreach ($post_meta_infos as $meta_info) {
                     $meta_key = $meta_info->meta_key;
                     if ($meta_key == '_wp_old_slug') continue;
-                    $meta_value = addslashes($meta_info->meta_value);
-                    $sql_query_sel[] = "SELECT $new_post_id, '$meta_key', '$meta_value'";
+                    $meta_value = $meta_info->meta_value;
+                    $sql_query_sel[] = $wpdb->prepare("SELECT %d, %s, %s", $new_post_id, $meta_key, $meta_value);
                 }
-                $sql_query .= implode(" UNION ALL ", $sql_query_sel);
-                $wpdb->query($sql_query);
+                if (!empty($sql_query_sel)) {
+                    $sql_query .= implode(" UNION ALL ", $sql_query_sel);
+                    $wpdb->query($sql_query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery, PluginCheck.Security.DirectDB.UnescapedDBParameter
+                }
             }
 
 

@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 
 use H5APPlayer\Helper\Functions;
 
@@ -20,7 +24,7 @@ $wrapper_attributes = get_block_wrapper_attributes();
     data-id="<?php echo esc_attr($uniqueId); ?>"
     data-attributes="<?php echo esc_attr($encoded_attributes); ?>"
     data-nonce="<?php echo esc_attr(wp_create_nonce('h5ap_radio_player_rest')); ?>"
-    <?php echo wp_kses_post($wrapper_attributes); ?>>
+    <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
     <?php if ($loader) { ?>
         <div class='h5ap_lp'>
             <div class='bar bar-1'></div>

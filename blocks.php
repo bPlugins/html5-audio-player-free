@@ -36,6 +36,7 @@ if (!class_exists('H5AP_Block')) {
 
         function init() {
             register_block_type(__DIR__ . '/build/blocks/audioplayer');
+            register_block_type(__DIR__ . '/build/blocks/audioplaylist');
             register_block_type(__DIR__ . '/build/blocks/radio-player');
         }
     }

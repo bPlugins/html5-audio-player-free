@@ -1,15 +1,15 @@
 <?php
 /*
- * Plugin Name: Html5 Audio Player
+ * Plugin Name: HTML5 Audio Player - The Ultimate No-Code Podcast, MP3 & Audio Player
  * Plugin URI:  https://bplugins.com/products/html5-audio-player/
  * Description: You can easily integrate html5 audio player in your WordPress website using this plugin.
- * Version: 2.6.4
- * Requires at least: 5.8
- * Tested up to: 6.9.4
+ * Version: 2.7.0
+ * Requires at least: 6.5
+ * Tested up to: 7.0
  * Requires PHP: 7.1
  * Author: bPlugins
  * Author URI: http://bPlugins.com
- * License: GPLv3
+ * License: GPLv2 or later
  * Text Domain: html5-audio-player
  */
 
@@ -23,7 +23,7 @@ if (function_exists('h5ap_fs')) {
 	define('H5AP_PRO_PLUGIN_DIR', plugin_dir_url(__FILE__));
 	define('H5AP_PRO_FILE_BASENAME', plugin_basename(__FILE__));
 	define('H5AP_PRO_DIR_BASENAME', plugin_basename(__DIR__));
-	define('H5AP_PRO_VERSION', isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] === 'dev.local' ? time() : '2.6.4');
+	define('H5AP_PRO_VERSION', isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] === 'dev.local' ? time() : '2.7.0');
 	defined('H5AP_PRO_PATH') or define('H5AP_PRO_PATH', plugin_dir_path(__FILE__));
 
 	if (file_exists(dirname(__FILE__) . '/vendor/autoload.php')) {
@@ -81,8 +81,6 @@ if (function_exists('h5ap_fs')) {
 	}
 
 	add_action('plugins_loaded', function () {
-		load_plugin_textdomain('html5-audio-player', false, dirname(plugin_basename(__FILE__)) . '/languages');
-
 		require_once 'shortcode/player.php';
 		require_once 'inc/admin.php';
 		require_once('tinymce/ewic-tinymce.php');
@@ -91,6 +89,7 @@ if (function_exists('h5ap_fs')) {
 
 		add_filter('template_include', 'h5ap_search_template');
 		function h5ap_search_template($template){
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			if (!isset($_GET['bps']))
 				return $template;
 

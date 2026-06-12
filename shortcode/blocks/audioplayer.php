@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 
 use H5APPlayer\Helper\LocalizeScript;
 
@@ -84,3 +88,4 @@ $block = [
     'innerHTML' => '',
     'innerContent' => [],
 ];
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

@@ -69,7 +69,7 @@ class EnqueueAssets
             wp_enqueue_style('bplugins-plyrio', H5AP_PRO_PLUGIN_DIR . 'assets/css/plyr-v3.7.2.css', array(), H5AP_PRO_VERSION);
             wp_enqueue_style('h5ap-player', H5AP_PRO_PLUGIN_DIR . 'build/player.css', array(), H5AP_PRO_VERSION);
 
-            wp_enqueue_script('h5ap-admin',  H5AP_PRO_PLUGIN_DIR . 'build/admin.js');
+            wp_enqueue_script('h5ap-admin',  H5AP_PRO_PLUGIN_DIR . 'build/admin.js', array('jquery'), H5AP_PRO_VERSION, true);
             wp_enqueue_script('bplugins-plyrio', H5AP_PRO_PLUGIN_DIR . 'assets/js/plyr-v3.7.2.js', array('jquery'), H5AP_PRO_VERSION, false);
             wp_enqueue_script('h5ap-player', H5AP_PRO_PLUGIN_DIR . 'build/player.js', array('jquery', 'bplugins-plyrio'), H5AP_PRO_VERSION, true);
 
@@ -77,7 +77,7 @@ class EnqueueAssets
                 'ajaxUrl' => admin_url('admin-ajax.php'),
                 'website' => site_url()
             ));
-            wp_enqueue_style('h5ap-help', H5AP_PRO_PLUGIN_DIR . 'admin/css/style.css');
+            wp_enqueue_style('h5ap-help', H5AP_PRO_PLUGIN_DIR . 'admin/css/style.css', array(), H5AP_PRO_VERSION);
         }
 
         if ('settings_page_html5ap_settings' == $screen) {

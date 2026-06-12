@@ -1,6 +1,9 @@
 <?php
-
 namespace H5APPlayer\Elementor\Widgets;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 use H5APPlayer\Helper\Functions;
 use H5APPlayer\Helper\LocalizeScript;

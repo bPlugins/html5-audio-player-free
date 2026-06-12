@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if (!class_exists('H5APAdmin')) {
 	class H5APAdmin
@@ -10,7 +13,7 @@ if (!class_exists('H5APAdmin')) {
 		}
 
 		function adminEnqueueScripts($hook){
-			if (str_contains($hook, 'html5-audio-player')) {
+			if (strpos($hook, 'html5-audio-player') !== false) {
 				wp_enqueue_style('h5ap-admin-style', H5AP_PRO_PLUGIN_DIR . 'build/dashboard.css', [], H5AP_PRO_VERSION);
 
 				wp_enqueue_script('h5ap-admin-script', H5AP_PRO_PLUGIN_DIR . 'build/dashboard.js', ['react', 'react-dom',  'wp-components', 'wp-i18n', 'wp-api', 'wp-util', 'lodash', 'wp-media-utils', 'wp-data', 'wp-core-data', 'wp-api-request'], H5AP_PRO_VERSION, true);
@@ -74,6 +77,8 @@ if (!class_exists('H5APAdmin')) {
 								'version'               => H5AP_PRO_VERSION,
 								'isPremium'             => false,
 								'hasPro'                => false,
+								'adminUrl' => admin_url(),
+								'isElementorActive'     => class_exists( '\Elementor\Plugin' ),
 								'deleteDataOnUninstall' => (bool) get_option( 'h5ap_delete_data_on_uninstall', false ),
 								'uninstallNonce'        => wp_create_nonce( 'h5ap_uninstall_nonce' ),
 							])); ?>'></div>

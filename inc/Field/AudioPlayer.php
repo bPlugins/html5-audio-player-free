@@ -334,6 +334,7 @@ class AudioPlayer
                             <li><strong>Pro Controls:</strong> Access advanced controls like Restart, Rewind, Fast Forward and Download.</li>
                             <li><strong>Seek Time:</strong> Set the time, in seconds, to seek when a user hits fast forward or rewind.</li>
                             <li><strong>Start Time:</strong> Set the specific time, in seconds, where the audio should start playing.</li>
+                            <li><strong>End Time:</strong> Set the specific time, in seconds, where the audio should stop playing.</li>
                             <li><strong>Disable Pause:</strong> Prevent users from pausing the audio playback.</li>
                             <li><strong>Save State:</strong> Save the player\'s time state so it resumes from where the user left off.</li>
                         </ul>

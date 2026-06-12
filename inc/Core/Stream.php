@@ -1,4 +1,5 @@
 <?php
+// phpcs:disable WordPress.WP.AlternativeFunctions
 
 namespace H5APPlayer\Core;
 
@@ -25,7 +26,9 @@ class Stream
         $context = stream_context_create($opts);
         $fp = fopen($url, 'r', false, $context);
 
-        if (!$fp) return false;
+        if (!$fp) {
+            return false;
+        }
 
         $metaInt = 0;
         foreach ($http_response_header as $header) {
@@ -35,7 +38,9 @@ class Stream
             }
         }
 
-        if ($metaInt === 0) return false;
+        if ($metaInt === 0) {
+            return false;
+        }
 
         // Read stream to metadata interval
         $data = fread($fp, $metaInt);

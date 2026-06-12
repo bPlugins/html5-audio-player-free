@@ -52,7 +52,7 @@ const Settings = ({ attributes, setAttributes, siteUrl }) => {
   };
 
   const getSettingsPremiumNoticeText = () => {
-    const features = [__('7 More Pro Skins', 'html5-audio-player'), __('Save State', 'html5-audio-player'), __('Disable Pause', 'html5-audio-player'), __('Seek Time', 'html5-audio-player'), __('Start Time', 'html5-audio-player')];
+    const features = [__('7 More Pro Skins', 'html5-audio-player'), __('Save State', 'html5-audio-player'), __('Disable Pause', 'html5-audio-player'), __('Seek Time', 'html5-audio-player'), __('Start Time', 'html5-audio-player'), __('End Time', 'html5-audio-player')];
     if (skin === "Fusion") {
       features.push(__('Initial Volume', 'html5-audio-player'));
       features.push(__('Download Button', 'html5-audio-player'));

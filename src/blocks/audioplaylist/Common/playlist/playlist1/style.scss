@@ -1,0 +1,63 @@
+.skin_playlist1 {
+    .plyr--full-ui input[type=range] {
+        color: var(--plyr-color-main);
+    }
+
+    .plyr__time--duration::before {
+        display: none;
+    }
+
+    .plyr__progress {
+        margin-right: 0;
+    }
+
+    .item-active {
+        border: 2px solid var(--plyr-color-main);
+    }
+
+    .items .icon--pressed {
+        display: none;
+    }
+
+    .item-playing {
+        .icon--not-pressed {
+            display: none;
+        }
+
+        .icon--pressed {
+            display: block;
+        }
+    }
+
+    // svg {
+    //     fill: var(--plyr-color-control);
+    // }
+
+
+    // .plyr.plyr--audio button:focus,
+    // .plyr.plyr--audio button:focus {
+    //     background-color: transparent;
+    // }
+
+    .plyr--audio .plyr__control:not([data-plyr="play"]):hover {
+        background-color: transparent;
+    }
+
+    .plyr--audio .plyr__control[data-plyr="play"]:hover {
+        --tw-ring-color: var(--plyr-color-main);
+    }
+
+    .plyr .bg-amber-500 {
+        background-color: var(--plyr-color-main);
+    }
+
+    .plyr__progress input[type=range] {
+        height: 5px;
+        overflow: hidden;
+    }
+
+
+
+
+
+}

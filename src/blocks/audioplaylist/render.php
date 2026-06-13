@@ -1,5 +1,10 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+
 use H5APPlayer\Helper\Functions;
 
 extract($attributes);
@@ -15,6 +20,6 @@ $wrapper_attributes = get_block_wrapper_attributes(['class' => 'wp-block-h5ap-ta
 <div
     id="<?php echo esc_attr($uniqueId); ?>"
     data-id="<?php echo esc_attr($uniqueId); ?>"
-    data-attributes="<?php echo $encoded_attributes; ?>"
-    <?php echo $wrapper_attributes; ?>>
+    data-attributes="<?php echo esc_attr($encoded_attributes); ?>"
+    <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 </div>

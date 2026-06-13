@@ -12,6 +12,7 @@ const Edit = (props) => {
   const { skin, defaultValue, uniqueId } = attributes;
   const [isPremium] = useState(window.h5apPlayer?.isPipe);
   const containerRef = useRef(null);
+  const isSkinMounted = useRef(false);
 
   useEffect(() => {
     if (!uniqueId) {
@@ -20,6 +21,10 @@ const Edit = (props) => {
   }, []);
 
   useEffect(() => {
+    if (!isSkinMounted.current) {
+      isSkinMounted.current = true;
+      return;
+    }
     if (defaultValue[skin]) {
       setAttributes(defaultValue[skin])
     }

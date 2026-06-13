@@ -453,7 +453,8 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
             list: [
                 'New: Moved the Audio Playlist Block from Pro to the Free version, allowing all users to build and display custom audio playlists.',
                 'New: Added End Time (Excerpt) settings for limiting audio playback duration.',
-                'Update: Completely redesigned and modernized the admin dashboard welcome screen with dynamic builder integration tabs (Gutenberg, Shortcode, Elementor) and status checks.'
+                'Update: Completely redesigned and modernized the admin dashboard welcome screen with dynamic builder integration tabs (Gutenberg, Shortcode, Elementor) and status checks.',
+                'Fix: Fixed an issue where the player\'s customized colors and style settings reset back to original default colors when loading or re-opening a page in the Gutenberg block editor.'
             ]
         },
         {

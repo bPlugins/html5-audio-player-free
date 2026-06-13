@@ -9,7 +9,7 @@ import { AlignmentToolbar, BlockControls, InspectorControls } from '@wordpress/b
 import { AdvertiseCard } from '../../../../../bpl-tools/ProControls/index.js';
 
 const Settings = ({ attributes, setAttributes, siteUrl }) => {
-  const { source, controls, download, primaryColor, controlColor, poster, skin, alignment, isSticky, title, artist, repeat, preload, radius, autoplay, muted, loader, width } = attributes;
+  const { source, controls, primaryColor, controlColor, poster, skin, alignment, isSticky, title, artist, repeat, preload, radius, autoplay, muted, loader, width } = attributes;
 
   const pricingURL = `${siteUrl}/wp-admin/admin.php?page=html5-audio-player-help-demo#/pricing`;
 
@@ -26,8 +26,12 @@ const Settings = ({ attributes, setAttributes, siteUrl }) => {
   const skins = ["Default", "Fusion", "Stamp", "Wave"];
 
   useEffect(() => {
-    if (!primaryColor) {
+    // Only seed colors that are still empty so we never overwrite a value the
+    // user already customized and saved (otherwise colors revert on reload).
+    if (!primaryColor && !bgColor) {
       setAttributes({ primaryColor: window.h5apEditor?.color?.primary, bgColor: window.h5apEditor?.color?.bg });
+    } else if (!primaryColor) {
+      setAttributes({ primaryColor: window.h5apEditor?.color?.primary });
     }
   }, []);
 

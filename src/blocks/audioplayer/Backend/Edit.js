@@ -9,19 +9,23 @@ const Edit = (props) => {
   const { attributes, setAttributes, clientId } = props;
   const { skin, defaultValue } = attributes;
   const containerRef = useRef(null);
+  const isSkinMounted = useRef(false);
 
   useEffect(() => {
     setAttributes({ uniqueId: "h5ap" + clientId.substr(0, 8) });
   }, []);
 
   useEffect(() => {
+    if (!isSkinMounted.current) {
+      isSkinMounted.current = true;
+      return;
+    }
     if (defaultValue[skin]) {
       setAttributes(defaultValue[skin])
     }
   }, [skin])
 
   const blockProps = useBlockProps({ className: 'wp-block-h5ap-tailwind' });
-
 
   return (
     <Fragment>

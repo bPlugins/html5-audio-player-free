@@ -224,6 +224,7 @@ e.g.
 * **New:** Moved the Audio Playlist Gutenberg Block from the Pro version to the Free version, allowing all users to create and display custom audio playlists.
 * **New:** Added End Time (Excerpt) settings for limiting audio playback duration.
 * **Update:** Completely redesigned and modernized the admin dashboard welcome screen with dynamic builder integration tabs (Gutenberg, Shortcode, Elementor) and status checks.
+* **Fix:** Fixed an issue where the player's customized colors and style settings reset back to original default colors when loading or re-opening a page in the Gutenberg block editor.
 
 = 2.6.4 - 21 May, 2026 =
 * **Fix:** Resolved SoundCloud track URL playback issues for standard players, shortcodes, and Gutenberg Block Editor.

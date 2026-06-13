@@ -5,7 +5,7 @@
 [![WordPress Support](https://img.shields.io/badge/WordPress-5.8+-blue.svg?style=flat-square&logo=wordpress)](https://wordpress.org/plugins/html5-audio-player/)
 [![PHP Support](https://img.shields.io/badge/PHP-7.1+-777bb4.svg?style=flat-square&logo=php)](./readme.txt)
 [![GPLv2 License](https://img.shields.io/badge/License-GPLv2-green.svg?style=flat-square)](./readme.txt)
-[![Stable Version](https://img.shields.io/badge/Version-2.6.0-blue.svg?style=flat-square)](./readme.txt)
+[![Stable Version](https://img.shields.io/badge/Version-2.7.0-blue.svg?style=flat-square)](./readme.txt)
 
 **HTML5 Audio Player** is a powerful, lightweight, and fully responsive audio player plugin for WordPress. It lets you embed MP3 and OGG audio files into posts, pages, widget areas, or template files using shortcodes or the intuitive Gutenberg block—no coding required!
 
@@ -15,7 +15,8 @@
 
 ### 💎 Core Functionality (Free)
 Everything you need to build a professional audio experience on your site:
-- **Advanced Player Types:** Choose from Standard or Sticky Player seamlessly.
+- **Advanced Player Types:** Choose from Standard, Sticky Player, or Audio Playlist Player seamlessly.
+- **Audio Playlist Block:** Create and embed fully-featured audio playlists with custom tracks directly in the Gutenberg block editor (previously a PRO-only block).
 - **Player Skins:** Access sleek and modern Default, Fusion, Stamp, and Wave skins for free.
 - **Embed Anywhere:** Add audio to posts, pages, widgets, and theme templates using native shortcodes.
 - **Responsive & Lightweight:** Adapts instantly to all devices and doesn’t slow down your page load times.
@@ -23,11 +24,10 @@ Everything you need to build a professional audio experience on your site:
 - **Title & Author Support:** Display custom audio titles and author metadata directly on the player.
 - **Playback Controls:** Autoplay, Preload, Mute, and Repeat options out-of-the-box.
 - **MP3 & OGG Support:** Automatically loads the right format based on the user’s device capabilities.
-- **Google Drive Audio Support:** Seamlessly play audio files directly from Google Drive. Our built-in smart proxy bypasses Google's restrictions and CORS errors, ensuring smooth playback and accurate duration display.
 
 ### 👑 Premium Power (Pro)
 Unlock advanced functionality for high-performing podcasts, music sites, and audio courses:
-- **The Playlist Player:** Unlock the fully-featured Playlist Player with dynamic Narrow and Extensive list designs.
+- **Premium Playlist Skins:** Unlock the advanced Narrow and Extensive playlist skins with premium customization options.
 - **7 Additional Premium Skins:** Access Card 1, Card 2, Simple 1, Simple 2, Player 9, Player 10, and Player 11.
 - **Color Customization:** Set custom primary and background colors to perfectly fit your site’s branding.
 - **Download Buttons:** Allow users to download your audio files with a single click.

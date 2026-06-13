@@ -9,7 +9,7 @@ import { AlignmentToolbar, BlockControls, InspectorControls } from '@wordpress/b
 import { AdvertiseCard } from '../../../../../bpl-tools/ProControls/index.js';
 
 const Settings = ({ attributes, setAttributes, siteUrl }) => {
-  const { source, controls, primaryColor, controlColor, poster, skin, alignment, isSticky, title, artist, repeat, preload, radius, autoplay, muted, loader, width } = attributes;
+  const { source, controls, primaryColor, bgColor, controlColor, poster, skin, alignment, isSticky, title, artist, repeat, preload, radius, autoplay, muted, loader, width } = attributes;
 
   const pricingURL = `${siteUrl}/wp-admin/admin.php?page=html5-audio-player-help-demo#/pricing`;
 

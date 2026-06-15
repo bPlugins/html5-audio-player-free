@@ -3,7 +3,7 @@
  * Plugin Name: HTML5 Audio Player - The Ultimate No-Code Podcast, MP3 & Audio Player
  * Plugin URI:  https://bplugins.com/products/html5-audio-player/
  * Description: You can easily integrate html5 audio player in your WordPress website using this plugin.
- * Version: 2.7.0
+ * Version: 2.7.1
  * Requires at least: 6.5
  * Tested up to: 7.0
  * Requires PHP: 7.1
@@ -23,7 +23,7 @@ if (function_exists('h5ap_fs')) {
 	define('H5AP_PRO_PLUGIN_DIR', plugin_dir_url(__FILE__));
 	define('H5AP_PRO_FILE_BASENAME', plugin_basename(__FILE__));
 	define('H5AP_PRO_DIR_BASENAME', plugin_basename(__DIR__));
-	define('H5AP_PRO_VERSION', isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] === 'dev.local' ? time() : '2.7.0');
+	define('H5AP_PRO_VERSION', isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] === 'dev.local' ? time() : '2.7.1');
 	defined('H5AP_PRO_PATH') or define('H5AP_PRO_PATH', plugin_dir_path(__FILE__));
 
 	if (file_exists(dirname(__FILE__) . '/vendor/autoload.php')) {

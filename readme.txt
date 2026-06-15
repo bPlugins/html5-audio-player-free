@@ -4,7 +4,7 @@ Tags: mp3 player, audio, audio player, player, podcast
 Donate link: https://www.buymeacoffee.com/abuhayat/  
 Requires at least: 6.5
 Tested up to: 7.0
-Stable tag: 2.7.0
+Stable tag: 2.7.1
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -219,6 +219,9 @@ e.g.
 
 
 == Changelog ==
+
+= 2.7.1 - 15 June, 2026 =
+* **Security:** Hardened the Google Drive audio proxy endpoint to patch XSS and SSRF vulnerabilities by validating MIME types, manually enforcing redirect checks, and applying strict HTTP headers.
 
 = 2.7.0 - 13 June, 2026 =
 * **New:** Moved the Audio Playlist Gutenberg Block from the Pro version to the Free version, allowing all users to create and display custom audio playlists.

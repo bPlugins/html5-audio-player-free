@@ -78,6 +78,54 @@ class Ajax
         ] );
     }
 
+    /**
+     * Checks if the host is a valid Google Drive API or CDN domain.
+     *
+     * @param string $host
+     * @return bool
+     */
+    private static function isAllowedGDriveHost($host) {
+        $host = strtolower($host);
+        if ($host === 'googleapis.com' || $host === 'www.googleapis.com') {
+            return true;
+        }
+        // Allow Google Drive CDN / User Content domains (e.g. *.googleusercontent.com)
+        if ($host === 'googleusercontent.com' || substr($host, -22) === '.googleusercontent.com') {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Resolves a relative URL against a base URL.
+     *
+     * @param string $base
+     * @param string $relative
+     * @return string
+     */
+    private static function resolveRelativeUrl($base, $relative) {
+        $pbase = wp_parse_url($base);
+        if (empty($pbase)) {
+            return $relative;
+        }
+        $scheme = isset($pbase['scheme']) ? $pbase['scheme'] . '://' : 'https://';
+        $host = isset($pbase['host']) ? $pbase['host'] : '';
+        
+        if (strpos($relative, '//') === 0) {
+            return $scheme . substr($relative, 2);
+        }
+        if (strpos($relative, '/') === 0) {
+            return $scheme . $host . $relative;
+        }
+        
+        $path = isset($pbase['path']) ? $pbase['path'] : '';
+        $dir = dirname($path);
+        if ($dir === '/' || $dir === '\\') {
+            $dir = '';
+        }
+        return $scheme . $host . $dir . '/' . $relative;
+    }
+
      /**
      * Google Drive Audio Proxy
      *
@@ -96,22 +144,7 @@ class Ajax
             exit('Missing URL parameter.');
         }
 
-        $parsed = wp_parse_url($url);
-        $host   = isset($parsed['host']) ? strtolower($parsed['host']) : '';
-        $path   = isset($parsed['path']) ? $parsed['path'] : '';
-
-        // Security: only proxy googleapis.com/drive paths
-        if ($host !== 'www.googleapis.com' && $host !== 'googleapis.com') {
-            status_header(403);
-            exit('Only googleapis.com URLs are allowed.');
-        }
-
-        if (strpos($path, '/drive/') !== 0) {
-            status_header(403);
-            exit('Only Google Drive API paths are allowed.');
-        }
-
-        // Handle OPTIONS request for CORS
+        // Handle OPTIONS request for CORS (before cURL or session handling)
         if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
             header('Access-Control-Allow-Origin: *');
             header('Access-Control-Allow-Methods: GET, HEAD, OPTIONS');
@@ -119,104 +152,189 @@ class Ajax
             exit;
         }
 
-        // Close session to prevent blocking other requests
-        session_write_close();
-
-        // Forward Range header for seek support
-        $request_headers = [];
-        if (isset($_SERVER['HTTP_RANGE'])) {
-            $request_headers[] = 'Range: ' . sanitize_text_field(wp_unslash($_SERVER['HTTP_RANGE']));
-        }
-
-        // phpcs:disable WordPress.WP.AlternativeFunctions
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $request_headers);
-        curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        
-        // Close the session to prevent session locking (which blocks subsequent requests)
+        // Close session once before the loop to prevent session locking (which blocks subsequent requests)
         if (session_id()) {
             session_write_close();
         }
 
-        $status_code = 200; // Track current HTTP status
+        $current_url = $url;
+        $max_redirects = 5;
+        $redirect_count = 0;
 
-        // Pass through headers
-        curl_setopt($ch, CURLOPT_HEADERFUNCTION, function($curl, $header) use (&$status_code) {
-            $header_lower = strtolower($header);
-            $trimmed_header = trim($header);
-            
-            if (empty($trimmed_header)) {
-                return strlen($header);
+        // phpcs:disable WordPress.WP.AlternativeFunctions
+        while ($redirect_count < $max_redirects) {
+            $parsed = wp_parse_url($current_url);
+            $host   = isset($parsed['host']) ? strtolower($parsed['host']) : '';
+
+            // Security check on every redirect hop
+            if ($redirect_count === 0) {
+                // First hop must be googleapis.com/drive path
+                if ($host !== 'www.googleapis.com' && $host !== 'googleapis.com') {
+                    status_header(403);
+                    exit('Only googleapis.com URLs are allowed.');
+                }
+                $path = isset($parsed['path']) ? $parsed['path'] : '';
+                if (strpos($path, '/drive/') !== 0) {
+                    status_header(403);
+                    exit('Only Google Drive API paths are allowed.');
+                }
+            } else {
+                // Subsequent redirects must be googleusercontent.com or googleapis.com
+                if (!self::isAllowedGDriveHost($host)) {
+                    status_header(403);
+                    exit('Redirect to an unauthorized host: ' . esc_html($host));
+                }
             }
 
-            // Parse HTTP status code
-            if (strpos($header_lower, 'http/') === 0) {
-                $parts = explode(' ', $trimmed_header, 3);
-                if (count($parts) >= 2) {
-                    $status_code = (int) $parts[1];
-                    // Only send status header if it's NOT a redirect
-                    if ($status_code < 300 || $status_code >= 400) {
-                        status_header($status_code);
+            // Forward Range header for seek support
+            $request_headers = [];
+            if (isset($_SERVER['HTTP_RANGE'])) {
+                $request_headers[] = 'Range: ' . sanitize_text_field(wp_unslash($_SERVER['HTTP_RANGE']));
+            }
+
+            $ch = curl_init($current_url);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $request_headers);
+            curl_setopt($ch, CURLOPT_HEADER, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false); // Handle manually!
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
+            $status_code = 200;
+            $redirect_url = '';
+            $content_type_verified = false;
+            $is_audio = false;
+
+            // Pass through headers
+            curl_setopt($ch, CURLOPT_HEADERFUNCTION, function($curl, $header) use (&$status_code, &$redirect_url, &$content_type_verified, &$is_audio) {
+                $header_lower = strtolower($header);
+                $trimmed_header = trim($header);
+                
+                if (empty($trimmed_header)) {
+                    return strlen($header);
+                }
+
+                // Parse HTTP status code
+                if (strpos($header_lower, 'http/') === 0) {
+                    $parts = explode(' ', $trimmed_header, 3);
+                    if (count($parts) >= 2) {
+                        $status_code = (int) $parts[1];
+                        // Only send status header if it's NOT a redirect
+                        if ($status_code < 300 || $status_code >= 400) {
+                            status_header($status_code);
+                        }
+                    }
+                    return strlen($header);
+                }
+
+                // If we are currently in a redirect response, capture Location header and ignore others
+                if ($status_code >= 300 && $status_code < 400) {
+                    if (strpos($header_lower, 'location:') === 0) {
+                        $redirect_url = trim(substr($header, 9));
+                    }
+                    return strlen($header);
+                }
+
+                // Verify content type for 200/206 status codes
+                if ($status_code === 200 || $status_code === 206) {
+                    if (strpos($header_lower, 'content-type:') === 0) {
+                        $content_type = trim(substr($header, 13));
+                        $content_type_verified = true;
+                        
+                        // Validate MIME type starts with audio/
+                        if (strpos(strtolower($content_type), 'audio/') === 0) {
+                            $is_audio = true;
+                            // Send custom headers to secure the audio download
+                            header('Content-Type: ' . $content_type);
+                            header('X-Content-Type-Options: nosniff');
+                            header('Content-Disposition: inline');
+                        }
+                    }
+                    
+                    // Only forward specific safe headers to the browser if we know it's audio
+                    if ($is_audio) {
+                        if (
+                            strpos($header_lower, 'content-length:') === 0 ||
+                            strpos($header_lower, 'content-range:') === 0 ||
+                            strpos($header_lower, 'accept-ranges:') === 0
+                        ) {
+                            header($trimmed_header);
+                        }
                     }
                 }
+                
                 return strlen($header);
-            }
+            });
 
-            // If we are currently in a redirect response, ignore all headers
-            if ($status_code >= 300 && $status_code < 400) {
-                return strlen($header);
-            }
+            // Pass through body chunks immediately
+            curl_setopt($ch, CURLOPT_WRITEFUNCTION, function($curl, $data) use (&$status_code, &$content_type_verified, &$is_audio) {
+                // Ignore redirect bodies to prevent flushing headers prematurely
+                if ($status_code >= 300 && $status_code < 400) {
+                    return strlen($data);
+                }
 
-            // Only forward specific headers to the browser
-            if (
-                strpos($header_lower, 'content-type:') === 0 ||
-                strpos($header_lower, 'content-length:') === 0 ||
-                strpos($header_lower, 'content-range:') === 0 ||
-                strpos($header_lower, 'accept-ranges:') === 0
-            ) {
-                header($trimmed_header);
-            }
-            
-            return strlen($header);
-        });
+                // Abort if we have parsed headers but the file isn't audio
+                if ($content_type_verified && !$is_audio) {
+                    return 0; // Aborts cURL execution
+                }
+                
+                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                echo $data;
+                flush();
+                ob_flush(); // Ensure output buffers are also flushed
+                
+                // If the browser closed the connection, abort the cURL download immediately
+                if (connection_aborted()) {
+                    return 0; // Returning 0 causes cURL to abort the transfer
+                }
 
-        // Pass through body chunks immediately
-        curl_setopt($ch, CURLOPT_WRITEFUNCTION, function($curl, $data) use (&$status_code) {
-            // Ignore redirect bodies to prevent flushing headers prematurely
-            if ($status_code >= 300 && $status_code < 400) {
                 return strlen($data);
-            }
+            });
+
+            // Add explicit CORS and Accept-Ranges headers
+            header('Access-Control-Allow-Origin: *');
+            header('Accept-Ranges: bytes');
+
+            curl_exec($ch);
             
-            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            echo $data;
-            flush();
-            ob_flush(); // Ensure output buffers are also flushed
-            
-            // If the browser closed the connection, abort the cURL download immediately
-            if (connection_aborted()) {
-                return 0; // Returning 0 causes cURL to abort the transfer
+            $curl_error = curl_errno($ch);
+            $curl_error_msg = curl_error($ch);
+            curl_close($ch);
+
+            // If it is a redirect, follow manually
+            if ($status_code >= 300 && $status_code < 400 && !empty($redirect_url)) {
+                if (strpos($redirect_url, 'https://') === 0 || strpos($redirect_url, 'http://') === 0) {
+                    $current_url = $redirect_url;
+                } else {
+                    $current_url = self::resolveRelativeUrl($current_url, $redirect_url);
+                }
+                $redirect_count++;
+                continue;
             }
 
-            return strlen($data);
-        });
+            if ($curl_error) {
+                // If we aborted intentionally due to content-type verification failing, curl_exec will return CURLE_WRITE_ERROR (23)
+                if ($curl_error === 23 && $content_type_verified && !$is_audio) {
+                    status_header(403);
+                    exit('Access denied: The requested file is not a valid audio format.');
+                }
+                status_header(502);
+                exit('Proxy Error: ' . esc_html($curl_error_msg));
+            }
 
-        // Add explicit CORS and Accept-Ranges headers
-        header('Access-Control-Allow-Origin: *');
-        header('Accept-Ranges: bytes');
+            // Fallback safety check: if we somehow finished without content-type verification succeeding or it wasn't audio
+            if (!$content_type_verified || !$is_audio) {
+                status_header(403);
+                exit('Access denied: The requested file is not a valid audio format.');
+            }
 
-        curl_exec($ch);
-        
-        if(curl_errno($ch)) {
-            status_header(502);
-            echo esc_html('Proxy Error: ' . curl_error($ch));
+            // Exit successfully since transfer has finished
+            exit;
         }
-        
-        curl_close($ch);
         // phpcs:enable WordPress.WP.AlternativeFunctions
-        exit;
+
+        // If we exceeded max redirects
+        status_header(508);
+        exit('Too many redirects.');
     }
 
     /**

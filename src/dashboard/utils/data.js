@@ -39,112 +39,6 @@ export const dashboardInfo = (info) => {
             plan_id: 23850,
             public_key: 'pk_ea4da01be073820a5edf59346b675'
         },
-
-        changelogs: [
-            {
-                version: '2.7.0 - 12 June, 2026',
-                type: 'new',
-                list: [
-                    'New: Moved the Audio Playlist Block from Pro to the Free version, allowing all users to build and display custom audio playlists.',
-                    'Update: Completely redesigned and modernized the admin dashboard welcome screen with dynamic builder integration tabs (Gutenberg, Shortcode, Elementor) and status checks.'
-                ]
-            },
-            {
-                version: '2.6.6 - 09 June, 2026',
-                type: 'new',
-                list: [
-                    'New: Added End Time (Excerpt) settings for limiting audio playback duration.',
-                ]
-            },
-            {
-                version: '2.6.5 - 02 June, 2026',
-                type: 'fix',
-                list: [
-                    'Fix: Resolved block compatibility issues in Gutenberg Editor for legacy "h5ap/existing" blocks by registering the block on the editor side.',
-                ]
-            },
-            {
-                version: '2.6.4 - 21 May, 2026',
-                type: 'fix',
-                list: [
-                    'Fix: Resolved SoundCloud track URL playback issues for standard players, shortcodes, and Gutenberg Block Editor.',
-                    'Fix: Implemented secure internal SoundCloud API v2 progressive stream proxying to bypass restricted/temporary CDN stream URL expirations.',
-                    'Fix: Fixed block settings panel URL updates and block preview rendering issues for SoundCloud track links.'
-                ]
-            },
-            {
-                version: '2.6.3 - 20 May, 2026',
-                type: 'fix',
-                list: [
-                    'Fix: Resolved an issue where Google Drive audio links displayed 00:00 duration by implementing a robust Range-request proxy.',
-                    'Fix: Fixed server connection hanging and PHP session locking issues caused by uninterrupted background downloads in the proxy endpoint.',
-                    'Fix: Improved compatibility and stable playback for Google Drive URLs across all audio player skins and playlist blocks.'
-                ]
-            },
-            {
-                version: '2.6.2 - 17 May, 2026',
-                type: 'fix',
-                list: [
-                    'Fix: Fixed the issue where the audio players showed 00:00 duration.'
-                ]
-            },
-            {
-                version: '2.6.1 - 15 May, 2026',
-                type: 'fix',
-                list: [
-                    'Fix: Fixed the issue where the Fusion skin of the standard player was not appearing due to a NaN volume value issue.'
-                ]
-            },
-            {
-                version: '2.6.0 - 10 May, 2026',
-                type: 'new',
-                list: [
-                    'New: Users can now turn shuffle on or off from Gutenberg and dashboard settings.',
-                    'Update: Massive structural update unlocking several previously PRO features to the Free version (Sticky player, standard skins, poster images, border radius, repeat, and more).',
-                    'Update: Cleaned up the free dashboard to neatly present premium-only settings via intuitive notice cards.',
-                    'Update: Fully redesigned the Playlist Premium unlock notice block.',
-                    'Update: Update brand new Dashboard.',
-                    'Fix: Printing Garbage / Raw JSON on the Page.',
-                    'Fix: Not Possible to Customise PRO Playlist Skin.',
-                    'Fix: Fix the player controls in Gutenberg Block Editor.',
-                    'Fix: Fix shuffle mode track mismatch issue.',
-                    'Fix: Resolved "Player not loading" issue on public/live WordPress websites caused by a JavaScript compatibility error (ReactDOM is not defined).',
-                    'Fix: Applied the fix across all player types — Fusion Player, Standard Player, Playlist (Narrow & Extensive), and Radio Player.',
-                    'Improvement: Improved Quick Player Settings with Documentation Link & Search Form Shortcode UI.',
-                    'Improvement: Completely revamped the HTML5 Audio Player "Playback Speed" menu with a premium, elegant design and custom scrollbars.'
-                ]
-            },
-            {
-                version: '2.5.3 - 15 Dec, 2025',
-                type: 'fix',
-                list: [
-                    'Fix: Undefined array key "postId"'
-                ]
-            },
-            {
-                version: '2.5.2 - 15 Dec, 2025',
-                type: 'update',
-                list: [
-                    'Update: Freemius SDK',
-                    'New: Added settings to add whitelist domains list to protect against random URL requests in the radio player'
-                ]
-            }
-        ],
-        proFeatures: [
-            'Premium Playlist Skins',
-            '7 Additional Premium Skins',
-            'Save State Functionality',
-            'Single Button Player',
-            'Premium Sticky Player Features',
-            'Color Customization',
-            'Fast Forward & Rewind Buttons',
-            'Download & Playback Controls',
-            'Start Time & Disable Pause',
-            'Post Playlist Controls',
-            'Ad-Free Experience',
-            'Google Drive Audio Support',
-            'SoundCloud Streaming Support',
-        ],
         startButton: {
             label: 'Start Now',
             url: `${adminUrl}post-new.php?post_type=audioplayer`
@@ -447,6 +341,13 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
         ]
     },
     changelogs: [
+        {
+            version: '2.7.1 - 15 June, 2026',
+            type: 'update',
+            list: [
+                'Security: Hardened the Google Drive audio proxy endpoint to patch XSS and SSRF vulnerabilities by validating MIME types, manually enforcing redirect checks, and applying strict HTTP headers.'
+            ]
+        },
         {
             version: '2.7.0 - 13 June, 2026',
             type: 'new',

@@ -56,6 +56,8 @@ class Shortcode
         $muted = Functions::settings('h5ap_muted', '0') === '1';
         $preload = $preload ? $preload : Functions::settings('h5ap_preload', 'metadata');
         $stime = (int)Functions::settings('h5ap_seektime', '10');
+        $global_lazy_load = Functions::settings('h5ap_lazy_load', '0') === '1';
+        $lazy_load = isset($lazy_load) ? ($lazy_load === 'true' || $lazy_load === '1' || $lazy_load === 1) : $global_lazy_load;
 
         if ($file) {
             $src = $file;
@@ -102,6 +104,7 @@ class Shortcode
                 'muted' => $muted,
                 'preload' => $preload,
                 'startTime' => (int)$start_time,
+                'lazyLoad' => (bool)$lazy_load,
                 'options' => [
                     'volume' => 0.5
                 ]
@@ -123,6 +126,7 @@ class Shortcode
             'repeat' => null,
             'shuffle' => null,
             'start_time' => 0,
+            'lazy_load' => null,
         );
     }
 

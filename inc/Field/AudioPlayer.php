@@ -168,6 +168,17 @@ class AudioPlayer
           'default' => false,
           'dependency' => array('h5ap_player_type', '==', 'opt-1')
         ),
+        array(
+          'id' => 'lazy_load',
+          'type' => 'switcher',
+          'title' => \__('Enable Lazy Load', 'html5-audio-player'),
+          'desc' => 'Only load the player and audio resources when it enters the viewport. (Not compatible with Sticky players as they stay fixed in the viewport)',
+          'default' => false,
+          'dependency' => array(
+            array('h5ap_player_type', '==', 'opt-1'),
+            array('enable_sticky', '!=', '1'),
+          )
+        ),
 
         array(
           'id' => 'width',
@@ -312,7 +323,7 @@ class AudioPlayer
           'id' => 'enable_sticky',
           'type' => 'switcher',
           'title' => \__('Enable Sticky', 'html5-audio-player'),
-          'desc' => 'Enable this to attach a sticky version of the player to the page so it remains visible while scrolling.',
+          'desc' => 'Enable this to attach a sticky version of the player to the page so it remains visible while scrolling. (Sticky players are always visible in the viewport, so Lazy Load is disabled)',
           'default' => false,
           'dependency' => array(
             array('h5ap_player_type|standard_skin', '==|any', 'opt-1|default,fusion,stamp,wave,Simple-1,Simple-2')

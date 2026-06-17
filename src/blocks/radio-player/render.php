@@ -12,6 +12,7 @@ $uniqueId = wp_unique_id('h5ap-player-');
 $settings = h5ap_get_settings('h5ap_settings');
 
 $attributes['multiple_audio'] = $settings('multipleAudio', false) === '1';
+$attributes['lazyLoad'] = isset($attributes['lazyLoad']) ? $attributes['lazyLoad'] : ($settings('h5ap_lazy_load', '0') === '1');
 
 global $post_id;
 

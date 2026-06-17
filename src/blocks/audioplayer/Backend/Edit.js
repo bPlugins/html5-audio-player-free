@@ -32,7 +32,7 @@ const Edit = (props) => {
       <Settings {...{ attributes, setAttributes }} />
       <div {...blockProps}>
         <OnlyBackend />
-        <AudioPlayer {...{ attributes, containerRef, id: `block-${clientId}` }} />
+        <AudioPlayer {...{ attributes, containerRef, id: `block-${clientId}`, isBackend: true }} />
       </div>
     </Fragment>
   );

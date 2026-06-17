@@ -49,7 +49,7 @@ Upgrade to the [**Pro version**](https://bplugins.com/products/html5-audio-playe
 - **Color Customization**: Set custom primary and background colors to perfectly fit your site’s branding.
 - **Download buttons**: Add download buttons to your player.
 - **Fast Forward & Rewind Buttons**: Enhance navigation with custom seek time settings.
-- **Start Time Settings**: Specify exactly when the audio should start playing.
+- **Start & End Time Settings**: Specify exactly when the audio should start and stop playing.
 - **Disable Pause Option**: Keep audio playing without interruption.
 - **Save State Functionality**: Save the player's time state so it resumes from where the user left off.
 - **Premium Sticky Player Features**: Unlock Background Color, Repeat, Save State, Initial Volume, and Download Button for Sticky Players.

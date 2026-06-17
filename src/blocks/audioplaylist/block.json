@@ -65,6 +65,10 @@
         "CSS": {
             "type": "string",
             "default": ""
+        },
+        "lazyLoad": {
+            "type": "boolean",
+            "default": false
         }
     },
     "supports": {

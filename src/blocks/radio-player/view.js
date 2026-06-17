@@ -10,10 +10,28 @@ document.addEventListener('DOMContentLoaded', function () {
         const attributers = JSON.parse(block.dataset.attributes);
         const id = block.dataset.id;
         const nonce = block.dataset.nonce;
-        block.removeAttribute('data-attributes');
-        block.removeAttribute('data-id');
-        block.removeAttribute('data-nonce');
-        createRoot(block).render(<RadioPlayer attributes={attributers} id={id} nonce={nonce} />);
+        const renderPlayer = () => {
+            block.removeAttribute('data-attributes');
+            block.removeAttribute('data-id');
+            block.removeAttribute('data-nonce');
+            createRoot(block).render(<RadioPlayer attributes={attributers} id={id} nonce={nonce} />);
+        };
+
+        const isLazyLoad = attributers.lazyLoad !== undefined ? attributers.lazyLoad : (window.h5apPlayer?.lazyLoad === true);
+
+        if (isLazyLoad && typeof IntersectionObserver !== 'undefined') {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        renderPlayer();
+                        observer.unobserve(block);
+                    }
+                });
+            }, { rootMargin: '200px' });
+            observer.observe(block);
+        } else {
+            renderPlayer();
+        }
 
     })
 });

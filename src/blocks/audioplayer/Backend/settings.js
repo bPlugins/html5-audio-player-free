@@ -9,7 +9,7 @@ import { AlignmentToolbar, BlockControls, InspectorControls } from '@wordpress/b
 import { AdvertiseCard } from '../../../../../bpl-tools/ProControls/index.js';
 
 const Settings = ({ attributes, setAttributes, siteUrl }) => {
-  const { source, controls, primaryColor, bgColor, controlColor, poster, skin, alignment, isSticky, title, artist, repeat, preload, radius, autoplay, muted, loader, width } = attributes;
+  const { source, controls, primaryColor, bgColor, controlColor, poster, skin, alignment, isSticky, title, artist, repeat, preload, radius, autoplay, muted, loader, width, lazyLoad } = attributes;
 
   const pricingURL = `${siteUrl}/wp-admin/admin.php?page=html5-audio-player-help-demo#/pricing`;
 
@@ -144,8 +144,12 @@ const Settings = ({ attributes, setAttributes, siteUrl }) => {
 
                         <ToggleControl className="mb5" label={__("Loader", "h5ap")} id="loader" checked={loader} onChange={() => setAttributes({ loader: !loader })} />
 
+                        {!isSticky && (
+                          <ToggleControl help={__("Only load the player and audio resources when it enters the viewport. (Not compatible with Sticky players)", "h5ap")} className="mb5" label={__("Enable Lazy Load", "h5ap")} id="lazyLoad" checked={lazyLoad} onChange={() => setAttributes({ lazyLoad: !lazyLoad })} />
+                        )}
+
                         {["Default", "Fusion", "Stamp", "Wave", "Simple-1", "Simple-2"].includes(skin) &&
-                          <ToggleControl className="mb5" label={__("Enable Sticky", "h5ap")} id="isSticky" checked={isSticky} onChange={() => setAttributes({ isSticky: !isSticky })} />
+                          <ToggleControl help={__("Enabling this will hide and disable the Lazy Load option (since sticky players are always fixed in the viewport).", "h5ap")} className="mb5" label={__("Enable Sticky", "h5ap")} id="isSticky" checked={isSticky} onChange={() => setAttributes({ isSticky: !isSticky })} />
                         }
                         <Notice status='premium' isIcon={true} className="mt15">{getSettingsPremiumNoticeText()}</Notice>
                       </PanelBody>

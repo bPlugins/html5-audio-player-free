@@ -8,13 +8,14 @@ import Stamp from "./players/stamp/Stamp";
 import Style from "./Style";
 import { resolveAudioSrc } from "../../../utils/gDriveProxy";
 
-const AudioPlayer = ({ attributes, id }) => {
+const AudioPlayer = ({ attributes, id, isBackend = false }) => {
     const containerRef = useRef(null);
     const skins = { Default, Fusion, Stamp, Wave };
 
     const resolvedAttributes = {
         ...attributes,
-        source: resolveAudioSrc(attributes.source)
+        source: resolveAudioSrc(attributes.source),
+        preload: (attributes.lazyLoad && !isBackend) ? 'none' : attributes.preload
     };
     const { isSticky, skin, width, multiple_audio} = resolvedAttributes;
 

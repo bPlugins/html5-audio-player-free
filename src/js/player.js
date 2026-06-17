@@ -42,8 +42,25 @@ const H5AP_Obj = new H5AP();
       audioPlayer.removeAttribute("data-options");
       audioPlayer.removeAttribute("data-song");
 
-      // alert("working fine");
-      if (options) H5AP_Obj.audioPlayer(audioPlayer, options);
+      const initPlayer = () => {
+        if (options) H5AP_Obj.audioPlayer(audioPlayer, options);
+      };
+
+      const isLazyLoad = options.lazy_load !== undefined ? (options.lazy_load === true || options.lazy_load === "1" || options.lazy_load === 1) : (window.h5apPlayer?.lazyLoad === true);
+
+      if (isLazyLoad && typeof IntersectionObserver !== "undefined") {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              initPlayer();
+              observer.unobserve(audioPlayer);
+            }
+          });
+        }, { rootMargin: '200px' });
+        observer.observe(audioPlayer);
+      } else {
+        initPlayer();
+      }
     });
 
     H5AP_Obj.stickyPlayer2($(".h5ap_sticky_player"));

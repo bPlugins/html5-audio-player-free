@@ -40,9 +40,10 @@ class EnqueueAssets
 
         wp_register_style('bplugins-plyrio', H5AP_PRO_PLUGIN_DIR . 'assets/css/plyr-v3.7.2.css', array(), H5AP_PRO_VERSION, 'all');
 
-        wp_localize_script('h5ap-all', 'h5apAll', [
+        $h5ap_settings = [
             'speed' => explode(',', Functions::getSetting('speed', '0.5, 1, 1.5, 2.0, 2.5')),
             'multipleAudio' => (bool) Functions::getSetting('multipleAudio', false),
+            'lazyLoad' => (bool) Functions::getSetting('h5ap_lazy_load', false),
             'plyrio_js' => H5AP_PRO_PLUGIN_DIR . 'assets/js/plyr-v3.7.2.js',
             'plyrio_css' => H5AP_PRO_PLUGIN_DIR . 'assets/css/plyr-v3.7.2.css',
             'ajaxUrl' => admin_url('admin-ajax.php'),
@@ -52,7 +53,10 @@ class EnqueueAssets
                 'seekTime' => (int) Functions::getSetting('h5ap_seektime', 10),
                 'loop' => ['active' => Functions::getSetting('h5ap_repeat', false) === '1'],
             ]
-        ]);
+        ];
+
+        wp_localize_script('h5ap-all', 'h5apPlayer', $h5ap_settings);
+        wp_localize_script('h5ap-all', 'h5apAll', $h5ap_settings);
 
     }
 

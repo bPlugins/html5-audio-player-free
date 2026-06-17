@@ -16,7 +16,7 @@ import { withSelect } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 
 const Settings = ({ attributes, siteUrl, setAttributes, isPremium }) => {
-  const { source, sourceType, statusText, poster, skin, alignment, isSticky, title, subtitle } = attributes;
+  const { source, sourceType, statusText, poster, skin, alignment, isSticky, title, subtitle, lazyLoad } = attributes;
 
   const pricingURL = `${siteUrl}/wp-admin/admin.php?page=html5-audio-player-help-demo#/pricing`;
 
@@ -123,8 +123,12 @@ const Settings = ({ attributes, siteUrl, setAttributes, isPremium }) => {
                         onChange={(statusText) => setAttributes({ statusText })} />}
 
 
+                      {!isSticky && (
+                        <ToggleControl help={__("Only load the player and audio resources when it enters the viewport. (Not compatible with Sticky players)", "h5ap")} className="mb5 mt15" label={__("Enable Lazy Load", "h5ap")} id="lazyLoad" checked={lazyLoad} onChange={() => setAttributes({ lazyLoad: !lazyLoad })} />
+                      )}
+
                       {["Default", "Fusion", "Stamp", "Wave", "Simple-1", "Simple-2"].includes(skin) &&
-                        <ToggleControl isPremium={isPremium} className="mb5" label={__("Enable Sticky", "h5ap")} id="isSticky" checked={isSticky} onChange={() => setAttributes({ isSticky: !isSticky })} />
+                        <ToggleControl isPremium={isPremium} help={__("Enabling this will hide and disable the Lazy Load option (since sticky players are always fixed in the viewport).", "h5ap")} className="mb5" label={__("Enable Sticky", "h5ap")} id="isSticky" checked={isSticky} onChange={() => setAttributes({ isSticky: !isSticky })} />
                       }
 
                     </PanelBody>

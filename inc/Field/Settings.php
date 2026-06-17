@@ -31,7 +31,24 @@ class Settings
       'footer_text' => 'Powered by <a href="https://bplugins.com" target="_blank">bPlugins</a>',
     ));
 
+    $this->performance_settings();
     $this->white_listed_stream_url();
+  }
+
+  public function performance_settings()
+  {
+    \CSF::createSection($this->prefix, array(
+      'title' => 'Performance',
+      'fields' => array(
+        array(
+          'id'      => 'h5ap_lazy_load',
+          'type'    => 'switcher',
+          'title'   => 'Enable Lazy Load',
+          'default' => false,
+          'desc'    => 'Enable this to only initialize and load the player and its resources when it enters the viewport.'
+        ),
+      )
+    ));
   }
 
   public function white_listed_stream_url()

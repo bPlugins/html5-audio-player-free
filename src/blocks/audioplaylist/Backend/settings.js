@@ -8,7 +8,7 @@ import { produce } from 'immer';
 
 const Settings = (props) => {
   const { attributes, setAttributes, clientId } = props;
-  const { width, alignment } = attributes;
+  const { width, alignment, lazyLoad } = attributes;
   const { activeIndex, setActiveIndex } = useState(0);
 
 
@@ -61,6 +61,15 @@ const Settings = (props) => {
                   <Panel>
                     <PanelBody className="bPlPanelBody" title={__("Tracks", "h5ap")}>
                       <ItemsPanel {...{ attributes, setAttributes, clientId, arrKey: 'audios', newItem: { source: '' }, ItemSettings, itemLabel: 'Item', activeIndex, setActiveIndex, design: 'sortable', }} />
+                    </PanelBody>
+                    <PanelBody title={__("Options", "h5vp")} className='bPlPanelBody'>
+                      <ToggleControl
+                        className="mb5"
+                        label={__("Enable Lazy Load", "h5ap")}
+                        id="lazyLoad"
+                        checked={lazyLoad}
+                        onChange={() => setAttributes({ lazyLoad: !lazyLoad })}
+                      />
                     </PanelBody>
 
                   </Panel>

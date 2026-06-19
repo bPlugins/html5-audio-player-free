@@ -7,9 +7,9 @@ add_action('init', function () {
     // Register block editor script for backend.
     wp_register_script(
         'h5ap_block_free-js', 
-        H5AP_PRO_PLUGIN_DIR . '/blocks/dist/blocks.build.js', 
+        H5AP_PLUGIN_DIR . '/blocks/dist/blocks.build.js', 
         array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor'), 
-        H5AP_PRO_VERSION, 
+        H5AP_VERSION, 
         true
     );
 

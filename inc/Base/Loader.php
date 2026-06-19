@@ -23,13 +23,13 @@ class Loader
                 if (!element && !window.srcLoaded) {
                     if (type === 'script') {
                         const script = document.createElement('script');
-                        script.src = `<?php echo esc_url(H5AP_PRO_PLUGIN_DIR) ?>${source}`;
+                        script.src = `<?php echo esc_url(H5AP_PLUGIN_DIR) ?>${source}`;
                         script.id = id;
                         document.getElementsByTagName("head")[0].appendChild(script);
                     }
                     if (type === 'css') {
                         const link = document.createElement('link');
-                        link.href = `<?php echo esc_url(H5AP_PRO_PLUGIN_DIR) ?>${source}`;
+                        link.href = `<?php echo esc_url(H5AP_PLUGIN_DIR) ?>${source}`;
                         link.rel = 'stylesheet';
                         document.getElementsByTagName("head")[0].appendChild(link);
                     }

@@ -23,6 +23,7 @@ Everything you need to build a professional audio experience on your site:
 - **Customization Options:** Adjust player width, border radius, and add custom poster images effortlessly.
 - **Title & Author Support:** Display custom audio titles and author metadata directly on the player.
 - **Playback Controls:** Autoplay, Preload, Mute, and Repeat options out-of-the-box.
+- **Lazy Load Support:** Optimize page load speed by loading the player and audio resources only when they enter the viewport.
 - **MP3 & OGG Support:** Automatically loads the right format based on the user’s device capabilities.
 
 ### 👑 Premium Power (Pro)

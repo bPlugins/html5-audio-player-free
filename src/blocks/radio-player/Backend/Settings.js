@@ -124,7 +124,7 @@ const Settings = ({ attributes, siteUrl, setAttributes, isPremium }) => {
 
 
                       {!isSticky && (
-                        <ToggleControl help={__("Only load the player and audio resources when it enters the viewport. (Not compatible with Sticky players)", "h5ap")} className="mb5 mt15" label={__("Enable Lazy Load", "h5ap")} id="lazyLoad" checked={lazyLoad} onChange={() => setAttributes({ lazyLoad: !lazyLoad })} />
+                        <ToggleControl help={__("Only load the player and audio resources when it enters the viewport.", "h5ap")} className="mb5 mt15" label={__("Enable Lazy Load", "h5ap")} id="lazyLoad" checked={lazyLoad} onChange={() => setAttributes({ lazyLoad: !lazyLoad })} />
                       )}
 
                       {["Default", "Fusion", "Stamp", "Wave", "Simple-1", "Simple-2"].includes(skin) &&

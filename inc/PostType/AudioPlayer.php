@@ -54,7 +54,7 @@ class AudioPlayer
                 'publicly_queryable' => true,
                 'exclude_from_search' => true,
                 'menu_position' => 1,
-                'menu_icon' => H5AP_PRO_PLUGIN_DIR . '/assets/images/icn.png',
+                'menu_icon' => H5AP_PLUGIN_DIR . '/assets/images/icn.png',
                 'show_in_menu' => 'html5-audio-player',
                 'has_archive' => false,
                 'hierarchical' => false,

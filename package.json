@@ -1,7 +1,7 @@
 {
-  "name": "audio-player",
-  "version": "2.6.0",
-  "description": "",
+  "name": "html5-audio-player",
+  "version": "2.7.2",
+  "description": "Best audio player plugin with multiple playlist layouts, playlist shortcode, audio player widget, and 6 plus advanced feature.",
   "main": "src/player.js",
   "scripts": {
     "packages-update": "wp-scripts packages-update",
@@ -20,7 +20,15 @@
     "make-zip": "wp-scripts build --webpack-copy-php && (npm run i18n || node -e \"console.log('i18n failed')\") && gulp bundle && gulp zip && node -e \"require('fs').rmSync('bundled', { recursive: true, force: true })\"",
     "start:css": "NODE_ENV=production npx tailwindcss -o ./src/blocks/audioplayer/Common/output.css --watch"
   },
-  "keywords": [],
+  "keywords": [
+    "audio",
+    "player",
+    "playlist",
+    "shortcode",
+    "widget",
+    "advanced",
+    "feature"
+  ],
   "author": "Md. Shamim Islam",
   "license": "ISC",
   "devDependencies": {

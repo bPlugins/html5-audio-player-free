@@ -20,8 +20,8 @@ if (!class_exists('H5AP_Block')) {
             wp_localize_script('h5ap-audioplayer-editor-script', 'h5apPlayer', [
                 'speed' => explode(',', Functions::getSetting('speed', '0.5, 1, 1.5, 2.0, 2.5')),
                 'multipleAudio' => (bool) Functions::getSetting('multipleAudio', false),
-                'plyrio_js' => H5AP_PRO_PLUGIN_DIR . 'assets/js/plyr-v3.7.2.js',
-                'plyr_js' => H5AP_PRO_PLUGIN_DIR . 'build/player.js',
+                'plyrio_js' => H5AP_PLUGIN_DIR . 'assets/js/plyr-v3.7.2.js',
+                'plyr_js' => H5AP_PLUGIN_DIR . 'build/player.js',
                 'isPipe' => false,
                 'ajaxUrl' => admin_url('admin-ajax.php')
             ]);
@@ -30,8 +30,8 @@ if (!class_exists('H5AP_Block')) {
         function enqueue_block_assets()
         {
             // plyrio library 
-            wp_register_script('bplugins-plyrio', H5AP_PRO_PLUGIN_DIR . 'assets/js/plyr-v3.7.2.js', array(), '3.7.2', false);
-            wp_register_style('bplugins-plyrio', H5AP_PRO_PLUGIN_DIR . 'assets/css/plyr-v3.7.2.css', array(), '3.7.2', 'all');
+            wp_register_script('bplugins-plyrio', H5AP_PLUGIN_DIR . 'assets/js/plyr-v3.7.2.js', array(), '3.7.2', false);
+            wp_register_style('bplugins-plyrio', H5AP_PLUGIN_DIR . 'assets/css/plyr-v3.7.2.css', array(), '3.7.2', 'all');
         }
 
         function init() {

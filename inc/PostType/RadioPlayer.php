@@ -62,7 +62,7 @@ class RadioPlayer
                 'publicly_queryable' => true,
                 'exclude_from_search' => true,
                 'menu_position' => 5,
-                // 'menu_icon' => H5AP_PRO_PLUGIN_DIR . '/assets/images/icn.png',
+                // 'menu_icon' => H5AP_PLUGIN_DIR . '/assets/images/icn.png',
                 'has_archive' => false,
                 'hierarchical' => false,
                 'capability_type' => 'page',

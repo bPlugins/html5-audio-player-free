@@ -64,7 +64,8 @@ const Settings = (props) => {
                     </PanelBody>
                     <PanelBody title={__("Options", "h5vp")} className='bPlPanelBody'>
                       <ToggleControl
-                        className="mb5"
+                        className="mt10"
+                        help={__("Only load the player and audio resources when it enters the viewport.", "h5ap")}
                         label={__("Enable Lazy Load", "h5ap")}
                         id="lazyLoad"
                         checked={lazyLoad}

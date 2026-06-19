@@ -342,6 +342,13 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
     },
     changelogs: [
         {
+            version: '2.7.2 - 20 June, 2026',
+            type: 'new',
+            list: [
+                'New: Added "Enable Lazy Load" option across all player skins and playlist layouts to optimize page load performance.',
+            ]
+        },
+        {
             version: '2.7.1 - 15 June, 2026',
             type: 'update',
             list: [
@@ -357,15 +364,6 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
                 'Update: Completely redesigned and modernized the admin dashboard welcome screen with dynamic builder integration tabs (Gutenberg, Shortcode, Elementor) and status checks.',
                 'Fix: Fixed an issue where the player\'s customized colors and style settings reset back to original default colors when loading or re-opening a page in the Gutenberg block editor.'
             ]
-        },
-        {
-            version: '2.6.4 - 21 May, 2026',
-            type: 'fix',
-            list: [
-                'Fix: Resolved SoundCloud track URL playback issues for standard players, shortcodes, and Gutenberg Block Editor.',
-                'Fix: Implemented secure internal SoundCloud API v2 progressive stream proxying to bypass restricted/temporary CDN stream URL expirations.',
-                'Fix: Fixed block settings panel URL updates and block preview rendering issues for SoundCloud track links.'
-            ]
         }
     ],
     changelogsLimit: 5,
@@ -379,9 +377,9 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
         'Color Customization',
         'Fast Forward & Rewind Buttons',
         'Download & Playback Controls',
-        'Start Time & Disable Pause',
+        'Start Time & End Time',
+        'Disable Pause',
         'Post Playlist Controls',
-        'Ad-Free Experience',
         'Google Drive Audio Support',
         'SoundCloud Streaming Support',
 

@@ -49,8 +49,8 @@ add_action('wp_ajax_ewic_grab_slider_list_ajax', 'ewic_grab_slider_list_ajax');
 /*-------------------------------------------------------------------------------*/
 function ewic_reg_script()
 {
-	wp_register_style('ewic-tinymcecss', plugins_url('tinymce/tinymce.css', dirname(__FILE__)), array(), H5AP_PRO_VERSION, 'all');
-	wp_register_script('ewic-tinymcejs', plugins_url('tinymce/tinymce.js', dirname(__FILE__)), array('jquery'), H5AP_PRO_VERSION, true);
+	wp_register_style('ewic-tinymcecss', plugins_url('tinymce/tinymce.css', dirname(__FILE__)), array(), H5AP_VERSION, 'all');
+	wp_register_script('ewic-tinymcejs', plugins_url('tinymce/tinymce.js', dirname(__FILE__)), array('jquery'), H5AP_VERSION, true);
 }
 add_action('admin_init', 'ewic_reg_script');
 
@@ -79,7 +79,7 @@ if (strstr($ewic_request_uri, 'wp-admin/post-new.php') || strstr($ewic_request_u
 	add_action('media_buttons', 'ewic_shortcode_button', 1);
 	function ewic_shortcode_button()
 	{
-		$img = H5AP_PRO_PLUGIN_DIR . 'assets/images/icn.png';
+		$img = H5AP_PLUGIN_DIR . 'assets/images/icn.png';
 		$container_id = 'ewicmodal';
 		$title = 'Insert Html5 Audio Player';
 		$context = '

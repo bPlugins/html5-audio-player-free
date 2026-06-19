@@ -4,7 +4,7 @@ Tags: mp3 player, audio, audio player, player, podcast
 Donate link: https://www.buymeacoffee.com/abuhayat/  
 Requires at least: 6.5
 Tested up to: 7.0
-Stable tag: 2.7.1
+Stable tag: 2.7.2
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -34,6 +34,7 @@ Built with modern HTML5 technology, this plugin works across all major browsers 
 - **Title & Author Support**: Display custom audio titles and author names.
 - **Autoplay, Preload & Mute Options**: Define how your audio behaves upon loading.
 - **Repeat Control**: Loop your audio seamlessly.
+- **Lazy Load Support**: Optimize page load speed by loading the player and audio resources only when they enter the viewport.
 - **Great for Podcasts**: Perfect for embedding podcast episodes or audio courses.
 - **MP3 & OGG Support**: Automatically loads the right format based on user’s device.
 - **Google Drive Audio Support**: Seamlessly play audio files directly from Google Drive. Our built-in smart proxy bypasses Google's restrictions and CORS errors, ensuring smooth playback and accurate duration display.
@@ -219,6 +220,9 @@ e.g.
 
 
 == Changelog ==
+
+= 2.7.2 - 20 June, 2026 =
+* **New:** Added "Enable Lazy Load" option across all player skins and playlist layouts to optimize page load performance.
 
 = 2.7.1 - 15 June, 2026 =
 * **Security:** Hardened the Google Drive audio proxy endpoint to patch XSS and SSRF vulnerabilities by validating MIME types, manually enforcing redirect checks, and applying strict HTTP headers.

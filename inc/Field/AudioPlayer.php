@@ -170,12 +170,13 @@ class AudioPlayer
         ),
         array(
           'id'      => 'lazy_load',
-          'type'    => 'select',
-          'title'   => \__('Lazy Load', 'html5-audio-player-pro'),
+          'type'    => 'button_set',
+          'title'   => \__('Lazy Load', 'html5-audio-player'),
+          'desc' => \__('Load player only when in viewport. (Unavailable when "Enable Sticky" is active).', 'html5-audio-player'),
           'options' => array(
-            'default' => \__('Inherit (Global Settings)', 'html5-audio-player-pro'),
-            'on'      => \__('Enable', 'html5-audio-player-pro'),
-            'off'     => \__('Disable', 'html5-audio-player-pro'),
+            'default' => \__('Inherit (Global Settings)', 'html5-audio-player'),
+            'on'      => \__('Enable', 'html5-audio-player'),
+            'off'     => \__('Disable', 'html5-audio-player'),
           ),
           'default' => 'default',
           'dependency' => array(
@@ -326,7 +327,7 @@ class AudioPlayer
           'id' => 'enable_sticky',
           'type' => 'switcher',
           'title' => \__('Enable Sticky', 'html5-audio-player'),
-          'desc' => 'Enable this to attach a sticky version of the player to the page so it remains visible while scrolling. (Sticky players are always visible in the viewport, so Lazy Load is disabled)',
+          'desc' => \__('Keep player visible while scrolling. (Hides Lazy Load since sticky players must load immediately).', 'html5-audio-player'),
           'default' => false,
           'dependency' => array(
             array('h5ap_player_type|standard_skin', '==|any', 'opt-1|default,fusion,stamp,wave,Simple-1,Simple-2')

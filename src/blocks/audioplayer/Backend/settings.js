@@ -146,8 +146,9 @@ const Settings = ({ attributes, setAttributes, siteUrl }) => {
 
                         {!isSticky && (
                           <SelectControl
+                            className='mt10'
                             label={__("Lazy Load", 'h5ap')}
-                            help={__("Only load the player and audio resources when it enters the viewport.", "h5ap")}
+                            help={__("Load player only when in viewport. (Unavailable when 'Enable Sticky' is active).", "h5ap")}
                             value={lazyLoad}
                             options={[
                               { label: __('Inherit (Global Settings)', 'h5ap'), value: 'default' },
@@ -159,7 +160,7 @@ const Settings = ({ attributes, setAttributes, siteUrl }) => {
                         )}
 
                         {["Default", "Fusion", "Stamp", "Wave", "Simple-1", "Simple-2"].includes(skin) &&
-                          <ToggleControl help={__("Enabling this will hide and disable the Lazy Load option (since sticky players are always fixed in the viewport).", "h5ap")} className="mb5" label={__("Enable Sticky", "h5ap")} id="isSticky" checked={isSticky} onChange={() => setAttributes({ isSticky: !isSticky })} />
+                          <ToggleControl help={__("Keep player visible while scrolling. (Hides Lazy Load since sticky players must load immediately).", "h5ap")} className="mt15" label={__("Enable Sticky", "h5ap")} id="isSticky" checked={isSticky} onChange={() => setAttributes({ isSticky: !isSticky })} />
                         }
                         <Notice status='premium' isIcon={true} className="mt15">{getSettingsPremiumNoticeText()}</Notice>
                       </PanelBody>

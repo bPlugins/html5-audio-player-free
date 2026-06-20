@@ -64,6 +64,7 @@ const Settings = (props) => {
                     </PanelBody>
                     <PanelBody title={__("Options", "h5vp")} className='bPlPanelBody'>
                       <SelectControl
+                        className='mt10'
                         label={__("Lazy Load", 'html5-audio-player-pro')}
                         help={__("Only load the player and audio resources when it enters the viewport.", "html5-audio-player-pro")}
                         value={lazyLoad}

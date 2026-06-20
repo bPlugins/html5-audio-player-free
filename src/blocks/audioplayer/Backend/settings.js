@@ -98,7 +98,9 @@ const Settings = ({ attributes, setAttributes, siteUrl }) => {
                     <Panel>
                       <PanelBody className="bPlPanelBody">
                         <SelectControl
-                          label={__("Skin", "h5ap")}
+                          className='mt10'
+                          label={__("Select Skin:", "h5ap")}
+                          labelPosition='left'
                           options={skins.map((item) => ({ label: item, value: item.replace(" ", "-") }))}
                           value={skin}
                           onChange={(skin) => setAttributes({ skin })}
@@ -136,13 +138,13 @@ const Settings = ({ attributes, setAttributes, siteUrl }) => {
                           onChange={(value) => setAttributes({ preload: value })}
                         />
 
-                        <ToggleControl help={__("This behavior may vary depending on the browser.", "h5ap")} className="mb5 mt10" label={__("Autoplay", "h5ap")} id="autoplay" checked={autoplay} onChange={() => setAttributes({ autoplay: !autoplay })} />
+                        <ToggleControl help={__("This behavior may vary depending on the browser.", "h5ap")} className="mt10" label={__("Autoplay", "h5ap")} id="autoplay" checked={autoplay} onChange={() => setAttributes({ autoplay: !autoplay })} />
 
-                        <ToggleControl className="mb5" label={__("Repeat", "h5ap")} id="repeat" checked={repeat} onChange={() => setAttributes({ repeat: !repeat })} />
+                        <ToggleControl className="mt10" label={__("Repeat", "h5ap")} id="repeat" checked={repeat} onChange={() => setAttributes({ repeat: !repeat })} />
 
-                        <ToggleControl className="mb5" label={__("Muted", "h5ap")} id="muted" checked={muted} onChange={() => setAttributes({ muted: !muted })} />
+                        <ToggleControl className="mt10" label={__("Muted", "h5ap")} id="muted" checked={muted} onChange={() => setAttributes({ muted: !muted })} />
 
-                        <ToggleControl className="mb5" label={__("Loader", "h5ap")} id="loader" checked={loader} onChange={() => setAttributes({ loader: !loader })} />
+                        <ToggleControl className="mt10" label={__("Loader", "h5ap")} id="loader" checked={loader} onChange={() => setAttributes({ loader: !loader })} />
 
                         {!isSticky && (
                           <SelectControl

@@ -54,7 +54,8 @@ const Settings = ({ attributes, siteUrl, setAttributes, isPremium }) => {
                     <PanelBody className="bPlPanelBody">
                       <SelectControl
                         Component={SelectControl}
-                        label={__("Skin", "h5ap")}
+                        labelPosition='left'
+                        label={__("Select Skin:", "h5ap")}
                         options={skins.map((item) => ({ label: item, value: item.replace(" ", "-") }))}
                         value={skin}
                         onChange={(skin) => setAttributes({ skin })}

@@ -342,7 +342,7 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
     },
     changelogs: [
         {
-            version: '2.7.2 - 20 June, 2026',
+            version: '2.7.2 - 21 June, 2026',
             type: 'new',
             list: [
                 'New: Added "Enable Lazy Load" option across all player skins and playlist layouts to optimize page load performance.',

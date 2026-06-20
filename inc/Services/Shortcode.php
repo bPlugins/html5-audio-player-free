@@ -50,14 +50,22 @@ class Shortcode
 
         $width = $width ? $width : Functions::settings('h5ap_player_width', ['width' => '100', 'unit' => '%']);
         $repeat = $repeat ? ($repeat === 'true' ? ' loop' : '')  : (Functions::settings('h5ap_repeat', 'loop') === 'loop' ? ' loop ' : '');
-        // $autoplay = Functions::settings('h5ap_autoplay', '0') === '1' ? ' autoplay ' : '';
-        // $muted = Functions::settings('h5ap_muted', '0') === '1' ? ' muted ' : '';
         $autoplay = Functions::settings('h5ap_autoplay', '0') === '1';
         $muted = Functions::settings('h5ap_muted', '0') === '1';
         $preload = $preload ? $preload : Functions::settings('h5ap_preload', 'metadata');
         $stime = (int)Functions::settings('h5ap_seektime', '10');
-        $global_lazy_load = Functions::settings('h5ap_lazy_load', '0') === '1';
-        $lazy_load = isset($lazy_load) ? ($lazy_load === 'true' || $lazy_load === '1' || $lazy_load === 1) : $global_lazy_load;
+
+        if (isset($lazy_load) && $lazy_load !== '') {
+            if ($lazy_load === 'on' || $lazy_load === 'true' || $lazy_load === '1' || $lazy_load === 1 || $lazy_load === true) {
+                $lazy_load_val = 'on';
+            } elseif ($lazy_load === 'off' || $lazy_load === 'false' || $lazy_load === '0' || $lazy_load === 0 || $lazy_load === false) {
+                $lazy_load_val = 'off';
+            } else {
+                $lazy_load_val = 'default';
+            }
+        } else {
+            $lazy_load_val = 'default';
+        }
 
         if ($file) {
             $src = $file;
@@ -104,7 +112,7 @@ class Shortcode
                 'muted' => $muted,
                 'preload' => $preload,
                 'startTime' => (int)$start_time,
-                'lazyLoad' => (bool)$lazy_load,
+                'lazyLoad' => $lazy_load_val,
                 'options' => [
                     'volume' => 0.5
                 ]

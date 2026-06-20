@@ -124,7 +124,17 @@ const Settings = ({ attributes, siteUrl, setAttributes, isPremium }) => {
 
 
                       {!isSticky && (
-                        <ToggleControl help={__("Only load the player and audio resources when it enters the viewport.", "h5ap")} className="mb5 mt15" label={__("Enable Lazy Load", "h5ap")} id="lazyLoad" checked={lazyLoad} onChange={() => setAttributes({ lazyLoad: !lazyLoad })} />
+                        <SelectControl
+                          label={__("Lazy Load", 'html5-audio-player-pro')}
+                          help={__("Only load the player and audio resources when it enters the viewport.", "html5-audio-player-pro")}
+                          value={lazyLoad}
+                          options={[
+                            { label: __('Inherit (Global Settings)', 'html5-audio-player-pro'), value: 'default' },
+                            { label: __('Enable', 'html5-audio-player-pro'), value: 'on' },
+                            { label: __('Disable', 'html5-audio-player-pro'), value: 'off' },
+                          ]}
+                          onChange={(value) => setAttributes({ lazyLoad: value })}
+                        />
                       )}
 
                       {["Default", "Fusion", "Stamp", "Wave", "Simple-1", "Simple-2"].includes(skin) &&

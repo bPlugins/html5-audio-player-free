@@ -35,14 +35,9 @@ if ($standard_skin === 'default' && $primary_color === '#195FF5') {
 
 $controls = $meta('controls', []);
 
-$is_sticky = $type === 'opt-3' || $meta('enable_sticky', false);
-$lazy_load = $meta('lazy_load', null);
-if ($is_sticky) {
-    $lazy_load = false;
-} else if ($lazy_load === null || $lazy_load === '') {
-    $lazy_load = $settings('h5ap_lazy_load', '0') === '1';
-} else {
-    $lazy_load = (bool)$lazy_load;
+$lazy_load_meta = $meta('lazy_load', 'default');
+if ($lazy_load_meta === null || $lazy_load_meta === '') {
+    $lazy_load_meta = 'default';
 }
 
 if (!is_array($controls)) {
@@ -85,7 +80,7 @@ $block = [
         'download'      => $download,
         'width'         => $width['width'] . $width['unit'],
         'radius'        => $type === 'opt-3' ? 0 : $meta('radius', '5') . 'px',
-        'lazyLoad'      => $lazy_load,
+        'lazyLoad'      => $lazy_load_meta,
         'controls' => array_fill_keys(array_unique($controls), true),
         'options'       => [
             'volume' => (float) $meta($type === 'opt-3' ? 'sticky_volume' : 'plp_volume', 0.5),

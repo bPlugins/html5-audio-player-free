@@ -1,5 +1,5 @@
 const { __ } = wp.i18n;
-import { TabPanel, Panel, PanelBody, PanelRow, __experimentalUnitControl as UnitControl, TextControl, ToggleControl } from '@wordpress/components';
+import { TabPanel, Panel, PanelBody, PanelRow, __experimentalUnitControl as UnitControl, SelectControl, TextControl } from '@wordpress/components';
 import { AlignmentToolbar, BlockControls, InspectorControls } from '@wordpress/block-editor';
 import { useState } from "react";
 
@@ -63,13 +63,16 @@ const Settings = (props) => {
                       <ItemsPanel {...{ attributes, setAttributes, clientId, arrKey: 'audios', newItem: { source: '' }, ItemSettings, itemLabel: 'Item', activeIndex, setActiveIndex, design: 'sortable', }} />
                     </PanelBody>
                     <PanelBody title={__("Options", "h5vp")} className='bPlPanelBody'>
-                      <ToggleControl
-                        className="mt10"
-                        help={__("Only load the player and audio resources when it enters the viewport.", "h5ap")}
-                        label={__("Enable Lazy Load", "h5ap")}
-                        id="lazyLoad"
-                        checked={lazyLoad}
-                        onChange={() => setAttributes({ lazyLoad: !lazyLoad })}
+                      <SelectControl
+                        label={__("Lazy Load", 'html5-audio-player-pro')}
+                        help={__("Only load the player and audio resources when it enters the viewport.", "html5-audio-player-pro")}
+                        value={lazyLoad}
+                        options={[
+                          { label: __('Inherit (Global Settings)', 'html5-audio-player-pro'), value: 'default' },
+                          { label: __('Enable', 'html5-audio-player-pro'), value: 'on' },
+                          { label: __('Disable', 'html5-audio-player-pro'), value: 'off' },
+                        ]}
+                        onChange={(value) => setAttributes({ lazyLoad: value })}
                       />
                     </PanelBody>
 

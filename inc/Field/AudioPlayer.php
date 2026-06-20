@@ -169,17 +169,20 @@ class AudioPlayer
           'dependency' => array('h5ap_player_type', '==', 'opt-1')
         ),
         array(
-          'id' => 'lazy_load',
-          'type' => 'switcher',
-          'title' => \__('Enable Lazy Load', 'html5-audio-player'),
-          'desc' => 'Only load the player and audio resources when it enters the viewport. (Not compatible with Sticky players as they stay fixed in the viewport)',
-          'default' => false,
+          'id'      => 'lazy_load',
+          'type'    => 'select',
+          'title'   => \__('Lazy Load', 'html5-audio-player-pro'),
+          'options' => array(
+            'default' => \__('Inherit (Global Settings)', 'html5-audio-player-pro'),
+            'on'      => \__('Enable', 'html5-audio-player-pro'),
+            'off'     => \__('Disable', 'html5-audio-player-pro'),
+          ),
+          'default' => 'default',
           'dependency' => array(
             array('h5ap_player_type', '==', 'opt-1'),
             array('enable_sticky', '!=', '1'),
           )
         ),
-
         array(
           'id' => 'width',
           'type' => 'dimensions',

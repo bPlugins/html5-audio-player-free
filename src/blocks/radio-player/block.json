@@ -144,8 +144,8 @@
       "default": ""
     },
     "lazyLoad": {
-      "type": "boolean",
-      "default": false
+      "type": "string",
+      "default": "default"
     },
     "defaultValue": {
       "type": "object",

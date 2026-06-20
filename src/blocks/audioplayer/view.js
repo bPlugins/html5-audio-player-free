@@ -10,15 +10,19 @@ document.addEventListener('DOMContentLoaded', function () {
     blocks.forEach((block) => {
         const attributers = JSON.parse(block.dataset.attributes);
         const id = block.dataset.id;
+
         const renderPlayer = () => {
+            // console.log(`[H5AP LazyLoad] Mounting Standard Player: ${id}`);
             createRoot(block).render(<AudioPlayer attributes={attributers} id={id} />);
             block.removeAttribute('data-attributes');
             block.removeAttribute('data-id');
         };
 
         const isLazyLoad = attributers.lazyLoad !== undefined ? attributers.lazyLoad : (window.h5apPlayer?.lazyLoad === true);
+        // console.log(`[H5AP LazyLoad Check] Standard Player ${id} - lazyLoad setting is: ${isLazyLoad}`);
 
         if (isLazyLoad && typeof IntersectionObserver !== 'undefined') {
+            // console.log(`[H5AP LazyLoad] Observing Standard Player: ${id}`);
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {

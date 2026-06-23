@@ -342,6 +342,13 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
     },
     changelogs: [
         {
+            version: '2.7.3 - 23 June, 2026',
+            type: 'fix',
+            list: [
+                'Fix: Resolved an issue where loading the player shortcode on a page containing third-party audio players could cause those third-party players to be hijacked by the plugin\'s global player script.'
+            ]
+        },
+        {
             version: '2.7.2 - 21 June, 2026',
             type: 'new',
             list: [

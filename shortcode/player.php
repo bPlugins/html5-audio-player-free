@@ -19,7 +19,6 @@ add_shortcode('player', function ($atts) {
   wp_enqueue_style('h5ap-public');
   wp_enqueue_style('bplugins-plyrio');
   wp_enqueue_script('bplugins-plyrio');
-  wp_enqueue_script('h5ap-all');
 
   // Enqueue block assets manually as render_block doesn't handle it for shortcodes
   wp_enqueue_script('h5ap-audioplayer-view-script');

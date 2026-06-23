@@ -4,7 +4,7 @@ Tags: mp3 player, audio, audio player, player, podcast
 Donate link: https://www.buymeacoffee.com/abuhayat/  
 Requires at least: 6.5
 Tested up to: 7.0
-Stable tag: 2.7.2
+Stable tag: 2.7.3
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -220,6 +220,9 @@ e.g.
 
 
 == Changelog ==
+
+= 2.7.3 - 23 June, 2026 =
+* **Fix:** Resolved an issue where loading the player shortcode on a page containing third-party audio players could cause those third-party players to be hijacked by the plugin's global player script.
 
 = 2.7.2 - 21 June, 2026 =
 * **New:** Added "Enable Lazy Load" option across all player skins and playlist layouts to optimize page load performance.

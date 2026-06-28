@@ -11,6 +11,19 @@ const useFetchStreamData = (streamUrl, nonce, intervalTime = 60000) => {
 
     const fetchStreamData = async () => {
         if (!source) return;
+
+        // Skip fetching metadata for static files, Google Drive, and SoundCloud URLs
+        const normalized = source.toLowerCase();
+        if (
+            normalized.includes('drive.google.com') ||
+            normalized.includes('docs.google.com') ||
+            normalized.includes('googleapis.com') ||
+            normalized.includes('soundcloud.com') ||
+            /\.(mp3|wav|m4a|ogg|aac)(?:\?.*)?$/i.test(normalized)
+        ) {
+            return;
+        }
+
         setIsLoading(true);
 
         window.wp.ajax.send('h5ap_get_stream_data', {

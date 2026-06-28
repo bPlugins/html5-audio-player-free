@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 use H5APPlayer\Helper\LocalizeScript;
 
 if (isset($attributes['source'])) {
-    $attributes['source'] = h5ap_resolve_soundcloud_url($attributes['source']);
+    $attributes['source'] = h5ap_resolve_gdrive_url(h5ap_resolve_soundcloud_url($attributes['source']));
 }
 
 extract($attributes);

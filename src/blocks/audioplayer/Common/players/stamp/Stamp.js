@@ -5,11 +5,13 @@ import "./stamp.scss";
 import CloseStickyIcon from "../../../Components/CloseStickyIcon";
 import fadeOut from "../../../../../utils/fadeOut";
 import PlyrExtend from "../../../../../utils/PlyrExtend";
+import { resolveAudioSrc } from "../../../../../utils/gDriveProxy";
 
 
 function Stamp(props) {
     const { attributes, containerRef, className } = props;
-    const { source, title, repeat, autoplay, muted, seekTime, startTime, disablePause, saveState, preload } = attributes;
+    const { source: rawSource, title, repeat, autoplay, muted, seekTime, startTime, disablePause, saveState, preload } = attributes;
+    const source = resolveAudioSrc(rawSource);
 
     useEffect(() => {
         if (!containerRef.current) {

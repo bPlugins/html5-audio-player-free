@@ -34,6 +34,18 @@ class Ajax
 
         $streamUrl = isset($_POST['url']) ? sanitize_url(wp_unslash($_POST['url'])) : '';
 
+        // Skip fetching stream metadata for Google Drive, SoundCloud, and static files
+        $lower_url = strtolower($streamUrl);
+        if (
+            strpos($lower_url, 'drive.google.com') !== false ||
+            strpos($lower_url, 'docs.google.com') !== false ||
+            strpos($lower_url, 'googleapis.com') !== false ||
+            strpos($lower_url, 'soundcloud.com') !== false ||
+            preg_match('/\.(mp3|wav|m4a|ogg|aac)(?:\?.*)?$/i', $lower_url)
+        ) {
+            wp_send_json_success(['trackTitle' => '']);
+        }
+
         $settings = get_option('h5ap_settings', []);
         $allowed_domains = isset($settings['white_listed_stream_url']) ? $settings['white_listed_stream_url'] : [];
         $allowed_domains = array_map(function($item){
@@ -87,6 +99,14 @@ class Ajax
     private static function isAllowedGDriveHost($host) {
         $host = strtolower($host);
         if ($host === 'googleapis.com' || $host === 'www.googleapis.com') {
+            return true;
+        }
+        // Allow Google Drive direct-download / sharing domains.
+        if (
+            $host === 'docs.google.com' ||
+            $host === 'drive.google.com' ||
+            $host === 'drive.usercontent.google.com'
+        ) {
             return true;
         }
         // Allow Google Drive CDN / User Content domains (e.g. *.googleusercontent.com)
@@ -168,15 +188,14 @@ class Ajax
 
             // Security check on every redirect hop
             if ($redirect_count === 0) {
-                // First hop must be googleapis.com/drive path
-                if ($host !== 'www.googleapis.com' && $host !== 'googleapis.com') {
-                    status_header(403);
-                    exit('Only googleapis.com URLs are allowed.');
-                }
+                // First hop must be either a googleapis.com/drive API URL or a
+                // Google Drive direct-download URL (docs.google.com/uc | drive.google.com/uc).
                 $path = isset($parsed['path']) ? $parsed['path'] : '';
-                if (strpos($path, '/drive/') !== 0) {
+                $is_api_url = ($host === 'www.googleapis.com' || $host === 'googleapis.com') && strpos($path, '/drive/') === 0;
+                $is_direct_url = ($host === 'docs.google.com' || $host === 'drive.google.com') && strpos($path, '/uc') === 0;
+                if (!$is_api_url && !$is_direct_url) {
                     status_header(403);
-                    exit('Only Google Drive API paths are allowed.');
+                    exit('Only Google Drive / Google APIs URLs are allowed.');
                 }
             } else {
                 // Subsequent redirects must be googleusercontent.com or googleapis.com

@@ -57,6 +57,9 @@ class EnqueueAssets
 
         wp_localize_script('h5ap-all', 'h5apPlayer', $h5ap_settings);
         wp_localize_script('h5ap-all', 'h5apAll', $h5ap_settings);
+        // Also expose on the Plyr library script so window.h5apPlayer.ajaxUrl
+        // (used to build the Google Drive proxy URL) is available wherever Plyr loads.
+        wp_localize_script('bplugins-plyrio', 'h5apPlayer', $h5ap_settings);
 
     }
 
@@ -86,6 +89,17 @@ class EnqueueAssets
                 'ajaxUrl' => admin_url('admin-ajax.php'),
                 'website' => site_url()
             ));
+
+            // Expose player settings (incl. ajaxUrl) on the admin player/Plyr scripts so the
+            // CPT (dashboard) preview can build the Google Drive proxy URL just like the frontend.
+            $h5ap_admin_player_settings = [
+                'speed' => explode(',', Functions::getSetting('speed', '0.5, 1, 1.5, 2.0, 2.5')),
+                'multipleAudio' => (bool) Functions::getSetting('multipleAudio', false),
+                'lazyLoad' => (bool) Functions::getSetting('h5ap_lazy_load', false),
+                'ajaxUrl' => admin_url('admin-ajax.php'),
+            ];
+            wp_localize_script('bplugins-plyrio', 'h5apPlayer', $h5ap_admin_player_settings);
+            wp_localize_script('h5ap-player', 'h5apPlayer', $h5ap_admin_player_settings);
             wp_enqueue_style('h5ap-help', H5AP_PLUGIN_DIR . 'admin/css/style.css', array(), H5AP_VERSION);
         }
 

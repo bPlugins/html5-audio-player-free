@@ -13,13 +13,29 @@ class H5AP {
     }
     let { controls, seekTime, i18n, title, artist, disablePause, poster, muted, autoplay, startTime, source, skin, disableDownload, fusionDownload, color, background, repeat, primaryColor, saveState = false } = options;
 
-    // Google Drive proxy: googleapis.com/drive URLs cannot be streamed directly in the browser
+    // Google Drive proxy: googleapis.com/drive, drive.google.com, docs.google.com URLs cannot be streamed directly in the browser
     // due to CORS/Range-request limitations. Route them through the WordPress proxy endpoint.
     // NOTE: We must also update the <audio src=""> attribute directly because Plyr reads the
     // existing DOM attribute (set by PHP at render time), not the JS `source` variable.
-    if (source && typeof source === 'string' && source.includes('googleapis.com/drive')) {
+    if (source && typeof source === 'string' && (source.includes('googleapis.com/drive') || source.includes('docs.google.com/uc') || source.includes('drive.google.com/uc') || source.includes('drive.google.com/file/d/'))) {
       const ajaxUrl = (window.h5apPlayer && window.h5apPlayer.ajaxUrl) ? window.h5apPlayer.ajaxUrl : '';
       if (ajaxUrl) {
+        // Convert standard Google Drive link to direct download link first
+        if ((source.includes('drive.google.com') || source.includes('docs.google.com')) && !source.includes('/uc')) {
+          let fileId = '';
+          const fileDMatch = source.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+          if (fileDMatch) {
+            fileId = fileDMatch[1];
+          } else {
+            const idParamMatch = source.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+            if (idParamMatch) {
+              fileId = idParamMatch[1];
+            }
+          }
+          if (fileId) {
+            source = 'https://docs.google.com/uc?export=download&id=' + fileId;
+          }
+        }
         source = ajaxUrl + '?action=h5ap_gdrive_proxy&url=' + encodeURIComponent(source);
         // Update the <audio> element src BEFORE Plyr initializes so it uses the proxy URL
         $(audioPlayer).find('audio').attr('src', source);

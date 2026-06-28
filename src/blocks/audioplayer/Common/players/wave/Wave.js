@@ -6,11 +6,13 @@ import handleWave from "./handleWave";
 import CloseStickyIcon from "../../../Components/CloseStickyIcon";
 import fadeOut from "../../../../../utils/fadeOut";
 import PlyrExtend from "../../../../../utils/PlyrExtend";
+import { resolveAudioSrc } from "../../../../../utils/gDriveProxy";
 
 
 function Wave(props) {
     const { attributes, containerRef, className } = props;
-    const { source, title, poster, artist, bgColor, primaryColor, controlColor, repeat, autoplay, muted, seekTime, disablePause, startTime, saveState, preload } = attributes;
+    const { source: rawSource, title, poster, artist, bgColor, primaryColor, controlColor, repeat, autoplay, muted, seekTime, disablePause, startTime, saveState, preload } = attributes;
+    const source = resolveAudioSrc(rawSource);
 
     const playerRef = useRef();
 
@@ -50,7 +52,7 @@ function Wave(props) {
 
     return <div className={`skin_wave ${className}`} id="" ref={containerRef}>
         <CloseStickyIcon onClick={() => fadeOut(containerRef.current)} />
-        <audio preload={preload} src={source}></audio>
+        <audio preload={preload} src={source} crossOrigin="anonymous"></audio>
     </div>
 }
 

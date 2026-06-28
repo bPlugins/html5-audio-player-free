@@ -2,9 +2,11 @@ import React, { useEffect } from "react";
 import CloseStickyIcon from "../../../Components/CloseStickyIcon";
 import fadeOut from "../../../../../utils/fadeOut";
 import PlyrExtend from "../../../../../utils/PlyrExtend";
+import { resolveAudioSrc } from "../../../../../utils/gDriveProxy";
 
 export default ({ attributes, containerRef, playerRef, className }) => {
-    const { source, controls, preload, repeat, autoplay, muted, seekTime, startTime, disablePause, saveState, i18n, speed, uniqueId } = attributes;
+    const { source: rawSource, controls, preload, repeat, autoplay, muted, seekTime, startTime, disablePause, saveState, i18n, speed, uniqueId } = attributes;
+    const source = resolveAudioSrc(rawSource);
 
 
     useEffect(() => {

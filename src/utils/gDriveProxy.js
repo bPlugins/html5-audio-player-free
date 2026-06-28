@@ -16,6 +16,23 @@ export function resolveAudioSrc(src) {
 
     let normalizedSrc = src.trim();
 
+    // Convert standard Google Drive sharing/viewer link to direct download link
+    if ((normalizedSrc.includes('drive.google.com') || normalizedSrc.includes('docs.google.com')) && !normalizedSrc.includes('/uc')) {
+        let fileId = '';
+        const fileDMatch = normalizedSrc.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+        if (fileDMatch) {
+            fileId = fileDMatch[1];
+        } else {
+            const idParamMatch = normalizedSrc.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+            if (idParamMatch) {
+                fileId = idParamMatch[1];
+            }
+        }
+        if (fileId) {
+            normalizedSrc = 'https://docs.google.com/uc?export=download&id=' + fileId;
+        }
+    }
+
     const ajaxUrl =
         (window.h5apPlayer && window.h5apPlayer.ajaxUrl)
             ? window.h5apPlayer.ajaxUrl
@@ -24,7 +41,7 @@ export function resolveAudioSrc(src) {
                 : '';
 
     if (ajaxUrl) {
-        if (normalizedSrc.includes('googleapis.com/drive')) {
+        if (normalizedSrc.includes('googleapis.com/drive') || normalizedSrc.includes('docs.google.com/uc') || normalizedSrc.includes('drive.google.com/uc')) {
             return ajaxUrl + '?action=h5ap_gdrive_proxy&url=' + encodeURIComponent(normalizedSrc);
         }
 

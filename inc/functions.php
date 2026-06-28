@@ -169,3 +169,36 @@ if (!function_exists('h5ap_resolve_soundcloud_url')) {
     }
 }
 
+if (!function_exists('h5ap_resolve_gdrive_url')) {
+    /**
+     * Converts a standard Google Drive sharing/viewer link
+     * (drive.google.com/file/d/ID or ...?id=ID) into a direct
+     * download link (docs.google.com/uc?export=download&id=ID).
+     * The client-side player then routes /uc and googleapis.com/drive
+     * URLs through the h5ap_gdrive_proxy endpoint for streaming.
+     */
+    function h5ap_resolve_gdrive_url($url)
+    {
+        if (empty($url) || !is_string($url)) {
+            return $url;
+        }
+
+        $url = trim($url);
+
+        if ((stripos($url, 'drive.google.com') !== false || stripos($url, 'docs.google.com') !== false) && stripos($url, '/uc') === false) {
+            $file_id = '';
+            if (preg_match('/\/file\/d\/([a-zA-Z0-9_-]+)/', $url, $matches)) {
+                $file_id = $matches[1];
+            } elseif (preg_match('/[?&]id=([a-zA-Z0-9_-]+)/', $url, $matches)) {
+                $file_id = $matches[1];
+            }
+
+            if (!empty($file_id)) {
+                return 'https://docs.google.com/uc?export=download&id=' . $file_id;
+            }
+        }
+
+        return $url;
+    }
+}
+

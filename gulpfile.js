@@ -27,6 +27,7 @@ function bundle() {
       "!.eslintrc.js",
       "!pnpm-lock.yaml",
       "!readme.md",
+      "!todo.txt",
     ])
     .pipe(gulp.dest("bundled/html5-audio-player"));
 }

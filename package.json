@@ -1,6 +1,6 @@
 {
   "name": "html5-audio-player",
-  "version": "2.7.3",
+  "version": "2.7.4",
   "description": "Best audio player plugin with multiple playlist layouts, playlist shortcode, audio player widget, and 6 plus advanced feature.",
   "main": "src/player.js",
   "scripts": {

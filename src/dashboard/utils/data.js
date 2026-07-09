@@ -342,6 +342,13 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
     },
     changelogs: [
         {
+            version: '2.7.4 - 09 July, 2026',
+            type: 'fix',
+            list: [
+                'Resolved player wrapper z-index stacking issue to prevent the player interface from overlapping with site navigation headers, dropdown menus, and overlays.'
+            ]
+        },
+        {
             version: '2.7.3 - 23 June, 2026',
             type: 'fix',
             list: [

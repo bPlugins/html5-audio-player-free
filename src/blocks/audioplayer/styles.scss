@@ -73,7 +73,7 @@
 
 .wp-block-h5ap-audioplayer {
     position: relative;
-    z-index: 10 !important;
+    // z-index: 10 !important;
 
     input[type="range"]::-webkit-slider-runnable-track {
         height: 4px;
@@ -162,7 +162,7 @@
 
 .skin_default {
     position: relative;
-    z-index: 999999 !important; // Bring the WHOLE player above headers so nested popups aren't clipped by the header's z-index!
+    // z-index: 999999 !important;
 
     .plyr--audio .plyr__control:hover {
         font-weight: bold;

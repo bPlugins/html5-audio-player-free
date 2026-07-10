@@ -2,6 +2,7 @@ import { Fragment, useEffect } from 'react';
 import { useBlockProps } from '@wordpress/block-editor';
 import Settings from "./settings";
 import Playlist from '../Common/Playlist';
+import OnlyBackend from '../../components/OnlyBackend';
 
 
 const Edit = (props) => {
@@ -20,6 +21,7 @@ const Edit = (props) => {
     <Fragment>
       <Settings {...props} />
       <div {...blockProps}>
+        <OnlyBackend />
         <Playlist {...{ attributes, id: `block-${clientId}` }} />
       </div>
     </Fragment>

@@ -221,7 +221,7 @@ e.g.
 
 == Changelog ==
 
-= 2.7.4 - 09 July, 2026 =
+= 2.7.4 - 10 July, 2026 =
 * **Fix:** Resolved player wrapper z-index stacking issue to prevent the player interface from overlapping with site navigation headers, dropdown menus, and overlays.
 
 = 2.7.3 - 23 June, 2026 =

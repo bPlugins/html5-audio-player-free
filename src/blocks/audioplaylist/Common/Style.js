@@ -18,6 +18,11 @@ const Style = ({ attributes, id }) => {
       background: ${bgColor};
       border-radius:${radius}
     }
+      
+    #${id} [data-plyr="playlist-title"] {
+      color: ${textColor || '#fff'} !important;
+    }
+
     #${id} .skin_default .plyr__control,
     #${id} .plyr__time{
       color: red;

@@ -41,7 +41,7 @@ class Ajax
             strpos($lower_url, 'docs.google.com') !== false ||
             strpos($lower_url, 'googleapis.com') !== false ||
             strpos($lower_url, 'soundcloud.com') !== false ||
-            preg_match('/\.(mp3|wav|m4a|ogg|aac)(?:\?.*)?$/i', $lower_url)
+            preg_match('/\.(mp3|wav|m4a|ogg|aac|m3u8)(?:\?.*)?$/i', $lower_url)
         ) {
             wp_send_json_success(['trackTitle' => '']);
         }

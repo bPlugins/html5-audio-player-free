@@ -103,6 +103,10 @@
       "type": "boolean",
       "default": false
     },
+    "autoplay": {
+      "type": "boolean",
+      "default": false
+    },
     "width": {
       "type": "string",
       "default": "500px"

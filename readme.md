@@ -5,7 +5,7 @@
 [![WordPress Support](https://img.shields.io/badge/WordPress-5.8+-blue.svg?style=flat-square&logo=wordpress)](https://wordpress.org/plugins/html5-audio-player/)
 [![PHP Support](https://img.shields.io/badge/PHP-7.1+-777bb4.svg?style=flat-square&logo=php)](./readme.txt)
 [![GPLv2 License](https://img.shields.io/badge/License-GPLv2-green.svg?style=flat-square)](./readme.txt)
-[![Stable Version](https://img.shields.io/badge/Version-2.7.4-blue.svg?style=flat-square)](./readme.txt)
+[![Stable Version](https://img.shields.io/badge/Version-2.7.5-blue.svg?style=flat-square)](./readme.txt)
 
 **HTML5 Audio Player** is a powerful, lightweight, and fully responsive audio player plugin for WordPress. It lets you embed MP3 and OGG audio files into posts, pages, widget areas, or template files using shortcodes or the intuitive Gutenberg block—no coding required!
 
@@ -23,11 +23,17 @@ Everything you need to build a professional audio experience on your site:
 - **Customization Options:** Adjust player width, border radius, and add custom poster images effortlessly.
 - **Title & Author Support:** Display custom audio titles and author metadata directly on the player.
 - **Playback Controls:** Autoplay, Preload, Mute, and Repeat options out-of-the-box.
+- **Autoplay & Browser Policy Handling**: Dedicated autoplay settings with Autoplay Muted fallback for modern browser compliance.
+- **HLS (m3u8) Streaming Support**: Stream live audio broadcasts seamlessly using modern HLS protocols.
+- **Connecting, Buffering & Offline Indicators**: Instant visual status updates ("Connecting...", "Buffering...", "Offline").
 - **Lazy Load Support:** Optimize page load speed by loading the player and audio resources only when they enter the viewport.
 - **MP3 & OGG Support:** Automatically loads the right format based on the user’s device capabilities.
 
 ### 👑 Premium Power (Pro)
 Unlock advanced functionality for high-performing podcasts, music sites, and audio courses:
+- **Multiple Radio Stations Playlist**: Allow users to switch between multiple radio stations/channels directly inside a unified bottom playlist.
+- **Backup / Fallback Stream URL**: Secure continuous playback by automatically switching to a backup stream URL if the primary stream fails.
+- **Recently Played History**: Show track/song timelines fetched dynamically from Icecast/Shoutcast server metadata.
 - **Premium Playlist Skins:** Unlock the advanced Narrow and Extensive playlist skins with premium customization options.
 - **7 Additional Premium Skins:** Access Card 1, Card 2, Simple 1, Simple 2, Player 9, Player 10, and Player 11.
 - **Color Customization:** Set custom primary and background colors to perfectly fit your site’s branding.

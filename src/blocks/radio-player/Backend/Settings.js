@@ -4,7 +4,7 @@ import { TabPanel, Panel, PanelBody, ToggleControl, SelectControl, TextControl, 
 import { AlignmentToolbar, BlockControls, InspectorControls } from '@wordpress/block-editor';
 import PanelItem from "../../components/PanelItem/PanelItem.js";
 import { AdvertiseCard } from '../../../../../bpl-tools/ProControls';
-import { BButtonGroup, InlineMediaUpload, Label } from '../../../../../bpl-tools/Components';
+import { BButtonGroup, InlineMediaUpload, Label, Notice } from '../../../../../bpl-tools/Components';
 import Style from './Tabs/Style.js';
 
 import compactSkin from './../skins/CompactHorizontal.png';
@@ -16,7 +16,7 @@ import { withSelect } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 
 const Settings = ({ attributes, siteUrl, setAttributes, isPremium }) => {
-  const { source, sourceType, statusText, poster, skin, alignment, isSticky, title, subtitle, lazyLoad } = attributes;
+  const { source, sourceType, statusText, poster, skin, alignment, isSticky, title, subtitle, lazyLoad, autoplay } = attributes;
 
   const pricingURL = `${siteUrl}/wp-admin/admin.php?page=html5-audio-player-help-demo#/pricing`;
 
@@ -139,9 +139,21 @@ const Settings = ({ attributes, siteUrl, setAttributes, isPremium }) => {
                         />
                       )}
 
+                      <ToggleControl
+                        className="mt10"
+                        label={__("Autoplay", "h5ap")}
+                        help={__("Autoplay behaves differently depending on the browser. Streams will start muted if autoplay is enabled.", "h5ap")}
+                        checked={autoplay}
+                        onChange={() => setAttributes({ autoplay: !autoplay })}
+                      />
+
                       {["Default", "Fusion", "Stamp", "Wave", "Simple-1", "Simple-2"].includes(skin) &&
                         <ToggleControl isPremium={isPremium} help={__("Keep player visible while scrolling. (Hides Lazy Load since sticky players must load immediately).", "h5ap")} className="mb5" label={__("Enable Sticky", "h5ap")} id="isSticky" checked={isSticky} onChange={() => setAttributes({ isSticky: !isSticky })} />
                       }
+
+                      <Notice status='premium' isIcon={true} className="mt15">
+                        {__("Multiple Radio Stations (Playlist), Fallback Stream URL, Recently Played Track History, and more features are available in the Pro version.", "html5-audio-player")}
+                      </Notice>
 
                     </PanelBody>
                   </Panel>

@@ -342,6 +342,18 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
     },
     changelogs: [
         {
+            version: '2.7.5 - 15 July, 2026',
+            type: 'new',
+            list: [
+                'New: Added Autoplay & Browser Policy Handling (Autoplay Muted fallback) to bypass modern browser audio playback blocks [Free & Pro].',
+                'New: Added HLS (m3u8) streaming protocol support to play live streams seamlessly on iOS and modern web browsers [Free & Pro].',
+                'New: Added live buffering and connection status indicator showing "Connecting...", "Buffering...", and "Offline" status notifications [Free & Pro].',
+                'New: Added Multiple Radio Stations playlist supporting channel switching directly in the player [Pro Only].',
+                'New: Added Backup / Fallback Stream URL for automatic failover switching if the primary server goes offline [Pro Only].',
+                'New: Added Recently Played Track History to display track timelines via Icecast/Shoutcast metadata [Pro Only].'
+            ]
+        },
+        {
             version: '2.7.4 - 11 July, 2026',
             type: 'fix',
             list: [
@@ -380,7 +392,7 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
             ]
         }
     ],
-    changelogsLimit: 5,
+    changelogsLimit: 2,
     changelogsReadMoreLabel: 'View More Changelogs',
     proFeatures: [
         'Premium Playlist Skins',

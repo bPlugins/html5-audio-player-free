@@ -115,4 +115,32 @@
             height: 0;
         }
     }
+
+    /* Buffering Spinner styling */
+    .plyr--loading [data-plyr="play"] .icon--not-pressed,
+    .plyr--loading [data-plyr="play"] .icon--pressed {
+        display: none !important;
+    }
+
+    .plyr--loading [data-plyr="play"] .icon--loading {
+        display: block !important;
+    }
+
+    /* Hide loading icon by default */
+    [data-plyr="play"] .icon--loading {
+        display: none;
+    }
+
+    /* Spinner Animation */
+    @keyframes h5ap-spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+    .h5ap-animate-spin {
+        animation: h5ap-spin 1s linear infinite !important;
+    }
 }

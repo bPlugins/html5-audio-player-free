@@ -23,17 +23,17 @@ Everything you need to build a professional audio experience on your site:
 - **Customization Options:** Adjust player width, border radius, and add custom poster images effortlessly.
 - **Title & Author Support:** Display custom audio titles and author metadata directly on the player.
 - **Playback Controls:** Autoplay, Preload, Mute, and Repeat options out-of-the-box.
-- **Autoplay & Browser Policy Handling**: Dedicated autoplay settings with Autoplay Muted fallback for modern browser compliance.
-- **HLS (m3u8) Streaming Support**: Stream live audio broadcasts seamlessly using modern HLS protocols.
-- **Connecting, Buffering & Offline Indicators**: Instant visual status updates ("Connecting...", "Buffering...", "Offline").
+- **Radio Player: Autoplay & Browser Policy Handling**: Dedicated autoplay settings with Autoplay Muted fallback for modern browser compliance.
+- **Radio Player: HLS (m3u8) Streaming Support**: Stream live radio broadcasts seamlessly using modern HLS protocols.
+- **Radio Player: Connecting, Buffering & Offline Indicators**: Instant visual status updates ("Connecting...", "Buffering...", "Offline") on live streams.
 - **Lazy Load Support:** Optimize page load speed by loading the player and audio resources only when they enter the viewport.
-- **MP3 & OGG Support:** Automatically loads the right format based on the user’s device capabilities.
+- **MP3, OGG & FLAC Support:** Play high-quality lossless FLAC audio files seamlessly alongside MP3 and OGG formats with native Media Library upload support.
 
 ### 👑 Premium Power (Pro)
 Unlock advanced functionality for high-performing podcasts, music sites, and audio courses:
-- **Multiple Radio Stations Playlist**: Allow users to switch between multiple radio stations/channels directly inside a unified bottom playlist.
-- **Backup / Fallback Stream URL**: Secure continuous playback by automatically switching to a backup stream URL if the primary stream fails.
-- **Recently Played History**: Show track/song timelines fetched dynamically from Icecast/Shoutcast server metadata.
+- **Radio Player: Multiple Radio Stations Playlist**: Allow users to switch between multiple radio stations/channels directly inside a unified bottom playlist.
+- **Radio Player: Backup / Fallback Stream URL**: Secure continuous playback by automatically switching to a backup stream URL if the primary stream fails.
+- **Radio Player: Recently Played History**: Show track/song timelines fetched dynamically from Icecast/Shoutcast server metadata.
 - **Premium Playlist Skins:** Unlock the advanced Narrow and Extensive playlist skins with premium customization options.
 - **7 Additional Premium Skins:** Access Card 1, Card 2, Simple 1, Simple 2, Player 9, Player 10, and Player 11.
 - **Color Customization:** Set custom primary and background colors to perfectly fit your site’s branding.

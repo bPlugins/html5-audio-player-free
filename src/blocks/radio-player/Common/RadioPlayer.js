@@ -13,8 +13,7 @@ import useFetchStreamData from '../hooks/useFetchStreamData';
 const RadioPlayer = ({ attributes, id, nonce }) => {
     const containerRef = useRef(null);
     const { streamData, fetchStreamData, isLoading, error } = useFetchStreamData(attributes.source, nonce);
-    const { title, subtitle, sourceType, skin, source, options, statusText, multiple_audio } = attributes;
-    const { autoplay } = options;
+    const { title, subtitle, sourceType, skin, source, options, statusText, multiple_audio, autoplay } = attributes;
 
     const resolvedSource = resolveAudioSrc(source);
 
@@ -73,7 +72,7 @@ const RadioPlayer = ({ attributes, id, nonce }) => {
         <>
             <Style attributes={attributes} id={id} />
             <div ref={containerRef} className={`radio_skin_${skin.toLowerCase()} radio-wrapper`}>
-                <audio id={id} className={id} src={resolvedSource} controls>
+                <audio id={id} className={id} src={resolvedSource} muted={autoplay} controls>
                     Your browser does not support the <code>audio</code> element.
                 </audio>
             </div>

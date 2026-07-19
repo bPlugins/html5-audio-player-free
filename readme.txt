@@ -227,13 +227,14 @@ e.g.
 == Changelog ==
 
 = 2.7.5 - 19 July, 2026 =
-* **New:** Added Autoplay & Browser Policy Handling (Autoplay Muted fallback) to bypass modern browser audio playback blocks [Free & Pro].
-* **New:** Added HLS (m3u8) streaming protocol support to play live streams seamlessly on iOS and modern web browsers [Free & Pro].
-* **New:** Added live buffering and connection status indicator showing "Connecting...", "Buffering...", and "Offline" status notifications [Free & Pro].
+* **New:** Added Autoplay & Browser Policy Handling (Autoplay Muted fallback) to bypass modern browser audio playback blocks.
+* **New:** Added HLS (m3u8) streaming protocol support to play live streams seamlessly on iOS and modern web browsers.
+* **New:** Added live buffering and connection status indicator showing "Connecting...", "Buffering...", and "Offline" status notifications.
 * **New (Pro):** Added Multiple Radio Stations playlist supporting channel switching directly in the player.
 * **New (Pro):** Added Backup / Fallback Stream URL for automatic failover switching if the primary server goes offline.
 * **New (Pro):** Added Recently Played Track History to display track timelines via Icecast/Shoutcast metadata.
 * **Improvement:** Native FLAC file upload support in WordPress Media Library.
+* **Improvement:** Improved Stream Whitelist settings with step-by-step examples and added automatic URL hostname extraction.
 
 = 2.7.4 - 11 July, 2026 =
 * **Fix:** Resolved player wrapper z-index stacking issue to prevent the player interface from overlapping with site navigation headers, dropdown menus, and overlays.

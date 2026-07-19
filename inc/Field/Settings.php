@@ -57,15 +57,38 @@ class Settings
       'title' => 'White List Stream URL',
       'fields' => array(
         array(
+          'type'    => 'content',
+          'content' => '
+            <div class="h5ap-settings-shortcode-container" style="max-width: 100%; margin-bottom: 24px;">
+              <div class="h5ap-settings-shortcode-title" style="display: flex; align-items: center; gap: 8px;">
+                <i class="fa fa-shield" style="color: var(--success-color);"></i> Stream Whitelist Security
+              </div>
+              <div class="h5ap-settings-shortcode-desc" style="line-height: 1.5; font-size: 12px; color: var(--text-secondary);">
+                To prevent hotlinking, protect bandwidth, and authorize metadata/played history fetching, you can restrict access to specific hostnames.
+                <br><br>
+                <strong>How to use:</strong> Click the <strong>Add New</strong> button and enter only the stream hostname (without protocols, paths, or query strings).
+                <br><br>
+                <strong>Example:</strong>
+                <br>
+                &bull; Full Stream URL: <code>https://classicrock.stream.laut.fm/classicrock</code>
+                <br>
+                &bull; What to remove: <code>https://</code> or <code>http://</code> (from the beginning) and <code>/classicrock</code> (from the end).
+                <br>
+                &bull; Value to enter: <code>classicrock.stream.laut.fm</code>
+              </div>
+            </div>
+          '
+        ),
+        array(
           'id' => 'white_listed_stream_url',
-          'title' => 'White List Stream URL',
+          'title' => '',
           'type' => 'group',
           'fields' => array(
             array(
               'id' => 'url',
               'type' => 'text',              
-              'desc' => 'Enter only the hostname (e.g., example.com), without "http://", "https://", or "www.".',
-              'title' => 'Stream URL (HOSTNAME ONLY)',
+              'desc' => 'Enter the stream URL or hostname. Protocols (http/https) and paths will be automatically removed.',
+              'title' => 'Stream URL / Hostname',
             ),
           )
         ),

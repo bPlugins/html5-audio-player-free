@@ -9,7 +9,7 @@ import { AlignmentToolbar, BlockControls, InspectorControls } from '@wordpress/b
 import { AdvertiseCard } from '../../../../../bpl-tools/ProControls/index.js';
 
 const Settings = ({ attributes, setAttributes, siteUrl }) => {
-  const { source, controls, primaryColor, bgColor, controlColor, poster, skin, alignment, isSticky, title, artist, repeat, preload, radius, autoplay, muted, loader, width, lazyLoad, waveType } = attributes;
+  const { source, controls, primaryColor, bgColor, controlColor, poster, skin, alignment, isSticky, title, artist, repeat, preload, radius, autoplay, muted, loader, width, lazyLoad } = attributes;
 
   const pricingURL = `${siteUrl}/wp-admin/admin.php?page=html5-audio-player-help-demo#/pricing`;
 
@@ -21,13 +21,9 @@ const Settings = ({ attributes, setAttributes, siteUrl }) => {
 
   const controlSettings = ["Restart", "Rewind", "Play", "Fast Forward", "Progress", "Duration", "Current Time", "Mute", "Volume", "Settings", "Download"];
 
-  // const skins = ["Default", "Fusion", "Stamp", "Wave", "Card 1", "Card 2", "Simple 1", "Simple 2", "Player9", "Player10", "Player11"];
-
   const skins = ["Default", "Fusion", "Stamp", "Wave"];
 
   useEffect(() => {
-    // Only seed colors that are still empty so we never overwrite a value the
-    // user already customized and saved (otherwise colors revert on reload).
     if (!primaryColor && !bgColor) {
       setAttributes({ primaryColor: window.h5apEditor?.color?.primary, bgColor: window.h5apEditor?.color?.bg });
     } else if (!primaryColor) {
@@ -114,7 +110,7 @@ const Settings = ({ attributes, setAttributes, siteUrl }) => {
                           </Fragment>
                         )}
 
-                        {skin === "Wave" && (
+                        {/* {skin === "Wave" && (
                           <Fragment>
                             <SelectControl
                               className="mt10"
@@ -130,7 +126,7 @@ const Settings = ({ attributes, setAttributes, siteUrl }) => {
                               {__("Static Waveform (SoundCloud Style) is available in the Pro version.", "h5ap")}
                             </Notice>
                           </Fragment>
-                        )}
+                        )} */}
 
                         {!['Default', "Simple-1", "Simple-2"].includes(skin) && (
                           <Fragment>

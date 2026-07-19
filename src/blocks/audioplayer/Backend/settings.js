@@ -9,7 +9,7 @@ import { AlignmentToolbar, BlockControls, InspectorControls } from '@wordpress/b
 import { AdvertiseCard } from '../../../../../bpl-tools/ProControls/index.js';
 
 const Settings = ({ attributes, setAttributes, siteUrl }) => {
-  const { source, controls, primaryColor, bgColor, controlColor, poster, skin, alignment, isSticky, title, artist, repeat, preload, radius, autoplay, muted, loader, width, lazyLoad } = attributes;
+  const { source, controls, primaryColor, bgColor, controlColor, poster, skin, alignment, isSticky, title, artist, repeat, preload, radius, autoplay, muted, loader, width, lazyLoad, waveType } = attributes;
 
   const pricingURL = `${siteUrl}/wp-admin/admin.php?page=html5-audio-player-help-demo#/pricing`;
 
@@ -111,6 +111,24 @@ const Settings = ({ attributes, setAttributes, siteUrl }) => {
                         {["Fusion", "Wave", "Card-1", "Card-2", "Simple-2", "Player9", "Player10", "Player11"].includes(skin) && (
                           <Fragment>
                             <InlineMediaUpload className='mt10' label={__("Poster/Thumbnail", "h5ap")} value={poster} type={["image"]} onChange={(poster) => setAttributes({ poster })} />
+                          </Fragment>
+                        )}
+
+                        {skin === "Wave" && (
+                          <Fragment>
+                            <SelectControl
+                              className="mt10"
+                              label={__("Waveform Style", "h5ap")}
+                              value={waveType || 'equalizer'}
+                              options={[
+                                { label: __('Real-time Equalizer (Jumping Bars)', "h5ap"), value: 'equalizer' },
+                                { label: __('Static Waveform (SoundCloud Style)', "h5ap"), value: 'waveform', disabled: true },
+                              ]}
+                              onChange={(waveType) => setAttributes({ waveType })}
+                            />
+                            <Notice status='premium' isIcon={true} className="mt10">
+                              {__("Static Waveform (SoundCloud Style) is available in the Pro version.", "h5ap")}
+                            </Notice>
                           </Fragment>
                         )}
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useFetchStreamData = (streamUrl, nonce, intervalTime = 60000) => {
+const useFetchStreamData = (streamUrl, nonce, intervalTime = 20000) => {
     const [streamData, setStreamData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -29,7 +29,8 @@ const useFetchStreamData = (streamUrl, nonce, intervalTime = 60000) => {
         window.wp.ajax.send('h5ap_get_stream_data', {
             data: {
                 url: source,
-                nonce: nonce
+                nonce: nonce,
+                _t: Date.now()
             },
             success: (response) => {
                 setStreamData(response);

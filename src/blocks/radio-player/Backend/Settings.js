@@ -14,6 +14,7 @@ import dashboardSkin from './../skins/DashboardStyle.png';
 
 import { withSelect } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
+import NewBadge from '../../components/NewBadge/NewBadge.js';
 
 const Settings = ({ attributes, siteUrl, setAttributes, isPremium }) => {
   const { source, sourceType, statusText, poster, skin, alignment, isSticky, title, subtitle, lazyLoad, autoplay } = attributes;
@@ -67,10 +68,10 @@ const Settings = ({ attributes, siteUrl, setAttributes, isPremium }) => {
                       {sourceType === "stream" ? (
                         <>
                           <TextControl
-                            label={__("Audio URL", "h5ap")}
+                            label={__("Stream URL", "h5ap")}
                             value={source}
                             onChange={(source) => setAttributes({ source })}
-                            placeholder="Audio URL"
+                            placeholder={__("Enter Stream URL", "h5ap")}
                             className='mt15'
                           />
 
@@ -85,8 +86,7 @@ const Settings = ({ attributes, siteUrl, setAttributes, isPremium }) => {
                               lineHeight: '1.5'
                             }}
                           >
-                            <strong>{__('Note:', 'html5-audio-player')}</strong>{' '}
-                            {__('To fetch stream metadata correctly, make sure this stream URL is added to the whitelist in your', 'html5-audio-player')}{' '}
+                            {__('Add stream URL to whitelist in', 'html5-audio-player')}{' '}
                             <a
                               rel="noreferrer"
                               href={`${window.location.origin}/wp-admin/admin.php?page=html5-audio-player-settings#tab=white-list-stream-url`}
@@ -97,7 +97,8 @@ const Settings = ({ attributes, siteUrl, setAttributes, isPremium }) => {
                               }}
                             >
                               {__('plugin settings', 'html5-audio-player')}
-                            </a>.
+                            </a>{' '}
+                            {__('to fetch metadata.', 'html5-audio-player')}
                           </div>
                         </>
                       ) : (
@@ -106,7 +107,7 @@ const Settings = ({ attributes, siteUrl, setAttributes, isPremium }) => {
                           types={["audio"]}
                           value={source}
                           onChange={(source) => setAttributes({ source })}
-                          placeholder="Audio URL"
+                          placeholder={__("Enter Audio URL or Select File", "h5ap")}
                           className='mt15'
                         />
                       )}
@@ -141,7 +142,12 @@ const Settings = ({ attributes, siteUrl, setAttributes, isPremium }) => {
 
                       <ToggleControl
                         className="mt10"
-                        label={__("Autoplay", "h5ap")}
+                        label={
+                          <span style={{ display: 'flex', alignItems: 'center' }}>
+                            {__("Autoplay", "h5ap")}
+                            <NewBadge />
+                          </span>
+                        }
                         help={__("Autoplay behaves differently depending on the browser. Streams will start muted if autoplay is enabled.", "h5ap")}
                         checked={autoplay}
                         onChange={() => setAttributes({ autoplay: !autoplay })}
@@ -152,7 +158,7 @@ const Settings = ({ attributes, siteUrl, setAttributes, isPremium }) => {
                       }
 
                       <Notice status='premium' isIcon={true} className="mt15">
-                        {__("Multiple Radio Stations (Playlist), Fallback Stream URL, Recently Played Track History, and more features are available in the Pro version.", "html5-audio-player")}
+                        {__("Multiple Radio Stations (Playlist), Fallback Stream URL, Recently Played Track History, Track History Limit, and more features are available in the Pro version.", "html5-audio-player")}
                       </Notice>
 
                     </PanelBody>

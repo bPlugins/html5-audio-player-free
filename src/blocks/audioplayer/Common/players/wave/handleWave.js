@@ -8,6 +8,16 @@ const handleWave = (container, player, color = '#fff', background = '#222') => {
         return;
     }
 
+    const ctx = canvas.getContext("2d");
+    let animationFrameId;
+
+    const dpr = window.devicePixelRatio || 1;
+    const WIDTH = canvas.getBoundingClientRect().width || 500;
+    const HEIGHT = canvas.getBoundingClientRect().height || 60;
+    canvas.width = WIDTH * dpr;
+    canvas.height = HEIGHT * dpr;
+    ctx.scale(dpr, dpr);
+
     const AudioContext = window.AudioContext || window.webkitAudioContext;
     if (!AudioContext) {
         //eslint-disable-next-line no-console
@@ -15,55 +25,68 @@ const handleWave = (container, player, color = '#fff', background = '#222') => {
         return;
     }
 
-    const context = new AudioContext();
-    const src = context.createMediaElementSource(audio);
-    const analyser = context.createAnalyser();
+    let context;
+    let analyser;
+    let source;
 
-    src.connect(analyser);
-    analyser.connect(context.destination);
-
-    const ctx = canvas.getContext("2d");
-    const WIDTH = window.innerWidth;
-    const HEIGHT = window.innerHeight;
-
-    canvas.width = WIDTH;
-    canvas.height = HEIGHT;
+    try {
+        context = new AudioContext();
+        analyser = context.createAnalyser();
+        source = context.createMediaElementSource(audio);
+        source.connect(analyser);
+        analyser.connect(context.destination);
+    } catch (e) {
+        //eslint-disable-next-line no-console
+        console.warn("AudioContext setup failed (might be already created or blocked):", e);
+    }
 
     let fftSize = container?.offsetWidth > 800 ? 1024 : 512;
-    analyser.fftSize = fftSize;
+    if (analyser) analyser.fftSize = fftSize;
 
-    const bufferLength = analyser.frequencyBinCount;
+    const bufferLength = analyser ? analyser.frequencyBinCount : 256;
     const dataArray = new Uint8Array(bufferLength);
 
-    const barWidth = (WIDTH / bufferLength) * 1;
-    window.ctx = ctx;
-    const renderFrame = () => {
-        requestAnimationFrame(renderFrame);
+    const barWidth = (WIDTH / bufferLength) * 1.5;
 
-        analyser.getByteFrequencyData(dataArray);
+    const renderFrame = () => {
+        animationFrameId = requestAnimationFrame(renderFrame);
+
+        if (analyser) {
+            analyser.getByteFrequencyData(dataArray);
+        }
 
         ctx.fillStyle = background;
         ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
         let x = 0;
         for (let i = 0; i < bufferLength; i++) {
-            const barHeight = player.playing ? dataArray[i] : dataArray[i] + 100;
+            const rawBarHeight = player.playing ? dataArray[i] : (dataArray[i] > 0 ? dataArray[i] : 10);
+            const baseline = HEIGHT * 0.1; // 10% baseline height
+            const jumpingHeight = (rawBarHeight * (HEIGHT / 256)) * 0.35; // max 35% jumping
+            const barHeight = baseline + jumpingHeight;
+
             ctx.fillStyle = color;
-            ctx.fillRect(x, HEIGHT - barHeight - 80, barWidth, barHeight + 80);
-            x += barWidth + 5;
+            ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
+            x += barWidth + 2;
         }
     };
 
     renderFrame();
 
-    player.on('play', () => {
-        context.resume();
-    });
+    const playHandler = () => {
+        if (context && context.state === 'suspended') {
+            context.resume();
+        }
+    };
+    player.on('play', playHandler);
 
-    player.on('pause', () => {
-        context.suspend();
-    });
-
+    return () => {
+        cancelAnimationFrame(animationFrameId);
+        player.off('play', playHandler);
+        if (context) {
+            context.close().catch(() => {});
+        }
+    };
 };
 
-export default handleWave
+export default handleWave;

@@ -143,4 +143,31 @@
     .h5ap-animate-spin {
         animation: h5ap-spin 1s linear infinite !important;
     }
+
+    /* Focus & outline reset for Plyr controls */
+    button:focus,
+    button:focus-visible,
+    .plyr__control:focus,
+    .plyr__control:focus-visible,
+    .plyr__control--focused {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+    button[data-plyr="mute"] {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        outline: none !important;
+
+        &:hover,
+        &:focus,
+        &:active,
+        &.plyr__control--focused,
+        &.plyr__control--pressed {
+            background: transparent !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+    }
 }

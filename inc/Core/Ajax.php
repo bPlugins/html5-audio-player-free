@@ -26,11 +26,7 @@ class Ajax
     }
 
     public function getStreamData()  {
-        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
-
-        if (!wp_verify_nonce($nonce, 'h5ap_radio_player_rest')) {
-            wp_send_json_error('Invalid nonce');
-        }
+        // Public read-only endpoint, bypassing nonce check to support static/page caching plugins.
 
         $streamUrl = isset($_POST['url']) ? sanitize_url(wp_unslash($_POST['url'])) : '';
 

@@ -43,9 +43,12 @@ function Wave(props) {
         }
 
         playerRef.current = player;
-        handleWave(containerRef.current, playerRef.current, controlColor, bgColor);
+        const cleanupWave = handleWave(containerRef.current, playerRef.current, controlColor, bgColor);
 
         return () => {
+            if (cleanupWave) {
+                cleanupWave();
+            }
             player.destroy()
         }
     }, [source, title, poster, artist, primaryColor, bgColor]);

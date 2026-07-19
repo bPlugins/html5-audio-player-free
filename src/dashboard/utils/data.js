@@ -342,7 +342,7 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
     },
     changelogs: [
         {
-            version: '2.7.5 - 16 July, 2026',
+            version: '2.7.5 - 19 July, 2026',
             type: 'new',
             list: [
                 'New: Added Autoplay & Browser Policy Handling (Autoplay Muted fallback) to bypass modern browser audio playback blocks [Free & Pro].',

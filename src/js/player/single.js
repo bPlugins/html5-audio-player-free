@@ -1,5 +1,6 @@
 import toHHMMSS from "../../../../utils/toHHMMSS";
 import { generateKeyFromUrl } from "../utils";
+import handleWave from "../../blocks/audioplayer/Common/players/wave/handleWave";
 
 class H5AP {
   audioPlayer(audioPlayer, options) {
@@ -1022,81 +1023,10 @@ class H5AP {
   }
 
   wave(wrapper, player, color = "#fff", background = "#333") {
-    const audio = jQuery(wrapper).find("audio");
-    const title = jQuery(wrapper).find(".title-author h2");
-    if (title) {
-      const titleText = title.text();
-      const dot = titleText.length > title?.width() / 10.5 ? "..." : "";
-      jQuery(title).text(titleText.substr(0, title?.width() / 10.5) + dot);
-    }
-    var AudioContext = window.AudioContext || window.webkitAudioContext || false;
-    const context = new AudioContext();
-
-    if (context) {
-      var src = context.createMediaElementSource(audio[0]);
-      var analyser = context.createAnalyser();
-
-      var canvas = jQuery(wrapper).find("#wave-canvas")[0];
-      if (canvas) {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        var ctx = canvas.getContext("2d");
-
-        src.connect(analyser);
-        analyser.connect(context.destination);
-
-        analyser.fftSize = 512;
-        if (wrapper?.offsetWidth > 800) {
-          analyser.fftSize = 1024;
-        }
-
-        var bufferLength = analyser.frequencyBinCount;
-
-        var dataArray = new Uint8Array(bufferLength);
-
-        var WIDTH = canvas.width;
-        var HEIGHT = canvas.height;
-
-        var barWidth = (WIDTH / bufferLength) * 1;
-        var barHeight;
-        var x = 0;
-
-        const renderFrame = () => {
-          requestAnimationFrame(renderFrame);
-
-          x = 0;
-
-          analyser.getByteFrequencyData(dataArray);
-
-          ctx.fillStyle = background;
-          ctx.fillRect(0, 0, WIDTH, HEIGHT);
-
-          for (var i = 0; i < bufferLength; i++) {
-            if (!player.playing) {
-              barHeight = dataArray[i] + 100;
-            } else {
-              barHeight = dataArray[i];
-            }
-
-            // var r = barHeight + 25 * (i / bufferLength);
-            // var g = 250 * (i / bufferLength);
-            // var b = 50;
-
-            // ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
-            ctx.fillStyle = color;
-            ctx.fillRect(x, HEIGHT - barHeight - 80, barWidth, barHeight + 80);
-
-            x += barWidth + 5;
-          }
-        };
-
-        renderFrame();
-      }
-
-      const palyButton = jQuery(wrapper).find('[data-plyr="play"]');
-      palyButton.one("click", function () {
-        context.resume();
-        // audio[0].play();
+    const cleanup = handleWave(wrapper, player, color, background);
+    if (cleanup) {
+      player.on("destroy", () => {
+        cleanup();
       });
     }
   }

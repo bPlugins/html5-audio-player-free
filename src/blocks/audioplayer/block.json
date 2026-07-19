@@ -18,6 +18,10 @@
       "type": "string",
       "default": "uniqueId"
     },
+    "waveType": {
+      "type": "string",
+      "default": "equalizer"
+    },
     "clientId": {
       "type": "string",
       "default": ""

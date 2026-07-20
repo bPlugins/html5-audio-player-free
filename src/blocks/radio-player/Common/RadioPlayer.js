@@ -41,6 +41,8 @@ const RadioPlayer = ({ attributes, id, nonce }) => {
         const player = new Plyr(containerRef.current.querySelector('audio'), {
             controls: SkinComponent ? SkinComponent({ sourceType, title, subtitle, statusText }) : ['play', 'progress', 'current-time', 'duration', 'mute', 'volume'],
             autoplay,
+            muted: autoplay,
+            storage: { enabled: false },
             tooltips: {
                 controls: true,
                 seek: true,
@@ -66,7 +68,7 @@ const RadioPlayer = ({ attributes, id, nonce }) => {
         return () => {
             player.destroy()
         }
-    }, [source, options, skin, sourceType, title, subtitle, statusText, multiple_audio]);
+    }, [source, options, skin, sourceType, title, subtitle, statusText, multiple_audio, autoplay]);
 
     return SkinComponent ? (
         <>

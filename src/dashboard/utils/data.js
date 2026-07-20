@@ -394,7 +394,7 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
             ]
         }
     ],
-    changelogsLimit: 2,
+    changelogsLimit: 1,
     changelogsReadMoreLabel: 'View More Changelogs',
     proFeatures: [
         'Premium Playlist Skins',

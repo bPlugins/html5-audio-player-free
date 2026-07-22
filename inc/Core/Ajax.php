@@ -23,6 +23,10 @@ class Ajax
         // SoundCloud audio stream redirect proxy
         add_action('wp_ajax_h5ap_soundcloud_stream', [$this, 'soundcloudStream']);
         add_action('wp_ajax_nopriv_h5ap_soundcloud_stream', [$this, 'soundcloudStream']);
+
+        // Podcast RSS feed parsing
+        add_action('wp_ajax_h5ap_parse_podcast_feed', [$this, 'parsePodcastFeed']);
+        add_action('wp_ajax_nopriv_h5ap_parse_podcast_feed', [$this, 'parsePodcastFeed']);
     }
 
     public function getStreamData()  {
@@ -471,5 +475,19 @@ class Ajax
 
         status_header(502);
         exit('Failed to fetch CDN streaming URL from SoundCloud.');
+    }
+
+    public function parsePodcastFeed()
+    {
+        $url = isset($_POST['url']) ? esc_url_raw(wp_unslash($_POST['url'])) : '';
+        if (empty($url)) {
+            wp_send_json_error('URL is empty');
+        }
+
+        $limit = 5; // Free version is strictly capped to 5 episodes
+
+        $tracks = Podcast::parse_feed($url, $limit);
+
+        wp_send_json_success($tracks);
     }
 }

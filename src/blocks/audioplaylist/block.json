@@ -5,7 +5,7 @@
     "description": "",
     "category": "media",
     "icon": "playlist-audio",
-    "version": "2.5.0",
+    "version": "2.8.0",
     "keywords": [
         "HTML5 Audio Playlist",
         "Media Player",
@@ -69,6 +69,34 @@
         "lazyLoad": {
             "type": "string",
             "default": "default"
+        },
+        "sourceType": {
+            "type": "string",
+            "default": "self-hosted"
+        },
+        "podcastRssUrl": {
+            "type": "string",
+            "default": ""
+        },
+        "podcastDate": {
+            "type": "boolean",
+            "default": true
+        },
+        "podcastDesc": {
+            "type": "boolean",
+            "default": true
+        },
+        "podcastSearch": {
+            "type": "boolean",
+            "default": false
+        },
+        "podcastLoadMore": {
+            "type": "boolean",
+            "default": false
+        },
+        "podcastLimit": {
+            "type": "number",
+            "default": 0
         }
     },
     "supports": {

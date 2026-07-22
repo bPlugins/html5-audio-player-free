@@ -7,9 +7,10 @@ import { ColorControl, InlineMediaUpload, Notice } from './../../../../../bpl-to
 import { TabPanel, Panel, PanelBody, PanelRow, ToggleControl, __experimentalUnitControl as UnitControl, SelectControl, RadioControl } from '@wordpress/components';
 import { AlignmentToolbar, BlockControls, InspectorControls } from '@wordpress/block-editor';
 import { AdvertiseCard } from '../../../../../bpl-tools/ProControls/index.js';
+import NewBadge from '../../components/NewBadge/NewBadge.js';
 
 const Settings = ({ attributes, setAttributes, siteUrl }) => {
-  const { source, controls, primaryColor, bgColor, controlColor, poster, skin, alignment, isSticky, title, artist, repeat, preload, radius, autoplay, muted, loader, width, lazyLoad } = attributes;
+  const { source, controls, primaryColor, bgColor, controlColor, poster, skin, alignment, isSticky, title, artist, repeat, preload, radius, autoplay, muted, loader, width, lazyLoad, waveType = "equalizer" } = attributes;
 
   const pricingURL = `${siteUrl}/wp-admin/admin.php?page=html5-audio-player-help-demo#/pricing`;
 
@@ -110,11 +111,16 @@ const Settings = ({ attributes, setAttributes, siteUrl }) => {
                           </Fragment>
                         )}
 
-                        {/* {skin === "Wave" && (
+                         {skin === "Wave" && (
                           <Fragment>
-                            <SelectControl
-                              className="mt10"
-                              label={__("Waveform Style", "h5ap")}
+                             <SelectControl
+                               className="mt10"
+                               label={
+                                 <span style={{ display: 'flex', alignItems: 'center' }}>
+                                   {__("Waveform Style", "h5ap")}
+                                   <NewBadge />
+                                 </span>
+                               }
                               value={waveType || 'equalizer'}
                               options={[
                                 { label: __('Real-time Equalizer (Jumping Bars)', "h5ap"), value: 'equalizer' },
@@ -126,7 +132,7 @@ const Settings = ({ attributes, setAttributes, siteUrl }) => {
                               {__("Static Waveform (SoundCloud Style) is available in the Pro version.", "h5ap")}
                             </Notice>
                           </Fragment>
-                        )} */}
+                        )}
 
                         {!['Default', "Simple-1", "Simple-2"].includes(skin) && (
                           <Fragment>

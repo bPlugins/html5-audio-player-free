@@ -53,11 +53,42 @@
 
     .plyr__progress input[type=range] {
         height: 5px;
-        overflow: hidden;
     }
 
+    .h5ap-scrollable-playlist {
+        max-height: 220px;
+        overflow-y: auto;
+        padding-right: 8px;
+        margin-bottom: 20px;
+        scroll-behavior: smooth;
 
+        &::-webkit-scrollbar {
+            width: 8px !important;
+            display: block !important;
+        }
 
+        &::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.15) !important;
+            border-radius: 4px !important;
+        }
 
+        &::-webkit-scrollbar-thumb {
+            background: #f4f2ee !important;
+            border-radius: 4px !important;
+        }
 
+        &::-webkit-scrollbar-thumb:hover {
+            background: #d97706 !important;
+        }
+
+        &.has-many-items {
+            [data-plyr="playlist-item"] {
+                padding: 12px !important;
+                background: rgba(255, 255, 255, 0.03) !important;
+                border: 1px solid rgba(255, 255, 255, 0.08) !important;
+                border-radius: 12px !important;
+                box-sizing: border-box !important;
+            }
+        }
+    }
 }

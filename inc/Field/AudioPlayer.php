@@ -352,6 +352,8 @@ class AudioPlayer
                             <li><strong>End Time:</strong> Set the specific time, in seconds, where the audio should stop playing.</li>
                             <li><strong>Disable Pause:</strong> Prevent users from pausing the audio playback.</li>
                             <li><strong>Save State:</strong> Save the player\'s time state so it resumes from where the user left off.</li>
+                            <li><strong>Waveform Style:</strong> Switch between Real-time Equalizer and Static Waveform (SoundCloud Style) for the Wave skin.</li>
+
                         </ul>
                         <a href="' . admin_url('admin.php?page=html5-audio-player-help-demo#/pricing') . '" 
                         class="h5ap-pro-notice-button"> ' . $h5ap_crown_icon . ' Get Pro</a>

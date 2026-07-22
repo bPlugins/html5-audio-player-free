@@ -1,17 +1,24 @@
 const { __ } = wp.i18n;
-import { TabPanel, Panel, PanelBody, PanelRow, __experimentalUnitControl as UnitControl, SelectControl, TextControl } from '@wordpress/components';
+import { TabPanel, Panel, PanelBody, PanelRow, __experimentalUnitControl as UnitControl, TextControl, ToggleControl, SelectControl } from '@wordpress/components';
 import { AlignmentToolbar, BlockControls, InspectorControls } from '@wordpress/block-editor';
 import { useState } from "react";
+import { withSelect } from '@wordpress/data';
+import { compose } from '@wordpress/compose';
 
 import { ColorControl, InlineMediaUpload, ItemsPanel } from './../../../../../bpl-tools/Components'
+import { ProModal, AdvertiseCard } from './../../../../../bpl-tools/ProControls';
+import NewBadge from '../../components/NewBadge/NewBadge.js';
 import { produce } from 'immer';
 
 const Settings = (props) => {
-  const { attributes, setAttributes, clientId } = props;
+  const { attributes, setAttributes, clientId, siteUrl } = props;
   const { width, alignment, lazyLoad } = attributes;
   const { activeIndex, setActiveIndex } = useState(0);
+  const [isProModalOpen, setIsProModalOpen] = useState(false);
 
-
+  const isPremium = false; // Forced false in the Free project to lock advanced settings
+  const pricingURL = siteUrl ? `${siteUrl}/wp-admin/admin.php?page=html5-audio-player-help-demo#/pricing` : 'https://bplugins.com/products/html5-audio-player/pricing';
+  const premiumProps = { isPremium, setIsProModalOpen };
 
   const tabController = () => {
     setTimeout(() => {
@@ -59,10 +66,87 @@ const Settings = (props) => {
               {tab.name == "content" && (
                 <span>
                   <Panel>
-                    <PanelBody className="bPlPanelBody" title={__("Tracks", "h5ap")}>
-                      <ItemsPanel {...{ attributes, setAttributes, clientId, arrKey: 'audios', newItem: { source: '' }, ItemSettings, itemLabel: 'Item', activeIndex, setActiveIndex, design: 'sortable', }} />
+                    <PanelBody className="bPlPanelBody" title={__("Tracks", 'html5-audio-player-pro')}>
+                      <SelectControl
+                        label={
+                          <span style={{ display: 'flex', alignItems: 'center' }}>
+                            {__("Source Type", 'html5-audio-player-pro')}
+                            <NewBadge />
+                          </span>
+                        }
+                        help={__("Choose 'Self-Hosted Audio (Default)' for custom audio tracks or 'Podcast RSS Feed (NEW)' to automatically import episodes from an RSS feed.", 'html5-audio-player-pro')}
+                        value={attributes.sourceType || 'self-hosted'}
+                        options={[
+                          { label: __('Self-Hosted Audio (Default)', 'html5-audio-player-pro'), value: 'self-hosted' },
+                          { label: __('Podcast RSS Feed (NEW)', 'html5-audio-player-pro'), value: 'podcast' },
+                        ]}
+                        onChange={(sourceType) => {
+                          if (sourceType === 'self-hosted' && (!Array.isArray(attributes.audios) || attributes.audios.length === 0)) {
+                            setAttributes({ sourceType, audios: [{ title: 'Audio Title', artist: 'Artist Name', source: '' }] });
+                          } else {
+                            setAttributes({ sourceType });
+                          }
+                        }}
+                      />
+
+                      {(attributes.sourceType === 'podcast') ? (
+                        <>
+                          <TextControl
+                            className="mt10"
+                            label={
+                              <span style={{ display: 'flex', alignItems: 'center' }}>
+                                {__("Podcast RSS Feed URL", 'html5-audio-player-pro')}
+                                <NewBadge />
+                              </span>
+                            }
+                            value={attributes.podcastRssUrl || ''}
+                            onChange={(podcastRssUrl) => setAttributes({ podcastRssUrl })}
+                            placeholder={__("Enter podcast RSS feed URL...", 'html5-audio-player-pro')}
+                          />
+                          <ToggleControl
+                            className="mt10"
+                            label={
+                              <span style={{ display: 'flex', alignItems: 'center' }}>
+                                {__("Show Episode Date", 'html5-audio-player-pro')}
+                                <NewBadge />
+                              </span>
+                            }
+                            checked={attributes.podcastDate !== false}
+                            onChange={(podcastDate) => setAttributes({ podcastDate })}
+                          />
+                          <ToggleControl
+                            className="mt10"
+                            label={
+                              <span style={{ display: 'flex', alignItems: 'center' }}>
+                                {__("Show Episode Description", 'html5-audio-player-pro')}
+                                <NewBadge />
+                              </span>
+                            }
+                            checked={attributes.podcastDesc !== false}
+                            onChange={(podcastDesc) => setAttributes({ podcastDesc })}
+                          />
+
+                          <div className="mt15" style={{ fontSize: '12.5px', color: '#b26a00', background: '#fff8e5', padding: '12px 14px', borderRadius: '6px', borderLeft: '4px solid #f59e0b', margin: '15px 0 0', lineHeight: '1.5' }}>
+                            <strong>{__('Unlock Podcast Pro Features:', 'html5-audio-player-pro')}</strong>
+                            <ul style={{ margin: '8px 0 0 16px', padding: 0, listStyleType: 'disc' }}>
+                              <li>{__('Fetch unlimited episodes (Free capped at 5)', 'html5-audio-player-pro')}</li>
+                              <li>{__('Enable Episode Search bar', 'html5-audio-player-pro')}</li>
+                              <li>{__('Pagination & Load More settings', 'html5-audio-player-pro')}</li>
+                              <li>{__('Hide download button control', 'html5-audio-player-pro')}</li>
+                            </ul>
+                            <p style={{ margin: '10px 0 0' }}>
+                              <a href={pricingURL} target="_blank" rel="noreferrer" style={{ color: '#d97706', fontWeight: 'bold', textDecoration: 'none' }}>
+                                {__('Upgrade to Pro →', 'html5-audio-player-pro')}
+                              </a>
+                            </p>
+                          </div>
+                        </>
+                      ) : (
+                        <ItemsPanel {...{ attributes, setAttributes, clientId, arrKey: 'audios', newItem: { source: '' }, ItemSettings, itemLabel: 'Item', activeIndex, setActiveIndex, design: 'sortable', }} />
+                      )}
                     </PanelBody>
                     <PanelBody title={__("Options", "h5vp")} className='bPlPanelBody'>
+
                       <SelectControl
                         className='mt10'
                         label={__("Lazy Load", 'html5-audio-player-pro')}
@@ -76,7 +160,6 @@ const Settings = (props) => {
                         onChange={(value) => setAttributes({ lazyLoad: value })}
                       />
                     </PanelBody>
-
                   </Panel>
                 </span>
               )}
@@ -86,7 +169,7 @@ const Settings = (props) => {
                     <PanelBody className="bPlPanelBody">
                       <PanelRow>
                         <UnitControl
-                          label={__("Width", "h5ap")}
+                          label={__("Width", 'html5-audio-player-pro')}
                           labelPosition="side"
                           units={[
                             { value: "px", label: "px", default: 500 },
@@ -98,19 +181,19 @@ const Settings = (props) => {
                         />
                       </PanelRow>
                       <ColorControl
-                        label={__("Primary Color", "h5ap")}
+                        label={__("Primary Color", 'html5-audio-player-pro')}
                         onChange={(color) => setAttributes({ primaryColor: color })}
                         value={attributes.primaryColor}
                         defaultColor="rgb(245, 158, 11, var(--tw-bg-opacity, 1))"
                       />
                       <ColorControl
-                        label={__("Background Color", "h5ap")}
+                        label={__("Background Color", 'html5-audio-player-pro')}
                         onChange={(color) => setAttributes({ bgColor: color })}
                         value={attributes.bgColor}
                         defaultColor="rgb(245, 158, 11, var(--tw-bg-opacity, 1))"
                       />
                       <ColorControl
-                        label={__("Text Color", "h5ap")}
+                        label={__("Text Color", 'html5-audio-player-pro')}
                         onChange={(color) => setAttributes({ textColor: color })}
                         value={attributes.textColor}
                         defaultColor="rgb(245, 158, 11, var(--tw-bg-opacity, 1))"
@@ -125,24 +208,47 @@ const Settings = (props) => {
       </TabPanel>
       <BlockControls>
         <AlignmentToolbar value={alignment} onChange={val => setAttributes({ alignment: val })} describedBy={__('Alignment')} alignmentControls={[
-          { title: __('Left', 'h5ap'), align: 'left', icon: 'align-left' },
-          { title: __('Center', 'h5ap'), align: 'center', icon: 'align-center' },
-          { title: __('Right', 'h5ap'), align: 'right', icon: 'align-right' }
+          { title: __('Left', 'html5-audio-player-pro'), align: 'left', icon: 'align-left' },
+          { title: __('Center', 'html5-audio-player-pro'), align: 'center', icon: 'align-center' },
+          { title: __('Right', 'html5-audio-player-pro'), align: 'right', icon: 'align-right' }
         ]} />
       </BlockControls>
+      <AdvertiseCard planLink={pricingURL || 'https://bplugins.com/products/html5-audio-player/pricing'} />
+      <ProModal isProModalOpen={isProModalOpen} setIsProModalOpen={setIsProModalOpen}
+        link={pricingURL || 'https://bplugins.com/products/html5-audio-player/pricing'}
+        title={__('Unlock More with<br/>HTML5 Audio Player Pro!')}
+        description={__(`The free or deactivated license of Plugin limits features—upgrade to PRO to unlock podcast RSS feeds, real-time search, and custom pagination.`)}
+        features={[
+          'Podcast RSS Feed URL import and auto-fetching.',
+          'Podcast episode search and real-time filtering.',
+          'Load More & Numbered Pagination for podcast episodes.',
+          'Custom episode fetch limit and batch count control.',
+          'Hide download button and full layout customization.'
+        ]}
+      />
     </InspectorControls>
   );
 };
 
-export default Settings;
+export default compose(
+  withSelect((select) => {
+    return {
+      siteUrl: select('core').getSite()?.url,
+    };
+  })
+)(Settings);
 
 
 export const ItemSettings = ({ attributes, arrKey, index, setAttributes }) => {
-  const { source, poster, title, artist } = attributes[arrKey][index];
+  const currentItem = attributes[arrKey]?.[index] || {};
+  const { source = '', poster = '', title = '', artist = '' } = currentItem;
 
   const handleList = (property, value, index) => {
-    const newAudios = produce(attributes[arrKey], (draft) => {
-      draft[index][property] = value;
+    const list = Array.isArray(attributes[arrKey]) ? attributes[arrKey] : [];
+    const newAudios = produce(list, (draft) => {
+      if (draft[index]) {
+        draft[index][property] = value;
+      }
     });
     setAttributes({ audios: newAudios });
   };
@@ -152,8 +258,8 @@ export const ItemSettings = ({ attributes, arrKey, index, setAttributes }) => {
       onChange={(audio) => handleList("source", audio, index)}
       value={source}
       types={["audio"]}
-      placeholder={__("Audio Source", "h5ap")}
-      label={__("Audio Source", "h5ap")}
+      placeholder={__("Audio Source", 'html5-audio-player-pro')}
+      label={__("Audio Source", 'html5-audio-player-pro')}
       className="mb-0"
     />
 
@@ -162,15 +268,15 @@ export const ItemSettings = ({ attributes, arrKey, index, setAttributes }) => {
       onChange={(poster) => handleList("poster", poster, index)}
       value={poster}
       types={["image"]}
-      placeholder={__("Thumbnail", "h5ap")}
-      label={__("Thumbnail", "h5ap")}
+      placeholder={__("Thumbnail", 'html5-audio-player-pro')}
+      label={__("Thumbnail", 'html5-audio-player-pro')}
     />
 
     <PanelRow>
-      <TextControl label={__("Title", "h5ap")} placeholder={__("Title", "h5ap")} value={title} onChange={(title) => handleList("title", title, index)} />
+      <TextControl label={__("Title", 'html5-audio-player-pro')} placeholder={__("Title", 'html5-audio-player-pro')} value={title} onChange={(title) => handleList("title", title, index)} />
     </PanelRow>
     <PanelRow>
-      <TextControl label={__("Artist", "h5ap")} placeholder={__("Artist", "h5ap")} value={artist} onChange={(artist) => handleList("artist", artist, index)} />
+      <TextControl label={__("Artist", 'html5-audio-player-pro')} placeholder={__("Artist", 'html5-audio-player-pro')} value={artist} onChange={(artist) => handleList("artist", artist, index)} />
     </PanelRow>
   </>
 }

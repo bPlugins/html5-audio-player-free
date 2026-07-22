@@ -4,7 +4,7 @@ Tags: mp3 player, audio, audio player, player, podcast
 Donate link: https://www.buymeacoffee.com/abuhayat/  
 Requires at least: 6.5
 Tested up to: 7.0
-Stable tag: 2.7.5
+Stable tag: 2.8.0
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -24,43 +24,37 @@ https://youtube.com/watch?v=6ZHKarDpllQ
 Built with modern HTML5 technology, this plugin works across all major browsers and iOS devices, ensuring reliable playback on any screen size. Its shortcode-based setup gives you full control over placement and player settings, making it suitable for podcasts, music tracks, audio previews, or online courses.
 
 ### Key Features – Free Version
-- **Advanced Player Types**: Choose from Standard, Sticky Player, or Audio Playlist Player (New in Free!).
-- **Audio Playlist Block**: Create and embed fully-featured audio playlists with custom tracks directly in the block editor (Previously a PRO-only block!).
-- **Standard Player Skins**: Access Default, Fusion, Stamp, and Wave skins for free.
-- **Sticky Player Skins**: Access Simple and Fusion skins for free.
-- **Embed Anywhere**: Add audio to posts, pages, widgets, and theme templates using shortcodes.
-- **Responsive & Lightweight**: Adapts to all devices and doesn’t slow down your site.
-- **Customization Options**: Adjust width, border radius, and poster images.
-- **Title & Author Support**: Display custom audio titles and author names.
-- **Autoplay, Preload & Mute Options**: Define how your audio behaves upon loading.
-- **Radio Player: Autoplay & Browser Policy Handling**: Dedicated autoplay settings with Autoplay Muted fallback for modern browser compliance.
-- **Radio Player: HLS (m3u8) Streaming Support**: Stream live audio broadcasts seamlessly using modern HLS protocols.
-- **Radio Player: Connecting, Buffering & Offline Indicators**: Instant visual status updates ("Connecting...", "Buffering...", "Offline") on live streams.
-- **Repeat Control**: Loop your audio seamlessly.
-- **Great for Podcasts**: Perfect for embedding podcast episodes or audio courses.
-- **MP3, OGG & FLAC Support**: Play high-quality lossless FLAC audio files seamlessly alongside MP3 and OGG formats with native Media Library upload support.
-- **Google Drive Audio Support**: Seamlessly play audio files directly from Google Drive. Our built-in smart proxy bypasses Google's restrictions and CORS errors, ensuring smooth playback and accurate duration display.
-- **SoundCloud Streaming Support**: Stream tracks seamlessly by pasting their page URLs directly. Bypasses strict access rules, authorization requirements, and expiring CDN URLs for a smooth visitor experience.
-- **Cross-Browser Support**: Works smoothly on Chrome, Firefox, Safari, Edge, IE7–IE9, and more.
+* **Advanced Player Layouts**: Choose from Standard Player, Sticky Player (fixed bottom/top), and the newly unlocked Audio Playlist Player.
+* **Podcast RSS Feed Import**: Easily import podcast channels from any RSS feed URL (shows the latest 5 episodes; upgrade to PRO for unlimited episodes, search, and custom pagination).
+* **Modern Player Skins**: Select from Default, Fusion, Stamp, and Wave skins (includes real-time jumping bars visualizer; SoundCloud-style static waveform available in PRO).
+* **Google Drive & SoundCloud Support**: Play shared files directly from Google Drive or stream tracks via SoundCloud URLs using our built-in proxy.
+* **Lossless & Standard Formats**: Seamless playback of MP3, OGG, and FLAC audio files with native WordPress Media Library upload support.
+* **Gutenberg & Widget Ready**: Embed players instantly using the custom Gutenberg block or versatile shortcodes on posts, pages, and sidebar widgets.
+* **Autoplay & Browser Compliance**: Smart fallback rules to start streams muted if modern browsers block autoplay audio playback.
+* **HLS Live Streaming**: Stream live audio broadcasts seamlessly using modern HLS (m3u8) protocol integrations.
+* **Interactive Status Indicators**: Instant visual status updates including "Connecting...", "Buffering...", and "Offline" for live streams.
+* **Custom Styling & Metadata**: Easily customize player width, border radius, poster thumbnails, audio titles, and artist details.
+* **Cross-Browser & Responsive**: Fully responsive layout optimized for all modern browsers, smartphones, tablets, and iOS/Android devices.
 
 ### Pro Version – Unlock Premium Audio Controls
-Upgrade to the [**Pro version**](https://bplugins.com/products/html5-audio-player/pricing) for more control over design, behavior, and playback settings.
+Upgrade to the [**Pro version**](https://bplugins.com/products/html5-audio-player/pricing) for full control over design, layouts, advanced podcast features, and unlimited streams.
 
 **What’s Included in Pro:**
-- **Radio Player: Multiple Radio Stations Playlist**: Allow users to switch between multiple radio stations/channels directly inside a unified bottom playlist.
-- **Radio Player: Backup / Fallback Stream URL**: Secure continuous playback by automatically switching to a backup stream URL if the primary stream fails.
-- **Radio Player: Recently Played History**: Show track/song timelines fetched dynamically from Icecast/Shoutcast server metadata.
-- **Advanced Playlist Designs & Custom Skins**: Unlock additional premium designs (like Narrow and Extensive playlist skins) and custom settings.
-- **7 Additional Premium Skins**: Access Card 1, Card 2, Simple 1, Simple 2, Player 9, Player 10, and Player 11.
-- **Color Customization**: Set custom primary and background colors to perfectly fit your site’s branding.
-- **Download buttons**: Add download buttons to your player.
-- **Fast Forward & Rewind Buttons**: Enhance navigation with custom seek time settings.
-- **Start Time Settings**: Specify exactly when the audio should start playing.
-- **Disable Pause Option**: Keep audio playing without interruption.
-- **Save State Functionality**: Save the player's time state so it resumes from where the user left off.
-- **Premium Sticky Player Features**: Unlock Background Color, Repeat, Save State, Initial Volume, and Download Button for Sticky Players.
-- **Single Button Player**: Minimalist design for single-action audio playback.
-- **Ad-Free Experience**: No ads, ever.
+* **Unlimited Podcast Episodes & Feeds**: Completely removes the 5-episode limit, allowing you to fetch and play unlimited episodes from any RSS feed.
+* **SoundCloud-Style Static Waveform**: Renders a beautiful static wavesurfer waveform visualizer for the Wave skin instead of just jumping equalizer bars.
+* **Podcast Episode Search & Filter**: Real-time frontend keyword search to let users filter and find specific episodes inside playlist layers.
+* **Load More & Numbered Pagination**: Configure custom per-page batch limits with standard numbered pagination (1, 2, 3...) or Load More buttons.
+* **Advanced Playlist Skins**: Access premium Narrow and Extensive playlist layouts with collapsible track descriptions and customized styling.
+* **7 Premium Player Skins**: Unlock Card 1, Card 2, Simple 1, Simple 2, Player 9, Player 10, and Player 11.
+* **Multiple Radio Stations (Playlists)**: Unified player interface allowing users to switch between multiple radio stations or channels.
+* **Recently Played Track History**: Display live song timelines and titles fetched dynamically from Icecast/Shoutcast server metadata.
+* **Backup/Fallback Stream URL**: Automatic failover switching to secondary audio streams if the primary server goes offline.
+* **Full Color Customization**: Set custom primary, background, hover, active, and alternating track colors to match your brand.
+* **Download Button**: Enable or disable direct download options for tracks and episodes.
+* **Advanced Navigation & Seeking**: Add custom forward/rewind skip intervals, start/end time offsets, and disable pause locks.
+* **State Saving**: Remember the user's playback timeline and resume tracks from where they last left off.
+* **Single Button Player**: A clean, single-action play button suitable for inline audio samples.
+* **Ad-Free Experience & Premium Support**: Dedicated support channel with priority bug fixes and updates.
 
 [**Try the HTML5 Audio Player PRO**](https://bplugins.com/products/html5-audio-player/pricing) – Unlock all premium features now!
 
@@ -225,6 +219,16 @@ e.g.
 
 
 == Changelog ==
+
+= 2.8.0 - 22 July, 2026 =
+* **New:** Added Podcast RSS feed importing support for the Audio Playlist block (capped at latest 5 episodes in Free version).
+* **New:** Added advanced Narrow and Extensive playlist player skins for podcast layouts [Pro Only].
+* **New:** Added real-time episode search bar for podcast playlist layers [Pro Only].
+* **New:** Added numbered pagination and "Load More" button layouts for podcast episodes [Pro Only].
+* **New:** Added custom podcast episode fetch limits and per-page limits [Pro Only].
+* **New:** Added show/hide toggles for episode publication date and description details in the podcast settings.
+* **New:** Added Waveform Style selector for the Wave skin block settings.
+* **New:** Added SoundCloud-style Static Waveform visualizer using wavesurfer [Pro Only].
 
 = 2.7.5 - 19 July, 2026 =
 * **New:** Added Autoplay & Browser Policy Handling (Autoplay Muted fallback) to bypass modern browser audio playback blocks.

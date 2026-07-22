@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 
 const Style = ({ attributes, id }) => {
@@ -14,43 +13,60 @@ const Style = ({ attributes, id }) => {
     #${id} .flat-black-player-container{ 
       width: ${width};
     }
+    #${id} .skin_playlist1 {
+      background-color: ${bgColor || '#18181b'} !important;
+      border-radius: ${radius || '16px'} !important;
+      color: ${textColor || '#ffffff'} !important;
+    }
+    #${id} .plyr,
+    #${id} .plyr-wrapper,
     #${id} .plyr__controls {
-      background: ${bgColor};
-      border-radius:${radius}
+      background: transparent !important;
+      color: ${textColor || '#ffffff'} !important;
     }
-      
+    #${id} .plyr {
+      --theme-skin-wave-color: ${primaryColor || '#00b2ff'};
+      --plyr-color-main: ${primaryColor || '#00b2ff'};
+      color: ${textColor || '#ffffff'} !important;
+    }
     #${id} [data-plyr="playlist-title"] {
-      color: ${textColor || '#fff'} !important;
+      color: ${textColor || '#ffffff'} !important;
     }
-
-    #${id} .skin_default .plyr__control,
-    #${id} .plyr__time{
-      color: red;
+    #${id} [data-plyr="playlist-artist"] {
+      color: ${textColor ? textColor : 'rgba(255,255,255,0.7)'} !important;
     }
-    #${id} .plyr{
-      --theme-skin-wave-color: ${primaryColor};
-      --plyr-color-main: ${primaryColor};
-      color: ${textColor};
-    } 
-    #${id}.skin_default .plyr__control:hover {
-      background: ${hoverColor}
+    #${id} .podcast-date {
+      color: ${textColor ? textColor : 'rgba(255,255,255,0.6)'} !important;
     }
-    #${id} .plyr__controls__item input {
-      color: ${hoverColor}
+    #${id} .podcast-desc-text {
+      color: ${textColor ? textColor : 'rgba(255,255,255,0.75)'} !important;
     }
-    #${id} .plyr .ring-amber-500 {
-      --tw-ring-color:${primaryColor};
+    #${id} .plyr__time {
+      color: ${textColor || '#ffffff'} !important;
     }
-    
-    #${id} .plyr-wrapper {
-      background-color: ${bgColor}
+    #${id} .plyr__control {
+      color: ${textColor || '#ffffff'} !important;
     }
-
-      
+    #${id} .h5ap-load-more-btn {
+      background-color: ${primaryColor || '#00b2ff'} !important;
+    }
+    #${id} .h5ap-pagination-btn.is-active,
+    #${id} .h5ap-pagination-num.is-active,
+    #${id} .h5ap-pagination-btn:hover:not(:disabled),
+    #${id} .h5ap-pagination-num:hover:not(:disabled) {
+      background-color: ${primaryColor || '#00b2ff'} !important;
+      border-color: ${primaryColor || '#00b2ff'} !important;
+    }
+    #${id} .h5ap-podcast-search-input:focus {
+      border-color: ${primaryColor || '#00b2ff'} !important;
+    }
+    #${id} .h5ap-show-more-btn {
+      color: ${primaryColor || '#00b2ff'} !important;
+    }
     `;
 
     setCSS(CSS);
-  }, [width, bgColor, radius, id, hoverColor, primaryColor, alignment, primaryColor, textColor]);
+  }, [width, bgColor, radius, id, hoverColor, primaryColor, alignment, textColor]);
 
   return <style>{CSS}</style>;
 };

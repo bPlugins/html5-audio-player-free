@@ -20,6 +20,14 @@ if ($lazy_load_attr === 'default') {
 }
 $attributes['lazyLoad'] = $lazy_load;
 
+if (isset($attributes['sourceType']) && $attributes['sourceType'] === 'podcast' && !empty($attributes['podcastRssUrl'])) {
+    $limit = 5; // Free version is strictly capped at 5 episodes
+    $podcast_tracks = \H5APPlayer\Core\Podcast::parse_feed($attributes['podcastRssUrl'], $limit);
+    if (!empty($podcast_tracks)) {
+        $attributes['audios'] = $podcast_tracks;
+    }
+}
+
 $encoded_attributes = esc_attr(wp_json_encode($attributes, JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS));
 $wrapper_attributes = get_block_wrapper_attributes(['class' => 'wp-block-h5ap-tailwind']);
 

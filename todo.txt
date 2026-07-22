@@ -1,1 +1,9 @@
-<li><strong>Waveform Style:</strong> Switch between Real-time Equalizer and Static Waveform (SoundCloud Style) for the Wave skin.</li>
+
+===============================================================================
+ NPR News Now (অডিও নিউজ - অত্যন্ত নির্ভরযোগ্য ও ফাস্ট)  --> https://feeds.npr.org/510318/podcast.xml
+ TED Talks Daily (টেড টকস অডিও পডকাস্ট)  --> https://feeds.feedburner.com/tedtalks_audio
+ The Daily - New York Times (নিউজ পডকাস্ট)  --> https://feeds.simplecast.com/54nAGcIl
+
+
+
+

@@ -97,6 +97,10 @@
         "podcastLimit": {
             "type": "number",
             "default": 0
+        },
+        "podcastFilter": {
+            "type": "boolean",
+            "default": false
         }
     },
     "supports": {

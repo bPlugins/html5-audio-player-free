@@ -36,14 +36,14 @@ function Playlist1(props) {
 
     if (isLoadMoreEnabled && !searchQuery.trim()) {
         if (paginationType === 'pagination') {
-            totalPages = Math.ceil(audios.length / perPage) || 1;
+            totalPages = Math.ceil(filteredAudios.length / perPage) || 1;
             const startIndex = (currentPage - 1) * perPage;
-            itemsToDisplay = audios.slice(startIndex, startIndex + perPage);
+            itemsToDisplay = filteredAudios.slice(startIndex, startIndex + perPage);
         } else {
-            itemsToDisplay = audios.slice(0, visibleCount);
+            itemsToDisplay = filteredAudios.slice(0, visibleCount);
         }
-    } else if (!searchQuery.trim() && audios.length > 50) {
-        itemsToDisplay = audios.slice(0, 50);
+    } else if (!searchQuery.trim() && filteredAudios.length > 50) {
+        itemsToDisplay = filteredAudios.slice(0, 50);
     }
 
     const firstSource = itemsToDisplay[0]?.source || '';
@@ -77,6 +77,11 @@ function Playlist1(props) {
         window.player = player;
 
         new PlyrPlaylist(player, itemsToDisplay, { multipleAudio: multiple_audio });
+
+        const searchInput = container.querySelector('[data-h5ap-search]');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => setSearchQuery(e.target.value));
+        }
 
         const loadMoreBtn = container.querySelector('[data-h5ap-action="load_more"]');
         if (loadMoreBtn) {
@@ -131,17 +136,19 @@ function Playlist1(props) {
     return (
         <div className="skin_playlist1 h5ap_skin w-full rounded-2xl shadow-xl p-6" ref={containerRef}>
             {isPodcast && attributes.podcastSearch && (
-                <div className="h5ap-podcast-search-wrap mb-4" style={{ position: 'relative', width: '100%', marginBottom: '18px' }}>
-                    <svg className="h5ap-search-icon" viewBox="0 0 24 24" width="16" height="16" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.5)', pointerEvents: 'none', zIndex: 2 }}>
-                        <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                    </svg>
-                    <input
-                        type="text"
-                        className="h5ap-podcast-search-input"
-                        placeholder="Search episodes..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                    />
+                <div className="h5ap-podcast-controls-row">
+                    <div className="h5ap-podcast-search-wrap">
+                        <svg className="h5ap-search-icon" viewBox="0 0 24 24" width="16" height="16">
+                            <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                        </svg>
+                        <input
+                            type="text"
+                            className="h5ap-podcast-search-input"
+                            placeholder="Search episodes..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                        />
+                    </div>
                 </div>
             )}
             <div className="h5ap-audio-element-container">

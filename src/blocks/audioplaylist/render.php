@@ -20,11 +20,14 @@ if ($lazy_load_attr === 'default') {
 }
 $attributes['lazyLoad'] = $lazy_load;
 
-if (isset($attributes['sourceType']) && $attributes['sourceType'] === 'podcast' && !empty($attributes['podcastRssUrl'])) {
-    $limit = 5; // Free version is strictly capped at 5 episodes
-    $podcast_tracks = \H5APPlayer\Core\Podcast::parse_feed($attributes['podcastRssUrl'], $limit);
-    if (!empty($podcast_tracks)) {
-        $attributes['audios'] = $podcast_tracks;
+if (isset($attributes['sourceType']) && $attributes['sourceType'] === 'podcast') {
+    $attributes['audios'] = [];
+    if (!empty($attributes['podcastRssUrl'])) {
+        $limit = 5; // Free version is strictly capped at 5 episodes
+        $podcast_tracks = \H5APPlayer\Core\Podcast::parse_feed($attributes['podcastRssUrl'], $limit);
+        if (!empty($podcast_tracks)) {
+            $attributes['audios'] = $podcast_tracks;
+        }
     }
 }
 

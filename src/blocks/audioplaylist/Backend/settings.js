@@ -125,12 +125,12 @@ const Settings = (props) => {
                             checked={attributes.podcastDesc !== false}
                             onChange={(podcastDesc) => setAttributes({ podcastDesc })}
                           />
-
                           <div className="mt15" style={{ fontSize: '12.5px', color: '#b26a00', background: '#fff8e5', padding: '12px 14px', borderRadius: '6px', borderLeft: '4px solid #f59e0b', margin: '15px 0 0', lineHeight: '1.5' }}>
                             <strong>{__('Unlock Podcast Pro Features:', 'html5-audio-player-pro')}</strong>
                             <ul style={{ margin: '8px 0 0 16px', padding: 0, listStyleType: 'disc' }}>
                               <li>{__('Fetch unlimited episodes (Free capped at 5)', 'html5-audio-player-pro')}</li>
                               <li>{__('Enable Episode Search bar', 'html5-audio-player-pro')}</li>
+                              <li>{__('Enable Episode Filter & Sort', 'html5-audio-player-pro')}</li>
                               <li>{__('Pagination & Load More settings', 'html5-audio-player-pro')}</li>
                               <li>{__('Hide download button control', 'html5-audio-player-pro')}</li>
                             </ul>

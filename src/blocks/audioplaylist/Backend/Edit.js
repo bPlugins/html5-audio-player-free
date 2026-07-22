@@ -55,11 +55,8 @@ const Edit = (props) => {
 
   const effectiveAttributes = {
     ...attributes,
-    audios: attributes.sourceType === 'podcast' 
-      ? (isFetchingPodcast 
-          ? [{ title: 'Loading episodes...', artist: '', source: '' }] 
-          : (podcastAudios.length > 0 ? podcastAudios : [{ title: 'No episodes found', artist: '', source: '' }])) 
-      : attributes.audios
+    audios: attributes.sourceType === 'podcast' ? podcastAudios : attributes.audios,
+    _podcastLoading: attributes.sourceType === 'podcast' && isFetchingPodcast,
   };
 
   return (

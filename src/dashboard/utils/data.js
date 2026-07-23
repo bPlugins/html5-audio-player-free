@@ -342,17 +342,18 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
     },
     changelogs: [
         {
-            version: '2.8.0 - 22 July, 2026',
+            version: '2.8.0 - 23 July, 2026',
             type: 'new',
             list: [
-                'New: Added Podcast RSS feed importing support for the Audio Playlist block (capped at latest 5 episodes in Free version).',
-                'New: Added advanced Narrow and Extensive playlist player skins for podcast layouts [Pro Only].',
+                'New: Added Podcast RSS Feed importing and playback support for Audio Playlists (Narrow & Extensive skins).',
+                'New: Integrated Podcast RSS Feed configuration directly into Codestar Admin Shortcode Settings [Pro Only].',
+                'New: Added Playlist Filter & Search options to quickly filter tracks in audio playlists [Pro Only].',
                 'New: Added real-time episode search bar for podcast playlist layers [Pro Only].',
-                'New: Added numbered pagination and "Load More" button layouts for podcast episodes [Pro Only].',
-                'New: Added custom podcast episode fetch limits and per-page limits [Pro Only].',
-                'New: Added show/hide toggles for episode publication date and description details in the podcast settings.',
-                'New: Added Waveform Style selector for the Wave skin block settings.',
-                'New: Added SoundCloud-style Static Waveform visualizer using wavesurfer [Pro Only].'
+                'New: Added numbered pagination and "Load More" button options for podcast episodes [Pro Only].',
+                'New: Added custom podcast episode fetch limits and per-page display controls [Pro Only].',
+                'New: Added SoundCloud-style Static Waveform visualizer (WaveSurfer.js) and Waveform Style selector in Block Editor & Codestar Admin Settings [Pro Only].',
+                'New: Added show/hide toggles for podcast episode publication date and description details in Block Editor & Codestar Admin Settings.',
+                'Improvement: Completely redesigned Admin Shortcode Settings interface with organized section headings and contextual field descriptions.'
             ]
         },
         {

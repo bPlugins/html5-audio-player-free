@@ -25,7 +25,7 @@ Built with modern HTML5 technology, this plugin works across all major browsers 
 
 ### Key Features – Free Version
 * **Advanced Player Layouts**: Choose from Standard Player, Sticky Player (fixed bottom/top), and the newly unlocked Audio Playlist Player.
-* **Podcast RSS Feed Import**: Easily import podcast channels from any RSS feed URL (shows the latest 5 episodes; upgrade to PRO for unlimited episodes, search, and custom pagination).
+* **Podcast RSS Feed Import**: Easily import podcast channels from any RSS feed URL (shows the latest 5 episodes; upgrade to PRO for unlimited episodes, search, filter and custom pagination).
 * **Modern Player Skins**: Select from Default, Fusion, Stamp, and Wave skins (includes real-time jumping bars visualizer; SoundCloud-style static waveform available in PRO).
 * **Google Drive & SoundCloud Support**: Play shared files directly from Google Drive or stream tracks via SoundCloud URLs using our built-in proxy.
 * **Lossless & Standard Formats**: Seamless playback of MP3, OGG, and FLAC audio files with native WordPress Media Library upload support.
@@ -220,15 +220,16 @@ e.g.
 
 == Changelog ==
 
-= 2.8.0 - 22 July, 2026 =
-* **New:** Added Podcast RSS feed importing support for the Audio Playlist block (capped at latest 5 episodes in Free version).
-* **New:** Added advanced Narrow and Extensive playlist player skins for podcast layouts [Pro Only].
-* **New:** Added real-time episode search bar for podcast playlist layers [Pro Only].
-* **New:** Added numbered pagination and "Load More" button layouts for podcast episodes [Pro Only].
-* **New:** Added custom podcast episode fetch limits and per-page limits [Pro Only].
-* **New:** Added show/hide toggles for episode publication date and description details in the podcast settings.
-* **New:** Added Waveform Style selector for the Wave skin block settings.
-* **New:** Added SoundCloud-style Static Waveform visualizer using wavesurfer [Pro Only].
+= 2.8.0 - 23 July, 2026 =
+* **New:** Added Podcast RSS Feed importing and playback support for Audio Playlists (Narrow & Extensive).
+* **New (Pro):** Integrated Podcast RSS Feed configuration directly into Codestar Admin Shortcode Settings.
+* **New (Pro):** Added Playlist Filter & Search options to quickly filter tracks in audio playlists.
+* **New (Pro):** Added real-time episode search bar for podcast playlist layers.
+* **New (Pro):** Added numbered pagination and "Load More" button options for podcast episodes.
+* **New (Pro):** Added custom podcast episode fetch limits and per-page display controls.
+* **New:** Added show/hide toggles for podcast episode publication date and description details in Block Editor & Codestar Admin Settings.
+* **New (Pro):** Added SoundCloud-style Static Waveform visualizer (WaveSurfer.js) and Waveform Style selector in Block Editor & Codestar Admin Settings.
+* **Improvement:** Completely redesigned Admin Shortcode Settings interface with organized section headings and contextual field descriptions.
 
 = 2.7.5 - 19 July, 2026 =
 * **New:** Added Autoplay & Browser Policy Handling (Autoplay Muted fallback) to bypass modern browser audio playback blocks.

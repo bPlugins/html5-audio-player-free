@@ -16,6 +16,8 @@
 ### 💎 Core Functionality (Free)
 Everything you need to build a professional audio experience on your site:
 - **Advanced Player Layouts**: Includes Standard Player, Sticky Player (fixed bottom/top), and the newly unlocked Audio Playlist Player.
+- **Playlist Filter & Search**: Enable filter options for audio playlists to quickly search and sort tracks.
+- **Redesigned Admin Shortcode Settings**: Organized Codestar options interface with clear section headings and detailed field descriptions for seamless player creation.
 - **Podcast RSS Feed Import**: Easily import podcast channels and playlists from any RSS feed URL (capped at the latest 5 episodes).
 - **Modern Player Skins**: Access clean and responsive skins including Default, Fusion, Stamp, and Wave.
 - **Google Drive & SoundCloud Support**: Play shared files directly from Google Drive or stream tracks via SoundCloud URLs using our built-in bypass proxy.

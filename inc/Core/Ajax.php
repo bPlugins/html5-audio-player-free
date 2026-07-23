@@ -30,12 +30,14 @@ class Ajax
     }
 
     public function getStreamData()  {
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce is verified right below.
         $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
 
         if (!wp_verify_nonce($nonce, 'h5ap_radio_player_rest')) {
             wp_send_json_error('Invalid nonce');
         }
 
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce was verified above.
         $streamUrl = isset($_POST['url']) ? sanitize_url(wp_unslash($_POST['url'])) : '';
 
         // Skip fetching stream metadata for Google Drive, SoundCloud, and static files
@@ -72,6 +74,7 @@ class Ajax
 
     public function saveUninstallOption() {
         // Verify nonce.
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce is retrieved below and verified via wp_verify_nonce.
         $nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
         if ( ! wp_verify_nonce( $nonce, 'h5ap_uninstall_nonce' ) ) {
             wp_send_json_error( 'Invalid nonce.' );
@@ -82,6 +85,7 @@ class Ajax
             wp_send_json_error( 'Insufficient permissions.' );
         }
 
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce was verified above.
         $enabled = isset( $_POST['enabled'] ) && sanitize_text_field( wp_unslash( $_POST['enabled'] ) ) === 'true';
 
         update_option( 'h5ap_delete_data_on_uninstall', $enabled );
@@ -479,6 +483,7 @@ class Ajax
 
     public function parsePodcastFeed()
     {
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Public endpoint for fetching podcast feed.
         $url = isset($_POST['url']) ? esc_url_raw(wp_unslash($_POST['url'])) : '';
         if (empty($url)) {
             wp_send_json_error('URL is empty');

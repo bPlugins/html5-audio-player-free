@@ -220,7 +220,7 @@ e.g.
 
 == Changelog ==
 
-= 2.8.0 - 23 July, 2026 =
+= 2.8.0 - 26 July, 2026 =
 * **New:** Added Podcast RSS Feed importing and playback support for Audio Playlists (Narrow & Extensive).
 * **New (Pro):** Integrated Podcast RSS Feed configuration directly into Codestar Admin Shortcode Settings.
 * **New (Pro):** Added Playlist Filter & Search options to quickly filter tracks in audio playlists.

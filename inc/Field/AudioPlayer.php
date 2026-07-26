@@ -36,31 +36,6 @@ class AudioPlayer
      \CSF::createSection($prefix, array(
       'fields' => array(
 
-        // Custom CSS for Spacious Section Separation
-        array(
-          'type'    => 'content',
-          'content' => '
-            <style>
-              .h5ap-section-header {
-                margin: 24px 0 10px 0;
-                padding: 10px 14px;
-                background: #f8fafc;
-                border-radius: 4px;
-                font-weight: 700;
-                font-size: 13px;
-                color: #1e293b;
-                display: flex;
-                align-items: center;
-                gap: 8px;
-              }
-              .h5ap-section-header.blue { border-left: 4px solid #2563eb; }
-              .h5ap-section-header.green { border-left: 4px solid #16a34a; }
-              .h5ap-section-header.amber { border-left: 4px solid #d97706; }
-              .h5ap-section-header.indigo { border-left: 4px solid #6366f1; }
-            </style>
-          ',
-        ),
-
         // ==========================================
         // MAIN PLAYER TYPE SELECTOR
         // ==========================================
@@ -85,8 +60,26 @@ class AudioPlayer
         // --- Section Header 1: Content & Source ---
         array(
           'type'       => 'content',
-          'dependency' => array('h5ap_player_type', '==', 'opt-1'),
+          'dependency' => array('h5ap_player_type', 'any', 'opt-1,opt-3'),
           'content'    => '
+            <style>
+              .h5ap-section-header {
+                margin: 24px 0 10px 0;
+                padding: 10px 14px;
+                background: #f8fafc;
+                border-radius: 4px;
+                font-weight: 700;
+                font-size: 13px;
+                color: #1e293b;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+              }
+              .h5ap-section-header.blue { border-left: 4px solid #2563eb; }
+              .h5ap-section-header.green { border-left: 4px solid #16a34a; }
+              .h5ap-section-header.amber { border-left: 4px solid #d97706; }
+              .h5ap-section-header.indigo { border-left: 4px solid #6366f1; }
+            </style>
             <div class="h5ap-section-header blue">
               <span>🎵</span> ' . \__('1. Audio Source &amp; Metadata', 'html5-audio-player') . '
             </div>
@@ -98,7 +91,7 @@ class AudioPlayer
           'title' => 'Audio source',
           'desc' => 'Upload or select the main audio file you want to play.',
           'library' => 'audio',
-          'dependency' => array('h5ap_player_type', '==', 'opt-1'),
+          'dependency' => array('h5ap_player_type', 'any', 'opt-1,opt-3'),
           'placeholder' => 'http://',
           'button_title' => 'Add Audio',
           'remove_title' => 'Remove Audio',
@@ -156,7 +149,12 @@ class AudioPlayer
         // --- Section Header 2: Controls & Components ---
         array(
           'type'       => 'content',
-          'dependency' => array('h5ap_player_type', '==', 'opt-1'),
+          'dependency' => array(
+            'h5ap_player_type|standard_skin',
+            '==|==',
+            'opt-1|default',
+            'all'
+          ),
           'content'    => '
             <div class="h5ap-section-header green">
               <span>🎛️</span> ' . \__('2. Controls &amp; Components', 'html5-audio-player') . '
@@ -394,46 +392,6 @@ class AudioPlayer
         // ==========================================
         // 3. STICKY PLAYER (opt-3)
         // ==========================================
-
-        // --- Section Header 1: Content & Source ---
-        array(
-          'type'       => 'content',
-          'dependency' => array('h5ap_player_type', '==', 'opt-3'),
-          'content'    => '
-            <div class="h5ap-section-header blue">
-              <span>🎵</span> ' . \__('1. Sticky Audio Source &amp; Metadata', 'html5-audio-player') . '
-            </div>
-          ',
-        ),
-        array(
-          'id' => 'h5vp_default_audio',
-          'type' => 'upload',
-          'title' => 'Audio source',
-          'desc' => 'Upload or select the main audio file you want to play.',
-          'library' => 'audio',
-          'dependency' => array('h5ap_player_type', '==', 'opt-3'),
-          'placeholder' => 'http://',
-          'button_title' => 'Add Audio',
-          'remove_title' => 'Remove Audio',
-        ),
-        array(
-          'id' => 'title_sticky',
-          'type' => 'text',
-          'title' => \__('Title', 'html5-audio-player'),
-          'default' => 'Audio Title',
-          'desc' => \__('Enter the title of the audio', 'html5-audio-player'),
-          'dependency' => array('h5ap_player_type', '==', 'opt-3'),
-        ),
-        array(
-          'id' => 'poster_sticky',
-          'type' => 'upload',
-          'library' => 'image',
-          'title' => \__('Poster', 'html5-audio-player'),
-          'button_title' => \__('Add or Upload Poster Image', 'html5-audio-player'),
-          'remove_title' => \__('Remove', 'html5-audio-player'),
-          'desc' => \__('100x100 px photo is the standard poster size, accepted file type .png, .jpeg, .jpg ', 'html5-audio-player'),
-          'dependency' => array('h5ap_player_type', '==', 'opt-3'),
-        ),
 
         // --- Sticky Pro Notice Box ---
         array(

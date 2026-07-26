@@ -342,7 +342,7 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
     },
     changelogs: [
         {
-            version: '2.8.0 - 23 July, 2026',
+            version: '2.8.0 - 26 July, 2026',
             type: 'new',
             list: [
                 'New: Added Podcast RSS Feed importing and playback support for Audio Playlists (Narrow & Extensive skins).',

@@ -88,8 +88,11 @@ const skin = (audios = [], customOptions = {}) => {
     </div>
     </div>
     <div class="flex items-center justify-center gap-6">
-       <button class="plyr__control p-2 hover:text-white" data-plyr="prev">
-          <svg role="presentation"><use xlink:href="#plyr-rewind"></use></svg>
+       <button class="plyr__control p-2 hover:text-white" data-plyr="prev" title="Previous Track" aria-label="Previous Track">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+             <polygon points="19 20 9 12 19 4 19 20"></polygon>
+             <line x1="5" y1="19" x2="5" y2="5" stroke-width="2.5"></line>
+          </svg>
        </button>
        <button class="plyr__control p-4 bg-amber-500 rounded-full hover:bg-amber-400 leading-0" data-plyr="play">
           <svg class="icon--pressed" role="presentation"><use xlink:href="#plyr-pause"></use></svg>
@@ -97,8 +100,11 @@ const skin = (audios = [], customOptions = {}) => {
           <span class="label--pressed plyr__tooltip" role="tooltip">Pause</span>
           <span class="label--not-pressed plyr__tooltip" role="tooltip">Play</span>
        </button>
-       <button class="plyr__control p-2 hover:text-white" data-plyr="next">
-          <svg role="presentation"><use xlink:href="#plyr-fast-forward"></use></svg>
+       <button class="plyr__control p-2 hover:text-white" data-plyr="next" title="Next Track" aria-label="Next Track">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+             <polygon points="5 4 15 12 5 20 5 4"></polygon>
+             <line x1="19" y1="5" x2="19" y2="19" stroke-width="2.5"></line>
+          </svg>
        </button>
     </div>
 

@@ -227,6 +227,7 @@ e.g.
 * **New (Pro):** Added real-time episode search bar for podcast playlist layers.
 * **New (Pro):** Added numbered pagination and "Load More" button options for podcast episodes.
 * **New (Pro):** Added custom podcast episode fetch limits and per-page display controls.
+* **New (Pro):** Added Hide Download Icon and Shuffle Playlist toggle controls for Audio Playlists.
 * **New:** Added show/hide toggles for podcast episode publication date and description details in Block Editor & Codestar Admin Settings.
 * **New (Pro):** Added SoundCloud-style Static Waveform visualizer (WaveSurfer.js) and Waveform Style selector in Block Editor & Codestar Admin Settings.
 * **Improvement:** Completely redesigned Admin Shortcode Settings interface with organized section headings and contextual field descriptions.

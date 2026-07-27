@@ -5,7 +5,7 @@ import { useState } from "react";
 import { withSelect } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 
-import { ColorControl, InlineMediaUpload, ItemsPanel } from './../../../../../bpl-tools/Components'
+import { ColorControl, InlineMediaUpload, ItemsPanel, Notice } from './../../../../../bpl-tools/Components'
 import { ProModal, AdvertiseCard } from './../../../../../bpl-tools/ProControls';
 import NewBadge from '../../components/NewBadge/NewBadge.js';
 import { produce } from 'immer';
@@ -159,6 +159,9 @@ const Settings = (props) => {
                         ]}
                         onChange={(value) => setAttributes({ lazyLoad: value })}
                       />
+                      <Notice status='premium' isIcon={true} className="mt15">
+                        {__("Hide Download Icon, Shuffle Playlist, and more features are available in the Pro version.", "html5-audio-player-pro")}
+                      </Notice>
                     </PanelBody>
                   </Panel>
                 </span>

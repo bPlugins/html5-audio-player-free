@@ -342,7 +342,7 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
     },
     changelogs: [
         {
-            version: '2.8.0 - 26 July, 2026',
+            version: '2.8.0 - 27 July, 2026',
             type: 'new',
             list: [
                 'New: Added Podcast RSS Feed importing and playback support for Audio Playlists (Narrow & Extensive skins).',
@@ -351,8 +351,8 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
                 'New: Added real-time episode search bar for podcast playlist layers [Pro Only].',
                 'New: Added numbered pagination and "Load More" button options for podcast episodes [Pro Only].',
                 'New: Added custom podcast episode fetch limits and per-page display controls [Pro Only].',
-                'New: Added SoundCloud-style Static Waveform visualizer (WaveSurfer.js) and Waveform Style selector in Block Editor & Codestar Admin Settings [Pro Only].',
                 'New: Added show/hide toggles for podcast episode publication date and description details in Block Editor & Codestar Admin Settings.',
+                'New: Added SoundCloud-style Static Waveform visualizer (WaveSurfer.js) and Waveform Style selector in Block Editor & Codestar Admin Settings [Pro Only].',
                 'Improvement: Completely redesigned Admin Shortcode Settings interface with organized section headings and contextual field descriptions.'
             ]
         },

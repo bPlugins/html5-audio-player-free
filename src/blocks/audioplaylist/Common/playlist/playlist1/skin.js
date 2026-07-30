@@ -75,13 +75,13 @@ const skin = (audios = [], customOptions = {}) => {
          <progress class="plyr__progress__buffer" min="0" max="100" value="0">% buffered</progress>
          <span role="tooltip" class="plyr__tooltip">00:00</span>
      </div>
-    <div class="flex justify-between text-sm mt-1">
-        <span class="plyr__time--current">0:00</span>
-        <div class="flex items-center gap-2">
-            <span class="plyr__time--duration">0:00</span>
+    <div class="flex justify-between text-sm items-center" style="margin-top: 8px; margin-left: 0; margin-right: -7px; padding: 0;">
+        <span class="plyr__time--current" style="margin: 0 !important; padding: 0 !important;">0:00</span>
+        <div class="flex items-center gap-2" style="line-height: 1; margin: 0 !important; padding: 0 !important;">
+            <span class="plyr__time--duration" style="margin: 0 !important; padding: 0 !important;">0:00</span>
             ${!customOptions?.hide_download && audios[0]?.source ? `
-                <a class="plyr__control p-1 text-white opacity-80 hover:opacity-100" target="_blank" download href="${audios[0].source}" title="Download Track">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                <a class="p-1 text-white opacity-80 hover:opacity-100 flex items-center justify-center" target="_blank" download href="${audios[0].source}" title="Download Track" style="margin: 0 !important; padding: 0 !important; line-height: 1; display: inline-flex;">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: block; margin: 0 !important;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                 </a>
             ` : ''}
         </div>

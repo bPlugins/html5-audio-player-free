@@ -5,7 +5,7 @@
 [![WordPress Support](https://img.shields.io/badge/WordPress-5.8+-blue.svg?style=flat-square&logo=wordpress)](https://wordpress.org/plugins/html5-audio-player/)
 [![PHP Support](https://img.shields.io/badge/PHP-7.1+-777bb4.svg?style=flat-square&logo=php)](./readme.txt)
 [![GPLv2 License](https://img.shields.io/badge/License-GPLv2-green.svg?style=flat-square)](./readme.txt)
-[![Stable Version](https://img.shields.io/badge/Version-2.8.0-blue.svg?style=flat-square)](./readme.txt)
+[![Stable Version](https://img.shields.io/badge/Version-2.8.1-blue.svg?style=flat-square)](./readme.txt)
 
 **HTML5 Audio Player** is a powerful, lightweight, and fully responsive audio player plugin for WordPress. It lets you embed MP3 and OGG audio files into posts, pages, widget areas, or template files using shortcodes or the intuitive Gutenberg block—no coding required!
 
@@ -18,8 +18,8 @@ Everything you need to build a professional audio experience on your site:
 - **Advanced Player Layouts**: Includes Standard Player, Sticky Player (fixed bottom/top), and the newly unlocked Audio Playlist Player.
 - **Playlist Filter & Search**: Enable filter options for audio playlists to quickly search and sort tracks.
 - **Redesigned Admin Shortcode Settings**: Organized Codestar options interface with clear section headings and detailed field descriptions for seamless player creation.
-- **Podcast RSS Feed Import**: Easily import podcast channels and playlists from any RSS feed URL (capped at the latest 5 episodes).
-- **Modern Player Skins**: Access clean and responsive skins including Default, Fusion, Stamp, and Wave.
+- **Podcast RSS Feed Import**: Easily import podcast channels and playlists from any RSS feed URL (fetch and play unlimited episodes with custom fetch limits).
+- **Modern Player Skins**: Access clean and responsive skins including Default, Fusion, Stamp, and Wave (Wave skin includes real-time jumping bars and SoundCloud-style static waveform).
 - **Google Drive & SoundCloud Support**: Play shared files directly from Google Drive or stream tracks via SoundCloud URLs using our built-in bypass proxy.
 - **Lossless & Standard Formats**: Seamless playback of MP3, OGG, and FLAC audio files with native WordPress Media Library upload support.
 - **Gutenberg & Widget Ready**: Embed players instantly using the custom Gutenberg block or versatile shortcodes on posts, pages, and sidebar widgets.
@@ -31,11 +31,9 @@ Everything you need to build a professional audio experience on your site:
 
 ### 👑 Premium Power (Pro)
 Unlock advanced functionality for high-performing podcasts, music sites, and audio courses:
-- **Unlimited Podcast Feeds**: Fetch unlimited podcast episodes with no caps, custom fetch limits, and episode batch settings.
+- **Advanced Playlist Skins**: Access premium Narrow and Extensive playlist layouts with collapsible track descriptions.
 - **Podcast Episode Search & Filter**: Real-time frontend keyword search to filter and find specific episodes inside playlist layers.
 - **Numbered & Load More Pagination**: Configure batch sizes with standard numbered pagination (1, 2, 3...) or Load More buttons.
-- **Static Waveform Visualizer**: SoundCloud-style static waveform visualizer using the wavesurfer library inside the Wave skin.
-- **Advanced Playlist Skins**: Access premium Narrow and Extensive playlist layouts with collapsible track descriptions.
 - **7 Premium Player Skins**: Unlock Card 1, Card 2, Simple 1, Simple 2, Player 9, Player 10, and Player 11.
 - **Multiple Radio Stations (Playlists)**: Unified player interface allowing users to switch between multiple radio stations or channels.
 - **Recently Played Track History**: Display live song timelines and titles fetched dynamically from Icecast/Shoutcast metadata.

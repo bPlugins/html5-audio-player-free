@@ -342,6 +342,14 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
     },
     changelogs: [
         {
+            version: '2.8.1 - 30 July, 2026',
+            type: 'update',
+            list: [
+                'Update: Unlocked SoundCloud-style Static Waveform visualizer (WaveSurfer.js) in the Wave skin for Free users.',
+                'Update: Removed 5-episode fetch limit on Podcast RSS feeds, allowing free users to fetch unlimited podcast episodes and set custom episode fetch limits.'
+            ]
+        },
+        {
             version: '2.8.0 - 27 July, 2026',
             type: 'new',
             list: [
@@ -413,20 +421,19 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
     changelogsLimit: 2,
     changelogsReadMoreLabel: 'View More Changelogs',
     proFeatures: [
-        'Premium Playlist Skins',
-        '7 Additional Premium Skins',
-        'Save State Functionality',
-        'Single Button Player',
-        'Premium Sticky Player Features',
-        'Color Customization',
-        'Fast Forward & Rewind Buttons',
-        'Download & Playback Controls',
-        'Start Time & End Time',
-        'Disable Pause',
-        'Post Playlist Controls',
-        'Google Drive Audio Support',
-        'SoundCloud Streaming Support',
-
+        'Advanced Playlist Skins (Narrow & Extensive Layouts)',
+        'Podcast Episode Search & Filter',
+        'Numbered Pagination & Load More Episodes',
+        'Playlist Shuffle & Hide Download Button Controls',
+        'Multiple Radio Stations Playlist',
+        'Backup Stream URL & Recently Played History',
+        '7+ Additional Premium Player Skins',
+        'Save Playback State & Resume Progress',
+        'Single Button Compact Player Layout',
+        'Full Color & Style Customization',
+        'Custom Skip Intervals, Start & End Time Limits',
+        'Icecast & Shoutcast Radio Metadata Sync',
+        'Custom Audio Playback Speed Control'
     ]
 })
 

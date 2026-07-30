@@ -18,11 +18,11 @@ const Style = ({ attributes, id }) => {
     }
     #${id} .plyr{
       --plyr-color-main: ${primaryColor};
-      --plyr-color-bg: black;
+      --plyr-color-bg: ${bgColor};
       --theme-skin-wave-color: ${controlColor};
       --plyr-color-text: ${textColor};
       --plyr-color-control: ${controlColor};
-      --plyr-color-background: black;
+      --plyr-color-background: ${bgColor};
     }
     #${id} .h5ap_standard_player,#${id} .h5ap-sticky,#${id} .h5ap_skin
      {

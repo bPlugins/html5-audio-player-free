@@ -11,7 +11,7 @@ import { resolveAudioSrc } from "../../../../../utils/gDriveProxy";
 
 function Wave(props) {
     const { attributes, containerRef, className } = props;
-    const { source: rawSource, title, poster, artist, bgColor, primaryColor, controlColor, repeat, autoplay, muted, seekTime, disablePause, startTime, saveState, preload } = attributes;
+    const { source: rawSource, title, poster, artist, bgColor, primaryColor, controlColor, repeat, autoplay, muted, seekTime, disablePause, startTime, saveState, preload, waveType } = attributes;
     const source = resolveAudioSrc(rawSource);
 
     const playerRef = useRef();
@@ -43,7 +43,8 @@ function Wave(props) {
         }
 
         playerRef.current = player;
-        const cleanupWave = handleWave(containerRef.current, playerRef.current, controlColor, bgColor);
+        const activeWaveType = waveType || 'equalizer';
+        const cleanupWave = handleWave(containerRef.current, playerRef.current, controlColor, bgColor, activeWaveType, source);
 
         return () => {
             if (cleanupWave) {
@@ -51,7 +52,7 @@ function Wave(props) {
             }
             player.destroy()
         }
-    }, [source, title, poster, artist, primaryColor, bgColor]);
+    }, [source, title, poster, artist, primaryColor, bgColor, waveType]);
 
     return <div className={`skin_wave ${className}`} id="" ref={containerRef}>
         <CloseStickyIcon onClick={() => fadeOut(containerRef.current)} />

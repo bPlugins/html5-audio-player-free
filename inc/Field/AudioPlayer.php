@@ -145,6 +145,21 @@ class AudioPlayer
             array('standard_skin', 'not-any', 'default,stamp,Simple-1'),
           ),
         ),
+        array(
+          'id'         => 'waveType',
+          'type'       => 'select',
+          'title'      => \__('Waveform Style <span class="h5ap-new-badge" style="background:#2563eb;color:#fff;font-size:10px;padding:2px 6px;border-radius:4px;margin-left:6px;font-weight:600;">NEW</span>', 'html5-audio-player'),
+          'desc'       => \__('Choose between dynamic jumping equalizer bars or a SoundCloud-style static waveform.', 'html5-audio-player'),
+          'options'    => array(
+            'equalizer' => 'Real-time Equalizer (Jumping Bars)',
+            'waveform'  => 'Static Waveform (SoundCloud Style)',
+          ),
+          'default'    => 'equalizer',
+          'dependency' => array(
+            array('h5ap_player_type', '==', 'opt-1'),
+            array('standard_skin', '==', 'wave'),
+          ),
+        ),
 
         // --- Section Header 2: Controls & Components ---
         array(
@@ -345,7 +360,6 @@ class AudioPlayer
                             <li><strong>End Time:</strong> Set the specific time, in seconds, where the audio should stop playing.</li>
                             <li><strong>Disable Pause:</strong> Prevent users from pausing the audio playback.</li>
                             <li><strong>Save State:</strong> Save the player\'s time state so it resumes from where the user left off.</li>
-                            <li><strong>Waveform Style <span style="background:#2563eb;color:#fff;font-size:10px;padding:2px 6px;border-radius:4px;margin-left:6px;font-weight:600;">NEW</span>:</strong> Switch between Real-time Equalizer and Static Waveform (SoundCloud Style) for the Wave skin.</li>
                         </ul>
                         <a href="' . admin_url('admin.php?page=html5-audio-player-help-demo#/pricing') . '" 
                         class="h5ap-pro-notice-button"> ' . $h5ap_crown_icon . ' Get Pro</a>

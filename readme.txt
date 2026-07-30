@@ -4,7 +4,7 @@ Tags: mp3 player, audio, audio player, player, podcast
 Donate link: https://www.buymeacoffee.com/abuhayat/  
 Requires at least: 6.5
 Tested up to: 7.0
-Stable tag: 2.8.0
+Stable tag: 2.8.1
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -25,8 +25,8 @@ Built with modern HTML5 technology, this plugin works across all major browsers 
 
 ### Key Features – Free Version
 * **Advanced Player Layouts**: Choose from Standard Player, Sticky Player (fixed bottom/top), and the newly unlocked Audio Playlist Player.
-* **Podcast RSS Feed Import**: Easily import podcast channels from any RSS feed URL (shows the latest 5 episodes; upgrade to PRO for unlimited episodes, search, filter and custom pagination).
-* **Modern Player Skins**: Select from Default, Fusion, Stamp, and Wave skins (includes real-time jumping bars visualizer; SoundCloud-style static waveform available in PRO).
+* **Podcast RSS Feed Import**: Easily import podcast channels from any RSS feed URL (fetch and play unlimited episodes with custom fetch limits).
+* **Modern Player Skins**: Select from Default, Fusion, Stamp, and Wave skins (Wave skin includes real-time jumping bars visualizer and SoundCloud-style static waveform).
 * **Google Drive & SoundCloud Support**: Play shared files directly from Google Drive or stream tracks via SoundCloud URLs using our built-in proxy.
 * **Lossless & Standard Formats**: Seamless playback of MP3, OGG, and FLAC audio files with native WordPress Media Library upload support.
 * **Gutenberg & Widget Ready**: Embed players instantly using the custom Gutenberg block or versatile shortcodes on posts, pages, and sidebar widgets.
@@ -40,11 +40,9 @@ Built with modern HTML5 technology, this plugin works across all major browsers 
 Upgrade to the [**Pro version**](https://bplugins.com/products/html5-audio-player/pricing) for full control over design, layouts, advanced podcast features, and unlimited streams.
 
 **What’s Included in Pro:**
-* **Unlimited Podcast Episodes & Feeds**: Completely removes the 5-episode limit, allowing you to fetch and play unlimited episodes from any RSS feed.
-* **SoundCloud-Style Static Waveform**: Renders a beautiful static wavesurfer waveform visualizer for the Wave skin instead of just jumping equalizer bars.
+* **Advanced Playlist Skins**: Access premium Narrow and Extensive playlist layouts with collapsible track descriptions and customized styling.
 * **Podcast Episode Search & Filter**: Real-time frontend keyword search to let users filter and find specific episodes inside playlist layers.
 * **Load More & Numbered Pagination**: Configure custom per-page batch limits with standard numbered pagination (1, 2, 3...) or Load More buttons.
-* **Advanced Playlist Skins**: Access premium Narrow and Extensive playlist layouts with collapsible track descriptions and customized styling.
 * **7 Premium Player Skins**: Unlock Card 1, Card 2, Simple 1, Simple 2, Player 9, Player 10, and Player 11.
 * **Multiple Radio Stations (Playlists)**: Unified player interface allowing users to switch between multiple radio stations or channels.
 * **Recently Played Track History**: Display live song timelines and titles fetched dynamically from Icecast/Shoutcast server metadata.
@@ -219,6 +217,10 @@ e.g.
 
 
 == Changelog ==
+
+= 2.8.1 - 30 July, 2026 =
+* **Update:** Unlocked SoundCloud-style Static Waveform visualizer (WaveSurfer.js) in the Wave skin for Free users.
+* **Update:** Removed 5-episode fetch limit on Podcast RSS feeds, allowing free users to fetch unlimited podcast episodes and set custom episode fetch limits.
 
 = 2.8.0 - 27 July, 2026 =
 * **New:** Added Podcast RSS Feed importing and playback support for Audio Playlists (Narrow & Extensive).

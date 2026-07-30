@@ -82,6 +82,7 @@ $block = [
         'radius'        => $type === 'opt-3' ? 0 : $meta('radius', '5') . 'px',
         'lazyLoad'      => $lazy_load_meta,
         'controls' => array_fill_keys(array_unique($controls), true),
+        'waveType'      => $meta('waveType', 'equalizer'),
         'options'       => [
             'volume' => (float) $meta($type === 'opt-3' ? 'sticky_volume' : 'plp_volume', 0.5),
         ],

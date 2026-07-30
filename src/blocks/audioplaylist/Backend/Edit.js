@@ -28,7 +28,7 @@ const Edit = (props) => {
     const formData = new FormData();
     formData.append('action', 'h5ap_parse_podcast_feed');
     formData.append('url', attributes.podcastRssUrl);
-    formData.append('limit', 5);
+    formData.append('limit', attributes.podcastLimit || 0);
 
     fetch(ajaxurl, {
       method: 'POST',

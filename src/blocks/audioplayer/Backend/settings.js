@@ -112,27 +112,22 @@ const Settings = ({ attributes, setAttributes, siteUrl }) => {
                         )}
 
                          {skin === "Wave" && (
-                          <Fragment>
-                             <SelectControl
-                               className="mt10"
-                               label={
-                                 <span style={{ display: 'flex', alignItems: 'center' }}>
-                                   {__("Waveform Style", "h5ap")}
-                                   <NewBadge />
-                                 </span>
-                               }
-                              value={waveType || 'equalizer'}
-                              options={[
-                                { label: __('Real-time Equalizer (Jumping Bars)', "h5ap"), value: 'equalizer' },
-                                { label: __('Static Waveform (SoundCloud Style)', "h5ap"), value: 'waveform', disabled: true },
-                              ]}
-                              onChange={(waveType) => setAttributes({ waveType })}
-                            />
-                            <Notice status='premium' isIcon={true} className="mt10">
-                              {__("Static Waveform (SoundCloud Style) is available in the Pro version.", "h5ap")}
-                            </Notice>
-                          </Fragment>
-                        )}
+                           <SelectControl
+                             className="mt10"
+                             label={
+                               <span style={{ display: 'flex', alignItems: 'center' }}>
+                                 {__("Waveform Style", "h5ap")}
+                                 <NewBadge />
+                               </span>
+                             }
+                             value={waveType || 'equalizer'}
+                             options={[
+                               { label: __('Real-time Equalizer (Jumping Bars)', "h5ap"), value: 'equalizer' },
+                               { label: __('Static Waveform (SoundCloud Style)', "h5ap"), value: 'waveform' },
+                             ]}
+                             onChange={(waveType) => setAttributes({ waveType })}
+                           />
+                         )}
 
                         {!['Default', "Simple-1", "Simple-2"].includes(skin) && (
                           <Fragment>

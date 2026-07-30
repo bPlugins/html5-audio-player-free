@@ -5,14 +5,11 @@ namespace H5APPlayer\Core;
 
 class Podcast
 {
-    public static function parse_feed($url, $limit = 5)
+    public static function parse_feed($url, $limit = 0)
     {
         if (empty($url)) {
             return [];
         }
-
-        // Enforce the 5-item limit for the Free version
-        $limit = ($limit > 0) ? min($limit, 5) : 5;
 
         $cache_key = 'h5ap_podcast_feed_v2_' . md5($url . '_' . $limit);
         $cached_data = get_transient($cache_key);
@@ -35,7 +32,7 @@ class Podcast
 
         $count = 0;
         foreach ($items as $item) {
-            if ($count >= $limit) {
+            if ($limit > 0 && $count >= $limit) {
                 break;
             }
 

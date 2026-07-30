@@ -12,7 +12,7 @@ class H5AP {
     if (typeof h5ap_i18n != "undefined") {
       options.i18n = h5ap_i18n;
     }
-    let { controls, seekTime, i18n, title, artist, disablePause, poster, muted, autoplay, startTime, source, skin, disableDownload, fusionDownload, color, background, repeat, primaryColor, saveState = false } = options;
+    let { controls, seekTime, i18n, title, artist, disablePause, poster, muted, autoplay, startTime, source, skin, disableDownload, fusionDownload, color, background, repeat, primaryColor, saveState = false, waveType } = options;
 
     // Google Drive proxy: googleapis.com/drive, drive.google.com, docs.google.com URLs cannot be streamed directly in the browser
     // due to CORS/Range-request limitations. Route them through the WordPress proxy endpoint.
@@ -146,7 +146,7 @@ class H5AP {
     }
 
     if (skin === "wave" && player) {
-      this.wave(audioPlayer, player, primaryColor, background);
+      this.wave(audioPlayer, player, primaryColor, background, waveType, source);
     }
 
     if (skin === "card-1" && player) {
@@ -1022,8 +1022,10 @@ class H5AP {
     });
   }
 
-  wave(wrapper, player, color = "#fff", background = "#333") {
-    const cleanup = handleWave(wrapper, player, color, background);
+  wave(wrapper, player, color = "#fff", background = "#333", waveType = "equalizer", sourceUrl = "") {
+    const activeWaveType = waveType || 'equalizer';
+
+    const cleanup = handleWave(wrapper, player, color, background, activeWaveType, sourceUrl);
     if (cleanup) {
       player.on("destroy", () => {
         cleanup();

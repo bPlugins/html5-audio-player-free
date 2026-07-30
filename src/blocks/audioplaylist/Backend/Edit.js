@@ -11,9 +11,9 @@ const Edit = (props) => {
   const [isFetchingPodcast, setIsFetchingPodcast] = useState(false);
 
   useEffect(() => {
-    setAttributes({ 
+    setAttributes({
       clientId,
-      uniqueId: "h5ap" + clientId.substr(0, 9) 
+      uniqueId: "h5ap" + clientId.substr(0, 9)
     });
   }, []);
 
@@ -51,7 +51,10 @@ const Edit = (props) => {
       });
   }, [attributes.sourceType, attributes.podcastRssUrl, attributes.podcastLimit]);
 
-  const blockProps = useBlockProps({ className: 'wp-block-h5ap-tailwind' });
+  const blockProps = useBlockProps({ 
+    className: 'wp-block-h5ap-tailwind',
+    id: `block-${clientId}`
+  });
 
   const effectiveAttributes = {
     ...attributes,

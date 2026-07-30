@@ -32,9 +32,9 @@ const skin = (audios = [], customOptions = {}) => {
     const isLoading = customOptions?.isLoading === true;
     const hasMany = audios?.length > 6;
 
-    return `<div class="plyr-wrapper w-full">
-    <div class="h5ap-scrollable-playlist ${hasMany ? 'has-many-items' : ''}" style="min-height: 180px;">
-       <div class="items grid grid-cols-3 gap-4">
+    return `<div class="plyr-wrapper w-full box-border overflow-hidden">
+    <div class="h5ap-scrollable-playlist ${hasMany ? 'has-many-items' : ''}" style="min-height: 180px; overflow-x: hidden; box-sizing: border-box;">
+       <div class="items grid grid-cols-3 gap-3 w-full box-border">
        ${audios.length === 0 ? `
            <div class="col-span-3 text-center py-10 opacity-60 text-xs" style="grid-column: 1 / -1; padding: 40px 0;">
                ${isLoading ? 'Loading episodes...' : (searchQuery ? `No episodes found matching "${searchQuery}"` : 'No episodes found')}
@@ -62,7 +62,7 @@ const skin = (audios = [], customOptions = {}) => {
                    ${audios[0].description}
                </p>
                ${audios[0].description.length > 100 ? `
-                   <button type="button" class="h5ap-show-more-btn" data-h5ap-expand="0" style="background:none;border:none;color:var(--plyr-color-main, #f59e0b);padding:0;font-size:11.5px;cursor:pointer;margin-top:6px;margin-bottom:6px;font-weight:600;display:inline-block;outline:none;">
+                   <button type="button" class="h5ap-show-more-btn" data-h5ap-expand="0" style="background:none;border:none;color:inherit;padding:0;font-size:11.5px;cursor:pointer;margin-top:6px;margin-bottom:6px;font-weight:600;display:inline-block;outline:none;">
                        ${customOptions?.expandedItems?.[0] ? 'Show Less' : 'Show More'}
                    </button>
                ` : ''}
@@ -75,7 +75,7 @@ const skin = (audios = [], customOptions = {}) => {
          <progress class="plyr__progress__buffer" min="0" max="100" value="0">% buffered</progress>
          <span role="tooltip" class="plyr__tooltip">00:00</span>
      </div>
-    <div class="flex justify-between text-sm items-center" style="margin-top: 8px; margin-left: 0; margin-right: -7px; padding: 0;">
+    <div class="flex justify-between text-sm items-center" style="margin-top: 8px; margin-left: 0; margin-right: 0; padding: 0 2px;">
         <span class="plyr__time--current" style="margin: 0 !important; padding: 0 !important;">0:00</span>
         <div class="flex items-center gap-2" style="line-height: 1; margin: 0 !important; padding: 0 !important;">
             <span class="plyr__time--duration" style="margin: 0 !important; padding: 0 !important;">0:00</span>

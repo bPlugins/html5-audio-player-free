@@ -7,11 +7,16 @@ const Style = ({ attributes, id }) => {
   useEffect(() => {
     const CSS = `#${id}{
       display: flex;
-      justify-content:${alignment};
+      justify-content:${alignment || 'left'};
+      width: 100%;
     }
     #${id} .plyr, 
+    #${id} .h5ap_playlist,
+    #${id} .skin_playlist1,
     #${id} .flat-black-player-container{ 
-      width: ${width};
+      width: ${width || '100%'};
+      max-width: 100%;
+      box-sizing: border-box;
     }
     #${id} .skin_playlist1 {
       background-color: ${bgColor || '#18181b'} !important;

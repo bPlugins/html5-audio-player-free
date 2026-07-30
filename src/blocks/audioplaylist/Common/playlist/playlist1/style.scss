@@ -1,4 +1,8 @@
 .skin_playlist1 {
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+
     .plyr--full-ui input[type=range] {
         color: var(--plyr-color-main);
     }
@@ -58,7 +62,9 @@
     .h5ap-scrollable-playlist {
         max-height: 220px;
         overflow-y: auto;
-        padding-right: 8px;
+        overflow-x: hidden;
+        box-sizing: border-box;
+        padding-right: 6px;
         margin-bottom: 20px;
         scroll-behavior: smooth;
 

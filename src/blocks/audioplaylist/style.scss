@@ -841,6 +841,131 @@
     background: transparent !important;
   }
 
+  // Playback Speed Controller Pill & Floating Dropdown
+  .h5ap-speed-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+    flex-shrink: 0;
+    margin: 0;
+
+    button.h5ap-speed-btn {
+      width: 36px !important;
+      min-width: 36px !important;
+      max-width: 36px !important;
+      height: 22px !important;
+      padding: 0 !important;
+      border-radius: 5px !important;
+      font-size: 10.5px !important;
+      font-weight: 700 !important;
+      font-family: inherit !important;
+      background: rgba(128, 128, 128, 0.12) !important;
+      border: 1px solid rgba(128, 128, 128, 0.22) !important;
+      cursor: pointer !important;
+      color: inherit !important;
+      line-height: 22px !important;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      box-sizing: border-box !important;
+      flex-shrink: 0 !important;
+
+      &:hover {
+        background: rgba(128, 128, 128, 0.24) !important;
+        color: var(--plyr-color-main, #f59e0b) !important;
+        transform: scale(1.05);
+      }
+
+      &:active {
+        transform: scale(0.96);
+      }
+    }
+
+    .h5ap-speed-dropdown {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%) translateY(6px);
+      background: #ffffff !important;
+      color: #1e293b !important;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      padding: 5px;
+      min-width: 80px;
+      z-index: 99999;
+      display: none;
+      flex-direction: column;
+      gap: 2px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 5px;
+        border-style: solid;
+        border-color: #ffffff transparent transparent transparent;
+      }
+
+      &.is-open {
+        display: flex !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        transform: translateX(-50%) translateY(0) !important;
+      }
+
+      .h5ap-speed-heading {
+        font-size: 9.5px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #64748b !important;
+        padding: 3px 6px;
+        border-bottom: 1px solid #f1f5f9;
+        margin-bottom: 2px;
+        text-align: center;
+      }
+
+      button.h5ap-speed-opt {
+        background: transparent !important;
+        border: none !important;
+        padding: 5px 8px !important;
+        font-size: 11px !important;
+        font-weight: 600 !important;
+        color: #334155 !important;
+        border-radius: 5px !important;
+        cursor: pointer !important;
+        text-align: center !important;
+        transition: all 0.15s ease !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+
+        &:hover {
+          background: #f1f5f9 !important;
+          color: #0f172a !important;
+        }
+
+        &.is-active,
+        &.is-active:hover {
+          background: var(--plyr-color-main, #f59e0b) !important;
+          color: #ffffff !important;
+          font-weight: 700 !important;
+          box-shadow: 0 2px 6px rgba(245, 158, 11, 0.35) !important;
+        }
+      }
+    }
+  }
+
   .h5ap-load-more-btn {
     background: var(--plyr-color-main, #f59e0b) !important;
     color: #ffffff !important;
@@ -920,4 +1045,16 @@
       font-size: 14px !important;
     }
   }
+}
+
+// Remove editor focus ring on range sliders
+.wp-block-h5ap-audioplaylist input[type="range"]:focus,
+.wp-block-h5ap-audioplaylist input[type="range"]:focus-visible,
+.wp-block-h5ap-audioplaylist input[type="range"]:active,
+.skin_playlist1 input[type="range"]:focus,
+.skin_playlist1 input[type="range"]:focus-visible,
+.skin_playlist1 input[type="range"]:active {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
 }

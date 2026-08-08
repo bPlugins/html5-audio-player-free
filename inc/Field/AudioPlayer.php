@@ -223,7 +223,7 @@ class AudioPlayer
           'type' => 'color',
           'title' => 'Control color',
           'desc' => 'Set the color for the player control buttons (like play, pause, volume).',
-          'default' => '#fff',
+          'default' => '#4A5464',
           'dependency' => array(
             'h5ap_player_type|standard_skin',
             '==|any',

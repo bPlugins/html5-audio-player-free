@@ -37,6 +37,30 @@
   .components-button.has-icon {
     border-radius: 0;
   }
+
+  .components-range-control {
+    width: 100%;
+
+    .components-range-control__root {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .components-range-control__slider,
+    .components-range-control__wrapper {
+      flex: 1;
+      width: 100%;
+    }
+
+    .components-range-control__number,
+    .components-input-control__input,
+    .components-range-control__input {
+      width: 60px !important;
+      min-width: 60px !important;
+    }
+  }
 }
 
 

@@ -55,9 +55,18 @@ function Playlist1(props) {
         const audioElement = container.querySelector('audio');
         if (!audioElement) return;
 
+        const skipSeconds = parseInt(attributes.skipTime || 15);
+
         const player = new Plyr(audioElement, {
+            seekTime: skipSeconds,
+            volume: 1,
+            muted: false,
+            storage: { enabled: false },
             controls: skin(itemsToDisplay, {
                 hide_download: hideDownload,
+                episodeSkip: attributes.episodeSkip,
+                skipTime: skipSeconds,
+                enableSpeed: attributes.enableSpeed,
                 sourceType: attributes.sourceType,
                 podcastDate: attributes.podcastDate,
                 podcastDesc: attributes.podcastDesc,
@@ -77,6 +86,49 @@ function Playlist1(props) {
         window.player = player;
 
         new PlyrPlaylist(player, itemsToDisplay, { multipleAudio: multiple_audio });
+
+        // Speed dropdown click handlers
+        const speedWrappers = container.querySelectorAll('.h5ap-speed-wrapper, [data-plyr="speed-wrapper"]');
+        speedWrappers.forEach(wrapper => {
+            const btn = wrapper.querySelector('.h5ap-speed-btn, [data-plyr="speed-btn"]');
+            const dropdown = wrapper.querySelector('.h5ap-speed-dropdown');
+            const options = wrapper.querySelectorAll('.h5ap-speed-opt');
+
+            if (btn && dropdown) {
+                btn.onclick = (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const isOpen = dropdown.classList.contains('is-open');
+                    document.querySelectorAll('.h5ap-speed-dropdown.is-open').forEach(d => d.classList.remove('is-open'));
+                    if (!isOpen) {
+                        dropdown.classList.add('is-open');
+                    }
+                };
+
+                options.forEach(opt => {
+                    opt.onclick = (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const speed = parseFloat(opt.dataset.speed) || 1;
+                        player.speed = speed;
+                        options.forEach(o => o.classList.remove('is-active'));
+                        opt.classList.add('is-active');
+                        const label = wrapper.querySelector('.h5ap-speed-label');
+                        if (label) {
+                            label.textContent = `${speed}×`;
+                        }
+                        dropdown.classList.remove('is-open');
+                    };
+                });
+            }
+        });
+
+        const handleOutsideClick = (e) => {
+            if (!e.target.closest('.h5ap-speed-wrapper') && !e.target.closest('[data-plyr="speed-wrapper"]')) {
+                document.querySelectorAll('.h5ap-speed-dropdown.is-open').forEach(d => d.classList.remove('is-open'));
+            }
+        };
+        document.addEventListener('click', handleOutsideClick);
 
         const searchInput = container.querySelector('[data-h5ap-search]');
         if (searchInput) {
@@ -125,13 +177,14 @@ function Playlist1(props) {
         });
 
         return () => {
+            document.removeEventListener('click', handleOutsideClick);
             try {
                 player?.destroy();
             } catch (e) {
                 // Suppress DOM unmount warning
             }
         };
-    }, [audios, hideDownload, currentPage, visibleCount, isLoadMoreEnabled, paginationType, perPage, searchQuery, attributes.podcastSearch, attributes.podcastLoadMore, attributes.podcastDate, attributes.podcastDesc, expandedItems]);
+    }, [audios, hideDownload, currentPage, visibleCount, isLoadMoreEnabled, paginationType, perPage, searchQuery, attributes.podcastSearch, attributes.podcastLoadMore, attributes.podcastDate, attributes.podcastDesc, attributes.episodeSkip, attributes.skipTime, attributes.enableSpeed, expandedItems]);
 
     return (
         <div className="skin_playlist1 h5ap_skin w-full max-w-xl mx-auto rounded-2xl shadow-xl p-6" ref={containerRef}>

@@ -31,7 +31,7 @@
                 {
                     "title": "Title",
                     "artist": "artist",
-                    "source": ""
+                    "source": "https://bplugins.b-cdn.net/wp-content/uploads/2023/11/sample-audio.mp3"
                 }
             ]
         },
@@ -99,6 +99,18 @@
             "default": 0
         },
         "podcastFilter": {
+            "type": "boolean",
+            "default": false
+        },
+        "episodeSkip": {
+            "type": "boolean",
+            "default": false
+        },
+        "skipTime": {
+            "type": "number",
+            "default": 15
+        },
+        "enableSpeed": {
             "type": "boolean",
             "default": false
         }

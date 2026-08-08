@@ -48,9 +48,9 @@ class PlyrPlaylist {
 
         this.player.on('ended', () => {
             if (this.repeat) {
-                this.switchToAudio(this.currentIndex);
+                this.switchToAudio(this.currentIndex, true);
             } else {
-                this.next();
+                this.next(true);
             }
         })
 
@@ -156,31 +156,31 @@ class PlyrPlaylist {
         }
 
         this.currentIndex = index;
-        const src = this.audios[this.currentIndex].source;
+        const src = this.audios[this.currentIndex]?.source;
 
         if (!src) return;
 
+        const audioEl = this.player.elements?.container ? this.player.elements.container.querySelector('audio') : null;
+        if (audioEl) {
+            audioEl.src = src;
 
-        if (this.player.elements.container.querySelector('audio')) {
-
-            this.player.elements.container.querySelector('audio').src = src;
             if (this.playlistTitle) {
-                this.playlistTitle.textContent = this.audios[this.currentIndex].title;
+                this.playlistTitle.textContent = this.audios[this.currentIndex]?.title || '';
             }
             if (this.playlistArtist) {
-                this.playlistArtist.textContent = this.audios[this.currentIndex].artist;
+                this.playlistArtist.textContent = this.audios[this.currentIndex]?.artist || '';
             }
             if (this.playlistCover) {
-                this.playlistCover.src = this.audios[this.currentIndex].poster || this.thumb;
+                this.playlistCover.src = this.audios[this.currentIndex]?.poster || this.thumb;
             }
 
-            this.playlistItems.forEach((item, index) => {
-                if (index === this.currentIndex) {
+            this.playlistItems.forEach((item, idx) => {
+                if (idx === this.currentIndex) {
                     item.classList.add('item-active');
                 } else {
                     item.classList.remove('item-active');
                 }
-            })
+            });
 
             if (play) {
                 this.player.play()?.catch((error) => {
@@ -188,11 +188,10 @@ class PlyrPlaylist {
                     console.error('Error playing audio:', error);
                 });
             }
-
         }
 
     }
-    next() {
+    next(forcePlay = null) {
         let index = (this.currentIndex + 1) % this.audios.length;
         if (this.shuffle) {
             index = Math.floor(Math.random() * this.audios.length);
@@ -200,10 +199,12 @@ class PlyrPlaylist {
                 index = (index + 1) % this.audios.length;
             }
         }
-        this.switchToAudio(index);
+        const shouldPlay = forcePlay !== null ? forcePlay : (this.player.playing === true);
+        this.switchToAudio(index, shouldPlay);
     }
-    prev() {
-        this.switchToAudio((this.currentIndex - 1 + this.audios.length) % this.audios.length);
+    prev(forcePlay = null) {
+        const shouldPlay = forcePlay !== null ? forcePlay : (this.player.playing === true);
+        this.switchToAudio((this.currentIndex - 1 + this.audios.length) % this.audios.length, shouldPlay);
     }
 
     setItemsDuration() {

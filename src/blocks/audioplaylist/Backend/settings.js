@@ -1,13 +1,14 @@
 const { __ } = wp.i18n;
-import { TabPanel, Panel, PanelBody, PanelRow, __experimentalUnitControl as UnitControl, TextControl, ToggleControl, SelectControl } from '@wordpress/components';
+import { TabPanel, Panel, PanelBody, PanelRow, __experimentalUnitControl as UnitControl, TextControl, ToggleControl, SelectControl, RangeControl } from '@wordpress/components';
 import { AlignmentToolbar, BlockControls, InspectorControls } from '@wordpress/block-editor';
 import { useState } from "react";
 import { withSelect } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 
 import { ColorControl, InlineMediaUpload, ItemsPanel, Notice } from './../../../../../bpl-tools/Components'
-import { ProModal, AdvertiseCard } from './../../../../../bpl-tools/ProControls';
+import { ProModal, AdvertiseCard, PremiumBadge, PremiumPanel } from './../../../../../bpl-tools/ProControls';
 import NewBadge from '../../components/NewBadge/NewBadge.js';
+import BRangeControl from '../../components/BRangeControl.js';
 import { produce } from 'immer';
 
 const Settings = (props) => {
@@ -156,6 +157,24 @@ const Settings = (props) => {
                         <ItemsPanel {...{ attributes, setAttributes, clientId, arrKey: 'audios', newItem: { source: '' }, ItemSettings, itemLabel: 'Item', activeIndex, setActiveIndex, design: 'sortable', }} />
                       )}
                     </PanelBody>
+
+                    <PanelBody
+                      title={
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                          <span>{__("Playback Controls", "html5-audio-player-pro")}</span>
+                          <PremiumBadge />
+                        </div>
+                      }
+                      className='bPlPanelBody'
+                      initialOpen={false}
+                    >
+                      <PremiumPanel
+                        title={__("Playback Controls", "html5-audio-player-pro")}
+                        description={__("Forward & Rewind Skip Buttons with customizable skip duration, Playback Speed Control, and more features are available in the Pro version.", "html5-audio-player-pro")}
+                        pricingUrl={pricingURL}
+                      />
+                    </PanelBody>
+
                     <PanelBody title={__("Options", "h5vp")} className='bPlPanelBody'>
 
                       <SelectControl

@@ -32,6 +32,10 @@ const skin = (audios = [], customOptions = {}) => {
     const isLoading = customOptions?.isLoading === true;
     const hasMany = audios?.length > 6;
 
+    const isSkipEnabled = customOptions?.episodeSkip === true;
+    const skipTime = customOptions?.skipTime || 15;
+    const isSpeedEnabled = customOptions?.enableSpeed === true;
+
     return `<div class="plyr-wrapper w-full box-border overflow-hidden">
     <div class="h5ap-scrollable-playlist ${hasMany ? 'has-many-items' : ''}" style="min-height: 180px; overflow-x: hidden; box-sizing: border-box;">
        <div class="items grid grid-cols-3 gap-3 w-full box-border">
@@ -87,25 +91,71 @@ const skin = (audios = [], customOptions = {}) => {
         </div>
     </div>
     </div>
-    <div class="flex items-center justify-center gap-6">
+    <div class="flex items-center justify-center gap-4 flex-wrap">
+       ${customOptions?.shuffle ? `
+       <button class="plyr__control p-2 hover:text-white active" data-plyr="shuffle" title="Shuffle" aria-label="Shuffle">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+             <polyline points="16 3 21 3 21 8"></polyline>
+             <line x1="4" y1="20" x2="21" y2="3"></line>
+             <polyline points="21 16 21 21 16 21"></polyline>
+             <line x1="15" y1="15" x2="21" y2="21"></line>
+             <line x1="4" y1="4" x2="9" y2="9"></line>
+          </svg>
+       </button>
+       ` : ''}
        <button class="plyr__control p-2 hover:text-white" data-plyr="prev" title="Previous Track" aria-label="Previous Track">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
              <polygon points="19 20 9 12 19 4 19 20"></polygon>
              <line x1="5" y1="19" x2="5" y2="5" stroke-width="2.5"></line>
           </svg>
        </button>
+       ${isSkipEnabled ? `
+       <button type="button" class="plyr__control p-2 hover:text-white" data-plyr="rewind" title="Rewind ${skipTime}s" aria-label="Rewind ${skipTime}s">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+             <polygon points="11 19 2 12 11 5 11 19"></polygon>
+             <polygon points="22 19 13 12 22 5 22 19"></polygon>
+          </svg>
+          <span class="plyr__tooltip" role="tooltip">Rewind ${skipTime}s</span>
+       </button>
+       ` : ''}
        <button class="plyr__control p-4 bg-amber-500 rounded-full hover:bg-amber-400 leading-0" data-plyr="play">
           <svg class="icon--pressed" role="presentation"><use xlink:href="#plyr-pause"></use></svg>
           <svg class="icon--not-pressed" role="presentation"><use xlink:href="#plyr-play"></use></svg>
           <span class="label--pressed plyr__tooltip" role="tooltip">Pause</span>
           <span class="label--not-pressed plyr__tooltip" role="tooltip">Play</span>
        </button>
+       ${isSkipEnabled ? `
+       <button type="button" class="plyr__control p-2 hover:text-white" data-plyr="fast-forward" title="Forward ${skipTime}s" aria-label="Forward ${skipTime}s">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+             <polygon points="13 19 22 12 13 5 13 19"></polygon>
+             <polygon points="2 19 11 12 2 5 2 19"></polygon>
+          </svg>
+          <span class="plyr__tooltip" role="tooltip">Forward ${skipTime}s</span>
+       </button>
+       ` : ''}
        <button class="plyr__control p-2 hover:text-white" data-plyr="next" title="Next Track" aria-label="Next Track">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
              <polygon points="5 4 15 12 5 20 5 4"></polygon>
              <line x1="19" y1="5" x2="19" y2="19" stroke-width="2.5"></line>
           </svg>
        </button>
+       ${isSpeedEnabled ? `
+       <div class="h5ap-speed-wrapper inline-flex items-center relative select-none" data-plyr="speed-wrapper">
+           <button type="button" class="plyr__control h5ap-speed-btn" data-plyr="speed-btn" aria-label="Playback Speed" title="Playback Speed">
+               <span class="h5ap-speed-label">1×</span>
+           </button>
+           <div class="h5ap-speed-dropdown">
+               <div class="h5ap-speed-heading">Speed</div>
+               <button type="button" class="h5ap-speed-opt" data-speed="0.5">0.5×</button>
+               <button type="button" class="h5ap-speed-opt" data-speed="0.75">0.75×</button>
+               <button type="button" class="h5ap-speed-opt is-active" data-speed="1">1×</button>
+               <button type="button" class="h5ap-speed-opt" data-speed="1.25">1.25×</button>
+               <button type="button" class="h5ap-speed-opt" data-speed="1.5">1.5×</button>
+               <button type="button" class="h5ap-speed-opt" data-speed="1.75">1.75×</button>
+               <button type="button" class="h5ap-speed-opt" data-speed="2">2×</button>
+           </div>
+       </div>
+       ` : ''}
     </div>
 
     ${isLoadMore && !searchQuery ? `

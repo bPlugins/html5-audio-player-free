@@ -7,41 +7,50 @@ if ( ! defined( 'ABSPATH' ) ) {
 use H5APPlayer\Helper\LocalizeScript;
 
 $standard_skin = $meta('standard_skin', "Default");
-// $background = $meta('background', '#f2f2f2');
-$background     = $meta('background', $standard_skin === 'wave' ? '#000' : '#f2f2f2');
-$sticky_simple_background     = $meta('sticky_simple_background');
-$control_color     = $meta('control_color', $standard_skin === 'default' ? '#fff' : '#4a5464');
-$primary_color     = $meta('primary_color', '#195FF5');
-$sticky_download     = $meta('sticky_download', false, true);
-$download     = $meta('fusion_download', false, true);
-$sticky_skin = $meta('sticky_skin', 'Fusion');
+$standard_skin_lower = strtolower($standard_skin);
+
+$skin_defaults = [
+    'default' => ['bg' => '#F5F5F5', 'control' => '#4A5464'],
+    'fusion'  => ['bg' => '#161616', 'control' => '#fff'],
+    'stamp'   => ['bg' => '#161616', 'control' => '#fff'],
+    'wave'    => ['bg' => '#161616', 'control' => '#fff'],
+];
+
+$defaults = $skin_defaults[$standard_skin_lower] ?? ['bg' => '#161616', 'control' => '#fff'];
+
+$background     = $meta('background', $defaults['bg']);
+$sticky_simple_background = $meta('sticky_simple_background');
+$control_color  = $meta('control_color', $defaults['control']);
+$primary_color  = $meta('primary_color', '#195FF5');
+$sticky_download = $meta('sticky_download', false, true);
+$download       = $meta('fusion_download', false, true);
+$sticky_skin    = $meta('sticky_skin', 'Fusion');
 
 // settings
 $settings = h5ap_get_settings('h5ap_settings', []);
 $settings_primary_color = $settings('h5ap_primary_color');
 $settings_background = $settings('h5ap_background_color');
 
-
 $bgColor = $background;
 if ($type === 'opt-3') {
-    $bgColor = $sticky_simple_background;
+    $bgColor = !empty($sticky_simple_background) ? $sticky_simple_background : $bgColor;
     $download = $sticky_download;
 }
 
-if ($standard_skin === 'default' && $primary_color === '#195FF5') {
-    $bgColor = $settings_background;
-    $control_color = $settings_primary_color;
+if (($control_color === '#fff' || $control_color === '#ffffff') && (empty($bgColor) || in_array(strtolower($bgColor), ['#f5f5f5', '#f2f2f2', '#eaeaea', '#ffffff', '#fff']))) {
+    $control_color = '#4A5464';
 }
 
-$controls = $meta('controls', []);
+$default_controls = ['play', 'progress', 'mute', 'volume', 'current-time', 'settings'];
+$controls = $meta('controls', $default_controls);
 
 $lazy_load_meta = $meta('lazy_load', 'default');
 if ($lazy_load_meta === null || $lazy_load_meta === '') {
     $lazy_load_meta = 'default';
 }
 
-if (!is_array($controls)) {
-    $controls = [];
+if (!is_array($controls) || empty($controls)) {
+    $controls = $default_controls;
 }
 
 // force play always ON

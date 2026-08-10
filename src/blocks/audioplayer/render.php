@@ -10,6 +10,31 @@ if (isset($attributes['source'])) {
     $attributes['source'] = h5ap_resolve_gdrive_url(h5ap_resolve_soundcloud_url($attributes['source']));
 }
 
+$default_controls = [
+    'restart'      => false,
+    'rewind'       => false,
+    'play'         => true,
+    'fast-forward' => false,
+    'progress'     => true,
+    'duration'     => false,
+    'current-time' => true,
+    'mute'         => true,
+    'volume'       => true,
+    'settings'     => true,
+    'download'     => false,
+];
+
+$critical_keys = ['progress', 'current-time', 'mute', 'volume'];
+$missing_critical = array_diff($critical_keys, array_keys((array) ($attributes['controls'] ?? [])));
+
+if (
+    !isset($attributes['controls'])
+    || !is_array($attributes['controls'])
+    || !empty($missing_critical)
+) {
+    $attributes['controls'] = wp_parse_args($attributes['controls'] ?? [], $default_controls);
+}
+
 extract($attributes);
 
 $uniqueId = wp_unique_id('h5ap-player-');

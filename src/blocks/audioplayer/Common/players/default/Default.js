@@ -14,8 +14,20 @@ export default ({ attributes, containerRef, playerRef, className }) => {
             return;
         }
 
+        const defaultControlsList = ['play', 'progress', 'current-time', 'mute', 'volume', 'settings'];
+        const rawControlsList = controls && typeof controls === 'object'
+            ? Object.keys(controls).filter(key => controls[key])
+            : defaultControlsList;
+
+        const hasCritical = rawControlsList.some(k => ['progress', 'current-time', 'mute', 'volume'].includes(k));
+        const finalControls = (rawControlsList.length > 0 && hasCritical) ? rawControlsList : defaultControlsList;
+
+        const speedOptions = Array.isArray(speed)
+            ? speed.map(Number)
+            : (Array.isArray(speed?.speed) ? speed.speed.map(Number) : (window.h5apPlayer?.speed ? window.h5apPlayer.speed.map(Number) : [0.5, 1, 1.5, 2]));
+
         const config = {
-            controls: Object.keys(controls).filter(key => controls[key]),
+            controls: finalControls,
             loop: { active: repeat },
             autoplay,
             seekTime,
@@ -24,8 +36,7 @@ export default ({ attributes, containerRef, playerRef, className }) => {
                 controls: true,
                 seek: true,
             },
-            speed: { selected: 1, options: speed }
-
+            speed: { selected: 1, options: speedOptions }
         }
 
         if (i18n) {

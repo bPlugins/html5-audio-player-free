@@ -5,7 +5,7 @@
     "description": "",
     "category": "media",
     "icon": "playlist-audio",
-    "version": "2.8.0",
+    "version": "2.8.2",
     "keywords": [
         "HTML5 Audio Playlist",
         "Media Player",
@@ -31,7 +31,7 @@
                 {
                     "title": "Title",
                     "artist": "artist",
-                    "source": "https://bplugins.b-cdn.net/wp-content/uploads/2023/11/sample-audio.mp3"
+                    "source": ""
                 }
             ]
         },
@@ -102,6 +102,22 @@
             "type": "boolean",
             "default": false
         },
+        "podcastPaginationType": {
+            "type": "string",
+            "default": "load_more"
+        },
+        "podcastPerPage": {
+            "type": "number",
+            "default": 5
+        },
+        "hideDownload": {
+            "type": "boolean",
+            "default": false
+        },
+        "shuffle": {
+            "type": "boolean",
+            "default": false
+        },
         "episodeSkip": {
             "type": "boolean",
             "default": false
@@ -113,6 +129,34 @@
         "enableSpeed": {
             "type": "boolean",
             "default": false
+        },
+        "enableSubscribe": {
+            "type": "boolean",
+            "default": false
+        },
+        "subscribeTitle": {
+            "type": "string",
+            "default": "Subscribe"
+        },
+        "applePodcastsUrl": {
+            "type": "string",
+            "default": ""
+        },
+        "spotifyUrl": {
+            "type": "string",
+            "default": ""
+        },
+        "amazonMusicUrl": {
+            "type": "string",
+            "default": ""
+        },
+        "youtubePodcastsUrl": {
+            "type": "string",
+            "default": ""
+        },
+        "rssFeedUrl": {
+            "type": "string",
+            "default": ""
         }
     },
     "supports": {

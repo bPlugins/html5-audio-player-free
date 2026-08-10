@@ -381,10 +381,11 @@ class AudioPlayer
                         <div style="display: flex; align-items: center; gap: 30px; margin: 20px 0; flex-wrap: wrap;">
                             <div style="flex: 1; min-width: 250px;">
                                 <ul class="h5ap-pro-notice-list" style="margin-top: 0;">
+                                    <li><strong>Playlist Skins:</strong> Choose between beautiful Narrow or Extensive list designs.</li>
                                     <li><strong>Podcast RSS Feed Import <span style="background:#2563eb;color:#fff;font-size:10px;padding:2px 6px;border-radius:4px;margin-left:6px;font-weight:600;">NEW</span>:</strong> Import and stream full podcast channels directly into Narrow or Extensive playlist skins using any RSS feed URL.</li>
                                     <li><strong>Podcast Search &amp; Filter <span style="background:#2563eb;color:#fff;font-size:10px;padding:2px 6px;border-radius:4px;margin-left:6px;font-weight:600;">NEW</span>:</strong> Allow listeners to search podcast episodes live and filter by publication date or order.</li>
                                     <li><strong>Podcast Pagination &amp; Load More <span style="background:#2563eb;color:#fff;font-size:10px;padding:2px 6px;border-radius:4px;margin-left:6px;font-weight:600;">NEW</span>:</strong> Paginate large podcast episode feeds with numbered pagination (1, 2, 3...) or a "Load More" button with episode fetch limits.</li>
-                                    <li><strong>Playlist Skins:</strong> Choose between beautiful Narrow or Extensive list designs.</li>
+                                    <li><strong>Playback Speed &amp; Skip Controls <span style="background:#2563eb;color:#fff;font-size:10px;padding:2px 6px;border-radius:4px;margin-left:6px;font-weight:600;">NEW</span>:</strong> Let listeners adjust playback speed (0.5x - 2x) and skip forward/rewind by custom duration (seconds).</li>
                                     <li><strong>Custom Themes:</strong> Switch between Light, Dark, or build your own Custom color theme.</li>
                                     <li><strong>Advanced Controls:</strong> Add specialized playlist controls like shuffle, forward/rewind to change tracks, and download buttons.</li>
                                     <li><strong>Custom Styles:</strong> Gain full control over item text colors, hover states, odd/even backgrounds, and border radius.</li>

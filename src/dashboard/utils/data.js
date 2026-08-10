@@ -342,6 +342,15 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
     },
     changelogs: [
         {
+            version: '2.8.2 - 10 August, 2026',
+            type: 'new',
+            list: [
+                'New: Added Subscribe Links button on Audio Playlist player supporting external podcast platforms (Spotify, Apple Podcasts, Amazon Music, YouTube Podcasts, and custom RSS Feeds).',
+                'New: Added Playback Speed Control (0.5x - 2x) with floating popup menu across all Audio Playlist layouts, including Narrow and Extensive skins [Pro Only].',
+                'New: Added Fast-Forward & Rewind Skip buttons with custom skip duration interval (seconds) across all Audio Playlist layouts, including Narrow and Extensive skins [Pro Only].',
+            ]
+        },
+        {
             version: '2.8.1 - 30 July, 2026',
             type: 'update',
             list: [
@@ -364,61 +373,9 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
                 'New: Added SoundCloud-style Static Waveform visualizer (WaveSurfer.js) and Waveform Style selector in Block Editor & Codestar Admin Settings [Pro Only].',
                 'Improvement: Completely redesigned Admin Shortcode Settings interface with organized section headings and contextual field descriptions.'
             ]
-        },
-        {
-            version: '2.7.5 - 19 July, 2026',
-            type: 'new',
-            list: [
-                'New: Added Autoplay & Browser Policy Handling (Autoplay Muted fallback) to bypass modern browser audio playback blocks.',
-                'New: Added HLS (m3u8) streaming protocol support to play live streams seamlessly on iOS and modern web browsers.',
-                'New: Added live buffering and connection status indicator showing "Connecting...", "Buffering...", and "Offline" status notifications.',
-                'New: Added Multiple Radio Stations playlist supporting channel switching directly in the player [Pro Only].',
-                'New: Added Backup / Fallback Stream URL for automatic failover switching if the primary server goes offline [Pro Only].',
-                'New: Added Recently Played Track History to display track timelines via Icecast/Shoutcast metadata [Pro Only].',
-                'Improvement: Native FLAC file upload support in WordPress Media Library.',
-                'Improvement: Improved Stream Whitelist settings with step-by-step examples and added automatic URL hostname extraction.'
-            ]
-        },
-        {
-            version: '2.7.4 - 11 July, 2026',
-            type: 'fix',
-            list: [
-                'Resolved player wrapper z-index stacking issue to prevent the player interface from overlapping with site navigation headers, dropdown menus, and overlays.'
-            ]
-        },
-        {
-            version: '2.7.3 - 23 June, 2026',
-            type: 'fix',
-            list: [
-                'Fix: Resolved an issue where loading the player shortcode on a page containing third-party audio players could cause those third-party players to be hijacked by the plugin\'s global player script.'
-            ]
-        },
-        {
-            version: '2.7.2 - 21 June, 2026',
-            type: 'new',
-            list: [
-                'New: Added "Enable Lazy Load" option across all player skins and playlist layouts to optimize page load performance.',
-            ]
-        },
-        {
-            version: '2.7.1 - 15 June, 2026',
-            type: 'update',
-            list: [
-                'Security: Hardened the Google Drive audio proxy endpoint to patch XSS and SSRF vulnerabilities by validating MIME types, manually enforcing redirect checks, and applying strict HTTP headers.'
-            ]
-        },
-        {
-            version: '2.7.0 - 13 June, 2026',
-            type: 'new',
-            list: [
-                'New: Moved the Audio Playlist Block from Pro to the Free version, allowing all users to build and display custom audio playlists.',
-                'New: Added End Time (Excerpt) settings for limiting audio playback duration.',
-                'Update: Completely redesigned and modernized the admin dashboard welcome screen with dynamic builder integration tabs (Gutenberg, Shortcode, Elementor) and status checks.',
-                'Fix: Fixed an issue where the player\'s customized colors and style settings reset back to original default colors when loading or re-opening a page in the Gutenberg block editor.'
-            ]
         }
     ],
-    changelogsLimit: 2,
+    changelogsLimit: 3,
     changelogsReadMoreLabel: 'View More Changelogs',
     proFeatures: [
         'Advanced Playlist Skins (Narrow & Extensive Layouts)',

@@ -1,5 +1,5 @@
 const { __ } = wp.i18n;
-import { TabPanel, Panel, PanelBody, PanelRow, __experimentalUnitControl as UnitControl, TextControl, ToggleControl, SelectControl, RangeControl } from '@wordpress/components';
+import { TabPanel, Panel, PanelBody, RangeControl, PanelRow, __experimentalUnitControl as UnitControl, TextControl, ToggleControl, SelectControl } from '@wordpress/components';
 import { AlignmentToolbar, BlockControls, InspectorControls } from '@wordpress/block-editor';
 import { useState } from "react";
 import { withSelect } from '@wordpress/data';
@@ -8,7 +8,6 @@ import { compose } from '@wordpress/compose';
 import { ColorControl, InlineMediaUpload, ItemsPanel, Notice } from './../../../../../bpl-tools/Components'
 import { ProModal, AdvertiseCard, PremiumBadge, PremiumPanel } from './../../../../../bpl-tools/ProControls';
 import NewBadge from '../../components/NewBadge/NewBadge.js';
-import BRangeControl from '../../components/BRangeControl.js';
 import { produce } from 'immer';
 
 const Settings = (props) => {
@@ -126,7 +125,7 @@ const Settings = (props) => {
                             checked={attributes.podcastDesc !== false}
                             onChange={(podcastDesc) => setAttributes({ podcastDesc })}
                           />
-                            <TextControl
+                          <TextControl
                             className="mt10"
                             label={
                               <span style={{ display: 'flex', alignItems: 'center' }}>
@@ -159,24 +158,90 @@ const Settings = (props) => {
                     </PanelBody>
 
                     <PanelBody
-                      title={
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-                          <span>{__("Playback Controls", "html5-audio-player-pro")}</span>
-                          <PremiumBadge />
-                        </div>
-                      }
                       className='bPlPanelBody'
                       initialOpen={false}
+                      title={<>
+                        {__("Playback Controls", "html5-audio-player-pro")}
+                        <PremiumBadge />
+                      </>}
                     >
                       <PremiumPanel
                         title={__("Playback Controls", "html5-audio-player-pro")}
-                        description={__("Forward & Rewind Skip Buttons with customizable skip duration, Playback Speed Control, and more features are available in the Pro version.", "html5-audio-player-pro")}
+                        description={__(
+                          "Playback Speed Control (0.5x - 2x), Skip Forward/Rewind Buttons, and Custom Skip Duration are available in the Pro version.",
+                          "html5-audio-player-pro"
+                        )}
                         pricingUrl={pricingURL}
                       />
                     </PanelBody>
 
-                    <PanelBody title={__("Options", "h5vp")} className='bPlPanelBody'>
+                    {attributes.sourceType === 'podcast' && (
+                      <PanelBody
+                        title={
+                          <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+                            {__("Subscribe Links", "html5-audio-player-pro")}
+                            <NewBadge />
+                          </span>
+                        }
+                        className='bPlPanelBody customSubscribePanel'
+                        initialOpen={false}
+                      >
+                        <ToggleControl
+                          className='mt10'
+                          label= {__("Enable Subscribe Button", 'html5-audio-player-pro')}
+                          help={__("Show subscribe button on player to let users listen on Spotify, Apple Podcasts, etc.", 'html5-audio-player-pro')}
+                          checked={attributes.enableSubscribe === true}
+                          onChange={(enableSubscribe) => setAttributes({ enableSubscribe })}
+                        />
+                        {attributes.enableSubscribe && (
+                          <>
+                            <TextControl
+                              className="mt10"
+                              label={__("Button Title", 'html5-audio-player-pro')}
+                              value={attributes.subscribeTitle || 'Subscribe'}
+                              onChange={(subscribeTitle) => setAttributes({ subscribeTitle })}
+                            />
+                            <TextControl
+                              className="mt10"
+                              label={__("Apple Podcasts URL", 'html5-audio-player-pro')}
+                              placeholder="https://podcasts.apple.com/..."
+                              value={attributes.applePodcastsUrl || ''}
+                              onChange={(applePodcastsUrl) => setAttributes({ applePodcastsUrl })}
+                            />
+                            <TextControl
+                              className="mt10"
+                              label={__("Spotify URL", 'html5-audio-player-pro')}
+                              placeholder="https://open.spotify.com/show/..."
+                              value={attributes.spotifyUrl || ''}
+                              onChange={(spotifyUrl) => setAttributes({ spotifyUrl })}
+                            />
+                            <TextControl
+                              className="mt10"
+                              label={__("Amazon Music URL", 'html5-audio-player-pro')}
+                              placeholder="https://music.amazon.com/..."
+                              value={attributes.amazonMusicUrl || ''}
+                              onChange={(amazonMusicUrl) => setAttributes({ amazonMusicUrl })}
+                            />
+                            <TextControl
+                              className="mt10"
+                              label={__("YouTube Podcasts URL", 'html5-audio-player-pro')}
+                              placeholder="https://youtube.com/..."
+                              value={attributes.youtubePodcastsUrl || ''}
+                              onChange={(youtubePodcastsUrl) => setAttributes({ youtubePodcastsUrl })}
+                            />
+                            <TextControl
+                              className="mt10"
+                              label={__("RSS Feed URL", 'html5-audio-player-pro')}
+                              placeholder="https://example.com/feed.xml"
+                              value={attributes.rssFeedUrl || ''}
+                              onChange={(rssFeedUrl) => setAttributes({ rssFeedUrl })}
+                            />
+                          </>
+                        )}
+                      </PanelBody>
+                    )}
 
+                    <PanelBody title={__("Options", "h5vp")} className='bPlPanelBody' initialOpen={false}>
                       <SelectControl
                         className='mt10'
                         label={__("Lazy Load", 'html5-audio-player-pro')}
@@ -296,8 +361,8 @@ export const ItemSettings = ({ attributes, arrKey, index, setAttributes }) => {
       className="mb-0"
     />
 
-    <label></label>
     <InlineMediaUpload
+      className="mt5"
       onChange={(poster) => handleList("poster", poster, index)}
       value={poster}
       types={["image"]}

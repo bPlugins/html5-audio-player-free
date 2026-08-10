@@ -8,10 +8,26 @@ import PlyrPlaylist from "../../../../../utils/PlyrPlaylist";
 
 function Playlist1(props) {
     const { attributes, containerRef } = props;
-    const { audios = [], multiple_audio, hideDownload } = attributes;
+    const { audios = [], multiple_audio, hideDownload, shuffle } = attributes;
 
     const [searchQuery, setSearchQuery] = useState('');
+    const [filterType, setFilterType] = useState('newest');
     const [expandedItems, setExpandedItems] = useState({});
+    const [isSubscribeOpen, setIsSubscribeOpen] = useState(false);
+    const hasSubLinks = attributes.spotifyUrl || attributes.applePodcastsUrl || attributes.amazonMusicUrl || attributes.youtubePodcastsUrl || attributes.rssFeedUrl;
+    const subLinkStyle = {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px',
+        padding: '7px 10px',
+        borderRadius: '6px',
+        fontSize: '12px',
+        fontWeight: '600',
+        color: '#334155',
+        textDecoration: 'none',
+        background: '#f8fafc',
+        transition: 'all 0.15s ease'
+    };
 
     const perPage = attributes.podcastPerPage && attributes.podcastPerPage > 0 ? attributes.podcastPerPage : 5;
     const [visibleCount, setVisibleCount] = useState(perPage);
@@ -21,6 +37,12 @@ function Playlist1(props) {
     const isLoadMoreEnabled = isPodcast && attributes.podcastLoadMore === true;
     const paginationType = attributes.podcastPaginationType || 'load_more';
 
+    const parseAudioDate = (dateStr) => {
+        if (!dateStr) return 0;
+        const parsed = Date.parse(dateStr);
+        return isNaN(parsed) ? 0 : parsed;
+    };
+
     let filteredAudios = audios;
     if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase();
@@ -29,6 +51,28 @@ function Playlist1(props) {
             (item.artist && item.artist.toLowerCase().includes(q)) ||
             (item.description && item.description.toLowerCase().includes(q))
         );
+    }
+
+    if (isPodcast && attributes.podcastFilter) {
+        // Date Filtering
+        if (filterType === '7days') {
+            const limitDate = Date.now() - 7 * 24 * 60 * 60 * 1000;
+            filteredAudios = filteredAudios.filter(item => parseAudioDate(item.date) >= limitDate);
+        } else if (filterType === '30days') {
+            const limitDate = Date.now() - 30 * 24 * 60 * 60 * 1000;
+            filteredAudios = filteredAudios.filter(item => parseAudioDate(item.date) >= limitDate);
+        } else if (filterType === 'thisyear') {
+            const currentYearStart = new Date(new Date().getFullYear(), 0, 1).getTime();
+            filteredAudios = filteredAudios.filter(item => parseAudioDate(item.date) >= currentYearStart);
+        }
+
+        // Date Sorting
+        if (filterType === 'oldest') {
+            filteredAudios = [...filteredAudios].sort((a, b) => parseAudioDate(a.date) - parseAudioDate(b.date));
+        } else {
+            // Default to newest first (sorts descending)
+            filteredAudios = [...filteredAudios].sort((a, b) => parseAudioDate(b.date) - parseAudioDate(a.date));
+        }
     }
 
     let itemsToDisplay = filteredAudios;
@@ -42,7 +86,7 @@ function Playlist1(props) {
         } else {
             itemsToDisplay = filteredAudios.slice(0, visibleCount);
         }
-    } else if (!searchQuery.trim() && filteredAudios.length > 50) {
+    } else if (filteredAudios.length > 50) {
         itemsToDisplay = filteredAudios.slice(0, 50);
     }
 
@@ -64,6 +108,7 @@ function Playlist1(props) {
             storage: { enabled: false },
             controls: skin(itemsToDisplay, {
                 hide_download: hideDownload,
+                shuffle,
                 episodeSkip: attributes.episodeSkip,
                 skipTime: skipSeconds,
                 enableSpeed: attributes.enableSpeed,
@@ -85,7 +130,7 @@ function Playlist1(props) {
 
         window.player = player;
 
-        new PlyrPlaylist(player, itemsToDisplay, { multipleAudio: multiple_audio });
+        new PlyrPlaylist(player, itemsToDisplay, { shuffle, multipleAudio: multiple_audio, container: containerRef.current });
 
         // Speed dropdown click handlers
         const speedWrappers = container.querySelectorAll('.h5ap-speed-wrapper, [data-plyr="speed-wrapper"]');
@@ -133,6 +178,11 @@ function Playlist1(props) {
         const searchInput = container.querySelector('[data-h5ap-search]');
         if (searchInput) {
             searchInput.addEventListener('input', (e) => setSearchQuery(e.target.value));
+        }
+
+        const filterSelect = container.querySelector('[data-h5ap-filter]');
+        if (filterSelect) {
+            filterSelect.addEventListener('change', (e) => setFilterType(e.target.value));
         }
 
         const loadMoreBtn = container.querySelector('[data-h5ap-action="load_more"]');
@@ -184,24 +234,144 @@ function Playlist1(props) {
                 // Suppress DOM unmount warning
             }
         };
-    }, [audios, hideDownload, currentPage, visibleCount, isLoadMoreEnabled, paginationType, perPage, searchQuery, attributes.podcastSearch, attributes.podcastLoadMore, attributes.podcastDate, attributes.podcastDesc, attributes.episodeSkip, attributes.skipTime, attributes.enableSpeed, expandedItems]);
+    }, [audios, hideDownload, shuffle, currentPage, visibleCount, isLoadMoreEnabled, paginationType, perPage, searchQuery, filterType, attributes.podcastFilter, attributes.podcastSearch, attributes.podcastLoadMore, attributes.podcastDate, attributes.podcastDesc, attributes.episodeSkip, attributes.skipTime, attributes.enableSpeed, expandedItems]);
+
+    useEffect(() => {
+        const handleOutsideSubClick = (e) => {
+            if (!e.target.closest('.h5ap-subscribe-wrapper')) {
+                setIsSubscribeOpen(false);
+            }
+        };
+        document.addEventListener('click', handleOutsideSubClick);
+        return () => {
+            document.removeEventListener('click', handleOutsideSubClick);
+        };
+    }, []);
 
     return (
         <div className="skin_playlist1 h5ap_skin w-full max-w-xl mx-auto rounded-2xl shadow-xl p-6" ref={containerRef}>
-            {isPodcast && attributes.podcastSearch && (
-                <div className="h5ap-podcast-controls-row">
-                    <div className="h5ap-podcast-search-wrap">
-                        <svg className="h5ap-search-icon" viewBox="0 0 24 24" width="16" height="16">
-                            <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
-                        </svg>
-                        <input
-                            type="text"
-                            className="h5ap-podcast-search-input"
-                            placeholder="Search episodes..."
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                        />
+            {((isPodcast && (attributes.podcastSearch === true || attributes.podcastFilter === true)) || attributes.enableSubscribe === true) && (
+                <div className="h5ap-podcast-controls-row" style={{ display: 'flex', gap: '10px', marginBottom: '16px', width: '100%', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+                    <div style={{ display: 'flex', gap: '10px', flex: 1, alignItems: 'center', minWidth: (attributes.podcastSearch || attributes.podcastFilter) ? '180px' : 'auto' }}>
+                        {isPodcast && attributes.podcastSearch && (
+                            <div className="h5ap-podcast-search" style={{ flex: 1, marginBottom: 0 }}>
+                                <div className="h5ap-podcast-search-wrap" style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                                    <svg className="h5ap-search-icon" viewBox="0 0 24 24" width="16" height="16" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', opacity: 0.5, pointerEvents: 'none' }}>
+                                        <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 14z" />
+                                    </svg>
+                                    <input
+                                        type="text"
+                                        className="h5ap-podcast-search-input"
+                                        placeholder="Search episodes..."
+                                        value={searchQuery}
+                                        onChange={(e) => setSearchQuery(e.target.value)}
+                                        style={{ width: '100%', boxSizing: 'border-box', paddingLeft: '34px' }}
+                                    />
+                                </div>
+                            </div>
+                        )}
+                        {isPodcast && attributes.podcastFilter && (
+                            <div className="h5ap-podcast-filter-wrap" style={{ position: 'relative', flexShrink: 0 }}>
+                                <select
+                                    className="h5ap-podcast-filter-select"
+                                    value={filterType}
+                                    onChange={(e) => setFilterType(e.target.value)}
+                                >
+                                    <option value="newest">Newest First</option>
+                                    <option value="oldest">Oldest First</option>
+                                    <option value="7days">Last 7 Days</option>
+                                    <option value="30days">Last 30 Days</option>
+                                    <option value="thisyear">This Year</option>
+                                </select>
+                            </div>
+                        )}
                     </div>
+
+                    {attributes.enableSubscribe === true && (
+                        <div className="h5ap-subscribe-wrapper" style={{ position: 'relative', flexShrink: 0, marginLeft: 'auto' }}>
+                            <button
+                                type="button"
+                                className="h5ap-subscribe-btn"
+                                onClick={() => setIsSubscribeOpen(prev => !prev)}
+                                style={{
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: '6px',
+                                    height: '35px',
+                                    padding: '0 14px',
+                                    borderRadius: '18px',
+                                    background: attributes.primaryColor || 'var(--plyr-color-main, #00b2ff)',
+                                    color: '#ffffff',
+                                    fontSize: '12.5px',
+                                    fontWeight: '600',
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
+                                    transition: 'all 0.2s ease'
+                                }}
+                            >
+                                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                                    <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+                                </svg>
+                                <span>{attributes.subscribeTitle || 'Subscribe'}</span>
+                            </button>
+
+                            {isSubscribeOpen && (
+                                <div
+                                    className="h5ap-subscribe-modal"
+                                    style={{
+                                        position: 'absolute',
+                                        top: 'calc(100% + 6px)',
+                                        right: 0,
+                                        background: '#ffffff',
+                                        color: '#0f172a',
+                                        borderRadius: '10px',
+                                        padding: '12px',
+                                        boxShadow: '0 10px 25px rgba(0,0,0,0.25)',
+                                        minWidth: '180px',
+                                        zIndex: 99999,
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        gap: '6px'
+                                    }}
+                                >
+                                    <div style={{ fontSize: '10px', fontWeight: '700', textTransform: 'uppercase', color: '#64748b', letterSpacing: '0.5px', marginBottom: '2px' }}>
+                                        Listen On
+                                    </div>
+                                    {attributes.spotifyUrl && (
+                                        <a href={attributes.spotifyUrl} target="_blank" rel="noopener noreferrer" style={subLinkStyle}>
+                                            🎵 Spotify
+                                        </a>
+                                    )}
+                                    {attributes.applePodcastsUrl && (
+                                        <a href={attributes.applePodcastsUrl} target="_blank" rel="noopener noreferrer" style={subLinkStyle}>
+                                            🍏 Apple Podcasts
+                                        </a>
+                                    )}
+                                    {attributes.amazonMusicUrl && (
+                                        <a href={attributes.amazonMusicUrl} target="_blank" rel="noopener noreferrer" style={subLinkStyle}>
+                                            📦 Amazon Music
+                                        </a>
+                                    )}
+                                    {attributes.youtubePodcastsUrl && (
+                                        <a href={attributes.youtubePodcastsUrl} target="_blank" rel="noopener noreferrer" style={subLinkStyle}>
+                                            ▶️ YouTube
+                                        </a>
+                                    )}
+                                    {attributes.rssFeedUrl && (
+                                        <a href={attributes.rssFeedUrl} target="_blank" rel="noopener noreferrer" style={subLinkStyle}>
+                                            📡 RSS Feed
+                                        </a>
+                                    )}
+                                    {!hasSubLinks && (
+                                        <span style={{ fontSize: '11px', color: '#94a3b8', fontStyle: 'italic', padding: '4px' }}>
+                                            No links set in settings
+                                        </span>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    )}
                 </div>
             )}
             <div className="h5ap-audio-element-container">

@@ -5,7 +5,10 @@ const Style = ({ attributes, id }) => {
   const [CSS, setCSS] = useState("");
 
   useEffect(() => {
+    const mainColor = primaryColor || '#00b2ff';
     const CSS = `#${id}{
+      --theme-skin-wave-color: ${mainColor};
+      --plyr-color-main: ${mainColor};
       display: flex;
       justify-content:${alignment || 'left'};
       width: 100%;
@@ -19,6 +22,8 @@ const Style = ({ attributes, id }) => {
       box-sizing: border-box;
     }
     #${id} .skin_playlist1 {
+      --theme-skin-wave-color: ${mainColor};
+      --plyr-color-main: ${mainColor};
       background-color: ${bgColor || '#18181b'} !important;
       border-radius: ${radius || '16px'} !important;
       color: ${textColor || '#ffffff'} !important;
@@ -30,8 +35,8 @@ const Style = ({ attributes, id }) => {
       color: ${textColor || '#ffffff'} !important;
     }
     #${id} .plyr {
-      --theme-skin-wave-color: ${primaryColor || '#00b2ff'};
-      --plyr-color-main: ${primaryColor || '#00b2ff'};
+      --theme-skin-wave-color: ${mainColor};
+      --plyr-color-main: ${mainColor};
       color: ${textColor || '#ffffff'} !important;
     }
     #${id} [data-plyr="playlist-title"] {
@@ -53,20 +58,39 @@ const Style = ({ attributes, id }) => {
       color: ${textColor || '#ffffff'} !important;
     }
     #${id} .h5ap-load-more-btn {
-      background-color: ${primaryColor || '#00b2ff'} !important;
+      background-color: ${mainColor} !important;
     }
     #${id} .h5ap-pagination-btn.is-active,
     #${id} .h5ap-pagination-num.is-active,
     #${id} .h5ap-pagination-btn:hover:not(:disabled),
     #${id} .h5ap-pagination-num:hover:not(:disabled) {
-      background-color: ${primaryColor || '#00b2ff'} !important;
-      border-color: ${primaryColor || '#00b2ff'} !important;
+      background-color: ${mainColor} !important;
+      border-color: ${mainColor} !important;
     }
     #${id} .h5ap-podcast-search-input:focus {
-      border-color: ${primaryColor || '#00b2ff'} !important;
+      border-color: ${mainColor} !important;
     }
     #${id} .h5ap-show-more-btn {
-      color: ${primaryColor || '#00b2ff'} !important;
+      color: ${mainColor} !important;
+    }
+    #${id} .h5ap-subscribe-btn {
+      background-color: ${mainColor} !important;
+      color: #ffffff !important;
+    }
+    #${id} input[type=range],
+    #${id} .plyr__progress input[type=range],
+    #${id} input[type=range][data-plyr="seek"],
+    #${id} .plyr--full-ui input[type=range] {
+      outline: none !important;
+      box-shadow: none !important;
+      border: none !important;
+    }
+    #${id} input[type=range]:focus,
+    #${id} input[type=range]:focus-visible,
+    #${id} input[type=range]:active {
+      outline: none !important;
+      box-shadow: none !important;
+      border: none !important;
     }
     `;
 

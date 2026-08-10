@@ -4,7 +4,7 @@ Tags: mp3 player, audio, audio player, player, podcast
 Donate link: https://www.buymeacoffee.com/abuhayat/  
 Requires at least: 6.5
 Tested up to: 7.0
-Stable tag: 2.8.1
+Stable tag: 2.8.2
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -25,6 +25,7 @@ Built with modern HTML5 technology, this plugin works across all major browsers 
 
 ### Key Features – Free Version
 * **Advanced Player Layouts**: Choose from Standard Player, Sticky Player (fixed bottom/top), and the newly unlocked Audio Playlist Player.
+* **Subscribe Links**: Add customizable subscribe buttons to podcast playlists linking directly to Spotify, Apple Podcasts, Amazon Music, YouTube Podcasts, and custom RSS feeds.
 * **Podcast RSS Feed Import**: Easily import podcast channels from any RSS feed URL (fetch and play unlimited episodes with custom fetch limits).
 * **Modern Player Skins**: Select from Default, Fusion, Stamp, and Wave skins (Wave skin includes real-time jumping bars visualizer and SoundCloud-style static waveform).
 * **Google Drive & SoundCloud Support**: Play shared files directly from Google Drive or stream tracks via SoundCloud URLs using our built-in proxy.
@@ -41,6 +42,7 @@ Upgrade to the [**Pro version**](https://bplugins.com/products/html5-audio-playe
 
 **What’s Included in Pro:**
 * **Advanced Playlist Skins**: Access premium Narrow and Extensive playlist layouts with collapsible track descriptions and customized styling.
+* **Playback Speed & Skip Controls**: Full playback speed selector (0.5x, 0.75x, 1x, 1.25x, 1.5x, 1.75x, 2x) and fast-forward / rewind skip buttons across all playlist skins (Narrow & Extensive layouts).
 * **Podcast Episode Search & Filter**: Real-time frontend keyword search to let users filter and find specific episodes inside playlist layers.
 * **Load More & Numbered Pagination**: Configure custom per-page batch limits with standard numbered pagination (1, 2, 3...) or Load More buttons.
 * **7 Premium Player Skins**: Unlock Card 1, Card 2, Simple 1, Simple 2, Player 9, Player 10, and Player 11.
@@ -217,6 +219,11 @@ e.g.
 
 
 == Changelog ==
+
+= 2.8.2 - 10 August, 2026 =
+* **New:** Added Subscribe Links button on Audio Playlist player supporting external podcast platforms (Spotify, Apple Podcasts, Amazon Music, YouTube Podcasts, and custom RSS Feeds).
+* **New (Pro):** Added Playback Speed Control (0.5x - 2x) with floating popup menu across all Audio Playlist layouts, including Narrow and Extensive skins.
+* **New (Pro):** Added Fast-Forward & Rewind Skip buttons with custom skip duration interval (seconds) across all Audio Playlist layouts, including Narrow and Extensive skins.
 
 = 2.8.1 - 30 July, 2026 =
 * **Update:** Unlocked SoundCloud-style Static Waveform visualizer (WaveSurfer.js) in the Wave skin for Free users.

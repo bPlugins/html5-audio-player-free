@@ -11,6 +11,20 @@
 
 ---
 
+## 🎙️ Video Walkthrough: New Podcast Features & Controls
+
+Watch our comprehensive video guide exploring the latest podcast features, RSS feed imports, podcast subscribe buttons (Spotify, Apple Podcasts, Amazon Music, YouTube, RSS), static waveform visualizer, playback speed, and player customization options:
+
+[![HTML5 Audio Player New Features Walkthrough](https://img.youtube.com/vi/jR1IS1OLmIA/hqdefault.jpg)](https://www.youtube.com/watch?v=jR1IS1OLmIA)
+
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=jR1IS1OLmIA" target="_blank" rel="noopener noreferrer">
+    <img src="https://img.shields.io/badge/YouTube-Watch%20New%20Features%20Walkthrough-red?style=for-the-badge&logo=youtube" alt="Watch New Features Walkthrough on YouTube" />
+  </a>
+</p>
+
+---
+
 ## 🚀 Key Features
 
 ### 💎 Core Functionality (Free)

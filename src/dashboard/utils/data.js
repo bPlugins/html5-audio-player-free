@@ -25,7 +25,7 @@ export const dashboardInfo = (info) => {
             logo: `https://ps.w.org/${slug}/assets/icon-128x128.png`,
             banner: `https://ps.w.org/${slug}/assets/banner-772x250.png`,
             thumbnail: `https://bplugins.com/wp-content/themes/b-technologies/assets/images/products/${slug}.png`,
-            video: 'https://youtu.be/n3B4SpbDS30',
+            video: 'https://www.youtube.com/watch?v=jR1IS1OLmIA',
             isYoutube: true
         },
         pages: {
@@ -33,6 +33,7 @@ export const dashboardInfo = (info) => {
             landing: `https://bplugins.com/products/${slug}/`,
             docs: `https://bplugins.com/docs/${slug}/`,
             pricing: `https://bplugins.com/products/${slug}/pricing`,
+            tutorial: 'https://www.youtube.com/watch?v=jR1IS1OLmIA',
         },
         freemius: {
             product_id: 14260,
@@ -258,6 +259,7 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
                 key: 'gutenberg',
                 label: 'Gutenberg',
                 icon: gutenbergTabIcon,
+                video: 'https://youtu.be/jR1IS1OLmIA?si=wD9YUqYZT-yaxzus',
                 steps: [
                     {
                         num: 1,
@@ -342,36 +344,36 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
     },
     changelogs: [
         {
-            version: '2.8.2 - 10 August, 2026',
+            version: '2.8.2 - 11 August, 2026',
             type: 'new',
             list: [
-                'New: Added Subscribe Links button on Audio Playlist player supporting external podcast platforms (Spotify, Apple Podcasts, Amazon Music, YouTube Podcasts, and custom RSS Feeds).',
-                'New: Added Playback Speed Control (0.5x - 2x) with floating popup menu across all Audio Playlist layouts, including Narrow and Extensive skins [Pro Only].',
-                'New: Added Fast-Forward & Rewind Skip buttons with custom skip duration interval (seconds) across all Audio Playlist layouts, including Narrow and Extensive skins [Pro Only].',
+                '<strong>New:</strong> Added Subscribe Links button on Audio Playlist player supporting external podcast platforms (Spotify, Apple Podcasts, Amazon Music, YouTube Podcasts, and custom RSS Feeds).',
+                '<strong>New (Pro):</strong> Added Playback Speed Control (0.5x - 2x) with floating popup menu across all Audio Playlist layouts, including Narrow and Extensive skins.',
+                '<strong>New (Pro):</strong> Added Fast-Forward & Rewind Skip buttons with custom skip duration interval (seconds) across all Audio Playlist layouts, including Narrow and Extensive skins.',
             ]
         },
         {
             version: '2.8.1 - 30 July, 2026',
             type: 'update',
             list: [
-                'Update: Unlocked SoundCloud-style Static Waveform visualizer (WaveSurfer.js) in the Wave skin for Free users.',
-                'Update: Removed 5-episode fetch limit on Podcast RSS feeds, allowing free users to fetch unlimited podcast episodes and set custom episode fetch limits.'
+                '<strong>Update:</strong> Unlocked SoundCloud-style Static Waveform visualizer (WaveSurfer.js) in the Wave skin for Free users.',
+                '<strong>Update:</strong> Removed 5-episode fetch limit on Podcast RSS feeds, allowing free users to fetch unlimited podcast episodes and set custom episode fetch limits.'
             ]
         },
         {
             version: '2.8.0 - 27 July, 2026',
             type: 'new',
             list: [
-                'New: Added Podcast RSS Feed importing and playback support for Audio Playlists (Narrow & Extensive skins).',
-                'New: Integrated Podcast RSS Feed configuration directly into Codestar Admin Shortcode Settings [Pro Only].',
-                'New: Added Playlist Filter & Search options to quickly filter tracks in audio playlists [Pro Only].',
-                'New: Added real-time episode search bar for podcast playlist layers [Pro Only].',
-                'New: Added numbered pagination and "Load More" button options for podcast episodes [Pro Only].',
-                'New: Added custom podcast episode fetch limits and per-page display controls [Pro Only].',
-                'New: Added Hide Download Icon and Shuffle Playlist toggle controls for Audio Playlists [Pro Only].',
-                'New: Added show/hide toggles for podcast episode publication date and description details in Block Editor & Codestar Admin Settings.',
-                'New: Added SoundCloud-style Static Waveform visualizer (WaveSurfer.js) and Waveform Style selector in Block Editor & Codestar Admin Settings [Pro Only].',
-                'Improvement: Completely redesigned Admin Shortcode Settings interface with organized section headings and contextual field descriptions.'
+                '<strong>New:</strong> Added Podcast RSS Feed importing and playback support for Audio Playlists (Narrow & Extensive skins).',
+                '<strong>New (Pro):</strong> Integrated Podcast RSS Feed configuration directly into Codestar Admin Shortcode Settings.',
+                '<strong>New (Pro):</strong> Added Playlist Filter & Search options to quickly filter tracks in audio playlists.',
+                '<strong>New (Pro):</strong> Added real-time episode search bar for podcast playlist layers.',
+                '<strong>New (Pro):</strong> Added numbered pagination and "Load More" button options for podcast episodes.',
+                '<strong>New (Pro):</strong> Added custom podcast episode fetch limits and per-page display controls.',
+                '<strong>New (Pro):</strong> Added Hide Download Icon and Shuffle Playlist toggle controls for Audio Playlists.',
+                '<strong>New:</strong> Added show/hide toggles for podcast episode publication date and description details in Block Editor & Codestar Admin Settings.',
+                '<strong>New (Pro):</strong> Added SoundCloud-style Static Waveform visualizer (WaveSurfer.js) and Waveform Style selector in Block Editor & Codestar Admin Settings.',
+                '<strong>Improvement:</strong> Completely redesigned Admin Shortcode Settings interface with organized section headings and contextual field descriptions.'
             ]
         }
     ],

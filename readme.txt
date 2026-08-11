@@ -23,6 +23,12 @@ https://youtube.com/watch?v=6ZHKarDpllQ
 
 Built with modern HTML5 technology, this plugin works across all major browsers and iOS devices, ensuring reliable playback on any screen size. Its shortcode-based setup gives you full control over placement and player settings, making it suitable for podcasts, music tracks, audio previews, or online courses.
 
+### 🎙️ Podcast Player & New Features Walkthrough
+
+Watch our in-depth video walkthrough showcasing the latest podcast features, RSS feed import, podcast subscribe buttons (Spotify, Apple Podcasts, Amazon Music, YouTube, RSS), static waveform visualizer, and advanced audio controls:
+
+https://www.youtube.com/watch?v=jR1IS1OLmIA
+
 ### Key Features – Free Version
 * **Advanced Player Layouts**: Choose from Standard Player, Sticky Player (fixed bottom/top), and the newly unlocked Audio Playlist Player.
 * **Subscribe Links**: Add customizable subscribe buttons to podcast playlists linking directly to Spotify, Apple Podcasts, Amazon Music, YouTube Podcasts, and custom RSS feeds.
@@ -220,7 +226,7 @@ e.g.
 
 == Changelog ==
 
-= 2.8.2 - 10 August, 2026 =
+= 2.8.2 - 11 August, 2026 =
 * **New:** Added Subscribe Links button on Audio Playlist player supporting external podcast platforms (Spotify, Apple Podcasts, Amazon Music, YouTube Podcasts, and custom RSS Feeds).
 * **New (Pro):** Added Playback Speed Control (0.5x - 2x) with floating popup menu across all Audio Playlist layouts, including Narrow and Extensive skins.
 * **New (Pro):** Added Fast-Forward & Rewind Skip buttons with custom skip duration interval (seconds) across all Audio Playlist layouts, including Narrow and Extensive skins.

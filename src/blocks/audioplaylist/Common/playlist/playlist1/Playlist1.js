@@ -238,7 +238,7 @@ function Playlist1(props) {
 
     useEffect(() => {
         const handleOutsideSubClick = (e) => {
-            if (!e.target.closest('.h5ap-subscribe-wrapper')) {
+            if (!e.target.closest('.h5ap-subscribe-btn')) {
                 setIsSubscribeOpen(false);
             }
         };
@@ -339,27 +339,27 @@ function Playlist1(props) {
                                         Listen On
                                     </div>
                                     {attributes.spotifyUrl && (
-                                        <a href={attributes.spotifyUrl} target="_blank" rel="noopener noreferrer" style={subLinkStyle}>
+                                        <a href={attributes.spotifyUrl} target="_blank" rel="noopener noreferrer" style={subLinkStyle} onClick={() => setIsSubscribeOpen(false)}>
                                             🎵 Spotify
                                         </a>
                                     )}
                                     {attributes.applePodcastsUrl && (
-                                        <a href={attributes.applePodcastsUrl} target="_blank" rel="noopener noreferrer" style={subLinkStyle}>
+                                        <a href={attributes.applePodcastsUrl} target="_blank" rel="noopener noreferrer" style={subLinkStyle} onClick={() => setIsSubscribeOpen(false)}>
                                             🍏 Apple Podcasts
                                         </a>
                                     )}
                                     {attributes.amazonMusicUrl && (
-                                        <a href={attributes.amazonMusicUrl} target="_blank" rel="noopener noreferrer" style={subLinkStyle}>
+                                        <a href={attributes.amazonMusicUrl} target="_blank" rel="noopener noreferrer" style={subLinkStyle} onClick={() => setIsSubscribeOpen(false)}>
                                             📦 Amazon Music
                                         </a>
                                     )}
                                     {attributes.youtubePodcastsUrl && (
-                                        <a href={attributes.youtubePodcastsUrl} target="_blank" rel="noopener noreferrer" style={subLinkStyle}>
+                                        <a href={attributes.youtubePodcastsUrl} target="_blank" rel="noopener noreferrer" style={subLinkStyle} onClick={() => setIsSubscribeOpen(false)}>
                                             ▶️ YouTube
                                         </a>
                                     )}
                                     {attributes.rssFeedUrl && (
-                                        <a href={attributes.rssFeedUrl} target="_blank" rel="noopener noreferrer" style={subLinkStyle}>
+                                        <a href={attributes.rssFeedUrl} target="_blank" rel="noopener noreferrer" style={subLinkStyle} onClick={() => setIsSubscribeOpen(false)}>
                                             📡 RSS Feed
                                         </a>
                                     )}

@@ -182,22 +182,15 @@ class AudioPlayer
           'title' => 'Control buttons and Components',
           'multiple' => true,
           'options' => array(
-            'play' => 'Play',
-            'progress' => 'Progressbar',
-            'mute' => 'Mute Button',
-            'volume' => 'Volume Control',
-            'duration' => 'Duration',
+            'play'         => 'Play',
+            'progress'     => 'Progressbar',
+            'duration'     => 'Duration',
             'current-time' => 'Current Time',
-            'settings' => 'Setting Button',
+            'mute'         => 'Mute Button',
+            'volume'       => 'Volume Control',
+            'settings'     => 'Setting Button',
           ),
-          'default' => array(
-            'play',
-            'progress',
-            'mute',
-            'volume',
-            'current-time',
-            'settings'
-          ),
+          'default' => array('play', 'progress', 'current-time', 'mute', 'volume', 'settings'),
           'help' => 'Click on the item to turn ON/OFF',
           'desc' => 'Enable/Disable audio player controls. Note: Play button is mandatory and always enabled for proper player functionality.',
           'dependency' => array(
@@ -223,7 +216,6 @@ class AudioPlayer
           'type' => 'color',
           'title' => 'Control color',
           'desc' => 'Set the color for the player control buttons (like play, pause, volume).',
-          'default' => '#4A5464',
           'dependency' => array(
             'h5ap_player_type|standard_skin',
             '==|any',

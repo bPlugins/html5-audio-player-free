@@ -24,15 +24,12 @@ $default_controls = [
     'download'     => false,
 ];
 
-$critical_keys = ['progress', 'current-time', 'mute', 'volume'];
-$missing_critical = array_diff($critical_keys, array_keys((array) ($attributes['controls'] ?? [])));
-
 if (
     !isset($attributes['controls'])
     || !is_array($attributes['controls'])
-    || !empty($missing_critical)
+    || empty($attributes['controls'])
 ) {
-    $attributes['controls'] = wp_parse_args($attributes['controls'] ?? [], $default_controls);
+    $attributes['controls'] = $default_controls;
 }
 
 extract($attributes);

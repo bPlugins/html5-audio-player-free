@@ -15,12 +15,11 @@ export default ({ attributes, containerRef, playerRef, className }) => {
         }
 
         const defaultControlsList = ['play', 'progress', 'current-time', 'mute', 'volume', 'settings'];
-        const rawControlsList = controls && typeof controls === 'object'
-            ? Object.keys(controls).filter(key => controls[key])
+        const activeControls = controls && typeof controls === 'object'
+            ? Object.keys(controls).filter(key => Boolean(controls[key]))
             : defaultControlsList;
 
-        const hasCritical = rawControlsList.some(k => ['progress', 'current-time', 'mute', 'volume'].includes(k));
-        const finalControls = (rawControlsList.length > 0 && hasCritical) ? rawControlsList : defaultControlsList;
+        const finalControls = activeControls.length > 0 ? activeControls : ['play'];
 
         const speedOptions = Array.isArray(speed)
             ? speed.map(Number)

@@ -226,10 +226,11 @@ e.g.
 
 == Changelog ==
 
-= 2.8.2 - 11 August, 2026 =
+= 2.8.2 - 16 August, 2026 =
 * **New:** Added Subscribe Links button on Audio Playlist player supporting external podcast platforms (Spotify, Apple Podcasts, Amazon Music, YouTube Podcasts, and custom RSS Feeds).
 * **New (Pro):** Added Playback Speed Control (0.5x - 2x) with floating popup menu across all Audio Playlist layouts, including Narrow and Extensive skins.
 * **New (Pro):** Added Fast-Forward & Rewind Skip buttons with custom skip duration interval (seconds) across all Audio Playlist layouts, including Narrow and Extensive skins.
+* **Fix:** Added fallback mechanism to ensure standard playback controls (progress bar, current time, duration, mute, volume) always render properly when control settings are missing or incomplete.
 
 = 2.8.1 - 30 July, 2026 =
 * **Update:** Unlocked SoundCloud-style Static Waveform visualizer (WaveSurfer.js) in the Wave skin for Free users.

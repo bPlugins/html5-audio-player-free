@@ -344,12 +344,14 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
     },
     changelogs: [
         {
-            version: '2.8.2 - 11 August, 2026',
+            version: '2.8.2 - 16 August, 2026',
             type: 'new',
             list: [
                 '<strong>New:</strong> Added Subscribe Links button on Audio Playlist player supporting external podcast platforms (Spotify, Apple Podcasts, Amazon Music, YouTube Podcasts, and custom RSS Feeds).',
                 '<strong>New (Pro):</strong> Added Playback Speed Control (0.5x - 2x) with floating popup menu across all Audio Playlist layouts, including Narrow and Extensive skins.',
                 '<strong>New (Pro):</strong> Added Fast-Forward & Rewind Skip buttons with custom skip duration interval (seconds) across all Audio Playlist layouts, including Narrow and Extensive skins.',
+                '<strong>Fix:</strong> Added fallback mechanism to ensure standard playback controls (progress bar, current time, duration, mute, volume) always render properly when control settings are missing or incomplete.'
+
             ]
         },
         {

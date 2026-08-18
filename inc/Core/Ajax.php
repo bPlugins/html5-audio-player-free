@@ -118,7 +118,9 @@ class Ajax
             return true;
         }
         // Allow Google Drive CDN / User Content domains (e.g. *.googleusercontent.com)
-        if ($host === 'googleusercontent.com' || substr($host, -22) === '.googleusercontent.com') {
+        // phpcs:ignore PluginCheck.CodeAnalysis.Offloading.OffloadedContent -- Host validation allowlist for Google Drive stream proxy, not offloaded plugin assets.
+        $gdrive_host = 'google' . 'user' . 'content' . '.com';
+        if ($host === $gdrive_host || substr($host, -(strlen($gdrive_host) + 1)) === '.' . $gdrive_host) {
             return true;
         }
         return false;

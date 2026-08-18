@@ -5,7 +5,7 @@
 [![WordPress Support](https://img.shields.io/badge/WordPress-5.8+-blue.svg?style=flat-square&logo=wordpress)](https://wordpress.org/plugins/html5-audio-player/)
 [![PHP Support](https://img.shields.io/badge/PHP-7.1+-777bb4.svg?style=flat-square&logo=php)](./readme.txt)
 [![GPLv2 License](https://img.shields.io/badge/License-GPLv2-green.svg?style=flat-square)](./readme.txt)
-[![Stable Version](https://img.shields.io/badge/Version-2.8.2-blue.svg?style=flat-square)](./readme.txt)
+[![Stable Version](https://img.shields.io/badge/Version-2.8.3-blue.svg?style=flat-square)](./readme.txt)
 
 **HTML5 Audio Player** is a powerful, lightweight, and fully responsive audio player plugin for WordPress. It lets you embed MP3 and OGG audio files into posts, pages, widget areas, or template files using shortcodes or the intuitive Gutenberg block—no coding required!
 
@@ -55,6 +55,7 @@ Unlock advanced functionality for high-performing podcasts, music sites, and aud
 - **Recently Played Track History**: Display live song timelines and titles fetched dynamically from Icecast/Shoutcast metadata.
 - **Backup/Fallback Stream URL**: Automatic failover switching to secondary audio streams if the primary server goes offline.
 - **Full Color Customization**: Set custom primary, background, hover, active, and alternating track colors to match your brand.
+- **Track Title & Artist Typography Controls**: Fully customize font family (Google Fonts), font size, weight, style, text transform, line height, and letter spacing for Narrow and Extensive playlist skins in Block Editor and Admin Settings.
 - **Download Button**: Enable or disable direct download options for tracks and episodes.
 - **Advanced Navigation & Seeking**: Add custom forward/rewind skip intervals, start/end time offsets, and disable pause locks.
 - **State Saving**: Remember the user's playback timeline and resume tracks from where they last left off.

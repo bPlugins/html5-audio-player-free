@@ -344,6 +344,16 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
     },
     changelogs: [
         {
+            version: '2.8.3 - 19 August, 2026',
+            type: 'new',
+            list: [
+                '<strong>New (Pro):</strong> Added Track Title Typography and Track Artist Typography controls with full Google Fonts, font size, weight, text transform, and spacing options for Narrow and Extensive playlist skins.',
+                '<strong>New (Pro):</strong> Integrated Track Title and Artist Typography settings directly into Codestar Admin Shortcode Settings for all playlist skins.',
+                '<strong>Fix:</strong> Restored playlist track title default font weight to normal (removed forced bold styling) to maintain original design aesthetics while allowing full user customization.',
+                '<strong>Fix:</strong> Resolved an issue where unselected control buttons (mute, volume, settings) were forcibly rendered on standard audio players, allowing custom button configurations to work properly.'
+            ]
+        },
+        {
             version: '2.8.2 - 16 August, 2026',
             type: 'new',
             list: [
@@ -351,7 +361,6 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
                 '<strong>New (Pro):</strong> Added Playback Speed Control (0.5x - 2x) with floating popup menu across all Audio Playlist layouts, including Narrow and Extensive skins.',
                 '<strong>New (Pro):</strong> Added Fast-Forward & Rewind Skip buttons with custom skip duration interval (seconds) across all Audio Playlist layouts, including Narrow and Extensive skins.',
                 '<strong>Fix:</strong> Added fallback mechanism to ensure standard playback controls (progress bar, current time, duration, mute, volume) always render properly when control settings are missing or incomplete.'
-
             ]
         },
         {
@@ -379,9 +388,10 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
             ]
         }
     ],
-    changelogsLimit: 3,
+    changelogsLimit: 2,
     changelogsReadMoreLabel: 'View More Changelogs',
     proFeatures: [
+        'Track Title & Artist Typography Controls (Narrow & Extensive)',
         'Advanced Playlist Skins (Narrow & Extensive Layouts)',
         'Podcast Episode Search & Filter',
         'Numbered Pagination & Load More Episodes',

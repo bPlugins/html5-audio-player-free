@@ -4,7 +4,7 @@ Tags: mp3 player, audio, audio player, player, podcast
 Donate link: https://www.buymeacoffee.com/abuhayat/  
 Requires at least: 6.5
 Tested up to: 7.0
-Stable tag: 2.8.2
+Stable tag: 2.8.3
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -56,6 +56,7 @@ Upgrade to the [**Pro version**](https://bplugins.com/products/html5-audio-playe
 * **Recently Played Track History**: Display live song timelines and titles fetched dynamically from Icecast/Shoutcast server metadata.
 * **Backup/Fallback Stream URL**: Automatic failover switching to secondary audio streams if the primary server goes offline.
 * **Full Color Customization**: Set custom primary, background, hover, active, and alternating track colors to match your brand.
+* **Track Title & Artist Typography**: Fully customize typography (Google Fonts, size, weight, style, text transform, line height, letter spacing) for Narrow and Extensive playlist skins in Block Editor and Admin Settings.
 * **Download Button**: Enable or disable direct download options for tracks and episodes.
 * **Advanced Navigation & Seeking**: Add custom forward/rewind skip intervals, start/end time offsets, and disable pause locks.
 * **State Saving**: Remember the user's playback timeline and resume tracks from where they last left off.
@@ -225,6 +226,12 @@ e.g.
 
 
 == Changelog ==
+
+= 2.8.3 - 19 August, 2026 =
+* **New (Pro):** Added Track Title Typography and Track Artist Typography controls with full Google Fonts, font size, weight, text transform, and spacing options for Narrow and Extensive playlist skins.
+* **New (Pro):** Integrated Track Title and Artist Typography settings directly into Codestar Admin Shortcode Settings for all playlist skins.
+* **Fix:** Restored playlist track title default font weight to normal (removed forced bold styling) to maintain original design aesthetics while allowing full user customization.
+* **Fix:** Resolved an issue where unselected control buttons (mute, volume, settings) were forcibly rendered on standard audio players, allowing custom button configurations to work properly.
 
 = 2.8.2 - 16 August, 2026 =
 * **New:** Added Subscribe Links button on Audio Playlist player supporting external podcast platforms (Spotify, Apple Podcasts, Amazon Music, YouTube Podcasts, and custom RSS Feeds).

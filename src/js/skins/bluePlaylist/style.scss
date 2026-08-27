@@ -132,7 +132,7 @@
   & .right {
     display: flex;
     flex-direction: column;
-    overflow-y: scroll;
+    overflow-y: auto;
 
     & .hsong-item {
       cursor: pointer;

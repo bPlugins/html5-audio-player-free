@@ -86,8 +86,6 @@ function Playlist1(props) {
         } else {
             itemsToDisplay = filteredAudios.slice(0, visibleCount);
         }
-    } else if (filteredAudios.length > 50) {
-        itemsToDisplay = filteredAudios.slice(0, 50);
     }
 
     const firstSource = itemsToDisplay[0]?.source || '';

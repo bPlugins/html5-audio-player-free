@@ -37,7 +37,7 @@ const skin = (audios = [], customOptions = {}) => {
     const isSpeedEnabled = customOptions?.enableSpeed === true;
 
     return `<div class="plyr-wrapper w-full box-border overflow-hidden">
-    <div class="h5ap-scrollable-playlist ${hasMany ? 'has-many-items' : ''}" style="min-height: 180px; overflow-x: hidden; box-sizing: border-box;">
+    <div class="h5ap-scrollable-playlist ${hasMany ? 'has-many-items' : ''}" style="${hasMany ? 'min-height: 180px;' : 'min-height: auto;'} overflow-x: hidden; box-sizing: border-box;">
        <div class="items grid grid-cols-3 gap-3 w-full box-border">
        ${audios.length === 0 ? `
            <div class="col-span-3 text-center py-10 opacity-60 text-xs" style="grid-column: 1 / -1; padding: 40px 0;">

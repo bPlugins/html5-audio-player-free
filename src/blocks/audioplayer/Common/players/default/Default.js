@@ -7,6 +7,8 @@ import { resolveAudioSrc } from "../../../../../utils/gDriveProxy";
 export default ({ attributes, containerRef, playerRef, className }) => {
     const { source: rawSource, controls, preload, repeat, autoplay, muted, seekTime, startTime, disablePause, saveState, i18n, speed, uniqueId } = attributes;
     const source = resolveAudioSrc(rawSource);
+    const isMuted = Boolean(muted === true || muted === 'true');
+    const effectiveMuted = autoplay ? true : isMuted;
 
 
     useEffect(() => {
@@ -14,9 +16,15 @@ export default ({ attributes, containerRef, playerRef, className }) => {
             return;
         }
 
+        const standardOrder = ['restart', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'duration', 'mute', 'volume', 'settings', 'download'];
         const defaultControlsList = ['play', 'progress', 'current-time', 'mute', 'volume', 'settings'];
         const activeControls = controls && typeof controls === 'object'
-            ? Object.keys(controls).filter(key => Boolean(controls[key]))
+            ? Object.keys(controls).filter(key => Boolean(controls[key])).sort((a, b) => {
+                const indexA = standardOrder.indexOf(a);
+                const indexB = standardOrder.indexOf(b);
+                if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+                return 0;
+            })
             : defaultControlsList;
 
         const finalControls = activeControls.length > 0 ? activeControls : ['play'];
@@ -30,7 +38,8 @@ export default ({ attributes, containerRef, playerRef, className }) => {
             loop: { active: repeat },
             autoplay,
             seekTime,
-            muted,
+            muted: effectiveMuted,
+            storage: { enabled: false },
             tooltips: {
                 controls: true,
                 seek: true,
@@ -42,12 +51,13 @@ export default ({ attributes, containerRef, playerRef, className }) => {
             config.i18n = i18n;
         }
         const player = new Plyr(containerRef.current.querySelector('audio'), config);
-        player.muted = muted;
+        player.muted = effectiveMuted;
 
+        if (playerRef) {
+            playerRef.current = player;
+        }
 
-        playerRef.current = player;
-
-        new PlyrExtend(player, { disablePause, startTime, saveState, muted })
+        new PlyrExtend(player, { source, disablePause, startTime, saveState, muted: effectiveMuted });
 
         if (autoplay) {
             try {
@@ -68,7 +78,7 @@ export default ({ attributes, containerRef, playerRef, className }) => {
     return <>
         <div ref={containerRef} className={`skin_default ${className}`}>
             <CloseStickyIcon onClick={() => fadeOut(containerRef.current)} />
-            <audio id={uniqueId} className={uniqueId} preload={preload} src={source} controls>
+            <audio id={uniqueId} className={uniqueId} preload={preload || 'metadata'} src={source} muted={effectiveMuted} controls>
                 Your browser does not support the <code>audio</code> element.
             </audio>
         </div>

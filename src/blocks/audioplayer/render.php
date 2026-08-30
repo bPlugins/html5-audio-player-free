@@ -2,6 +2,8 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+wp_enqueue_style('h5ap-public');
 // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 
 use H5APPlayer\Helper\LocalizeScript;

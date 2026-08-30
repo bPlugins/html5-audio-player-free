@@ -33,7 +33,7 @@ class EnqueueAssets
      * Public Assets
      */
     public function publicAssets() {
-        wp_enqueue_style('h5ap-public', H5AP_PLUGIN_DIR . 'assets/css/style.css', array(), H5AP_VERSION);
+        wp_register_style('h5ap-public', H5AP_PLUGIN_DIR . 'assets/css/style.css', array(), H5AP_VERSION);
         wp_register_script('bplugins-plyrio', H5AP_PLUGIN_DIR . 'assets/js/plyr-v3.7.2.js', array('jquery'), H5AP_VERSION, false);
 
         wp_register_script('h5ap-all', H5AP_PLUGIN_DIR . 'build/h5ap-all.js', array(), H5AP_VERSION, true);

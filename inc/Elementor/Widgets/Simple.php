@@ -226,6 +226,7 @@ class Simple extends Widget_Base
 	 */
 	protected function render()
 	{
+		wp_enqueue_style('h5ap-public');
 		$settings = $this->get_settings_for_display();
 
 		$arm = '';

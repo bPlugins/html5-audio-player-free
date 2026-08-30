@@ -85,27 +85,19 @@ class H5AP {
       }, 1000);
     });
 
-    let plyr = localStorage.getItem("plyr");
-    // const isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
-    const isFirefox = typeof InstallTrigger !== "undefined";
-    if (autoplay && plyr && isFirefox) {
-      plyr = JSON.parse(plyr);
-      plyr.muted = true;
-      localStorage.setItem("plyr", JSON.stringify(plyr));
-    } else if (plyr) {
-      plyr = JSON.parse(plyr);
-      plyr.muted = false;
-      localStorage.setItem("plyr", JSON.stringify(plyr));
-    }
-
-    // window.onload = function () {
-    //   console.log($(audioPlayer).find("audio"));
-    //   $(audioPlayer).find("audio")[0].play();
-    //   console.log(navigator.getAutoplayPolicy(audioPlayer).find("audio")[0]);
-    // };
-    // return;
+    const isMuted = muted === "true" || muted === true;
+    const effectiveMuted = (autoplay === "true" || autoplay === true) ? true : isMuted;
 
     //initialize player
+    if (Array.isArray(controls)) {
+      const standardOrder = ['restart', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'duration', 'mute', 'volume', 'settings', 'download'];
+      controls.sort((a, b) => {
+        const indexA = standardOrder.indexOf(a);
+        const indexB = standardOrder.indexOf(b);
+        if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+        return 0;
+      });
+    }
 
     const player = new Plyr($(audioPlayer).find("audio"), {
       controls,
@@ -114,10 +106,68 @@ class H5AP {
       loop: {
         active: repeat,
       },
-      muted,
+      muted: effectiveMuted,
+      storage: { enabled: false },
       autoplay,
-      speed: { selected: 1, options: h5apPlayer?.speed.map(Number) },
+      speed: { selected: 1, options: h5apPlayer?.speed ? h5apPlayer.speed.map(Number) : [0.5, 1, 1.5, 2] },
     });
+
+    const setDurationText = (dur) => {
+      const $durEl = $(audioPlayer).find(".plyr__time--duration");
+      if ($durEl.length > 0) {
+        if (dur && !isNaN(dur) && dur > 0) {
+          $durEl.text(toHHMMSS(dur));
+        } else {
+          $durEl.text("00:00");
+        }
+      }
+    };
+
+    const updateDuration = () => {
+      const audioDOM = $(audioPlayer).find("audio")[0];
+      const dur = player.duration || (audioDOM && audioDOM.duration);
+      setDurationText(dur);
+    };
+
+    player.on("ready", updateDuration);
+    player.on("loadedmetadata", updateDuration);
+    player.on("canplay", updateDuration);
+    player.on("durationchange", updateDuration);
+
+    const audioDOM = $(audioPlayer).find("audio")[0];
+    if (audioDOM) {
+      audioDOM.setAttribute("preload", "metadata");
+      audioDOM.addEventListener("loadedmetadata", updateDuration);
+      audioDOM.addEventListener("canplay", updateDuration);
+      audioDOM.addEventListener("durationchange", updateDuration);
+      audioDOM.addEventListener("loadeddata", updateDuration);
+      if (audioDOM.readyState >= 1) {
+        updateDuration();
+      } else {
+        try { audioDOM.load(); } catch (e) { }
+      }
+    }
+
+    const isPreloadNone = preload === 'none' || (audioDOM && audioDOM.getAttribute('preload') === 'none');
+    if (!isPreloadNone && source && typeof source === 'string' && source.trim() !== '') {
+      const tempAudio = new Audio();
+      tempAudio.preload = "metadata";
+      const handleLoaded = () => {
+        if (tempAudio.duration && !isNaN(tempAudio.duration) && tempAudio.duration > 0) {
+          setDurationText(tempAudio.duration);
+        }
+      };
+      tempAudio.addEventListener("loadedmetadata", handleLoaded);
+      tempAudio.addEventListener("durationchange", handleLoaded);
+      tempAudio.addEventListener("canplay", handleLoaded);
+      tempAudio.addEventListener("loadeddata", handleLoaded);
+      tempAudio.src = source;
+      if (tempAudio.readyState >= 1) {
+        handleLoaded();
+      }
+    } else {
+      updateDuration();
+    }
 
     const key = generateKeyFromUrl(player.source);
     this.handleSaveState(player, saveState, key);

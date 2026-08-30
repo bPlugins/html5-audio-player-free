@@ -1,6 +1,8 @@
 import { toHHMMSS } from "../js/utils";
 import { resolveAudioSrc } from "./gDriveProxy";
 
+const durationCache = new Map();
+
 class PlyrPlaylist {
     constructor(player, audios, options = {}) {
         this.player = player;
@@ -209,20 +211,40 @@ class PlyrPlaylist {
 
     setItemsDuration() {
         this.playlistItems.forEach((item, index) => {
-            const audio = document.createElement("audio");
-            if (item.querySelector(".duration")) {
-                audio.src = this.audios[index]?.source;
+            const durationEl = item.querySelector(".duration");
+            if (!durationEl) return;
 
-                const updateDuration = () => {
-                    if (!isNaN(audio.duration) && audio.duration !== Infinity) {
-                        item.querySelector(".duration").innerText = toHHMMSS(audio.duration);
-                    }
-                };
+            const src = this.audios[index]?.source;
+            if (!src) return;
 
-                audio.addEventListener("loadedmetadata", updateDuration);
-                audio.addEventListener("durationchange", updateDuration);
+            if (durationCache.has(src)) {
+                durationEl.innerText = toHHMMSS(durationCache.get(src));
+                return;
             }
-        })
+
+            const trackDuration = this.audios[index]?.duration;
+            if (trackDuration && !isNaN(trackDuration) && trackDuration > 0) {
+                durationCache.set(src, trackDuration);
+                durationEl.innerText = toHHMMSS(trackDuration);
+            }
+        });
+
+        const updateCurrentDuration = () => {
+            const currentSrc = this.audios[this.currentIndex]?.source;
+            const duration = this.player.duration;
+            if (currentSrc && duration && !isNaN(duration) && duration > 0) {
+                durationCache.set(currentSrc, duration);
+                const currentItem = this.playlistItems[this.currentIndex];
+                const durationEl = currentItem?.querySelector(".duration");
+                if (durationEl) {
+                    durationEl.innerText = toHHMMSS(duration);
+                }
+            }
+        };
+
+        this.player.on('loadedmetadata', updateCurrentDuration);
+        this.player.on('durationchange', updateCurrentDuration);
+        this.player.on('canplay', updateCurrentDuration);
     }
 
 }

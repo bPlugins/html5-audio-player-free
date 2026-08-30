@@ -4,32 +4,37 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 add_action('init', function () {
-    // Register block editor script for backend.
-    wp_register_script(
-        'h5ap_block_free-js', 
-        H5AP_PLUGIN_DIR . '/blocks/dist/blocks.build.js', 
-        array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor'), 
-        H5AP_VERSION, 
-        true
-    );
+    $blocks_build_js_path = plugin_dir_path(__DIR__) . 'blocks/dist/blocks.build.js';
 
-    wp_localize_script(
-        'h5ap_block_free-js',
-        'cgbGlobal', 
-        [
-            'pluginDirPath' => plugin_dir_path(__DIR__),
-            'pluginDirUrl'  => plugin_dir_url(__DIR__),
-        ]
-    );
+    if (file_exists($blocks_build_js_path)) {
+        // Register block editor script for backend.
+        wp_register_script(
+            'h5ap_block_free-js', 
+            H5AP_PLUGIN_DIR . 'blocks/dist/blocks.build.js', 
+            array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor'), 
+            H5AP_VERSION, 
+            true
+        );
 
-    // Register Gutenberg block on server-side.
-    register_block_type('h5ap/free', array(
-        'style'         => 'h5ap_block_free-style-css',
-        'editor_script' => 'h5ap_block_free-js',
-        'editor_style'  => 'h5ap_block_free-editor-css',
-    ));
+        wp_localize_script(
+            'h5ap_block_free-js',
+            'cgbGlobal', 
+            [
+                'pluginDirPath' => plugin_dir_path(__DIR__),
+                'pluginDirUrl'  => plugin_dir_url(__DIR__),
+            ]
+        );
+
+        // Register Gutenberg block on server-side.
+        register_block_type('h5ap/free', array(
+            'style'         => 'h5ap_block_free-style-css',
+            'editor_script' => 'h5ap_block_free-js',
+            'editor_style'  => 'h5ap_block_free-editor-css',
+        ));
+    }
 
     register_block_type('h5ap/existing', [
+        'editor_script'   => 'h5ap-audioplayer-editor-script',
         'render_callback' => 'h5ap_pro_render_h5ap_block_free_existing',
     ]);
 });

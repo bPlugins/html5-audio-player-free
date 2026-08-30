@@ -3,8 +3,8 @@ Contributors: bplugins, abuhayat, freemius, shamim10, farazi1
 Tags: mp3 player, audio, audio player, player, podcast
 Donate link: https://www.buymeacoffee.com/abuhayat/  
 Requires at least: 6.5
-Tested up to: 7.0
-Stable tag: 2.8.3
+Tested up to: 7.1
+Stable tag: 2.8.4
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -94,7 +94,7 @@ Using the Block Editor? You’re covered.
 
 - Choose your audio player and hit the **Publish** button.
 
-Enjoy crystal-clear audio in just a few clicks!
+- Enjoy crystal-clear audio in just a few clicks!
 
 
 [**Live Demo**](https://bplugins.com/products/html5-audio-player/#demos) | [**Upgrade to Pro**](https://bplugins.com/products/html5-audio-player/pricing)
@@ -227,16 +227,22 @@ e.g.
 
 == Changelog ==
 
+= 2.8.4 - 30 August, 2026 =
+* **Performance:** Resolved a major site slowness issue by eliminating eager audio metadata request loops in playlists, preventing network bandwidth congestion on large playlists.
+* **Fix:** Resolved duration and time played display orientation issue on the Default player skin.
+* **Fix:** Fixed redundant secondary metadata probing when `preload="none"` is configured.
+* **Fix:** Replaced dynamic timestamp versioning in Elementor widget script registration to restore browser HTTP caching.
+
 = 2.8.3 - 19 August, 2026 =
-* **New (Pro):** Added Track Title Typography and Track Artist Typography controls with full Google Fonts, font size, weight, text transform, and spacing options for Narrow and Extensive playlist skins.
-* **New (Pro):** Integrated Track Title and Artist Typography settings directly into Codestar Admin Shortcode Settings for all playlist skins.
+* **New:** Added Track Title Typography and Track Artist Typography controls with full Google Fonts, font size, weight, text transform, and spacing options for Narrow and Extensive playlist skins.
+* **New:** Integrated Track Title and Artist Typography settings directly into Codestar Admin Shortcode Settings for all playlist skins.
 * **Fix:** Restored playlist track title default font weight to normal (removed forced bold styling) to maintain original design aesthetics while allowing full user customization.
 * **Fix:** Resolved an issue where unselected control buttons (mute, volume, settings) were forcibly rendered on standard audio players, allowing custom button configurations to work properly.
 
 = 2.8.2 - 16 August, 2026 =
 * **New:** Added Subscribe Links button on Audio Playlist player supporting external podcast platforms (Spotify, Apple Podcasts, Amazon Music, YouTube Podcasts, and custom RSS Feeds).
-* **New (Pro):** Added Playback Speed Control (0.5x - 2x) with floating popup menu across all Audio Playlist layouts, including Narrow and Extensive skins.
-* **New (Pro):** Added Fast-Forward & Rewind Skip buttons with custom skip duration interval (seconds) across all Audio Playlist layouts, including Narrow and Extensive skins.
+* **New:** Added Playback Speed Control (0.5x - 2x) with floating popup menu across all Audio Playlist layouts, including Narrow and Extensive skins.
+* **New:** Added Fast-Forward & Rewind Skip buttons with custom skip duration interval (seconds) across all Audio Playlist layouts, including Narrow and Extensive skins.
 * **Fix:** Added fallback mechanism to ensure standard playback controls (progress bar, current time, duration, mute, volume) always render properly when control settings are missing or incomplete.
 
 = 2.8.1 - 30 July, 2026 =
@@ -245,23 +251,23 @@ e.g.
 
 = 2.8.0 - 27 July, 2026 =
 * **New:** Added Podcast RSS Feed importing and playback support for Audio Playlists (Narrow & Extensive).
-* **New (Pro):** Integrated Podcast RSS Feed configuration directly into Codestar Admin Shortcode Settings.
-* **New (Pro):** Added Playlist Filter & Search options to quickly filter tracks in audio playlists.
-* **New (Pro):** Added real-time episode search bar for podcast playlist layers.
-* **New (Pro):** Added numbered pagination and "Load More" button options for podcast episodes.
-* **New (Pro):** Added custom podcast episode fetch limits and per-page display controls.
-* **New (Pro):** Added Hide Download Icon and Shuffle Playlist toggle controls for Audio Playlists.
+* **New:** Integrated Podcast RSS Feed configuration directly into Codestar Admin Shortcode Settings.
+* **New:** Added Playlist Filter & Search options to quickly filter tracks in audio playlists.
+* **New:** Added real-time episode search bar for podcast playlist layers.
+* **New:** Added numbered pagination and "Load More" button options for podcast episodes.
+* **New:** Added custom podcast episode fetch limits and per-page display controls.
+* **New:** Added Hide Download Icon and Shuffle Playlist toggle controls for Audio Playlists.
 * **New:** Added show/hide toggles for podcast episode publication date and description details in Block Editor & Codestar Admin Settings.
-* **New (Pro):** Added SoundCloud-style Static Waveform visualizer (WaveSurfer.js) and Waveform Style selector in Block Editor & Codestar Admin Settings.
+* **New:** Added SoundCloud-style Static Waveform visualizer (WaveSurfer.js) and Waveform Style selector in Block Editor & Codestar Admin Settings.
 * **Improvement:** Completely redesigned Admin Shortcode Settings interface with organized section headings and contextual field descriptions.
 
 = 2.7.5 - 19 July, 2026 =
 * **New:** Added Autoplay & Browser Policy Handling (Autoplay Muted fallback) to bypass modern browser audio playback blocks.
 * **New:** Added HLS (m3u8) streaming protocol support to play live streams seamlessly on iOS and modern web browsers.
 * **New:** Added live buffering and connection status indicator showing "Connecting...", "Buffering...", and "Offline" status notifications.
-* **New (Pro):** Added Multiple Radio Stations playlist supporting channel switching directly in the player.
-* **New (Pro):** Added Backup / Fallback Stream URL for automatic failover switching if the primary server goes offline.
-* **New (Pro):** Added Recently Played Track History to display track timelines via Icecast/Shoutcast metadata.
+* **New:** Added Multiple Radio Stations playlist supporting channel switching directly in the player.
+* **New:** Added Backup / Fallback Stream URL for automatic failover switching if the primary server goes offline.
+* **New:** Added Recently Played Track History to display track timelines via Icecast/Shoutcast metadata.
 * **Improvement:** Native FLAC file upload support in WordPress Media Library.
 * **Improvement:** Improved Stream Whitelist settings with step-by-step examples and added automatic URL hostname extraction.
 
@@ -340,7 +346,7 @@ e.g.
 * Improved: Code 
 
 = 2.3.2 - 11 May, 2025 = 
-* Fixed: Hide Download option worn't work (Pro)
+* Fixed: Hide Download option worn't work
 
 = 2.3.0 - 20 April, 2025 = 
 * Update: Improve Security

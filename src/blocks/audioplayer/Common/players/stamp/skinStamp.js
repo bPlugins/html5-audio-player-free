@@ -1,13 +1,14 @@
 export default function skinStamp(title) {
   return `<div class="skin_container StampAudioPlayerSkin radius">
-   <button type="button" class="muteUnmute plyr__control" data-plyr="mute"><svg class="icon--pressed" aria-hidden="true" focusable="false"><use xlink:href="#plyr-muted"></use></svg><svg class="icon--not-pressed" aria-hidden="true" focusable="false"><use xlink:href="#plyr-volume"></use></svg></button>
    <div class="extraOptions">
-   <h3 class="audioTitle">${title}</h3>
-
-   <div class="plyr__volume">
-        <input data-plyr="volume" type="range" min="0" max="1" step="0.05" value="1" autocomplete="off" aria-label="Volume">
-    </div>
-    </div>
+     <h3 class="audioTitle">${title}</h3>
+     <div class="volume_controls">
+       <button type="button" class="muteUnmute plyr__control" data-plyr="mute"><svg class="icon--pressed" aria-hidden="true" focusable="false"><use xlink:href="#plyr-muted"></use></svg><svg class="icon--not-pressed" aria-hidden="true" focusable="false"><use xlink:href="#plyr-volume"></use></svg></button>
+       <div class="plyr__volume">
+         <input data-plyr="volume" type="range" min="0" max="1" step="0.05" value="1" autocomplete="off" aria-label="Volume">
+       </div>
+     </div>
+   </div>
 
    <div class="mainOptions">
    <button class="leftAudio  plyr__controls__item plyr__control" data-plyr="rewind"><svg aria-hidden="true" focusable="false"><use xlink:href="#plyr-rewind"></use></svg></button>

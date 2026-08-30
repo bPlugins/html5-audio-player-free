@@ -13,6 +13,8 @@ function Fusion(props) {
     const { source: rawSource, title, poster, download, repeat, autoplay, muted, seekTime, disablePause, startTime, saveState, preload, options = {} } = attributes;
     const { volume } = options;
     const source = resolveAudioSrc(rawSource);
+    const isMuted = Boolean(muted === true || muted === 'true');
+    const effectiveMuted = autoplay ? true : isMuted;
 
     useEffect(() => {
         if (!containerRef.current) {
@@ -23,13 +25,15 @@ function Fusion(props) {
             controls: skinFusion(poster, title, source, { download, repeat: true }),
             loop: { active: repeat },
             autoplay,
-            muted,
+            muted: effectiveMuted,
             seekTime,
             volume: safeVolume,
+            storage: { enabled: false },
         })
 
+        player.muted = effectiveMuted;
 
-        new PlyrExtend(player, { disablePause, startTime, saveState, muted });
+        new PlyrExtend(player, { source, disablePause, startTime, saveState, muted: effectiveMuted });
 
         if (autoplay) {
             try {
@@ -45,6 +49,7 @@ function Fusion(props) {
         player.on('ready', () => {
             const safeVolume = isNaN(parseFloat(volume)) ? 0.5 : parseFloat(volume);
             player.volume = safeVolume;
+            player.muted = effectiveMuted;
         });
 
         return () => {
@@ -54,7 +59,7 @@ function Fusion(props) {
 
     return <div className={`skin_fusion ${className}`} ref={containerRef}>
         <CloseStickyIcon onClick={() => fadeOut(containerRef.current)} />
-        <audio preload={preload} src={source}></audio>
+        <audio preload={preload} src={source} muted={effectiveMuted}></audio>
     </div>
 }
 

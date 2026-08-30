@@ -344,47 +344,23 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
     },
     changelogs: [
         {
+            version: '2.8.4 - 30 August, 2026',
+            type: 'fix',
+            list: [
+                '<strong>Performance:</strong> Resolved a major site slowness issue by eliminating eager audio metadata request loops in playlists, preventing network bandwidth congestion on large playlists.',
+                '<strong>Fix:</strong> Resolved duration and time played display orientation issue on the Default player skin.',
+                '<strong>Fix:</strong> Fixed redundant secondary metadata probing when <code>preload="none"</code> is configured.',
+                '<strong>Fix:</strong> Replaced dynamic timestamp versioning in Elementor widget script registration to restore browser HTTP caching.'
+            ]
+        },
+        {
             version: '2.8.3 - 19 August, 2026',
             type: 'new',
             list: [
-                '<strong>New (Pro):</strong> Added Track Title Typography and Track Artist Typography controls with full Google Fonts, font size, weight, text transform, and spacing options for Narrow and Extensive playlist skins.',
-                '<strong>New (Pro):</strong> Integrated Track Title and Artist Typography settings directly into Codestar Admin Shortcode Settings for all playlist skins.',
+                '<strong>New:</strong> Added Track Title Typography and Track Artist Typography controls with full Google Fonts, font size, weight, text transform, and spacing options for Narrow and Extensive playlist skins.',
+                '<strong>New:</strong> Integrated Track Title and Artist Typography settings directly into Codestar Admin Shortcode Settings for all playlist skins.',
                 '<strong>Fix:</strong> Restored playlist track title default font weight to normal (removed forced bold styling) to maintain original design aesthetics while allowing full user customization.',
                 '<strong>Fix:</strong> Resolved an issue where unselected control buttons (mute, volume, settings) were forcibly rendered on standard audio players, allowing custom button configurations to work properly.'
-            ]
-        },
-        {
-            version: '2.8.2 - 16 August, 2026',
-            type: 'new',
-            list: [
-                '<strong>New:</strong> Added Subscribe Links button on Audio Playlist player supporting external podcast platforms (Spotify, Apple Podcasts, Amazon Music, YouTube Podcasts, and custom RSS Feeds).',
-                '<strong>New (Pro):</strong> Added Playback Speed Control (0.5x - 2x) with floating popup menu across all Audio Playlist layouts, including Narrow and Extensive skins.',
-                '<strong>New (Pro):</strong> Added Fast-Forward & Rewind Skip buttons with custom skip duration interval (seconds) across all Audio Playlist layouts, including Narrow and Extensive skins.',
-                '<strong>Fix:</strong> Added fallback mechanism to ensure standard playback controls (progress bar, current time, duration, mute, volume) always render properly when control settings are missing or incomplete.'
-            ]
-        },
-        {
-            version: '2.8.1 - 30 July, 2026',
-            type: 'update',
-            list: [
-                '<strong>Update:</strong> Unlocked SoundCloud-style Static Waveform visualizer (WaveSurfer.js) in the Wave skin for Free users.',
-                '<strong>Update:</strong> Removed 5-episode fetch limit on Podcast RSS feeds, allowing free users to fetch unlimited podcast episodes and set custom episode fetch limits.'
-            ]
-        },
-        {
-            version: '2.8.0 - 27 July, 2026',
-            type: 'new',
-            list: [
-                '<strong>New:</strong> Added Podcast RSS Feed importing and playback support for Audio Playlists (Narrow & Extensive skins).',
-                '<strong>New (Pro):</strong> Integrated Podcast RSS Feed configuration directly into Codestar Admin Shortcode Settings.',
-                '<strong>New (Pro):</strong> Added Playlist Filter & Search options to quickly filter tracks in audio playlists.',
-                '<strong>New (Pro):</strong> Added real-time episode search bar for podcast playlist layers.',
-                '<strong>New (Pro):</strong> Added numbered pagination and "Load More" button options for podcast episodes.',
-                '<strong>New (Pro):</strong> Added custom podcast episode fetch limits and per-page display controls.',
-                '<strong>New (Pro):</strong> Added Hide Download Icon and Shuffle Playlist toggle controls for Audio Playlists.',
-                '<strong>New:</strong> Added show/hide toggles for podcast episode publication date and description details in Block Editor & Codestar Admin Settings.',
-                '<strong>New (Pro):</strong> Added SoundCloud-style Static Waveform visualizer (WaveSurfer.js) and Waveform Style selector in Block Editor & Codestar Admin Settings.',
-                '<strong>Improvement:</strong> Completely redesigned Admin Shortcode Settings interface with organized section headings and contextual field descriptions.'
             ]
         }
     ],

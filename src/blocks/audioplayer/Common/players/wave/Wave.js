@@ -13,6 +13,8 @@ function Wave(props) {
     const { attributes, containerRef, className } = props;
     const { source: rawSource, title, poster, artist, bgColor, primaryColor, controlColor, repeat, autoplay, muted, seekTime, disablePause, startTime, saveState, preload, waveType } = attributes;
     const source = resolveAudioSrc(rawSource);
+    const isMuted = Boolean(muted === true || muted === 'true');
+    const effectiveMuted = autoplay ? true : isMuted;
 
     const playerRef = useRef();
 
@@ -24,12 +26,14 @@ function Wave(props) {
             controls: skinWave(poster, title, artist),
             loop: { active: repeat },
             autoplay,
-            muted,
+            muted: effectiveMuted,
             seekTime,
             storage: { enabled: false },
-        })
+        });
 
-        new PlyrExtend(player, { disablePause, startTime, saveState, muted });
+        player.muted = effectiveMuted;
+
+        new PlyrExtend(player, { source, disablePause, startTime, saveState, muted: effectiveMuted });
 
         if (autoplay) {
             try {
@@ -52,11 +56,11 @@ function Wave(props) {
             }
             player.destroy()
         }
-    }, [source, title, poster, artist, primaryColor, bgColor, waveType]);
+    }, [attributes]);
 
     return <div className={`skin_wave ${className}`} id="" ref={containerRef}>
         <CloseStickyIcon onClick={() => fadeOut(containerRef.current)} />
-        <audio preload={preload} src={source} crossOrigin="anonymous"></audio>
+        <audio preload={preload} src={source} muted={effectiveMuted} crossOrigin="anonymous"></audio>
     </div>
 }
 

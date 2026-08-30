@@ -12,6 +12,8 @@ function Stamp(props) {
     const { attributes, containerRef, className } = props;
     const { source: rawSource, title, repeat, autoplay, muted, seekTime, startTime, disablePause, saveState, preload } = attributes;
     const source = resolveAudioSrc(rawSource);
+    const isMuted = Boolean(muted === true || muted === 'true');
+    const effectiveMuted = autoplay ? true : isMuted;
 
     useEffect(() => {
         if (!containerRef.current) {
@@ -21,12 +23,14 @@ function Stamp(props) {
             controls: skinStamp(title),
             loop: { active: repeat },
             autoplay,
-            muted,
+            muted: effectiveMuted,
             seekTime,
             storage: { enabled: false },
         })
 
-        new PlyrExtend(player, { disablePause, startTime, saveState, muted });
+        player.muted = effectiveMuted;
+
+        new PlyrExtend(player, { source, disablePause, startTime, saveState, muted: effectiveMuted });
 
         if (autoplay) {
             try {
@@ -48,7 +52,7 @@ function Stamp(props) {
 
     return <div className={`skin_stamp ${className}`} ref={containerRef}>
         <CloseStickyIcon onClick={() => fadeOut(containerRef.current)} />
-        <audio preload={preload} src={source}></audio>
+        <audio preload={preload} src={source} muted={effectiveMuted}></audio>
     </div>
 }
 

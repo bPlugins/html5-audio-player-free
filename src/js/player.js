@@ -1,6 +1,10 @@
 import "./../css/player.scss";
 import H5AP from "./player/single";
+import { initGlobalPlayHandler } from "../utils/globalPlayHandler";
 const H5AP_Obj = new H5AP();
+
+// Initialize global play handler for pausing other players when one starts playing
+initGlobalPlayHandler();
 
 (function ($) {
   $(document).ready(function () {
@@ -25,6 +29,9 @@ const H5AP_Obj = new H5AP();
 
     Object.keys(h5apAudios).map((item) => {
       const audioPlayer = $(h5apAudios[item])[0];
+      if (audioPlayer.dataset?.h5apInitialized) return;
+      audioPlayer.dataset.h5apInitialized = "true";
+
       let options = audioPlayer.dataset.options;
       try {
         options = options == "{" ? {} : JSON.parse(options);
@@ -90,10 +97,13 @@ const H5AP_Obj = new H5AP();
       const players = $(scope).find(".stampAudioPlayer");
       players.map((index, item) => {
         item = $(players[index]);
-        let options = $(item).data("option");
+        const el = item[0];
+        if (!el || el.dataset?.h5apInitialized) return;
+        el.dataset.h5apInitialized = "true";
+        let options = $(item).data("option") || {};
         options.source = options.source ?? $(item).data("song");
         options.poster = options.poster ?? $(item).data("poster");
-        H5AP_Obj.audioPlayer(item[0], options);
+        H5AP_Obj.audioPlayer(el, options);
       });
     });
 
@@ -102,10 +112,13 @@ const H5AP_Obj = new H5AP();
       const players = $(scope).find(".h5ap_fusion_player");
       players.map((index, item) => {
         item = $(players[index]);
-        const options = $(item).data("option");
+        const el = item[0];
+        if (!el || el.dataset?.h5apInitialized) return;
+        el.dataset.h5apInitialized = "true";
+        const options = $(item).data("option") || {};
         options.source = options.source ?? $(item).data("song");
         options.poster = options.poster ?? $(item).data("poster");
-        H5AP_Obj.audioPlayer(item[0], options);
+        H5AP_Obj.audioPlayer(el, options);
       });
     });
 
@@ -115,11 +128,14 @@ const H5AP_Obj = new H5AP();
       // window.players = players;
       players.map((index, item) => {
         item = $(players[index]);
+        const el = item[0];
+        if (!el || el.dataset?.h5apInitialized) return;
+        el.dataset.h5apInitialized = "true";
         const options = $(item).data("options") || {};
         $(item).removeAttr("data-options");
         options.source = options?.source ?? $(item).data("song");
         options.poster = options?.poster ?? $(item).data("poster");
-        H5AP_Obj.audioPlayer(item[0], options);
+        H5AP_Obj.audioPlayer(el, options);
       });
     });
   });

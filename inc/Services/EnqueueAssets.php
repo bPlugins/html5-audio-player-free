@@ -33,12 +33,12 @@ class EnqueueAssets
      * Public Assets
      */
     public function publicAssets() {
-        wp_register_style('h5ap-public', H5AP_PLUGIN_DIR . 'assets/css/style.css', array(), H5AP_VERSION);
+        wp_enqueue_style('h5ap-public', H5AP_PLUGIN_DIR . 'assets/css/style.css', array(), H5AP_VERSION);
         wp_register_script('bplugins-plyrio', H5AP_PLUGIN_DIR . 'assets/js/plyr-v3.7.2.js', array('jquery'), H5AP_VERSION, false);
 
         wp_register_script('h5ap-all', H5AP_PLUGIN_DIR . 'build/h5ap-all.js', array(), H5AP_VERSION, true);
 
-        wp_register_style('bplugins-plyrio', H5AP_PLUGIN_DIR . 'assets/css/plyr-v3.7.2.css', array(), H5AP_VERSION, 'all');
+        wp_enqueue_style('bplugins-plyrio', H5AP_PLUGIN_DIR . 'assets/css/plyr-v3.7.2.css', array(), H5AP_VERSION, 'all');
 
         $h5ap_settings = [
             'speed' => explode(',', Functions::getSetting('speed', '0.5, 1, 1.5, 2.0, 2.5')),

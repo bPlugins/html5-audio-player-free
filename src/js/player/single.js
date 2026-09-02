@@ -225,16 +225,7 @@ class H5AP {
       $(audioPlayer).addClass("skinFusionMobile");
     }
 
-    // disable other player when playing this audio
-    if (!h5apPlayer?.multipleAudio) {
-      $(audioPlayer)
-        .find('.plyr__control[data-plyr="play"]')
-        .on("click", () => {
-          if (player.playing) {
-            this.disableOtherPlayer(player, true);
-          }
-        });
-    }
+
 
     //dynamic repeat button
     $(audioPlayer)
@@ -327,16 +318,7 @@ class H5AP {
       player.play();
     }
 
-    //pause other player if this player is playing
-    if (!h5apPlayer?.multipleAudio) {
-      $(quickPlayer)
-        .find('.plyr__control[data-plyr="play"]')
-        .on("click", () => {
-          if (player.playing) {
-            this.disableOtherPlayer(player, true);
-          }
-        });
-    }
+
   }
 
   /**
@@ -427,16 +409,7 @@ class H5AP {
     //   player.play();
     // }, 2000);
 
-    // disable other player when playing this audio
-    if (!h5apPlayer?.multipleAudio) {
-      $(stickyPlayer)
-        .find('.plyr__control[data-plyr="play"]')
-        .on("click", () => {
-          if (player.playing) {
-            this.disableOtherPlayer(player, true);
-          }
-        });
-    }
+
 
     //close player
     btnClose.on("click", function () {
@@ -570,16 +543,7 @@ class H5AP {
       player.play();
     }
 
-    // disable other player when playing this audio
-    if (!h5apPlayer?.multipleAudio) {
-      $(wrapper)
-        .find('.plyr__control[data-plyr="play"]')
-        .on("click", () => {
-          if (player.playing) {
-            this.disableOtherPlayer(player, true);
-          }
-        });
-    }
+
 
     const key = generateKeyFromUrl(player.source);
     const state = localStorage.getItem(key);

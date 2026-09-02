@@ -4,7 +4,7 @@ Tags: mp3 player, audio, audio player, player, podcast
 Donate link: https://www.buymeacoffee.com/abuhayat/  
 Requires at least: 6.5
 Tested up to: 7.1
-Stable tag: 2.8.4
+Stable tag: 2.8.5
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -226,6 +226,10 @@ e.g.
 
 
 == Changelog ==
+
+= 2.8.5 - 02 September, 2026 =
+* **Fix:** Resolved an issue where multiple audio players could play simultaneously without auto-pausing when switching tracks.
+* **Fix:** Improved Elementor player widget initialization to prevent duplicate player instances.
 
 = 2.8.4 - 30 August, 2026 =
 * **Performance:** Resolved a major site slowness issue by eliminating eager audio metadata request loops in playlists, preventing network bandwidth congestion on large playlists.

@@ -343,6 +343,14 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
         ]
     },
     changelogs: [
+         {
+            version: '2.8.5 - 02 September, 2026',
+            type: 'fix',
+            list: [
+                '<strong>Fix:</strong> Resolved an issue where multiple audio players could play simultaneously without auto-pausing when switching tracks.',
+                '<strong>Fix:</strong> Improved Elementor player widget initialization to prevent duplicate player instances.'
+            ]
+        },
         {
             version: '2.8.4 - 30 August, 2026',
             type: 'fix',
@@ -364,10 +372,9 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
             ]
         }
     ],
-    changelogsLimit: 2,
+    changelogsLimit: 3,
     changelogsReadMoreLabel: 'View More Changelogs',
     proFeatures: [
-        'Track Title & Artist Typography Controls (Narrow & Extensive)',
         'Advanced Playlist Skins (Narrow & Extensive Layouts)',
         'Podcast Episode Search & Filter',
         'Numbered Pagination & Load More Episodes',
@@ -375,8 +382,9 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
         'Multiple Radio Stations Playlist',
         'Backup Stream URL & Recently Played History',
         '7+ Additional Premium Player Skins',
-        'Save Playback State & Resume Progress',
         'Single Button Compact Player Layout',
+        'Save Playback State & Resume Progress',
+        'Track Title & Artist Typography Controls (Narrow & Extensive)',
         'Full Color & Style Customization',
         'Custom Skip Intervals, Start & End Time Limits',
         'Icecast & Shoutcast Radio Metadata Sync',

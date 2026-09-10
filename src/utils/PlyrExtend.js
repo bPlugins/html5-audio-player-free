@@ -102,15 +102,16 @@ class PlyrExtend {
         });
 
         const audioEl = this.player.media || this.player.elements?.container?.querySelector('audio');
+        const effectivePreload = this.config?.preload || (audioEl ? audioEl.getAttribute("preload") : null) || "metadata";
         if (audioEl) {
-            audioEl.setAttribute('preload', 'metadata');
+            audioEl.setAttribute('preload', effectivePreload);
             audioEl.addEventListener("loadedmetadata", updateDuration);
             audioEl.addEventListener("canplay", updateDuration);
             audioEl.addEventListener("durationchange", updateDuration);
             audioEl.addEventListener("loadeddata", updateDuration);
             if (audioEl.readyState >= 1) {
                 updateDuration();
-            } else {
+            } else if (effectivePreload !== 'none') {
                 try { audioEl.load(); } catch (e) { }
             }
         }
@@ -125,7 +126,7 @@ class PlyrExtend {
             src = audioEl.src || audioEl.getAttribute('src') || '';
         }
 
-        const isPreloadNone = this.config?.preload === 'none' || (audioEl && audioEl.getAttribute('preload') === 'none');
+        const isPreloadNone = effectivePreload === 'none';
         if (!isPreloadNone && src && typeof src === 'string' && src.trim() !== '') {
             const tempAudio = new Audio();
             tempAudio.preload = "metadata";

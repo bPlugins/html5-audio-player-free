@@ -4,7 +4,7 @@ Tags: mp3 player, audio, audio player, player, podcast
 Donate link: https://www.buymeacoffee.com/abuhayat/  
 Requires at least: 6.5
 Tested up to: 7.1
-Stable tag: 2.8.5
+Stable tag: 2.8.6
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -226,6 +226,11 @@ e.g.
 
 
 == Changelog ==
+
+= 2.8.6 - 10 September, 2026 =
+* **Fix:** Resolved JavaScript ReferenceError crash where `preload` variable was undefined during initial player initialization.
+* **Fix:** Fixed preload strategy setting (`preload="none"`) to strictly prevent automated background audio range requests on page load across Gutenberg, Elementor, and shortcodes.
+* **New:** Added Preload Strategy control field to Elementor Audio Player widgets and Standard Player metabox settings.
 
 = 2.8.5 - 02 September, 2026 =
 * **Fix:** Resolved an issue where multiple audio players could play simultaneously without auto-pausing when switching tracks.

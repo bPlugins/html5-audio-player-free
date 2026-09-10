@@ -343,6 +343,15 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
         ]
     },
     changelogs: [
+        {
+            version: '2.8.6 - 10 September, 2026',
+            type: 'fix',
+            list: [
+                '<strong>Fix:</strong> Resolved JavaScript ReferenceError crash where <code>preload</code> variable was undefined during initial player initialization.',
+                '<strong>Fix:</strong> Fixed preload strategy setting (<code>preload="none"</code>) to strictly prevent automated background audio range requests on page load across Gutenberg, Elementor, and shortcodes.',
+                '<strong>New:</strong> Added Preload Strategy control field to Elementor Audio Player widgets and Standard Player metabox settings.'
+            ]
+        },
          {
             version: '2.8.5 - 02 September, 2026',
             type: 'fix',

@@ -12,7 +12,7 @@ class H5AP {
     if (typeof h5ap_i18n != "undefined") {
       options.i18n = h5ap_i18n;
     }
-    let { controls, seekTime, i18n, title, artist, disablePause, poster, muted, autoplay, startTime, source, skin, disableDownload, fusionDownload, color, background, repeat, primaryColor, saveState = false, waveType } = options;
+    let { controls, seekTime, i18n, title, artist, disablePause, poster, muted, autoplay, startTime, source, skin, disableDownload, fusionDownload, color, background, repeat, primaryColor, saveState = false, waveType, preload } = options;
 
     // Google Drive proxy: googleapis.com/drive, drive.google.com, docs.google.com URLs cannot be streamed directly in the browser
     // due to CORS/Range-request limitations. Route them through the WordPress proxy endpoint.
@@ -99,6 +99,9 @@ class H5AP {
       });
     }
 
+    const audioDOM = $(audioPlayer).find("audio")[0];
+    const effectivePreload = preload || (audioDOM ? audioDOM.getAttribute("preload") : null) || "metadata";
+
     const player = new Plyr($(audioPlayer).find("audio"), {
       controls,
       i18n,
@@ -124,8 +127,8 @@ class H5AP {
     };
 
     const updateDuration = () => {
-      const audioDOM = $(audioPlayer).find("audio")[0];
-      const dur = player.duration || (audioDOM && audioDOM.duration);
+      const audioDOMEl = $(audioPlayer).find("audio")[0];
+      const dur = player.duration || (audioDOMEl && audioDOMEl.duration);
       setDurationText(dur);
     };
 
@@ -134,21 +137,20 @@ class H5AP {
     player.on("canplay", updateDuration);
     player.on("durationchange", updateDuration);
 
-    const audioDOM = $(audioPlayer).find("audio")[0];
     if (audioDOM) {
-      audioDOM.setAttribute("preload", "metadata");
+      audioDOM.setAttribute("preload", effectivePreload);
       audioDOM.addEventListener("loadedmetadata", updateDuration);
       audioDOM.addEventListener("canplay", updateDuration);
       audioDOM.addEventListener("durationchange", updateDuration);
       audioDOM.addEventListener("loadeddata", updateDuration);
       if (audioDOM.readyState >= 1) {
         updateDuration();
-      } else {
+      } else if (effectivePreload !== 'none') {
         try { audioDOM.load(); } catch (e) { }
       }
     }
 
-    const isPreloadNone = preload === 'none' || (audioDOM && audioDOM.getAttribute('preload') === 'none');
+    const isPreloadNone = effectivePreload === 'none';
     if (!isPreloadNone && source && typeof source === 'string' && source.trim() !== '') {
       const tempAudio = new Audio();
       tempAudio.preload = "metadata";

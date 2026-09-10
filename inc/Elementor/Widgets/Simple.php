@@ -128,6 +128,21 @@ class Simple extends Widget_Base
 			]
 		);
 
+		$this->add_control(
+			'baudio_preload',
+			[
+				'label' => __('Preload', 'html5-audio-player'),
+				'type' => Controls_Manager::SELECT,
+				'options' => [
+					'metadata' => __('Metadata (Default)', 'html5-audio-player'),
+					'none' => __('None (Load on interaction)', 'html5-audio-player'),
+					'auto' => __('Auto', 'html5-audio-player'),
+				],
+				'default' => 'metadata',
+				'separator' 	=> 'before',
+			]
+		);
+
 
 		$this->end_controls_section();
 
@@ -235,9 +250,12 @@ class Simple extends Widget_Base
 		$arm .= $settings['baudio_muted'] == 'true' ? ' muted' : '';
 
 		$s = $settings;
+		$global_preload = class_exists('\H5APPlayer\Helper\Functions') ? \H5APPlayer\Helper\Functions::getSetting('h5ap_preload', 'metadata') : 'metadata';
+		$preload = !empty($s['baudio_preload']) ? $s['baudio_preload'] : $global_preload;
 		$options = array(
 			'controls' => ['play', 'progress', 'current-time', 'duration', 'mute', 'volume', 'settings'],
-			'seekTime' => $s['baudio_seek_time']
+			'seekTime' => $s['baudio_seek_time'],
+			'preload' => $preload
 		);
 
 
@@ -245,7 +263,7 @@ class Simple extends Widget_Base
 ?>
 
 		<div class="skin_simple h5ap_standard_player" data-options='<?php echo wp_json_encode($options) ?>'>
-			<audio controls id="bplayer_id" <?php echo esc_attr($arm); ?>>
+			<audio controls id="bplayer_id" src="<?php echo esc_url($settings['baudio_url'] . '?download=false') ?>" preload="<?php echo esc_attr($preload); ?>" <?php echo esc_attr($arm); ?>>
 				<source src="<?php echo esc_url($settings['baudio_url'] . '?download=false') ?>" type="<?php echo esc_attr(h5ap_get_audio_type($settings['baudio_url'])) ?>">
 			</audio>
 		</div>

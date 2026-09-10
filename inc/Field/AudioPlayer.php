@@ -299,6 +299,19 @@ class AudioPlayer
           'dependency' => array('h5ap_player_type', '==', 'opt-1', 'all'),
         ),
         array(
+          'id'         => 'preload',
+          'type'       => 'radio',
+          'title'      => \__('Preload Strategy', 'html5-audio-player'),
+          'desc'       => \__('Specify how much audio data browser preloads on page load.', 'html5-audio-player'),
+          'options'    => array(
+            'auto'     => 'Auto - Preload entire audio file when page loads.',
+            'metadata' => 'Metadata - Preload only audio metadata (duration, headers) when page loads.',
+            'none'     => 'None - Do not preload audio until user clicks Play.',
+          ),
+          'default'    => 'metadata',
+          'dependency' => array('h5ap_player_type', '==', 'opt-1')
+        ),
+        array(
           'id' => 'disable_loader',
           'type' => 'switcher',
           'title' => \__('Disable Loading', 'html5-audio-player'),

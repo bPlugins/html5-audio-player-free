@@ -344,6 +344,15 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
     },
     changelogs: [
         {
+            version: '2.8.7 - 15 September, 2026',
+            type: 'fix',
+            list: [
+                '<strong>Fix:</strong> Resolved PageSpeed Insights accessibility failure by adding missing <code>aria-label</code> and <code>title</code> attributes to rewind and fast-forward control buttons across all player skins.',
+                '<strong>Fix:</strong> Resolved Stamp skin mobile player layout issue and restored missing fast-forward control button.',
+                '<strong>Fix:</strong> Fixed invalid padding property syntax in player SCSS stylesheet.'
+            ]
+        },
+        {
             version: '2.8.6 - 10 September, 2026',
             type: 'fix',
             list: [

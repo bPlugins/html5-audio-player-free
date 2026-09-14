@@ -4,7 +4,7 @@ Tags: mp3 player, audio, audio player, player, podcast
 Donate link: https://www.buymeacoffee.com/abuhayat/  
 Requires at least: 6.5
 Tested up to: 7.1
-Stable tag: 2.8.6
+Stable tag: 2.8.7
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -226,6 +226,11 @@ e.g.
 
 
 == Changelog ==
+
+= 2.8.7 - 15 September, 2026 =
+* **Fix:** Resolved PageSpeed Insights accessibility failure by adding missing `aria-label` and `title` attributes to rewind and fast-forward control buttons across all player skins.
+* **Fix:** Resolved Stamp skin mobile player layout issue and restored missing fast-forward control button.
+* **Fix:** Fixed invalid padding property syntax in player SCSS stylesheet.
 
 = 2.8.6 - 10 September, 2026 =
 * **Fix:** Resolved JavaScript ReferenceError crash where `preload` variable was undefined during initial player initialization.

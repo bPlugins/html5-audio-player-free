@@ -20,7 +20,7 @@ export default function skinFusion(poster = null, title = null, source = null, o
     <div class="plyr__controls rewind_play_fastforward">
     ${(poster !== 'null') ? `<img class="thumbnails" src="${poster || thumb}" alt=""></img>` : ''}
     <div class="plyr__controls">
-    <button type="button" class="plyr__control" data-plyr="rewind">
+    <button type="button" class="plyr__control" aria-label="Rewind {seektime}s" title="Rewind {seektime}s" data-plyr="rewind">
       <svg role="presentation"><use xlink:href="#plyr-rewind"></use></svg>
       <span class="plyr__tooltip" role="tooltip">Rewind {seektime}s</span>
     </button>
@@ -30,7 +30,7 @@ export default function skinFusion(poster = null, title = null, source = null, o
       <span class="label--pressed plyr__tooltip" role="tooltip">Pause</span>
       <span class="label--not-pressed plyr__tooltip" role="tooltip">Play</span>
     </button>
-    <button type="button" class="plyr__control" data-plyr="fast-forward">
+    <button type="button" class="plyr__control" aria-label="Forward {seektime}s" title="Forward {seektime}s" data-plyr="fast-forward">
       <svg role="presentation"><use xlink:href="#plyr-fast-forward"></use></svg>
       <span class="plyr__tooltip" role="tooltip">Forward {seektime}s</span>
     </button>

@@ -261,7 +261,24 @@ class H5AP {
         loadingPlaceholder.style.display = "none";
       }
 
-      if (player.source?.includes("soundcloud")) {
+      const currentSource = typeof player.source === 'string' ? player.source : (player.source?.sources?.[0]?.src || '');
+      const container = player.elements.container;
+      if (container) {
+        const muteBtn = container.querySelector('button[data-plyr="mute"]');
+        if (muteBtn && !muteBtn.getAttribute('aria-label')) {
+          muteBtn.setAttribute('aria-label', 'Mute');
+        }
+        const rewindBtn = container.querySelector('button[data-plyr="rewind"]');
+        if (rewindBtn && !rewindBtn.getAttribute('aria-label')) {
+          rewindBtn.setAttribute('aria-label', `Rewind ${seekTime || 10}s`);
+        }
+        const ffBtn = container.querySelector('button[data-plyr="fast-forward"]');
+        if (ffBtn && !ffBtn.getAttribute('aria-label')) {
+          ffBtn.setAttribute('aria-label', `Forward ${seekTime || 10}s`);
+        }
+      }
+
+      if (currentSource && typeof currentSource === 'string' && currentSource.includes("soundcloud")) {
         player.speed = 1;
         if (intervalId) {
           clearInterval(intervalId);
@@ -660,7 +677,7 @@ class H5AP {
     <div class="plyr__controls rewind_play_fastforward">
     <img class="thumbnails" src="${poster}" alt="">
     <div class="plyr__controls">
-    <button type="button" class="plyr__control" data-plyr="rewind">
+    <button type="button" class="plyr__control" aria-label="Rewind {seektime}s" title="Rewind {seektime}s" data-plyr="rewind">
       <svg role="presentation"><use xlink:href="#plyr-rewind"></use></svg>
       <span class="plyr__tooltip" role="tooltip">Rewind {seektime}s</span>
     </button>
@@ -670,7 +687,7 @@ class H5AP {
       <span class="label--pressed plyr__tooltip" role="tooltip">Pause</span>
       <span class="label--not-pressed plyr__tooltip" role="tooltip">Play</span>
     </button>
-    <button type="button" class="plyr__control" data-plyr="fast-forward">
+    <button type="button" class="plyr__control" aria-label="Forward {seektime}s" title="Forward {seektime}s" data-plyr="fast-forward">
       <svg role="presentation"><use xlink:href="#plyr-fast-forward"></use></svg>
       <span class="plyr__tooltip" role="tooltip">Forward {seektime}s</span>
     </button>
@@ -713,7 +730,7 @@ class H5AP {
 
   skinStamp() {
     return `<div class="StampAudioPlayerSkin radius">
-     <button type="button" class="muteUnmute plyr__control" data-plyr="mute"><svg class="icon--pressed" aria-hidden="true" focusable="false"><use xlink:href="#plyr-muted"></use></svg><svg class="icon--not-pressed" aria-hidden="true" focusable="false"><use xlink:href="#plyr-volume"></use></svg></button>
+     <button type="button" class="muteUnmute plyr__control" aria-label="Mute" data-plyr="mute"><svg class="icon--pressed" aria-hidden="true" focusable="false"><use xlink:href="#plyr-muted"></use></svg><svg class="icon--not-pressed" aria-hidden="true" focusable="false"><use xlink:href="#plyr-volume"></use></svg></button>
      <div class="extraOptions">
      <h3 class="audioTitle">Audio Title</h3>
 
@@ -723,12 +740,13 @@ class H5AP {
       </div>
 
      <div class="mainOptions">
-     <button class="leftAudio  plyr__controls__item plyr__control" data-plyr="rewind"><svg aria-hidden="true" focusable="false"><use xlink:href="#plyr-rewind"></use></svg></button>
+     <button class="leftAudio plyr__controls__item plyr__control" aria-label="Rewind {seektime}s" title="Rewind {seektime}s" data-plyr="rewind"><svg aria-hidden="true" focusable="false"><use xlink:href="#plyr-rewind"></use></svg></button>
 
      <div class="controls">
      <div class="play_forward_rewind">
-      <button class="playPauseAudio  plyr__controls__item plyr__control" data-plyr="rewind"><svg aria-hidden="true" focusable="false"><use xlink:href="#plyr-rewind"></use></svg></button>
+      <button class="plyr__controls__item plyr__control" aria-label="Rewind {seektime}s" title="Rewind {seektime}s" data-plyr="rewind"><svg aria-hidden="true" focusable="false"><use xlink:href="#plyr-rewind"></use></svg></button>
       <button class="plyr__controls__item plyr__control playPauseAudio" type="button" data-plyr="play" aria-label="Play"><svg class="icon--pressed" aria-hidden="true" focusable="false"><use xlink:href="#plyr-pause"></use></svg><svg class="icon--not-pressed" aria-hidden="true" focusable="false"><use xlink:href="#plyr-play"></use></svg></button>
+      <button class="plyr__controls__item plyr__control" aria-label="Forward {seektime}s" title="Forward {seektime}s" data-plyr="fast-forward"><svg aria-hidden="true" focusable="false"><use xlink:href="#plyr-fast-forward"></use></svg></button>
      </div>
 
      <div class="audioProgressView">
@@ -740,7 +758,7 @@ class H5AP {
         </div>
       </div>
 
-     <button class="rightAudio plyr__controls__item plyr__control" data-plyr="fast-forward"><svg aria-hidden="true" focusable="false"><use xlink:href="#plyr-fast-forward"></use></svg></button>
+     <button class="rightAudio plyr__controls__item plyr__control" aria-label="Forward {seektime}s" title="Forward {seektime}s" data-plyr="fast-forward"><svg aria-hidden="true" focusable="false"><use xlink:href="#plyr-fast-forward"></use></svg></button>
       </div>
       </div>`;
   }
@@ -897,7 +915,7 @@ class H5AP {
             </div>
         </div>
       <div class="controls">
-        <button type="button" class="plyr__control" data-plyr="rewind">
+        <button type="button" class="plyr__control" aria-label="Rewind {seektime}s" title="Rewind {seektime}s" data-plyr="rewind">
           <svg role="presentation"><use xlink:href="#plyr-rewind"></use></svg>
           <span class="plyr__tooltip" role="tooltip">Rewind {seektime}s</span>
         </button>
@@ -907,7 +925,7 @@ class H5AP {
           <span class="label--pressed plyr__tooltip" role="tooltip">Pause</span>
           <span class="label--not-pressed plyr__tooltip" role="tooltip">Play</span>
         </button>
-        <button type="button" class="plyr__control" data-plyr="fast-forward">
+        <button type="button" class="plyr__control" aria-label="Forward {seektime}s" title="Forward {seektime}s" data-plyr="fast-forward">
           <svg role="presentation"><use xlink:href="#plyr-fast-forward"></use></svg>
           <span class="plyr__tooltip" role="tooltip">Forward {seektime}s</span>
         </button>
@@ -921,7 +939,7 @@ class H5AP {
             <div class="thumbnail"><img src="${poster}" /></div>
         </div>
       <div class="controls">
-        <button type="button" class="plyr__control" data-plyr="rewind">
+        <button type="button" class="plyr__control" aria-label="Rewind {seektime}s" title="Rewind {seektime}s" data-plyr="rewind">
           <svg role="presentation"><use xlink:href="#plyr-rewind"></use></svg>
           <span class="plyr__tooltip" role="tooltip">Rewind {seektime}s</span>
         </button>
@@ -931,7 +949,7 @@ class H5AP {
           <span class="label--pressed plyr__tooltip" role="tooltip">Pause</span>
           <span class="label--not-pressed plyr__tooltip" role="tooltip">Play</span>
         </button>
-        <button type="button" class="plyr__control" data-plyr="fast-forward">
+        <button type="button" class="plyr__control" aria-label="Forward {seektime}s" title="Forward {seektime}s" data-plyr="fast-forward">
           <svg role="presentation"><use xlink:href="#plyr-fast-forward"></use></svg>
           <span class="plyr__tooltip" role="tooltip">Forward {seektime}s</span>
         </button>

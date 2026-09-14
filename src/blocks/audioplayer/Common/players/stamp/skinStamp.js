@@ -3,7 +3,7 @@ export default function skinStamp(title) {
    <div class="extraOptions">
      <h3 class="audioTitle">${title}</h3>
      <div class="volume_controls">
-       <button type="button" class="muteUnmute plyr__control" data-plyr="mute"><svg class="icon--pressed" aria-hidden="true" focusable="false"><use xlink:href="#plyr-muted"></use></svg><svg class="icon--not-pressed" aria-hidden="true" focusable="false"><use xlink:href="#plyr-volume"></use></svg></button>
+       <button type="button" class="muteUnmute plyr__control" aria-label="Mute" data-plyr="mute"><svg class="icon--pressed" aria-hidden="true" focusable="false"><use xlink:href="#plyr-muted"></use></svg><svg class="icon--not-pressed" aria-hidden="true" focusable="false"><use xlink:href="#plyr-volume"></use></svg></button>
        <div class="plyr__volume">
          <input data-plyr="volume" type="range" min="0" max="1" step="0.05" value="1" autocomplete="off" aria-label="Volume">
        </div>
@@ -11,14 +11,14 @@ export default function skinStamp(title) {
    </div>
 
    <div class="mainOptions">
-   <button class="leftAudio  plyr__controls__item plyr__control" data-plyr="rewind"><svg aria-hidden="true" focusable="false"><use xlink:href="#plyr-rewind"></use></svg></button>
-   <button class="rightAudio plyr__controls__item plyr__control" data-plyr="fast-forward"><svg aria-hidden="true" focusable="false"><use xlink:href="#plyr-fast-forward"></use></svg></button>
+   <button class="leftAudio  plyr__controls__item plyr__control" aria-label="Rewind {seektime}s" title="Rewind {seektime}s" data-plyr="rewind"><svg aria-hidden="true" focusable="false"><use xlink:href="#plyr-rewind"></use></svg></button>
+   <button class="rightAudio plyr__controls__item plyr__control" aria-label="Forward {seektime}s" title="Forward {seektime}s" data-plyr="fast-forward"><svg aria-hidden="true" focusable="false"><use xlink:href="#plyr-fast-forward"></use></svg></button>
 
    <div class="controls">
    <div class="play_forward_rewind">
-    <button class="plyr__controls__item plyr__control" data-plyr="rewind"><svg aria-hidden="true" focusable="false"><use xlink:href="#plyr-rewind"></use></svg></button>
+    <button class="plyr__controls__item plyr__control" aria-label="Rewind {seektime}s" title="Rewind {seektime}s" data-plyr="rewind"><svg aria-hidden="true" focusable="false"><use xlink:href="#plyr-rewind"></use></svg></button>
     <button class="plyr__controls__item plyr__control playPauseAudio" type="button" data-plyr="play" aria-label="Play"><svg class="icon--pressed" aria-hidden="true" focusable="false"><use xlink:href="#plyr-pause"></use></svg><svg class="icon--not-pressed" aria-hidden="true" focusable="false"><use xlink:href="#plyr-play"></use></svg></button>
-    <button class="plyr__controls__item plyr__control" data-plyr="fast-forward"><svg aria-hidden="true" focusable="false"><use xlink:href="#plyr-fast-forward"></use></svg></button>
+    <button class="plyr__controls__item plyr__control" aria-label="Forward {seektime}s" title="Forward {seektime}s" data-plyr="fast-forward"><svg aria-hidden="true" focusable="false"><use xlink:href="#plyr-fast-forward"></use></svg></button>
 </div>
 
    <div class="audioProgressView">

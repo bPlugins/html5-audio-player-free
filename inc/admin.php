@@ -69,6 +69,42 @@ if (!class_exists('H5APAdmin')) {
 				3
 			);
 
+			add_submenu_page(
+				'html5-audio-player',
+				__('Categories', 'html5-audio-player'),
+				__('Categories', 'html5-audio-player'),
+				'manage_categories',
+				'edit-tags.php?taxonomy=audio-player-category&post_type=audioplayer',
+				''
+			);
+
+			add_submenu_page(
+				'html5-audio-player',
+				__('Tags', 'html5-audio-player'),
+				__('Tags', 'html5-audio-player'),
+				'manage_categories',
+				'edit-tags.php?taxonomy=audio-player-tags&post_type=audioplayer',
+				''
+			);
+
+			add_submenu_page(
+				'html5-audio-player',
+				__('Radio Categories', 'html5-audio-player'),
+				__('Radio Categories', 'html5-audio-player'),
+				'manage_categories',
+				'edit-tags.php?taxonomy=radioplayer-category&post_type=radioplayer',
+				''
+			);
+
+			add_submenu_page(
+				'html5-audio-player',
+				__('Radio Tags', 'html5-audio-player'),
+				__('Radio Tags', 'html5-audio-player'),
+				'manage_categories',
+				'edit-tags.php?taxonomy=radioplayer-tags&post_type=radioplayer',
+				''
+			);
+
 		}
 
 		function dashboardPage(){ 
@@ -142,16 +178,57 @@ if (!class_exists('H5APAdmin')) {
 						$submenu['html5-audio-player'][$key][0] = __('All players', 'html5-audio-player');
 					} elseif ($item[2] === 'html5-audio-player-add-new') {
 						$submenu['html5-audio-player'][$key][0] = __('Add player', 'html5-audio-player');
+					} elseif ($item[2] === 'edit-tags.php?taxonomy=audio-player-category&post_type=audioplayer') {
+						$submenu['html5-audio-player'][$key][0] = __('Categories', 'html5-audio-player');
+					} elseif ($item[2] === 'edit-tags.php?taxonomy=audio-player-tags&post_type=audioplayer') {
+						$submenu['html5-audio-player'][$key][0] = __('Tags', 'html5-audio-player');
 					} elseif ($item[2] === 'edit.php?post_type=radioplayer') {
 						$submenu['html5-audio-player'][$key][0] = __('Radio players', 'html5-audio-player');
 					} elseif ($item[2] === 'html5-radio-player-add-new') {
 						$submenu['html5-audio-player'][$key][0] = __('Add radio', 'html5-audio-player');
+					} elseif ($item[2] === 'edit-tags.php?taxonomy=radioplayer-category&post_type=radioplayer') {
+						$submenu['html5-audio-player'][$key][0] = __('Radio Categories', 'html5-audio-player');
+					} elseif ($item[2] === 'edit-tags.php?taxonomy=radioplayer-tags&post_type=radioplayer') {
+						$submenu['html5-audio-player'][$key][0] = __('Radio Tags', 'html5-audio-player');
 					} elseif ($item[2] === 'html5-audio-player-help-demo') {
 						$submenu['html5-audio-player'][$key][0] = __('Help & Demos', 'html5-audio-player');
 					} elseif ($item[2] === 'html5-audio-player-settings') {
 						$submenu['html5-audio-player'][$key][0] = __('Settings', 'html5-audio-player');
 					}
 				}
+
+				$desired_order = array(
+					'edit.php?post_type=audioplayer',
+					'html5-audio-player',
+					'html5-audio-player-add-new',
+					'edit-tags.php?taxonomy=audio-player-category&post_type=audioplayer',
+					'edit-tags.php?taxonomy=audio-player-tags&post_type=audioplayer',
+					'edit.php?post_type=radioplayer',
+					'html5-radio-player-add-new',
+					'edit-tags.php?taxonomy=radioplayer-category&post_type=radioplayer',
+					'edit-tags.php?taxonomy=radioplayer-tags&post_type=radioplayer',
+					'html5-audio-player-settings',
+					'html5-audio-player-help-demo',
+				);
+
+				$reordered = array();
+				$items_by_slug = array();
+				foreach ($submenu['html5-audio-player'] as $item) {
+					$items_by_slug[$item[2]] = $item;
+				}
+
+				foreach ($desired_order as $slug) {
+					if (isset($items_by_slug[$slug])) {
+						$reordered[] = $items_by_slug[$slug];
+						unset($items_by_slug[$slug]);
+					}
+				}
+
+				foreach ($items_by_slug as $item) {
+					$reordered[] = $item;
+				}
+
+				$submenu['html5-audio-player'] = $reordered;
 			}
 		}
 	}

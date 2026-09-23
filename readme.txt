@@ -4,7 +4,7 @@ Tags: mp3 player, audio, audio player, player, podcast
 Donate link: https://www.buymeacoffee.com/abuhayat/  
 Requires at least: 6.5
 Tested up to: 7.1
-Stable tag: 2.8.7
+Stable tag: 2.8.8
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -226,6 +226,9 @@ e.g.
 
 
 == Changelog ==
+
+= 2.8.8 - 24 September, 2026 =
+* **New:** Added category and tag management options for Audio Player and Radio Player in the admin sidebar menu.
 
 = 2.8.7 - 15 September, 2026 =
 * **Fix:** Resolved PageSpeed Insights accessibility failure by adding missing `aria-label` and `title` attributes to rewind and fast-forward control buttons across all player skins.

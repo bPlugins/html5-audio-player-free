@@ -344,6 +344,13 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
     },
     changelogs: [
         {
+            version: '2.8.8 - 24 September, 2026',
+            type: 'new',
+            list: [
+                '<strong>New:</strong> Added category and tag management options for Audio Player and Radio Player in the admin sidebar menu.'
+            ]
+        },
+        {
             version: '2.8.7 - 15 September, 2026',
             type: 'fix',
             list: [

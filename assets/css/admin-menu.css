@@ -24,14 +24,14 @@ li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li {
 }
 
 /* Section divider borders under specific menu group items (FluentCRM style).
-   Bound to slugs (NOT nth-child) so groups stay correct across free/pro:
-     Group 1: All players / Add player           -> divider after Add player
-     Group 2: Radio players / Add radio           -> divider after Add radio
-     Group 3: Playlists / Add playlist (pro only) -> divider after Add playlist
+   Bound to slugs so groups stay correct across free/pro:
+     Group 1: All players / Add player / Categories / Tags           -> divider after Tags
+     Group 2: Radio players / Add radio / Radio Categories / Radio Tags -> divider after Radio Tags
+     Group 3: Playlists / Add playlist (pro only)                     -> divider after Add playlist
      Group 4: Help & Demos / Settings / Account / (Upgrade)
    In free there is no Playlists item, so Help & Demos simply joins Settings. */
-li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:has(a[href*="html5-audio-player-add-new"]),
-li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:has(a[href*="html5-radio-player-add-new"]),
+li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:has(a[href*="audio-player-tags"]),
+li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:has(a[href*="radioplayer-tags"]),
 li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:has(a[href*="html5-audio-playlist-add-new"]) {
     border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
     padding-bottom: 8px !important;
@@ -43,13 +43,10 @@ li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li.wp-submenu-head {
     display: none !important;
 }
 
-/* Section divider top padding for spacing when headers are removed.
-   First item of each group: All players (2), Radio players (4),
-   Playlists (6), Help & Demos (8). Child 1 is the hidden submenu head. */
-li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:nth-child(2),
-li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:nth-child(4),
-li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:nth-child(6),
-li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:nth-child(8) {
+/* Section divider top padding for spacing when headers are removed. */
+li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:has(a[href*="audio-player-tags"]) + li,
+li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:has(a[href*="radioplayer-tags"]) + li,
+li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:has(a[href*="html5-audio-playlist-add-new"]) + li {
     margin-top: 4px !important;
 }
 
@@ -79,13 +76,11 @@ li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a::before {
     opacity: 0.7;
 }
 
-/* Icons are bound to each item's href/slug (NOT nth-child) so they stay
-   correct even when the item count changes between free and pro layouts
-   (e.g. "Playlists" exists only in pro, "Upgrade" only in free). */
+/* Icons are bound to each item's href/slug */
 
 /* All players (parent dashboard / audioplayer list) */
 li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a[href*="page=html5-audio-player"]::before,
-li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a[href*="post_type=audioplayer"]::before {
+li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a[href*="post_type=audioplayer"]:not([href*="taxonomy="])::before {
     content: "\f509" !important;
     /* list-view */
 }
@@ -100,8 +95,22 @@ li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a[href*="html5-audio
     padding-left: 2px !important;
 }
 
+/* Audio Player & Radio Categories */
+li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a[href*="taxonomy=audio-player-category"]::before,
+li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a[href*="taxonomy=radioplayer-category"]::before {
+    content: "\f318" !important;
+    /* category icon */
+}
+
+/* Audio Player & Radio Tags */
+li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a[href*="taxonomy=audio-player-tags"]::before,
+li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a[href*="taxonomy=radioplayer-tags"]::before {
+    content: "\f323" !important;
+    /* tag icon */
+}
+
 /* Radio players */
-li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a[href*="post_type=radioplayer"]::before {
+li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a[href*="post_type=radioplayer"]:not([href*="taxonomy="])::before {
     content: "\f500" !important;
     /* media-audio */
 }

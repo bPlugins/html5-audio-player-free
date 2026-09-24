@@ -12,6 +12,8 @@ if (!class_exists('H5APAdmin')) {
 			add_action('admin_menu', [$this, 'adminMenu']);
 			add_action('admin_menu', [$this, 'h5ap_rename_submenus'], 999);
 			add_filter('submenu_file', [$this, 'h5ap_active_submenu_file'], 10, 2);
+			add_filter('parent_file', [$this, 'h5ap_active_parent_file']);
+			add_action('all_admin_notices', [$this, 'render_taxonomy_tabs']);
 		}
 
 		function adminEnqueueScripts($hook){
@@ -87,24 +89,6 @@ if (!class_exists('H5APAdmin')) {
 				''
 			);
 
-			add_submenu_page(
-				'html5-audio-player',
-				__('Radio Categories', 'html5-audio-player'),
-				__('Radio Categories', 'html5-audio-player'),
-				'manage_categories',
-				'edit-tags.php?taxonomy=radioplayer-category&post_type=radioplayer',
-				''
-			);
-
-			add_submenu_page(
-				'html5-audio-player',
-				__('Radio Tags', 'html5-audio-player'),
-				__('Radio Tags', 'html5-audio-player'),
-				'manage_categories',
-				'edit-tags.php?taxonomy=radioplayer-tags&post_type=radioplayer',
-				''
-			);
-
 		}
 
 		function dashboardPage(){ 
@@ -153,17 +137,59 @@ if (!class_exists('H5APAdmin')) {
 			}
 		}
 
+		/**
+		 * WordPress' own edit-tags.php hardcodes $parent_file to "edit.php?post_type=$post_type"
+		 * (see wp-admin/edit-tags.php), which never matches our custom top-level menu slug
+		 * ('html5-audio-player') because the audioplayer/radioplayer post types are registered
+		 * with show_in_menu set to that custom slug instead of true. Without this filter the
+		 * "HTML5 Audio Player" parent menu never gets its wp-has-current-submenu/wp-menu-open
+		 * classes on the Categories/Tags/Radio Categories/Radio Tags screens, so it renders collapsed.
+		 */
+		function h5ap_active_parent_file($parent_file) {
+			global $pagenow;
+			if ($pagenow === 'edit-tags.php') {
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only, no state change
+				if (isset($_GET['taxonomy'])) {
+					// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only, no state change
+					$taxonomy = sanitize_text_field(wp_unslash($_GET['taxonomy']));
+					if (in_array($taxonomy, array('audio-player-category', 'audio-player-tags', 'radioplayer-category', 'radioplayer-tags'), true)) {
+						return 'html5-audio-player';
+					}
+				}
+			}
+			return $parent_file;
+		}
+
 		function h5ap_active_submenu_file($submenu_file, $parent_file) {
 			global $pagenow;
-			if ($parent_file === 'html5-audio-player' && $pagenow === 'post-new.php') {
-				// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only, no state change
-				if (isset($_GET['post_type'])) {
+			if ($parent_file === 'html5-audio-player') {
+				if ($pagenow === 'post-new.php') {
 					// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only, no state change
-					$post_type = sanitize_text_field(wp_unslash($_GET['post_type']));
-					if ($post_type === 'audioplayer') {
-						return 'html5-audio-player-add-new';
-					} elseif ($post_type === 'radioplayer') {
-						return 'html5-radio-player-add-new';
+					if (isset($_GET['post_type'])) {
+						// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only, no state change
+						$post_type = sanitize_text_field(wp_unslash($_GET['post_type']));
+						if ($post_type === 'audioplayer') {
+							return 'html5-audio-player-add-new';
+						} elseif ($post_type === 'radioplayer') {
+							return 'html5-radio-player-add-new';
+						}
+					}
+				} elseif ($pagenow === 'edit-tags.php') {
+					// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only, no state change
+					if (isset($_GET['taxonomy'])) {
+						// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only, no state change
+						$taxonomy = sanitize_text_field(wp_unslash($_GET['taxonomy']));
+						// WP core's edit-tags.php hardcodes $submenu_file with "&amp;" instead of a
+						// plain "&" (see wp-admin/edit-tags.php), so it never exactly matches the
+						// slug we registered via add_submenu_page(). Always return our own
+						// correctly-formatted slug here (for both the audio-player-* taxonomies
+						// themselves and the radioplayer-* ones, which share the same tab) so the
+						// "current" highlight actually applies.
+						if ($taxonomy === 'audio-player-category' || $taxonomy === 'radioplayer-category') {
+							return 'edit-tags.php?taxonomy=audio-player-category&post_type=audioplayer';
+						} elseif ($taxonomy === 'audio-player-tags' || $taxonomy === 'radioplayer-tags') {
+							return 'edit-tags.php?taxonomy=audio-player-tags&post_type=audioplayer';
+						}
 					}
 				}
 			}
@@ -178,18 +204,17 @@ if (!class_exists('H5APAdmin')) {
 						$submenu['html5-audio-player'][$key][0] = __('All players', 'html5-audio-player');
 					} elseif ($item[2] === 'html5-audio-player-add-new') {
 						$submenu['html5-audio-player'][$key][0] = __('Add player', 'html5-audio-player');
-					} elseif ($item[2] === 'edit-tags.php?taxonomy=audio-player-category&post_type=audioplayer') {
-						$submenu['html5-audio-player'][$key][0] = __('Categories', 'html5-audio-player');
-					} elseif ($item[2] === 'edit-tags.php?taxonomy=audio-player-tags&post_type=audioplayer') {
-						$submenu['html5-audio-player'][$key][0] = __('Tags', 'html5-audio-player');
+						$submenu['html5-audio-player'][$key][4] = 'h5ap-group-divider';
 					} elseif ($item[2] === 'edit.php?post_type=radioplayer') {
 						$submenu['html5-audio-player'][$key][0] = __('Radio players', 'html5-audio-player');
 					} elseif ($item[2] === 'html5-radio-player-add-new') {
 						$submenu['html5-audio-player'][$key][0] = __('Add radio', 'html5-audio-player');
-					} elseif ($item[2] === 'edit-tags.php?taxonomy=radioplayer-category&post_type=radioplayer') {
-						$submenu['html5-audio-player'][$key][0] = __('Radio Categories', 'html5-audio-player');
-					} elseif ($item[2] === 'edit-tags.php?taxonomy=radioplayer-tags&post_type=radioplayer') {
-						$submenu['html5-audio-player'][$key][0] = __('Radio Tags', 'html5-audio-player');
+						$submenu['html5-audio-player'][$key][4] = 'h5ap-group-divider';
+					} elseif ($item[2] === 'edit-tags.php?taxonomy=audio-player-category&post_type=audioplayer') {
+						$submenu['html5-audio-player'][$key][0] = __('Categories', 'html5-audio-player');
+					} elseif ($item[2] === 'edit-tags.php?taxonomy=audio-player-tags&post_type=audioplayer') {
+						$submenu['html5-audio-player'][$key][0] = __('Tags', 'html5-audio-player');
+						$submenu['html5-audio-player'][$key][4] = 'h5ap-group-divider';
 					} elseif ($item[2] === 'html5-audio-player-help-demo') {
 						$submenu['html5-audio-player'][$key][0] = __('Help & Demos', 'html5-audio-player');
 					} elseif ($item[2] === 'html5-audio-player-settings') {
@@ -201,12 +226,10 @@ if (!class_exists('H5APAdmin')) {
 					'edit.php?post_type=audioplayer',
 					'html5-audio-player',
 					'html5-audio-player-add-new',
-					'edit-tags.php?taxonomy=audio-player-category&post_type=audioplayer',
-					'edit-tags.php?taxonomy=audio-player-tags&post_type=audioplayer',
 					'edit.php?post_type=radioplayer',
 					'html5-radio-player-add-new',
-					'edit-tags.php?taxonomy=radioplayer-category&post_type=radioplayer',
-					'edit-tags.php?taxonomy=radioplayer-tags&post_type=radioplayer',
+					'edit-tags.php?taxonomy=audio-player-category&post_type=audioplayer',
+					'edit-tags.php?taxonomy=audio-player-tags&post_type=audioplayer',
 					'html5-audio-player-settings',
 					'html5-audio-player-help-demo',
 				);
@@ -229,6 +252,51 @@ if (!class_exists('H5APAdmin')) {
 				}
 
 				$submenu['html5-audio-player'] = $reordered;
+			}
+		}
+
+		function render_taxonomy_tabs() {
+			global $pagenow;
+			if ($pagenow !== 'edit-tags.php') {
+				return;
+			}
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only check for rendering admin tab bar
+			$taxonomy = isset($_GET['taxonomy']) ? sanitize_text_field(wp_unslash($_GET['taxonomy'])) : '';
+
+			if (in_array($taxonomy, ['audio-player-category', 'radioplayer-category'], true)) {
+				$audio_url = admin_url('edit-tags.php?taxonomy=audio-player-category&post_type=audioplayer');
+				$radio_url = admin_url('edit-tags.php?taxonomy=radioplayer-category&post_type=radioplayer');
+				$is_audio  = ($taxonomy === 'audio-player-category');
+				$is_radio  = ($taxonomy === 'radioplayer-category');
+				?>
+				<div class="wrap h5ap-taxonomy-tabs-wrap" style="margin-top: 15px; margin-bottom: 10px;">
+					<h2 class="nav-tab-wrapper">
+						<a href="<?php echo esc_url($audio_url); ?>" class="nav-tab <?php echo $is_audio ? 'nav-tab-active' : ''; ?>">
+							<span class="dashicons dashicons-format-audio" style="margin-right: 5px; vertical-align: middle;"></span><?php esc_html_e('Audio Player Categories', 'html5-audio-player'); ?>
+						</a>
+						<a href="<?php echo esc_url($radio_url); ?>" class="nav-tab <?php echo $is_radio ? 'nav-tab-active' : ''; ?>">
+							<span class="dashicons dashicons-controls-volumeon" style="margin-right: 5px; vertical-align: middle;"></span><?php esc_html_e('Radio Categories', 'html5-audio-player'); ?>
+						</a>
+					</h2>
+				</div>
+				<?php
+			} elseif (in_array($taxonomy, ['audio-player-tags', 'radioplayer-tags'], true)) {
+				$audio_url = admin_url('edit-tags.php?taxonomy=audio-player-tags&post_type=audioplayer');
+				$radio_url = admin_url('edit-tags.php?taxonomy=radioplayer-tags&post_type=radioplayer');
+				$is_audio  = ($taxonomy === 'audio-player-tags');
+				$is_radio  = ($taxonomy === 'radioplayer-tags');
+				?>
+				<div class="wrap h5ap-taxonomy-tabs-wrap" style="margin-top: 15px; margin-bottom: 10px;">
+					<h2 class="nav-tab-wrapper">
+						<a href="<?php echo esc_url($audio_url); ?>" class="nav-tab <?php echo $is_audio ? 'nav-tab-active' : ''; ?>">
+							<span class="dashicons dashicons-tag" style="margin-right: 5px; vertical-align: middle;"></span><?php esc_html_e('Audio Player Tags', 'html5-audio-player'); ?>
+						</a>
+						<a href="<?php echo esc_url($radio_url); ?>" class="nav-tab <?php echo $is_radio ? 'nav-tab-active' : ''; ?>">
+							<span class="dashicons dashicons-tag" style="margin-right: 5px; vertical-align: middle;"></span><?php esc_html_e('Radio Tags', 'html5-audio-player'); ?>
+						</a>
+					</h2>
+				</div>
+				<?php
 			}
 		}
 	}

@@ -3,18 +3,10 @@
    Modern Premium Submenu Sidebar (FluentCRM Style Layout)
    ========================================================================== */
 
-/* Match Parent Menu Background when Open */
-li[id^="toplevel_page_html5-audio-player"].wp-menu-open,
-li[id^="toplevel_page_html5-audio-player"].wp-menu-open>a.menu-top {
-    background-color: #0f172a !important;
-    /* Premium Slate 900 */
-}
-
-/* Submenu container style overrides */
+/* Submenu container style overrides (bPlugins Modern Admin Brand Background #091E42) */
 li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu {
-    background-color: #0f172a !important;
-    /* Premium Slate 900 */
     padding: 6px 0 !important;
+    background-color: #091E42 !important;
 }
 
 /* Submenu list item spacing */
@@ -23,17 +15,13 @@ li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li {
     padding: 0 !important;
 }
 
-/* Section divider borders under specific menu group items (FluentCRM style).
-   Bound to slugs so groups stay correct across free/pro:
-     Group 1: All players / Add player / Categories / Tags           -> divider after Tags
-     Group 2: Radio players / Add radio / Radio Categories / Radio Tags -> divider after Radio Tags
-     Group 3: Playlists / Add playlist (pro only)                     -> divider after Add playlist
-     Group 4: Help & Demos / Settings / Account / (Upgrade)
-   In free there is no Playlists item, so Help & Demos simply joins Settings. */
-li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:has(a[href*="audio-player-tags"]),
-li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:has(a[href*="radioplayer-tags"]),
-li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:has(a[href*="html5-audio-playlist-add-new"]) {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+/* Section divider borders under specific menu group items (FluentCRM style). */
+li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li.h5ap-group-divider,
+li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:has(a[href*="html5-audio-player-add-new"]),
+li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:has(a[href*="html5-radio-player-add-new"]),
+li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:has(a[href*="html5-audio-playlist-add-new"]),
+li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:has(a[href*="audio-player-tags"]) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
     padding-bottom: 8px !important;
     margin-bottom: 8px !important;
 }
@@ -44,9 +32,11 @@ li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li.wp-submenu-head {
 }
 
 /* Section divider top padding for spacing when headers are removed. */
-li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:has(a[href*="audio-player-tags"]) + li,
-li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:has(a[href*="radioplayer-tags"]) + li,
-li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:has(a[href*="html5-audio-playlist-add-new"]) + li {
+li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li.h5ap-group-divider + li,
+li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:has(a[href*="html5-audio-player-add-new"]) + li,
+li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:has(a[href*="html5-radio-player-add-new"]) + li,
+li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:has(a[href*="html5-audio-playlist-add-new"]) + li,
+li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:has(a[href*="audio-player-tags"]) + li {
     margin-top: 4px !important;
 }
 
@@ -55,15 +45,15 @@ li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     font-size: 12.5px !important;
     padding: 8px 14px !important;
-    color: #cbd5e1 !important;
-    /* Lighter text color (increased visibility) */
+    margin: 1px 8px !important;
+    border-radius: 6px !important;
     display: flex !important;
     align-items: center !important;
-    transition: color 0.15s ease, background-color 0.15s ease !important;
+    transition: color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease !important;
     font-weight: 500 !important;
     text-decoration: none !important;
     border-bottom: none !important;
-    /* No individual bottom borders */
+    /* No individual bottom borders; rounded "pill" items instead for a premium, floating-card look */
 }
 
 /* Custom Icons via Dashicons */
@@ -213,17 +203,26 @@ li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a[href*="pricing"]::
     margin-top: 0 !important;
 }
 
-/* Hover state styling */
+/* Hover state styling (violet-tinted, harmonizes with the #6155F5 active accent) */
 li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a:hover {
+    background-color: rgba(97, 85, 245, 0.14) !important;
     color: #ffffff !important;
-    background-color: rgba(255, 255, 255, 0.05) !important;
 }
 
-/* Active submenu link state */
+/* Active submenu link state: no background fill, just the brand accent text color (#8b7fff) so it reads as "active" */
 li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li.current a,
 li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a.current {
-    background-color: #2563eb !important;
-    /* brand blue */
+    background-color: transparent !important;
+    color: #8b7fff !important;
+    font-weight: 600 !important;
+    box-shadow: none !important;
+}
+
+/* Top-level parent menu (the "HTML5 Audio Player" item itself) keeps a solid highlighted
+   background while any of its submenu pages is open, matching standard WP/plugin UX
+   (e.g. the highlighted top-level item shown in other plugins' admin menus). */
+#adminmenu li[id^="toplevel_page_html5-audio-player"].wp-has-current-submenu > a.wp-has-current-submenu {
+    background-color: #6155F5 !important;
     color: #ffffff !important;
 }
 
@@ -345,6 +344,6 @@ li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a:active {
 
 li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li.current a::before,
 li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a.current::before {
-    color: #ffffff !important;
+    color: #8b7fff !important;
     opacity: 1;
 }

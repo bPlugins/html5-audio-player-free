@@ -88,12 +88,11 @@ class AudioPlayer
         array(
           'id' => 'h5vp_default_audio',
           'type' => 'upload',
-          'title' => 'Audio source',
-          'desc' => 'Upload or select the main audio file you want to play.',
+          'title' => 'Audio File',
+          'desc' => 'Upload or select an audio file to play.',
           'library' => 'audio',
           'dependency' => array('h5ap_player_type', 'any', 'opt-1,opt-3'),
-          'placeholder' => 'http://',
-          'button_title' => 'Add Audio',
+          'button_title' => 'Upload Audio',
           'remove_title' => 'Remove Audio',
         ),
         array(

@@ -344,19 +344,10 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
     },
     changelogs: [
         {
-            version: '2.8.8 - 24 September, 2026',
+            version: '2.8.7 - 26 September, 2026',
             type: 'new',
             list: [
                 '<strong>New:</strong> Added category and tag management options for Audio Player and Radio Player in the admin sidebar menu.'
-            ]
-        },
-        {
-            version: '2.8.7 - 15 September, 2026',
-            type: 'fix',
-            list: [
-                '<strong>Fix:</strong> Resolved PageSpeed Insights accessibility failure by adding missing <code>aria-label</code> and <code>title</code> attributes to rewind and fast-forward control buttons across all player skins.',
-                '<strong>Fix:</strong> Resolved Stamp skin mobile player layout issue and restored missing fast-forward control button.',
-                '<strong>Fix:</strong> Fixed invalid padding property syntax in player SCSS stylesheet.'
             ]
         },
         {

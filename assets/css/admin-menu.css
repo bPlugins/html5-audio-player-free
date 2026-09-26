@@ -203,9 +203,9 @@ li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a[href*="pricing"]::
     margin-top: 0 !important;
 }
 
-/* Hover state styling (violet-tinted, harmonizes with the #6155F5 active accent) */
+/* Hover state styling */
 li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a:hover {
-    background-color: rgba(97, 85, 245, 0.14) !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
     color: #ffffff !important;
 }
 
@@ -213,7 +213,7 @@ li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a:hover {
 li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li.current a,
 li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a.current {
     background-color: transparent !important;
-    color: #8b7fff !important;
+    color: #ffffff !important;
     font-weight: 600 !important;
     box-shadow: none !important;
 }
@@ -222,7 +222,7 @@ li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a.current {
    background while any of its submenu pages is open, matching standard WP/plugin UX
    (e.g. the highlighted top-level item shown in other plugins' admin menus). */
 #adminmenu li[id^="toplevel_page_html5-audio-player"].wp-has-current-submenu > a.wp-has-current-submenu {
-    background-color: #6155F5 !important;
+    background-color: var(--wp-admin-theme-color, #2271b1) !important;
     color: #ffffff !important;
 }
 
@@ -344,6 +344,6 @@ li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a:active {
 
 li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li.current a::before,
 li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a.current::before {
-    color: #8b7fff !important;
-    opacity: 1;
+    color: #ffffff !important;
+    opacity: 1 !important;
 }

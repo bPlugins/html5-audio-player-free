@@ -26,7 +26,7 @@ const DashboardStyle = ({ title, sourceType, subtitle, statusText }) => (`
 
         <div class="flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <button data-plyr="play"
+                <button aria-label="Play" data-plyr="play"
                     class="plyr___control play-icon w-12 h-12 border-none rounded-xl flex items-center justify-center transition-all duration-200 shadow-md hover:shadow-lg"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play icon--not-pressed">

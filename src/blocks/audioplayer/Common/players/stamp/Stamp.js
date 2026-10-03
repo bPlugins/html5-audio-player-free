@@ -5,6 +5,7 @@ import "./stamp.scss";
 import CloseStickyIcon from "../../../Components/CloseStickyIcon";
 import fadeOut from "../../../../../utils/fadeOut";
 import PlyrExtend from "../../../../../utils/PlyrExtend";
+import bindExtraSeekButtons from "../../../../../utils/bindExtraSeekButtons";
 import { resolveAudioSrc } from "../../../../../utils/gDriveProxy";
 
 
@@ -27,6 +28,7 @@ function Stamp(props) {
             seekTime,
             storage: { enabled: false },
         })
+        bindExtraSeekButtons(player);
 
         player.muted = effectiveMuted;
 

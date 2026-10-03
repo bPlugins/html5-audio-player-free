@@ -1,6 +1,6 @@
 {
   "name": "html5-audio-player",
-  "version": "2.8.7",
+  "version": "2.8.8",
   "description": "Best audio player plugin with multiple playlist layouts, playlist shortcode, audio player widget, and 6 plus advanced feature.",
   "main": "src/player.js",
   "scripts": {
@@ -11,10 +11,7 @@
     "format": "wp-scripts format",
     "start": "wp-scripts start --webpack-copy-php",
     "build": "wp-scripts build --webpack-copy-php && (npm run i18n || node -e \"console.log('i18n failed')\")",
-    "i18n-pot": "wp i18n make-pot . languages/h5ap.pot --exclude=\"src\" && node -e \"require('fs').copyFileSync('languages/h5ap.pot', 'languages/h5ap-en_US.po')\"",
-    "i18n-json": "wp i18n make-json languages/ --no-purge",
-    "i18n-mo": "wp i18n make-mo languages/",
-    "i18n": "npm run i18n-pot && npm run i18n-json && npm run i18n-mo",
+    "i18n": "node scripts/i18n.js --pot=languages/h5ap.pot --po=languages/h5ap-en_US.po",
     "bundle": "gulp bundle",
     "zip": "gulp zip",
     "make-zip": "wp-scripts build --webpack-copy-php && (npm run i18n || node -e \"console.log('i18n failed')\") && gulp bundle && gulp zip && node -e \"require('fs').rmSync('bundled', { recursive: true, force: true })\"",

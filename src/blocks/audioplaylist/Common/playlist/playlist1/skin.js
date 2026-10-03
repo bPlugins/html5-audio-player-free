@@ -118,7 +118,7 @@ const skin = (audios = [], customOptions = {}) => {
           <span class="plyr__tooltip" role="tooltip">Rewind ${skipTime}s</span>
        </button>
        ` : ''}
-       <button class="plyr__control p-4 bg-amber-500 rounded-full hover:bg-amber-400 leading-0" data-plyr="play">
+       <button aria-label="Play" class="plyr__control p-4 bg-amber-500 rounded-full hover:bg-amber-400 leading-0" data-plyr="play">
           <svg class="icon--pressed" role="presentation"><use xlink:href="#plyr-pause"></use></svg>
           <svg class="icon--not-pressed" role="presentation"><use xlink:href="#plyr-play"></use></svg>
           <span class="label--pressed plyr__tooltip" role="tooltip">Pause</span>

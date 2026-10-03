@@ -14,6 +14,7 @@ function bundle() {
       "**/*",
       "!node_modules/**",
       "!src/**",
+      "!scripts/**",
       "!zip/**",
       "!composer.lock",
       "!bundled/**",

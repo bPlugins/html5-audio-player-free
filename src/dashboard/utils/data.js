@@ -344,6 +344,14 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
     },
     changelogs: [
         {
+            version: '2.8.8 - 03 October, 2026',
+            type: 'fix',
+            list: [
+                '<strong>Fix:</strong> Resolved PageSpeed Insights accessibility ("Navegación agéntica") error by adding static <code>aria-label</code> attributes to player control buttons.',
+                '<strong>Fix:</strong> Resolved Stamp skin Fast-Forward and Rewind buttons issue on mobile devices.'
+            ]
+        },
+        {
             version: '2.8.7 - 26 September, 2026',
             type: 'new',
             list: [
@@ -388,7 +396,7 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
             ]
         }
     ],
-    changelogsLimit: 3,
+    changelogsLimit: 4,
     changelogsReadMoreLabel: 'View More Changelogs',
     proFeatures: [
         'Advanced Playlist Skins (Narrow & Extensive Layouts)',

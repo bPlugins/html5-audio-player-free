@@ -11,11 +11,11 @@ export default function skinFusion(poster = null, title = null, source = null, o
       : "";
   const repeat =
     otherControls?.repeat === true
-      ? `<button type="button" data-active="false" class="plyr__control" data-plyr="repeat"><svg class="icon">
-          <use xlink:href="#exchange"></use>
+      ? `<button type="button" data-active="false" class="plyr__control" aria-label="Repeat" title="Repeat" data-plyr="repeat"><svg class="icon" aria-hidden="true" focusable="false">
+          <use xlink:href="#exchange"></use></svg>
         </button>`
       : "";
-  const playlist = otherControls?.playlist === true ? `<button type="button" class="plyr__control" data-active="true" data-plyr="playlist"><span class="dashicons dashicons-playlist-audio"></span></button>` : "";
+  const playlist = otherControls?.playlist === true ? `<button type="button" class="plyr__control" data-active="true" aria-label="Playlist" title="Playlist" data-plyr="playlist"><span class="dashicons dashicons-playlist-audio" aria-hidden="true"></span></button>` : "";
   return `<div class="plyr__controls radius">
     <div class="plyr__controls rewind_play_fastforward">
     ${(poster !== 'null') ? `<img class="thumbnails" src="${poster || thumb}" alt=""></img>` : ''}

@@ -1,6 +1,7 @@
 import toHHMMSS from "../../../../utils/toHHMMSS";
 import { generateKeyFromUrl } from "../utils";
 import handleWave from "../../blocks/audioplayer/Common/players/wave/handleWave";
+import bindExtraSeekButtons from "../../utils/bindExtraSeekButtons";
 
 class H5AP {
   audioPlayer(audioPlayer, options) {
@@ -114,6 +115,7 @@ class H5AP {
       autoplay,
       speed: { selected: 1, options: h5apPlayer?.speed ? h5apPlayer.speed.map(Number) : [0.5, 1, 1.5, 2] },
     });
+    bindExtraSeekButtons(player);
 
     const setDurationText = (dur) => {
       const $durEl = $(audioPlayer).find(".plyr__time--duration");
@@ -669,10 +671,10 @@ class H5AP {
         : "";
     const repeat =
       otherControls?.repeat === true
-        ? `<button type="button" data-active="false" class="plyr__control" data-plyr="repeat"><svg class="icon">
-        <use xlink:href="#exchange"></use></button>`
+        ? `<button type="button" data-active="false" class="plyr__control" aria-label="Repeat" title="Repeat" data-plyr="repeat"><svg class="icon" aria-hidden="true" focusable="false">
+        <use xlink:href="#exchange"></use></svg></button>`
         : "";
-    const playlist = otherControls?.playlist === true ? `<button type="button" class="plyr__control" data-active="true" data-plyr="playlist"><span class="dashicons dashicons-playlist-audio"></span></button>` : "";
+    const playlist = otherControls?.playlist === true ? `<button type="button" class="plyr__control" data-active="true" aria-label="Playlist" title="Playlist" data-plyr="playlist"><span class="dashicons dashicons-playlist-audio" aria-hidden="true"></span></button>` : "";
     return `<div class="plyr__controls radius">
     <div class="plyr__controls rewind_play_fastforward">
     <img class="thumbnails" src="${poster}" alt="">

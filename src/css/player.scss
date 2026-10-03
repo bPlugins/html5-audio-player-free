@@ -1,3 +1,7 @@
+// Stamp skin layout (incl. desktop/mobile rewind/forward toggle) for the shortcode player.
+// Only the scoped partial is imported; stamp.scss also carries a global range-color rule.
+@import '../blocks/audioplayer/Common/players/stamp/stamp-skin';
+
 :root {
   --theme-custom-bg: #6ab04c;
   --theme-custom-color: #fff;

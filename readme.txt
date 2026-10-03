@@ -4,7 +4,7 @@ Tags: mp3 player, audio, audio player, player, podcast
 Donate link: https://www.buymeacoffee.com/abuhayat/  
 Requires at least: 6.5
 Tested up to: 7.1
-Stable tag: 2.8.7
+Stable tag: 2.8.8
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -185,7 +185,7 @@ Yes, the plugin offers an option to enable or disable the download button.
 Yes, you can configure the player to show a sample or preview clip for digital products or paid content.
 
 = Can I use this plugin to sell audio files? =
-You can use the plugin to showcase previews and link to purchase/download pages. Integration with eCommerce plugins can be handled separately.
+Yes, you can use the plugin to showcase previews and link to purchase/download pages. Integration with eCommerce plugins can be handled separately.
 
 = Does this plugin support playlists? =
 Yes, you can create playlists with multiple audio files. Different player types are available, including standard, playlist, and sticky player.
@@ -226,6 +226,10 @@ e.g.
 
 
 == Changelog ==
+
+= 2.8.8 - 03 October, 2026 =
+* **Fix:** Resolved PageSpeed Insights accessibility ("Navegación agéntica") error by adding static aria-labels to player buttons and controls.
+* **Fix:** Resolved Stamp skin Fast-Forward and Rewind buttons issue on mobile devices.
 
 = 2.8.7 - 26 September, 2026 =
 * **New:** Added category and tag management options for Audio Player and Radio Player in the admin sidebar menu.

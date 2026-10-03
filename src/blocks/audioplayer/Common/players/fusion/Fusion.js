@@ -10,7 +10,7 @@ import { resolveAudioSrc } from "../../../../../utils/gDriveProxy";
 
 function Fusion(props) {
     const { attributes, containerRef, className } = props;
-    const { source: rawSource, title, poster, download, repeat, autoplay, muted, seekTime, disablePause, startTime, saveState, preload, options = {} } = attributes;
+    const { source: rawSource, title, poster, hideThumbnail, download, repeat, autoplay, muted, seekTime, disablePause, startTime, saveState, preload, options = {} } = attributes;
     const { volume } = options;
     const source = resolveAudioSrc(rawSource);
     const isMuted = Boolean(muted === true || muted === 'true');
@@ -22,7 +22,7 @@ function Fusion(props) {
         }
         const safeVolume = isNaN(parseFloat(volume)) ? 0.5 : parseFloat(volume);
         const player = new Plyr(containerRef.current.querySelector('audio'), {
-            controls: skinFusion(poster, title, source, { download, repeat: true }),
+            controls: skinFusion(poster, title, source, { download, repeat: true, hideThumbnail }),
             loop: { active: repeat },
             autoplay,
             muted: effectiveMuted,

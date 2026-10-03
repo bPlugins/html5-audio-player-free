@@ -108,6 +108,7 @@ class Shortcode
                 'repeat' => (bool)$repeat,
                 'shuffle' => (bool)$shuffle,
                 'skin' => isset($atts['skin']) ? ucfirst($atts['skin']) : 'Default',
+                'hideThumbnail' => isset($atts['thumbnail']) && in_array(strtolower((string) $atts['thumbnail']), array('false', '0', 'no', 'hide'), true),
                 'autoplay' => $autoplay,
                 'muted' => $muted,
                 'preload' => $preload,

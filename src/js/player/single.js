@@ -677,7 +677,7 @@ class H5AP {
     const playlist = otherControls?.playlist === true ? `<button type="button" class="plyr__control" data-active="true" aria-label="Playlist" title="Playlist" data-plyr="playlist"><span class="dashicons dashicons-playlist-audio" aria-hidden="true"></span></button>` : "";
     return `<div class="plyr__controls radius">
     <div class="plyr__controls rewind_play_fastforward">
-    <img class="thumbnails" src="${poster}" alt="">
+    <img class="thumbnails" src="${poster}" alt="${String(title || 'Audio thumbnail').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}">
     <div class="plyr__controls">
     <button type="button" class="plyr__control" aria-label="Rewind {seektime}s" title="Rewind {seektime}s" data-plyr="rewind">
       <svg role="presentation"><use xlink:href="#plyr-rewind"></use></svg>

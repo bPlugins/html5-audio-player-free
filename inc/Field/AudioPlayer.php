@@ -145,6 +145,17 @@ class AudioPlayer
           ),
         ),
         array(
+          'id' => 'hide_poster',
+          'type' => 'switcher',
+          'title' => \__('Hide Poster Image <span class="h5ap-new-badge" style="background:#2563eb;color:#fff;font-size:10px;padding:2px 6px;border-radius:4px;margin-left:6px;font-weight:600;">NEW</span>', 'html5-audio-player'),
+          'desc' => \__('Show the Fusion player without any image (the default image is not loaded either).', 'html5-audio-player'),
+          'default' => false,
+          'dependency' => array(
+            array('h5ap_player_type', '==', 'opt-1'),
+            array('standard_skin', '==', 'fusion'),
+          ),
+        ),
+        array(
           'id'         => 'waveType',
           'type'       => 'select',
           'title'      => \__('Waveform Style <span class="h5ap-new-badge" style="background:#2563eb;color:#fff;font-size:10px;padding:2px 6px;border-radius:4px;margin-left:6px;font-weight:600;">NEW</span>', 'html5-audio-player'),

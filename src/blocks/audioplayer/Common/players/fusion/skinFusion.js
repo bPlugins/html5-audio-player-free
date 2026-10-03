@@ -16,9 +16,12 @@ export default function skinFusion(poster = null, title = null, source = null, o
         </button>`
       : "";
   const playlist = otherControls?.playlist === true ? `<button type="button" class="plyr__control" data-active="true" aria-label="Playlist" title="Playlist" data-plyr="playlist"><span class="dashicons dashicons-playlist-audio" aria-hidden="true"></span></button>` : "";
-  return `<div class="plyr__controls radius">
+  const showThumbnail = poster !== 'null' && !otherControls?.hideThumbnail;
+  const safeTitle = String(title || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const thumbnailAlt = safeTitle || 'Audio thumbnail';
+  return `<div class="plyr__controls radius${showThumbnail ? '' : ' h5ap-no-thumbnail'}">
     <div class="plyr__controls rewind_play_fastforward">
-    ${(poster !== 'null') ? `<img class="thumbnails" src="${poster || thumb}" alt=""></img>` : ''}
+    ${showThumbnail ? `<img class="thumbnails" src="${poster || thumb}" alt="${thumbnailAlt}"></img>` : ''}
     <div class="plyr__controls">
     <button type="button" class="plyr__control" aria-label="Rewind {seektime}s" title="Rewind {seektime}s" data-plyr="rewind">
       <svg role="presentation"><use xlink:href="#plyr-rewind"></use></svg>

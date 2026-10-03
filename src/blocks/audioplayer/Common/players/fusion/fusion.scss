@@ -77,15 +77,34 @@ sticky skin
 
         & .title h3 {
             color: var(--plyr-color-control, #fff);
-            padding: 2px 0px 4px;
+            padding: 3px 8px;
             margin: 0;
             font-size: 16px;
             border-radius: 3px;
-            text-align: left;
+            text-align: center;
             margin-bottom: 12px;
             position: relative;
             z-index: 1;
             background-color: rgba(255, 255, 255, 0.1);
+        }
+    }
+}
+
+// "Hide thumbnail" option: without the image the buttons group becomes :first-child and would
+// pick up the mobile column-reverse rule below, stacking the buttons vertically.
+.skin_fusion .plyr .plyr__controls.h5ap-no-thumbnail .rewind_play_fastforward > .plyr__controls {
+    flex-direction: row;
+}
+
+// Reclaim the 110px the image used, keep controls off the left edge, and keep the same
+// 100px height as the image version so the title doesn't sit against the top edge.
+@media screen and (min-width: 769px) {
+    .skin_fusion .plyr .plyr__controls.h5ap-no-thumbnail {
+        padding-left: 15px;
+        min-height: 100px;
+
+        & .infos {
+            width: calc(100% - 275px);
         }
     }
 }

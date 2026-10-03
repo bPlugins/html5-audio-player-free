@@ -96,6 +96,7 @@ $block = [
         'alignment'     => $meta('plp_align', 'left'),
         'source'        => h5ap_resolve_gdrive_url(h5ap_resolve_soundcloud_url($h5vp_default_audio)),
         'poster'        => $type === 'opt-3' ? $meta('poster_sticky') : $meta('sticky_poster'),
+        'hideThumbnail' => $meta('hide_poster', false, true),
         'title'         => $type === 'opt-3' ? $meta('title_sticky') : $meta('title'),
         'artist'        => $meta('author'),
         'color'         => $meta('color', '#fff'),

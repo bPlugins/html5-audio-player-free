@@ -10,7 +10,7 @@ import { AdvertiseCard } from '../../../../../bpl-tools/ProControls/index.js';
 import NewBadge from '../../components/NewBadge/NewBadge.js';
 
 const Settings = ({ attributes, setAttributes, siteUrl }) => {
-  const { source, controls, primaryColor, bgColor, controlColor, poster, skin, alignment, isSticky, title, artist, repeat, preload, radius, autoplay, muted, loader, width, lazyLoad, waveType = "equalizer" } = attributes;
+  const { source, controls, primaryColor, bgColor, controlColor, poster, hideThumbnail, skin, alignment, isSticky, title, artist, repeat, preload, radius, autoplay, muted, loader, width, lazyLoad, waveType = "equalizer" } = attributes;
 
   const pricingURL = `${siteUrl}/wp-admin/admin.php?page=html5-audio-player-help-demo#/pricing`;
 
@@ -107,7 +107,17 @@ const Settings = ({ attributes, setAttributes, siteUrl }) => {
 
                         {["Fusion", "Wave", "Card-1", "Card-2", "Simple-2", "Player9", "Player10", "Player11"].includes(skin) && (
                           <Fragment>
-                            <InlineMediaUpload className='mt10' label={__("Poster/Thumbnail", "h5ap")} value={poster} type={["image"]} onChange={(poster) => setAttributes({ poster })} />
+                            {!(skin === "Fusion" && hideThumbnail) && (
+                              <InlineMediaUpload className='mt10' label={__("Poster/Thumbnail", "h5ap")} value={poster} type={["image"]} onChange={(poster) => setAttributes({ poster })} />
+                            )}
+                            {skin === "Fusion" && (
+                              <ToggleControl className="mt10" label={
+                                <span style={{ display: 'flex', alignItems: 'center' }}>
+                                  {__("Hide Thumbnail", "h5ap")}
+                                  <NewBadge />
+                                </span>
+                              } help={__("Show the player without any image.", "h5ap")} checked={!!hideThumbnail} onChange={() => setAttributes({ hideThumbnail: !hideThumbnail })} />
+                            )}
                           </Fragment>
                         )}
 

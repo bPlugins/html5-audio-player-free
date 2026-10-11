@@ -83,6 +83,18 @@ class Shortcode
             }
         }
 
+        // Shortcode attributes come from post authors (contributor+), allow only known-safe values.
+        if (!preg_match('/^\d+(\.\d+)?(px|%|em|rem|vw)?$/', (string) $width)) {
+            $width = '100%';
+        }
+        if (!in_array($preload, ['auto', 'metadata', 'none'], true)) {
+            $preload = 'metadata';
+        }
+        // Match the skin case-insensitively (e.g. skin="fusion" => "Fusion"), unknown skins fall back to Default.
+        $skins = ['Default', 'Fusion', 'Stamp', 'Wave'];
+        $skin_map = array_combine(array_map('strtolower', $skins), $skins);
+        $skin = $skin_map[strtolower(trim((string) ($atts['skin'] ?? '')))] ?? 'Default';
+
         $code_controls = $controls ? explode(',', $controls) : null;
         $final_controls = [];
 
@@ -107,7 +119,7 @@ class Shortcode
                 'seekTime' => $stime,
                 'repeat' => (bool)$repeat,
                 'shuffle' => (bool)$shuffle,
-                'skin' => isset($atts['skin']) ? ucfirst($atts['skin']) : 'Default',
+                'skin' => $skin,
                 'hideThumbnail' => isset($atts['thumbnail']) && in_array(strtolower((string) $atts['thumbnail']), array('false', '0', 'no', 'hide'), true),
                 'autoplay' => $autoplay,
                 'muted' => $muted,

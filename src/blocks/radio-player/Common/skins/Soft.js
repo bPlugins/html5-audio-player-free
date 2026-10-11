@@ -1,9 +1,11 @@
+import { escHTML } from '../../../../utils/escape';
+
 const Soft = ({ title, sourceType, statusText = 'LIVE' }) => (`
     <div class="skin_container bg-blue-50 rounded-xl p-4 border border-blue-100">
         <div class="flex items-center space-x-2 mb-3">
             ${sourceType === 'stream' ? `<div class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-            <span class="status-text rounded px-2 text-xs font-medium text-blue-700">${statusText}</span>` : ''}
-            <span class="title text-xs text-blue-500">${title}</span>
+            <span class="status-text rounded px-2 text-xs font-medium text-blue-700">${escHTML(statusText)}</span>` : ''}
+            <span class="title text-xs text-blue-500">${escHTML(title)}</span>
         </div>
         <div class="mb-3">
             <div class="overflow-hidden">

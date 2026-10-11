@@ -28,7 +28,7 @@ const RadioPlayer = ({ attributes, id, nonce }) => {
             const trackTitle = playerRef.current.elements?.container?.querySelector('[data-plyr=current-track]');
 
             if (trackTitle) {
-                trackTitle.innerHTML = streamData?.trackTitle || '';
+                trackTitle.textContent = streamData?.trackTitle || '';
             }
         }
     }, [streamData, isLoading, error]);

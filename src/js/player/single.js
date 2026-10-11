@@ -2,6 +2,7 @@ import toHHMMSS from "../../../../utils/toHHMMSS";
 import { generateKeyFromUrl } from "../utils";
 import handleWave from "../../blocks/audioplayer/Common/players/wave/handleWave";
 import bindExtraSeekButtons from "../../utils/bindExtraSeekButtons";
+import { escHTML, escURL } from "../../utils/escape";
 
 class H5AP {
   audioPlayer(audioPlayer, options) {
@@ -662,7 +663,7 @@ class H5AP {
   skinFusion(poster = null, title = null, source = null, otherControls = { download: false }) {
     const download =
       otherControls?.download === true
-        ? `<a class="plyr__controls__item plyr__control plyr__download" href="${source}" target="_blank" download data-plyr="download">
+        ? `<a class="plyr__controls__item plyr__control plyr__download" href="${escURL(source)}" target="_blank" download data-plyr="download">
           <svg aria-hidden="true" focusable="false">
             <use xlink:href="#plyr-download"></use>
           </svg>
@@ -677,7 +678,7 @@ class H5AP {
     const playlist = otherControls?.playlist === true ? `<button type="button" class="plyr__control" data-active="true" aria-label="Playlist" title="Playlist" data-plyr="playlist"><span class="dashicons dashicons-playlist-audio" aria-hidden="true"></span></button>` : "";
     return `<div class="plyr__controls radius">
     <div class="plyr__controls rewind_play_fastforward">
-    <img class="thumbnails" src="${poster}" alt="${String(title || 'Audio thumbnail').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}">
+    <img class="thumbnails" src="${escURL(poster)}" alt="${String(title || 'Audio thumbnail').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}">
     <div class="plyr__controls">
     <button type="button" class="plyr__control" aria-label="Rewind {seektime}s" title="Rewind {seektime}s" data-plyr="rewind">
       <svg role="presentation"><use xlink:href="#plyr-rewind"></use></svg>
@@ -697,7 +698,7 @@ class H5AP {
     </div>
     <div class="infos">
       <div class="title">
-        <h3>${title}</h3>
+        <h3>${escHTML(title)}</h3>
     </div>
         <div class="time_progress">
         <div class="plyr__time plyr__time--current" aria-label="Current time">00:00</div>
@@ -766,13 +767,13 @@ class H5AP {
   }
 
   skinSimple(title = "", logo = "", background = "") {
-    return `<div class="skin_simple_sticky" style="background:${background}">
+    return `<div class="skin_simple_sticky" style="background:${escHTML(background)}">
       <div class="play">
       <button class="plyr__controls__item plyr__control" type="button" data-plyr="play" aria-label="Play Audio"><svg class="icon--pressed" aria-hidden="true" focusable="false"><use xlink:href="#plyr-pause"></use></svg><svg class="icon--not-pressed" aria-hidden="true" focusable="false"><use xlink:href="#plyr-play"></use></svg><span class="label--pressed plyr__sr-only">Pause</span><span class="label--not-pressed plyr__sr-only">Play Audio</span></button>
       </div>
-      <div class="title" title="${title}">${title}</div>
+      <div class="title" title="${escHTML(title)}">${escHTML(title)}</div>
       <div class="logo">
-        <img src="${logo}" alt="" />
+        <img src="${escURL(logo)}" alt="" />
       </div>
     </div>`;
   }
@@ -780,7 +781,7 @@ class H5AP {
   skinWave(poster = "", title = "", author = "") {
     return `<div class="wave radius">
       <div class="thumb">
-        <img src="${poster}" />
+        <img src="${escURL(poster)}" />
       </div>
       <div class="info-wave">
         <div class="wave">
@@ -798,8 +799,8 @@ class H5AP {
             </button>
           </div>
           <div class="title-author">
-            ${title && `<h2 title="${title}">${title}</h2>`}
-            ${author && `<p>${author}</p>`}
+            ${title && `<h2 title="${escHTML(title)}">${escHTML(title)}</h2>`}
+            ${author && `<p>${escHTML(author)}</p>`}
           </div>
           <div class="volume_controls">
             <button type="button" class="plyr__control" aria-label="Mute" data-plyr="mute">
@@ -825,13 +826,13 @@ class H5AP {
       </div>
       <div class="mask"></div>
       <ul class="player-info info-one">
-        <li>${info?.title}</li>
-        <li>${info?.artist}</li>
+        <li>${escHTML(info?.title)}</li>
+        <li>${escHTML(info?.artist)}</li>
         <li class="plyr__time--duration">0:00</li>
       </ul>
       <ul class="player-info info-two">
-        <li>${info?.title}</li>
-        <li>${info?.artist}</li>
+        <li>${escHTML(info?.title)}</li>
+        <li>${escHTML(info?.artist)}</li>
         <li><span class="plyr__time--current" id="duration"></span><i> / </i><span class="plyr__time--duration">0:00</span></li>
       </ul>
       <button id="play-button" type="button" class="plyr__control waves-effect waves-button waves-float play-inactive" aria-label="Play, {title}" data-plyr="play">
@@ -876,7 +877,7 @@ class H5AP {
 
   skinCardTwo(info = {}) {
     return `<div id="single-song-player" class="radius">
-    <img data-amplitude-song-info="cover_art_url" src="${info?.poster}"/>
+    <img data-amplitude-song-info="cover_art_url" src="${escURL(info?.poster)}"/>
     <div class="bottom-container">
       <progress type="range" class="amplitude-song-played-progress" min="0" max="100" step="0.01"></progress>
 
@@ -886,15 +887,15 @@ class H5AP {
       </div>
 
       <div class="control-container">
-        <button id="play-button" type="button" class="plyr__control amplitude-play-pause" aria-label="Play, ${info.title}" data-plyr="play">
+        <button id="play-button" type="button" class="plyr__control amplitude-play-pause" aria-label="Play, ${escHTML(info?.title)}" data-plyr="play">
           <svg class="icon--pressed icon-play" role="presentation">s<use xlink:href="#plyr-pause"></use></svg>
           <svg class="icon--not-pressed icon-play" role="presentation"><use xlink:href="#plyr-play"></use></svg>
           <span class="label--pressed plyr__tooltip" role="tooltip">Pause</span>
           <span class="label--not-pressed plyr__tooltip" role="tooltip">Play</span>
         </button>
         <div class="meta-container">
-          <span data-amplitude-song-info="name" class="song-name">${info?.title}</span>
-          <span data-amplitude-song-info="artist">${info?.artist}</span>
+          <span data-amplitude-song-info="name" class="song-name">${escHTML(info?.title)}</span>
+          <span data-amplitude-song-info="artist">${escHTML(info?.artist)}</span>
         </div>
       </div>
     </div>
@@ -938,7 +939,7 @@ class H5AP {
   skinSimpleTwo({ poster }) {
     return `<div class="h5ap-player-skin-6">
         <div class="progress-time">
-            <div class="thumbnail"><img src="${poster}" /></div>
+            <div class="thumbnail"><img src="${escURL(poster)}" /></div>
         </div>
       <div class="controls">
         <button type="button" class="plyr__control" aria-label="Rewind {seektime}s" title="Rewind {seektime}s" data-plyr="rewind">

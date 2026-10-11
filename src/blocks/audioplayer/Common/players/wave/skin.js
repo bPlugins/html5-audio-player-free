@@ -1,9 +1,10 @@
 import thumb from './../../../../../assets/img/sticky-default.jpg';
+import { escHTML, escURL } from '../../../../../utils/escape';
 
 export default function skinWave(poster = "", title = "", author = "") {
   return `<div class="skin_container wave radius">
       <div class="thumb">
-        <img src="${poster || thumb}" />
+        <img src="${escURL(poster || thumb)}" />
       </div>
       <div class="info-wave">
         <div class="wave">
@@ -21,8 +22,8 @@ export default function skinWave(poster = "", title = "", author = "") {
             </button>
           </div>
           <div class="title-author">
-            ${title && `<h2 title="${title}">${title}</h2>`}
-            ${author && `<p>${author}</p>`}
+            ${title && `<h2 title="${escHTML(title)}">${escHTML(title)}</h2>`}
+            ${author && `<p>${escHTML(author)}</p>`}
           </div>
           <div class="volume_controls">
             <button type="button" class="plyr__control" aria-label="Mute" data-plyr="mute">

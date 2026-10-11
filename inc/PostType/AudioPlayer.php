@@ -152,7 +152,7 @@ class AudioPlayer
     // Add a "Duplicate" link to the action links for a custom post type
     function add_duplicate_post_link($actions, $post)
     {
-        if (current_user_can('edit_posts') && $post->post_type == $this->post_type) {
+        if (current_user_can('edit_post', $post->ID) && $post->post_type == $this->post_type) {
             $actions['duplicate'] = '<a href="' . wp_nonce_url('admin.php?action=bp_duplicate_post_as_draft&post=' . $post->ID, basename(__FILE__), 'duplicate_nonce') . '" title="Duplicate this item" rel="permalink">Duplicate</a>';
         }
         return $actions;
@@ -177,10 +177,26 @@ class AudioPlayer
         * get the original post id
         */
         $post_id = (isset($_GET['post']) ? absint($_GET['post']) : absint($_POST['post']));
+
+        if (!$post_id) {
+            return;
+        }
+
         /*
         * and all the original post data then
         */
         $post = get_post($post_id);
+
+        if (!$post || $post->post_type !== $this->post_type) {
+            return;
+        }
+
+        /*
+        * Check capability
+        */
+        if (!current_user_can('edit_post', $post_id)) {
+            wp_die(esc_html__('You are not allowed to duplicate this item.', 'html5-audio-player'));
+        }
 
         /*
         * if you don't want current user to be the new post author,

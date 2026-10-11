@@ -1,7 +1,9 @@
+import { escHTML } from '../../../../../utils/escape';
+
 export default function skinStamp(title) {
   return `<div class="skin_container StampAudioPlayerSkin radius">
    <div class="extraOptions">
-     <h3 class="audioTitle">${title}</h3>
+     <h3 class="audioTitle">${escHTML(title)}</h3>
      <div class="volume_controls">
        <button type="button" class="muteUnmute plyr__control" aria-label="Mute" data-plyr="mute"><svg class="icon--pressed" aria-hidden="true" focusable="false"><use xlink:href="#plyr-muted"></use></svg><svg class="icon--not-pressed" aria-hidden="true" focusable="false"><use xlink:href="#plyr-volume"></use></svg></button>
        <div class="plyr__volume">

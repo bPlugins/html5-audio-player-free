@@ -6,6 +6,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use H5APPlayer\Helper\Functions;
 
+// Plain-text fields are rendered by JS skins; strip any markup coming from post authors.
+foreach (['title', 'subtitle', 'artist', 'statusText'] as $h5ap_text_key) {
+    if (isset($attributes[$h5ap_text_key]) && is_string($attributes[$h5ap_text_key])) {
+        $attributes[$h5ap_text_key] = sanitize_text_field($attributes[$h5ap_text_key]);
+    }
+}
+
 extract($attributes);
 
 $uniqueId = wp_unique_id('h5ap-player-');

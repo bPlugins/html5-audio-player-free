@@ -1,8 +1,9 @@
 import thumb from './../../../../../assets/img/sticky-default.jpg';
+import { escHTML, escURL } from '../../../../../utils/escape';
 export default function skinFusion(poster = null, title = null, source = null, otherControls = { download: false }) {
   const download =
     otherControls?.download === true
-      ? `<a class="plyr__controls__item plyr__control plyr__download" href="${source}" target="_blank" download data-plyr="download">
+      ? `<a class="plyr__controls__item plyr__control plyr__download" href="${escURL(source)}" target="_blank" download data-plyr="download">
           <svg aria-hidden="true" focusable="false">
             <use xlink:href="#plyr-download"></use>
           </svg>
@@ -21,7 +22,7 @@ export default function skinFusion(poster = null, title = null, source = null, o
   const thumbnailAlt = safeTitle || 'Audio thumbnail';
   return `<div class="plyr__controls radius${showThumbnail ? '' : ' h5ap-no-thumbnail'}">
     <div class="plyr__controls rewind_play_fastforward">
-    ${showThumbnail ? `<img class="thumbnails" src="${poster || thumb}" alt="${thumbnailAlt}"></img>` : ''}
+    ${showThumbnail ? `<img class="thumbnails" src="${escURL(poster || thumb)}" alt="${thumbnailAlt}"></img>` : ''}
     <div class="plyr__controls">
     <button type="button" class="plyr__control" aria-label="Rewind {seektime}s" title="Rewind {seektime}s" data-plyr="rewind">
       <svg role="presentation"><use xlink:href="#plyr-rewind"></use></svg>
@@ -41,7 +42,7 @@ export default function skinFusion(poster = null, title = null, source = null, o
     </div>
     <div class="infos">
       <div class="title">
-        <h3>${title}</h3>
+        <h3>${escHTML(title)}</h3>
     </div>
         <div class="time_progress">
         <div class="plyr__time plyr__time--current" aria-label="Current time">00:00</div>

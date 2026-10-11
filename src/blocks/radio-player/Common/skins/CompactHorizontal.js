@@ -1,13 +1,15 @@
+import { escHTML } from '../../../../utils/escape';
+
 const CompactHorizontal = ({ title, sourceType, statusText }) => {
 
     return `
         <div class="skin_container bg-gray-800 rounded-full px-6 py-3 flex items-center space-x-4 shadow-lg">
             ${sourceType === 'stream' ? `<div class="flex items-center space-x-2">
-                <div class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div><span class="status-text rounded px-2 text-xs font-medium text-red-400">${statusText}</span>
+                <div class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div><span class="status-text rounded px-2 text-xs font-medium text-red-400">${escHTML(statusText)}</span>
             </div>` : ''}
             <div class="flex-1 min-w-0">
                 <div class="overflow-hidden">
-                    <p class="title text-sm text-white animate-pulse truncate">${title}</p>
+                    <p class="title text-sm text-white animate-pulse truncate">${escHTML(title)}</p>
                 </div>
             </div>
             <button aria-label="Play" class="w-12 h-12 p-0 plyr___control play-icon border-none rounded-full bg-white text-gray-800 flex items-center justify-center hover:bg-gray-100 transition-colors duration-200 flex-shrink-0" data-plyr="play">

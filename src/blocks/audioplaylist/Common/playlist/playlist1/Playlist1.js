@@ -4,6 +4,7 @@ import skin from "./skin";
 import "./style.scss";
 import "../../../style.scss";
 import PlyrPlaylist from "../../../../../utils/PlyrPlaylist";
+import { safeURL } from "../../../../../utils/escape";
 
 
 function Playlist1(props) {
@@ -88,7 +89,7 @@ function Playlist1(props) {
         }
     }
 
-    const firstSource = itemsToDisplay[0]?.source || '';
+    const firstSource = safeURL(itemsToDisplay[0]?.source || '');
 
     useEffect(() => {
         const container = containerRef.current;
@@ -337,27 +338,27 @@ function Playlist1(props) {
                                         Listen On
                                     </div>
                                     {attributes.spotifyUrl && (
-                                        <a href={attributes.spotifyUrl} target="_blank" rel="noopener noreferrer" style={subLinkStyle} onClick={() => setIsSubscribeOpen(false)}>
+                                        <a href={safeURL(attributes.spotifyUrl)} target="_blank" rel="noopener noreferrer" style={subLinkStyle} onClick={() => setIsSubscribeOpen(false)}>
                                             🎵 Spotify
                                         </a>
                                     )}
                                     {attributes.applePodcastsUrl && (
-                                        <a href={attributes.applePodcastsUrl} target="_blank" rel="noopener noreferrer" style={subLinkStyle} onClick={() => setIsSubscribeOpen(false)}>
+                                        <a href={safeURL(attributes.applePodcastsUrl)} target="_blank" rel="noopener noreferrer" style={subLinkStyle} onClick={() => setIsSubscribeOpen(false)}>
                                             🍏 Apple Podcasts
                                         </a>
                                     )}
                                     {attributes.amazonMusicUrl && (
-                                        <a href={attributes.amazonMusicUrl} target="_blank" rel="noopener noreferrer" style={subLinkStyle} onClick={() => setIsSubscribeOpen(false)}>
+                                        <a href={safeURL(attributes.amazonMusicUrl)} target="_blank" rel="noopener noreferrer" style={subLinkStyle} onClick={() => setIsSubscribeOpen(false)}>
                                             📦 Amazon Music
                                         </a>
                                     )}
                                     {attributes.youtubePodcastsUrl && (
-                                        <a href={attributes.youtubePodcastsUrl} target="_blank" rel="noopener noreferrer" style={subLinkStyle} onClick={() => setIsSubscribeOpen(false)}>
+                                        <a href={safeURL(attributes.youtubePodcastsUrl)} target="_blank" rel="noopener noreferrer" style={subLinkStyle} onClick={() => setIsSubscribeOpen(false)}>
                                             ▶️ YouTube
                                         </a>
                                     )}
                                     {attributes.rssFeedUrl && (
-                                        <a href={attributes.rssFeedUrl} target="_blank" rel="noopener noreferrer" style={subLinkStyle} onClick={() => setIsSubscribeOpen(false)}>
+                                        <a href={safeURL(attributes.rssFeedUrl)} target="_blank" rel="noopener noreferrer" style={subLinkStyle} onClick={() => setIsSubscribeOpen(false)}>
                                             📡 RSS Feed
                                         </a>
                                     )}

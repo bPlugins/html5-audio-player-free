@@ -344,6 +344,16 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
     },
     changelogs: [
         {
+            version: '2.8.9 - 11 October, 2026',
+            type: 'fix',
+           list: [
+                '<strong>Security:</strong> Fixed a Stored Cross-Site Scripting (XSS) vulnerability that allowed users with Contributor or higher role to inject scripts through player titles, artist names and other text fields.',
+                '<strong>Security:</strong> Added output escaping to all player, playlist and radio player skins, and blocked unsafe <code>javascript:</code> URLs in poster, download and subscribe links.',
+                '<strong>Security:</strong> Added server-side sanitization for player text fields and <code>[audio_player]</code> shortcode attributes.',
+                '<strong>Security:</strong> Fixed authorization bypass vulnerability in post duplication action.'
+            ]
+        },
+        {
             version: '2.8.8 - 03 October, 2026',
             type: 'fix',
             list: [
@@ -357,46 +367,9 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
             list: [
                 '<strong>New:</strong> Added category and tag management options for Audio Player and Radio Player in the admin sidebar menu.'
             ]
-        },
-        {
-            version: '2.8.6 - 10 September, 2026',
-            type: 'fix',
-            list: [
-                '<strong>Fix:</strong> Resolved JavaScript ReferenceError crash where <code>preload</code> variable was undefined during initial player initialization.',
-                '<strong>Fix:</strong> Fixed preload strategy setting (<code>preload="none"</code>) to strictly prevent automated background audio range requests on page load across Gutenberg, Elementor, and shortcodes.',
-                '<strong>New:</strong> Added Preload Strategy control field to Elementor Audio Player widgets and Standard Player metabox settings.'
-            ]
-        },
-         {
-            version: '2.8.5 - 02 September, 2026',
-            type: 'fix',
-            list: [
-                '<strong>Fix:</strong> Resolved an issue where multiple audio players could play simultaneously without auto-pausing when switching tracks.',
-                '<strong>Fix:</strong> Improved Elementor player widget initialization to prevent duplicate player instances.'
-            ]
-        },
-        {
-            version: '2.8.4 - 30 August, 2026',
-            type: 'fix',
-            list: [
-                '<strong>Performance:</strong> Resolved a major site slowness issue by eliminating eager audio metadata request loops in playlists, preventing network bandwidth congestion on large playlists.',
-                '<strong>Fix:</strong> Resolved duration and time played display orientation issue on the Default player skin.',
-                '<strong>Fix:</strong> Fixed redundant secondary metadata probing when <code>preload="none"</code> is configured.',
-                '<strong>Fix:</strong> Replaced dynamic timestamp versioning in Elementor widget script registration to restore browser HTTP caching.'
-            ]
-        },
-        {
-            version: '2.8.3 - 19 August, 2026',
-            type: 'new',
-            list: [
-                '<strong>New:</strong> Added Track Title Typography and Track Artist Typography controls with full Google Fonts, font size, weight, text transform, and spacing options for Narrow and Extensive playlist skins.',
-                '<strong>New:</strong> Integrated Track Title and Artist Typography settings directly into Codestar Admin Shortcode Settings for all playlist skins.',
-                '<strong>Fix:</strong> Restored playlist track title default font weight to normal (removed forced bold styling) to maintain original design aesthetics while allowing full user customization.',
-                '<strong>Fix:</strong> Resolved an issue where unselected control buttons (mute, volume, settings) were forcibly rendered on standard audio players, allowing custom button configurations to work properly.'
-            ]
         }
     ],
-    changelogsLimit: 4,
+    changelogsLimit: 3,
     changelogsReadMoreLabel: 'View More Changelogs',
     proFeatures: [
         'Advanced Playlist Skins (Narrow & Extensive Layouts)',

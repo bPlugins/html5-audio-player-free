@@ -1,4 +1,5 @@
 import thumb from './../../../../../assets/img/sticky-default.jpg';
+import { escHTML, escURL } from '../../../../../utils/escape';
 
 const renderPaginationPages = (current, total, disabled = false) => {
     let pages = [];
@@ -41,11 +42,11 @@ const skin = (audios = [], customOptions = {}) => {
        <div class="items grid grid-cols-3 gap-3 w-full box-border">
        ${audios.length === 0 ? `
            <div class="col-span-3 text-center py-10 opacity-60 text-xs" style="grid-column: 1 / -1; padding: 40px 0;">
-               ${isLoading ? 'Loading episodes...' : (searchQuery ? `No episodes found matching "${searchQuery}"` : 'No episodes found')}
+               ${isLoading ? 'Loading episodes...' : (searchQuery ? `No episodes found matching "${escHTML(searchQuery)}"` : 'No episodes found')}
            </div>
        ` : audios.map((audio, index) => {
         return `<div class="relative aspect-square rounded-lg overflow-hidden cursor-pointer group" data-plyr="playlist-item" data-index="${index}">
-              <img src="${audio.poster || thumb}" alt="${audio.title || ''}" class="w-full h-full object-cover">
+              <img src="${escURL(audio.poster || thumb)}" alt="${escHTML(audio.title)}" class="w-full h-full object-cover">
               <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                  <svg class="icon--not-pressed" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play ">
                     <polygon points="5 3 19 12 5 21 5 3"></polygon>
@@ -57,13 +58,13 @@ const skin = (audios = [], customOptions = {}) => {
        </div>
     </div>
     <div class="text-center mt-5 mb-4">
-       <h2 class="text-xl font-bold mb-1" data-plyr="playlist-title">${audios[0]?.title || ''}</h2>
-       <p class="opacity-80" data-plyr="playlist-artist">${audios[0]?.artist || ''}</p>
-       ${isPodcast && customOptions?.podcastDate !== false && audios[0]?.date ? `<span class="podcast-date" style="display:block;font-size:12px;opacity:0.6;margin-top:2px;">${audios[0].date}</span>` : ''}
+       <h2 class="text-xl font-bold mb-1" data-plyr="playlist-title">${escHTML(audios[0]?.title)}</h2>
+       <p class="opacity-80" data-plyr="playlist-artist">${escHTML(audios[0]?.artist)}</p>
+       ${isPodcast && customOptions?.podcastDate !== false && audios[0]?.date ? `<span class="podcast-date" style="display:block;font-size:12px;opacity:0.6;margin-top:2px;">${escHTML(audios[0].date)}</span>` : ''}
        ${isPodcast && customOptions?.podcastDesc !== false && audios[0]?.description ? `
            <div class="podcast-desc" style="margin-top:6px;margin-bottom:14px;max-width:90%;margin-left:auto;margin-right:auto;">
                <p class="podcast-desc-text" style="display:${customOptions?.expandedItems?.[0] ? 'block' : '-webkit-box'};-webkit-line-clamp:${customOptions?.expandedItems?.[0] ? 'none' : 2};-webkit-box-orient:vertical;overflow:hidden;text-overflow:ellipsis;font-size:12px;opacity:0.75;line-height:1.4;margin:0;">
-                   ${audios[0].description}
+                   ${escHTML(audios[0].description)}
                </p>
                ${audios[0].description.length > 100 ? `
                    <button type="button" class="h5ap-show-more-btn" data-h5ap-expand="0" style="background:none;border:none;color:inherit;padding:0;font-size:11.5px;cursor:pointer;margin-top:6px;margin-bottom:6px;font-weight:600;display:inline-block;outline:none;">
@@ -84,7 +85,7 @@ const skin = (audios = [], customOptions = {}) => {
         <div class="flex items-center gap-2" style="line-height: 1; margin: 0 !important; padding: 0 !important;">
             <span class="plyr__time--duration" style="margin: 0 !important; padding: 0 !important;">0:00</span>
             ${!customOptions?.hide_download && audios[0]?.source ? `
-                <a class="p-1 text-white opacity-80 hover:opacity-100 flex items-center justify-center" target="_blank" download href="${audios[0].source}" title="Download Track" style="margin: 0 !important; padding: 0 !important; line-height: 1; display: inline-flex;">
+                <a class="p-1 text-white opacity-80 hover:opacity-100 flex items-center justify-center" target="_blank" download href="${escURL(audios[0].source)}" title="Download Track" style="margin: 0 !important; padding: 0 !important; line-height: 1; display: inline-flex;">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: block; margin: 0 !important;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                 </a>
             ` : ''}
@@ -110,12 +111,12 @@ const skin = (audios = [], customOptions = {}) => {
           </svg>
        </button>
        ${isSkipEnabled ? `
-       <button type="button" class="plyr__control p-2 hover:text-white" data-plyr="rewind" title="Rewind ${skipTime}s" aria-label="Rewind ${skipTime}s">
+       <button type="button" class="plyr__control p-2 hover:text-white" data-plyr="rewind" title="Rewind ${escHTML(skipTime)}s" aria-label="Rewind ${escHTML(skipTime)}s">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
              <polygon points="11 19 2 12 11 5 11 19"></polygon>
              <polygon points="22 19 13 12 22 5 22 19"></polygon>
           </svg>
-          <span class="plyr__tooltip" role="tooltip">Rewind ${skipTime}s</span>
+          <span class="plyr__tooltip" role="tooltip">Rewind ${escHTML(skipTime)}s</span>
        </button>
        ` : ''}
        <button aria-label="Play" class="plyr__control p-4 bg-amber-500 rounded-full hover:bg-amber-400 leading-0" data-plyr="play">
@@ -125,12 +126,12 @@ const skin = (audios = [], customOptions = {}) => {
           <span class="label--not-pressed plyr__tooltip" role="tooltip">Play</span>
        </button>
        ${isSkipEnabled ? `
-       <button type="button" class="plyr__control p-2 hover:text-white" data-plyr="fast-forward" title="Forward ${skipTime}s" aria-label="Forward ${skipTime}s">
+       <button type="button" class="plyr__control p-2 hover:text-white" data-plyr="fast-forward" title="Forward ${escHTML(skipTime)}s" aria-label="Forward ${escHTML(skipTime)}s">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
              <polygon points="13 19 22 12 13 5 13 19"></polygon>
              <polygon points="2 19 11 12 2 5 2 19"></polygon>
           </svg>
-          <span class="plyr__tooltip" role="tooltip">Forward ${skipTime}s</span>
+          <span class="plyr__tooltip" role="tooltip">Forward ${escHTML(skipTime)}s</span>
        </button>
        ` : ''}
        <button class="plyr__control p-2 hover:text-white" data-plyr="next" title="Next Track" aria-label="Next Track">

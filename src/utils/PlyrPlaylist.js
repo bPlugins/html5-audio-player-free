@@ -1,5 +1,6 @@
 import { toHHMMSS } from "../js/utils";
 import { resolveAudioSrc } from "./gDriveProxy";
+import { safeURL } from "./escape";
 
 const durationCache = new Map();
 
@@ -8,7 +9,8 @@ class PlyrPlaylist {
         this.player = player;
         this.audios = audios.map(audio => ({
             ...audio,
-            source: audio.source ? resolveAudioSrc(audio.source) : audio.source
+            source: audio.source ? resolveAudioSrc(safeURL(audio.source)) : audio.source,
+            poster: audio.poster ? safeURL(audio.poster) : audio.poster
         }));
         if (!player.elements.container) return;
 

@@ -4,7 +4,7 @@ Tags: mp3 player, audio, audio player, player, podcast
 Donate link: https://www.buymeacoffee.com/abuhayat/  
 Requires at least: 6.5
 Tested up to: 7.1
-Stable tag: 2.8.8
+Stable tag: 2.8.9
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -226,6 +226,12 @@ e.g.
 
 
 == Changelog ==
+
+= 2.8.9 - 11 October, 2026 =
+* **Security:** Fixed a Stored Cross-Site Scripting (XSS) vulnerability (CVE-2026-62039) that allowed users with Contributor or higher role to inject scripts through player titles, artist names and other text fields.
+* **Security:** Added output escaping to all player, playlist and radio player skins, and blocked unsafe `javascript:` URLs in poster, download and subscribe links.
+* **Security:** Added server-side sanitization for player text fields and `[audio_player]` shortcode attributes (`width`, `preload`, `skin`).
+* **Security:** Fixed authorization bypass vulnerability in post duplication action.
 
 = 2.8.8 - 03 October, 2026 =
 * **Fix:** Resolved PageSpeed Insights accessibility ("Navegación agéntica") error by adding static aria-labels to player buttons and controls.

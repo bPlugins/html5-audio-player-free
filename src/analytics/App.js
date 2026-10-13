@@ -94,7 +94,7 @@ export default function App({ settings }) {
 									),
 									{ b: <strong /> }
 								)
-								: __('See how your audio performs: plays, listening time and where people stop.', 'html5-audio-player')}
+								: __('See how your audio and radio players perform: plays, listening time and where people stop.', 'html5-audio-player')}
 						</p>
 					</div>
 

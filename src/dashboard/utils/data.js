@@ -357,6 +357,7 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
                 '<strong>Improvement:</strong> Redesigned the shortcode box on the Add/Edit Player screen with a one-click copy button.',
                 '<strong>Improvement:</strong> Added a copy shortcode button in the All Players and All Radio Players lists.',
                 '<strong>Improvement:</strong> Redesigned the HTML5 Audio Player admin menu for a cleaner, modern look.',
+                '<strong>Fix:</strong> Restored the Title and Poster fields for the Sticky Player.',
                 '<strong>Security:</strong> Fixed a Stored Cross-Site Scripting (XSS) vulnerability that allowed users with Contributor or higher role to inject scripts through player titles, artist names and other text fields.',
                 '<strong>Security:</strong> Added output escaping to all player, playlist and radio player skins and Elementor widgets, and blocked unsafe <code>javascript:</code> URLs in poster, download and subscribe links.',
                 '<strong>Security:</strong> Added server-side sanitization for player text fields and <code>[audio_player]</code> shortcode attributes.',

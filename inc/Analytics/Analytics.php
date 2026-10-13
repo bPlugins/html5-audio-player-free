@@ -165,7 +165,7 @@ class Analytics
 							<span class="h5ap-an-tag is-solid"><?php echo $data['isPro'] ? esc_html__('Pro plan', 'html5-audio-player') : esc_html__('Free plan', 'html5-audio-player'); ?></span>
 						</div>
 						<h1><?php esc_html_e('Audio Analytics', 'html5-audio-player'); ?></h1>
-						<p><?php esc_html_e('See how your audio performs: plays, listening time and where people stop.', 'html5-audio-player'); ?></p>
+						<p><?php esc_html_e('See how your audio and radio players perform: plays, listening time and where people stop.', 'html5-audio-player'); ?></p>
 					</div>
 					<div class="h5ap-an-range"><?php echo $bone('360px', '42px'); ?></div>
 				</section>
@@ -284,7 +284,7 @@ class Analytics
 		if (!function_exists('wp_add_privacy_policy_content')) {
 			return;
 		}
-		$content = '<p>' . __('This site counts how often audio players are played and for how long, using the HTML5 Audio Player plugin. No cookies are set and IP addresses are not stored. A short identifier is derived from the IP address and browser and changes every day, so visitors cannot be followed over time. The page, device type, browser and referring website are recorded together with listening time.', 'html5-audio-player') . '</p>';
+		$content = '<p>' . __('This site counts how often audio and radio players are played and for how long, using the HTML5 Audio Player plugin. No cookies are set and IP addresses are not stored. A short identifier is derived from the IP address and browser and changes every day, so visitors cannot be followed over time. The page, device type, browser and referring website are recorded together with listening time.', 'html5-audio-player') . '</p>';
 		wp_add_privacy_policy_content('HTML5 Audio Player', wp_kses_post($content));
 	}
 }

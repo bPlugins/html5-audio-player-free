@@ -240,6 +240,7 @@ e.g.
 * **Improvement:** Redesigned the shortcode box on the Add/Edit Player screen with a one-click copy button.
 * **Improvement:** Added a copy shortcode button in the All Players and All Radio Players lists.
 * **Improvement:** Redesigned the HTML5 Audio Player admin menu for a cleaner, modern look.
+* **Fix:** Restored the Title and Poster fields for the Sticky Player.
 * **Security:** Fixed a Stored Cross-Site Scripting (XSS) vulnerability (CVE-2026-62039) that allowed users with Contributor or higher role to inject scripts through player titles, artist names and other text fields.
 * **Security:** Added output escaping to all player, playlist and radio player skins and Elementor widgets, and blocked unsafe `javascript:` URLs in poster, download and subscribe links.
 * **Security:** Added server-side sanitization for player text fields and `[audio_player]` shortcode attributes (`width`, `preload`, `skin`).

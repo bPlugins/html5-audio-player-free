@@ -1,4 +1,5 @@
 import { generateKeyFromUrl } from "../js/utils";
+import trackPlayer from "./h5apAnalytics";
 
 // config = {disablePause: false, startTime: 0}
 class PlyrExtend {
@@ -21,6 +22,19 @@ class PlyrExtend {
                 this.player.play();
             }
         })
+
+        this.detachAnalytics = trackPlayer(player, () => ({ src: this.sourceUrl(), title: this.config.title }), { surface: 'player' });
+    }
+
+    sourceUrl() {
+        if (this.config.source && typeof this.config.source === 'string') {
+            return this.config.source;
+        }
+        const source = this.player?.source;
+        if (typeof source === 'string') {
+            return source;
+        }
+        return source?.sources?.[0]?.src || '';
     }
 
     configure() {
@@ -159,6 +173,9 @@ class PlyrExtend {
     }
 
     destroy() {
+        if (this.detachAnalytics) {
+            this.detachAnalytics();
+        }
         this.player = null;
     }
 }

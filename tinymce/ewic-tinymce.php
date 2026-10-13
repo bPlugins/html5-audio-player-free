@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
 /*-------------------------------------------------------------------------------*/
 /*   AJAX Get Slider List
 /*-------------------------------------------------------------------------------*/
-function ewic_grab_slider_list_ajax()
+function ewic_grab_slider_list_ajax() // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound -- legacy unique prefix.
 {
 	check_ajax_referer('ewic_slider_nonce', 'nonce');
 
@@ -47,7 +47,7 @@ add_action('wp_ajax_ewic_grab_slider_list_ajax', 'ewic_grab_slider_list_ajax');
 /*-------------------------------------------------------------------------------*/
 /*   Frontend Register JS & CSS
 /*-------------------------------------------------------------------------------*/
-function ewic_reg_script()
+function ewic_reg_script() // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound -- legacy unique prefix.
 {
 	wp_register_style('ewic-tinymcecss', plugins_url('tinymce/tinymce.css', dirname(__FILE__)), array(), H5AP_VERSION, 'all');
 	wp_register_script('ewic-tinymcejs', plugins_url('tinymce/tinymce.js', dirname(__FILE__)), array('jquery'), H5AP_VERSION, true);
@@ -56,12 +56,12 @@ add_action('admin_init', 'ewic_reg_script');
 
 
 //-------------------------------------------------------------------------------------------------	
-$ewic_request_uri = isset($_SERVER['REQUEST_URI']) ? esc_url_raw(wp_unslash($_SERVER['REQUEST_URI'])) : '';
+$ewic_request_uri = isset($_SERVER['REQUEST_URI']) ? esc_url_raw(wp_unslash($_SERVER['REQUEST_URI'])) : ''; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- legacy unique prefix.
 if (strstr($ewic_request_uri, 'wp-admin/post-new.php') || strstr($ewic_request_uri, 'wp-admin/post.php')) {
 
 	// ADD STYLE & SCRIPT
 	add_action('admin_head', 'ewic_editor_add_init');
-	function ewic_editor_add_init()
+	function ewic_editor_add_init() // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound -- legacy unique prefix.
 	{
 
 		if (get_post_type(get_the_ID()) != 'audioplayer') {
@@ -77,7 +77,7 @@ if (strstr($ewic_request_uri, 'wp-admin/post-new.php') || strstr($ewic_request_u
 
 	// ADD MEDIA BUTOON	
 	add_action('media_buttons', 'ewic_shortcode_button', 1);
-	function ewic_shortcode_button()
+	function ewic_shortcode_button() // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound -- legacy unique prefix.
 	{
 		$img = H5AP_PLUGIN_DIR . 'assets/images/icn.png';
 		$container_id = 'ewicmodal';
@@ -93,7 +93,7 @@ if (strstr($ewic_request_uri, 'wp-admin/post-new.php') || strstr($ewic_request_u
 
 // GENERATE POPUP CONTENT
 add_action('admin_footer', 'ewic_popup_content');
-function ewic_popup_content()
+function ewic_popup_content() // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound -- legacy unique prefix.
 {
 	$ewic_request_uri = isset($_SERVER['REQUEST_URI']) ? esc_url_raw(wp_unslash($_SERVER['REQUEST_URI'])) : '';
 	if (strstr($ewic_request_uri, 'wp-admin/post-new.php') || strstr($ewic_request_uri, 'wp-admin/post.php')) {

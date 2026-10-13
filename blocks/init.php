@@ -55,7 +55,7 @@ function h5ap_pro_render_h5ap_block_free_existing($attributes){
     } elseif ('empty' == $selectedPlayer || !$selectedPlayer) {
         echo '';
     } else {
-        echo do_shortcode("[player id=$selectedPlayer]");
+        echo do_shortcode("[player id=" . absint($selectedPlayer) . "]");
     }
 
     echo '</div>';

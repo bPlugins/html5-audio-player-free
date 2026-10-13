@@ -176,6 +176,9 @@ class Shortcode
 
         $content = $post->post_content ?? ' ';
         $blocks = parse_blocks($content);
+        if (!empty($blocks[0]['blockName'])) {
+            $blocks[0]['attrs']['analyticsRef'] = (int) $post->ID;
+        }
 
 
         switch ($post->post_status) {

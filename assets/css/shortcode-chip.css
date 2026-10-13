@@ -1,0 +1,172 @@
+/* Shortcode with a copy button (player lists and the player edit screen). */
+.h5ap-sc {
+    --h5ap-sc-green: #04a504;
+    --h5ap-sc-green-dark: #038a03;
+    position: relative;
+    display: inline-flex;
+    align-items: stretch;
+    max-width: 100%;
+    border: 1px solid rgba(4, 165, 4, 0.3);
+    border-radius: 4px;
+    background: #f3faf3;
+    overflow: hidden;
+    cursor: pointer;
+    vertical-align: middle;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.h5ap-sc:hover {
+    border-color: var(--h5ap-sc-green);
+}
+
+.h5ap-sc__code {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    margin: 0;
+    background: transparent;
+    color: #1b2e4b;
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    user-select: all;
+}
+
+.h5ap-sc__copy {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 34px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-left: 1px solid rgba(4, 165, 4, 0.3);
+    border-radius: 0;
+    background: var(--h5ap-sc-green);
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.h5ap-sc:hover .h5ap-sc__copy,
+.h5ap-sc__copy:focus-visible {
+    background: var(--h5ap-sc-green-dark);
+}
+
+.h5ap-sc__copy:focus-visible {
+    outline: 2px solid #1b2e4b;
+    outline-offset: -4px;
+}
+
+.h5ap-sc__icon-check {
+    display: none;
+}
+
+.h5ap-sc.is-copied .h5ap-sc__icon-copy {
+    display: none;
+}
+
+.h5ap-sc.is-copied .h5ap-sc__icon-check {
+    display: block;
+}
+
+/* "Copied!" bubble above the chip */
+.h5ap-sc__status {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 6px);
+    transform: translate(-50%, 4px);
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: #1b2e4b;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.4;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.h5ap-sc.is-copied {
+    overflow: visible;
+}
+
+.h5ap-sc.is-copied .h5ap-sc__status:not(:empty) {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+/* List tables: keep the chip compact */
+.wp-list-table .column-shortcode .h5ap-sc__code {
+    font-size: 12.5px;
+    padding: 5px 10px;
+}
+
+/* Box on the player edit screen, under the title */
+.h5ap-sc-box {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px 16px;
+    margin: 16px 0 4px;
+    padding: 14px 18px;
+    background: #fff;
+    border: 1px solid #e6eaef;
+    border-left: 4px solid #04a504;
+    border-radius: 4px;
+}
+
+.h5ap-sc-box__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    background: #e8f6e8;
+    color: #04a504;
+}
+
+.h5ap-sc-box__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1 1 260px;
+    min-width: 0;
+}
+
+.h5ap-sc-box__text strong {
+    color: #070127;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.h5ap-sc-box__text span {
+    color: #5f6b7d;
+    font-size: 13px;
+}
+
+.h5ap-sc-box .h5ap-sc__code {
+    font-size: 14px;
+    padding: 8px 14px;
+}
+
+.h5ap-sc-box .h5ap-sc__copy {
+    width: 40px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .h5ap-sc,
+    .h5ap-sc__copy,
+    .h5ap-sc__status {
+        transition: none;
+    }
+}

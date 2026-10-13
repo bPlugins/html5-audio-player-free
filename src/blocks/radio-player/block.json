@@ -160,6 +160,10 @@
           "bgColor": "#F5F5F5"
         }
       }
+    },
+    "analyticsRef": {
+      "type": "integer",
+      "default": 0
     }
   },
   "supports": {

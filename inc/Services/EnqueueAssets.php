@@ -74,6 +74,12 @@ class EnqueueAssets
         $menu_css_version = file_exists($menu_css_path) ? filemtime($menu_css_path) . '-' . time() : H5AP_VERSION;
         wp_enqueue_style('h5ap-admin-menu', H5AP_PLUGIN_DIR . 'assets/css/admin-menu.css', array(), $menu_css_version);
 
+        // Menu colour theme on top of admin-menu.css. Return false from this filter (or delete the file) to get the previous look back.
+        $menu_theme_path = dirname(dirname(__DIR__)) . '/assets/css/admin-menu-theme.css';
+        if (apply_filters('h5ap_admin_menu_theme', true) && file_exists($menu_theme_path)) {
+            wp_enqueue_style('h5ap-admin-menu-theme', H5AP_PLUGIN_DIR . 'assets/css/admin-menu-theme.css', array('h5ap-admin-menu'), filemtime($menu_theme_path));
+        }
+
         if (strpos($screen, 'html5-audio-player') !== false || (isset($current_screen->post_type) && ($current_screen->post_type === 'audioplayer' || $current_screen->post_type === 'radioplayer')) || $screen === 'plugins.php') {
             wp_enqueue_style('h5ap-admin', H5AP_PLUGIN_DIR . 'assets/css/style.css', array(), H5AP_VERSION);
             
@@ -110,43 +116,15 @@ class EnqueueAssets
             wp_enqueue_style('wp-codemirror');
         }
 
-        // clipboard start
-        global $post;
-		if ($screen === 'post.php' || $screen === 'post-new.php') {
-			if (isset($post) && $post->post_type === 'audioplayer') {
-				wp_add_inline_script('jquery-core', "
-                    document.addEventListener('click', function(e){
-                        var el = e.target.closest('.shortcode_copy');
-                        if(!el) return;
-
-                        if (navigator.clipboard && window.isSecureContext) {
-                            navigator.clipboard.writeText(el.dataset.code);
-                        } else {
-                            var textArea = document.createElement('textarea');
-                            textArea.value = el.dataset.code;
-                            textArea.style.position = 'absolute';
-                            textArea.style.left = '-999999px';
-                            document.body.prepend(textArea);
-                            textArea.select();
-                            try {
-                                document.execCommand('copy');
-                            } catch (error) {
-                                console.error(error);
-                            } finally {
-                                textArea.remove();
-                            }
-                        }
-
-                        var original = el.innerHTML;
-                        el.innerHTML = 'Copied!';
-                        setTimeout(function(){
-                            el.innerHTML = original;
-                        }, 1000);
-                    });
-                ");
-			}
-		}
-        // clipboard end
+        // Shortcode chip with copy button: player/radio lists and the player edit screen.
+        $is_player_screen = isset($current_screen->post_type) && ($current_screen->post_type === 'audioplayer' || $current_screen->post_type === 'radioplayer');
+        if ($is_player_screen && in_array($screen, array('edit.php', 'post.php', 'post-new.php'), true)) {
+            $plugin_path = dirname(dirname(__DIR__));
+            $chip_css = $plugin_path . '/assets/css/shortcode-chip.css';
+            $chip_js = $plugin_path . '/assets/js/shortcode-chip.js';
+            wp_enqueue_style('h5ap-shortcode-chip', H5AP_PLUGIN_DIR . 'assets/css/shortcode-chip.css', array(), file_exists($chip_css) ? filemtime($chip_css) : H5AP_VERSION);
+            wp_enqueue_script('h5ap-shortcode-chip', H5AP_PLUGIN_DIR . 'assets/js/shortcode-chip.js', array(), file_exists($chip_js) ? filemtime($chip_js) : H5AP_VERSION, true);
+        }
 
         $settings = get_option('h5ap_settings', []);
 

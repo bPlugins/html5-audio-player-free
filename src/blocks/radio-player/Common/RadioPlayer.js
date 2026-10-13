@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { resolveAudioSrc } from '../../../utils/gDriveProxy';
+import trackPlayer from '../../../utils/h5apAnalytics';
 
 import './../tailwind.minimal.scss';
 
@@ -65,7 +66,10 @@ const RadioPlayer = ({ attributes, id, nonce }) => {
 
         playerRef.current = player;
 
+        const detachAnalytics = trackPlayer(player, () => ({ src: resolvedSource, title }), { surface: 'radio', kind: 'radio', container: containerRef.current });
+
         return () => {
+            detachAnalytics();
             player.destroy()
         }
     }, [source, options, skin, sourceType, title, subtitle, statusText, multiple_audio, autoplay]);

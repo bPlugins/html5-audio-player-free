@@ -131,9 +131,7 @@ class RadioPlayer
     function h5ap_columns_content_only_radioplayer($column_name, $post_ID)
     {
         if ($column_name == 'shortcode') {
-?>
-            <div class='h5ap_front_shortcode'><input style='text-align: center; border: none; outline: none; background-color: #1e8cbe; color: #fff; padding: 4px 10px; border-radius: 3px;width:220px;' value='[h5ap_radio_player id="<?php echo esc_attr($post_ID) ?>"]' /><span class='htooltip'>Copy To Clipboard</span></div>
-<?php
+            echo \H5APPlayer\Helper\ShortcodeChip::html('[h5ap_radio_player id="' . absint($post_ID) . '"]'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped inside ShortcodeChip.
         }
     }
 

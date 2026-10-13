@@ -118,6 +118,18 @@ function h5ap_uninstall_plugin() {
 	// -------------------------------------------------------------------------
 	delete_transient( 'h5ap_license_status' );
 
+	// -------------------------------------------------------------------------
+	// 7. Drop analytics tables, options and the cleanup cron.
+	//    Plugin classes are not loaded during uninstall, so this is done directly.
+	// -------------------------------------------------------------------------
+	foreach ( array( 'h5ap_listens', 'h5ap_daily', 'h5ap_tracks' ) as $h5ap_table ) {
+		$wpdb->query( $wpdb->prepare( 'DROP TABLE IF EXISTS %i', $wpdb->prefix . $h5ap_table ) );
+	}
+	delete_option( 'h5ap_analytics_db_version' );
+	delete_option( 'h5ap_analytics_salt' );
+	delete_transient( 'h5ap_analytics_new_tracks' );
+	wp_clear_scheduled_hook( 'h5ap_analytics_daily' );
+
 	// phpcs:enable WordPress.DB.DirectDatabaseQuery, WordPress.DB.SlowDBQuery
 }
 

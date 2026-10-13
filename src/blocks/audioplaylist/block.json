@@ -157,6 +157,10 @@
         "rssFeedUrl": {
             "type": "string",
             "default": ""
+        },
+        "analyticsRef": {
+            "type": "integer",
+            "default": 0
         }
     },
     "supports": {

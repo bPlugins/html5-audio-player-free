@@ -1,6 +1,7 @@
 import { toHHMMSS } from "../js/utils";
 import { resolveAudioSrc } from "./gDriveProxy";
 import { safeURL } from "./escape";
+import trackPlayer from "./h5apAnalytics";
 
 const durationCache = new Map();
 
@@ -35,6 +36,10 @@ class PlyrPlaylist {
         this.setupEventListeners();
         this.setItemsDuration();
 
+        this.detachAnalytics = trackPlayer(player, () => {
+            const audio = this.audios[this.currentIndex];
+            return audio ? { src: audio.source, title: audio.title } : null;
+        }, { surface: 'playlist' });
     }
     setupEventListeners() {
         this.playlistItems.forEach((item, index) => {

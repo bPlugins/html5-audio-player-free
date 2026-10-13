@@ -2,6 +2,7 @@ import toHHMMSS from "../../../../utils/toHHMMSS";
 import { generateKeyFromUrl } from "../utils";
 import handleWave from "../../blocks/audioplayer/Common/players/wave/handleWave";
 import bindExtraSeekButtons from "../../utils/bindExtraSeekButtons";
+import trackPlayer from "../../utils/h5apAnalytics";
 import { escHTML, escURL } from "../../utils/escape";
 
 class H5AP {
@@ -117,6 +118,14 @@ class H5AP {
       speed: { selected: 1, options: h5apPlayer?.speed ? h5apPlayer.speed.map(Number) : [0.5, 1, 1.5, 2] },
     });
     bindExtraSeekButtons(player);
+    // Widgets like Elementor Simple put the file in a <source> tag instead of the options, so fall back to the element.
+    const mediaSrc = () => {
+      const el = player.media || audioDOM;
+      if (!el) return "";
+      const sourceTag = el.querySelector ? el.querySelector("source") : null;
+      return el.currentSrc || el.getAttribute("src") || (sourceTag ? sourceTag.getAttribute("src") : "") || "";
+    };
+    trackPlayer(player, () => ({ src: (typeof source === "string" && source) || mediaSrc(), title }), { surface: 'elementor' });
 
     const setDurationText = (dur) => {
       const $durEl = $(audioPlayer).find(".plyr__time--duration");

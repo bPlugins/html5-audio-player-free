@@ -141,13 +141,19 @@ li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a[href*="html5-audio
     /* admin-generic (cog) */
 }
 
+/* Analytics */
+li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a[href*="html5-audio-player-analytics"]::before {
+    content: "\f185" !important;
+    /* chart-bar */
+}
+
 /* Account */
 li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a[href*="account"]::before {
     content: "\f110" !important;
     /* admin-users */
 }
 
-/* Upgrade (free only): no icon before the orange button */
+/* Upgrade (free only): no icon before the green button */
 li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a[href*="pricing"]::before {
     content: none !important;
     margin-right: 0 !important;
@@ -155,11 +161,11 @@ li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a[href*="pricing"]::
 
 /* Upgrade button styling */
 li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a[href*="pricing"] {
-    background-color: #fb7a01 !important;
+    background-color: #04a504 !important;
     color: #ffffff !important;
     padding: 10px 16px !important;
     margin: 10px 14px 10px 14px !important;
-    border-radius: 6px !important;
+    border-radius: 0 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -172,7 +178,7 @@ li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a[href*="pricing"] {
 }
 
 li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a[href*="pricing"]:hover {
-    background-color: #d66801 !important;
+    background-color: #038a03 !important;
     color: #ffffff !important;
 }
 
@@ -346,4 +352,71 @@ li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li.current a::before,
 li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a.current::before {
     color: #ffffff !important;
     opacity: 1 !important;
+}
+
+/* ==========================================================================
+   "New" badge next to the Analytics entry points (menu, settings tab, meta box)
+   ========================================================================== */
+.h5ap-an-new-badge,
+.csf-nav a[data-tab-id="analytics"]::after,
+.csf-nav a:has(> .fa-chart-bar)::after {
+    display: inline-flex !important;
+    align-items: center;
+    margin-left: 6px;
+    padding: 1px 6px;
+    border-radius: 4px;
+    background: #04a504 !important;
+    color: #ffffff !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    line-height: 1.5;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    vertical-align: 1px;
+}
+
+.csf-nav a[data-tab-id="analytics"]::after,
+.csf-nav a:has(> .fa-chart-bar)::after {
+    content: var(--h5ap-an-new, "New");
+}
+
+/* Keep the badge readable when the menu item is hovered or active */
+#adminmenu .wp-submenu a:hover .h5ap-an-new-badge,
+#adminmenu .wp-submenu .current .h5ap-an-new-badge {
+    background: #04a504;
+    color: #ffffff !important;
+}
+
+/* Player edit screen: "New" ribbon across the top-left corner of the Analytics box */
+#h5ap-analytics-summary {
+    position: relative;
+    overflow: hidden;
+}
+
+#h5ap-analytics-summary::before {
+    content: var(--h5ap-an-new, "New");
+    position: absolute;
+    top: 6px;
+    left: -30px;
+    z-index: 2;
+    width: 90px;
+    padding: 3px 0 2px;
+    transform: rotate(-45deg);
+    background: linear-gradient(180deg, #08b808 0%, #04a504 55%, #038a03 100%);
+    border-top: 1px solid rgba(255, 255, 255, 0.35);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: 800;
+    line-height: 1.3;
+    letter-spacing: 0.1em;
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.18);
+    box-shadow: 0 2px 4px rgba(4, 80, 4, 0.25);
+    pointer-events: none;
+}
+
+#h5ap-analytics-summary .postbox-header .hndle {
+    padding-left: 42px;
 }

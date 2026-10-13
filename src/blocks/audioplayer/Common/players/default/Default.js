@@ -57,7 +57,7 @@ export default ({ attributes, containerRef, playerRef, className }) => {
             playerRef.current = player;
         }
 
-        new PlyrExtend(player, { source, disablePause, startTime, saveState, muted: effectiveMuted });
+        new PlyrExtend(player, { source, title: attributes.title, disablePause, startTime, saveState, muted: effectiveMuted });
 
         if (autoplay) {
             try {

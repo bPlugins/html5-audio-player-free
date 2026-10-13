@@ -673,11 +673,17 @@
 
 /* Desing upgrade menu */
 .fs-submenu-item.html5-audio-player.pricing.upgrade-mode {
-  background: #fb7a01;
-  border-radius: 3px;
+  background: #04a504;
+  border-radius: 0;
   color: #fff;
   display: inline-block;
   padding: 6px 40px 6px 15px;
+  transition: background 0.2s ease;
+}
+
+a:hover .fs-submenu-item.html5-audio-player.pricing.upgrade-mode,
+a:focus .fs-submenu-item.html5-audio-player.pricing.upgrade-mode {
+  background: #038a03;
 }
 
 

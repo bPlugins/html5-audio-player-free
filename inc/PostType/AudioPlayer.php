@@ -88,58 +88,15 @@ class AudioPlayer
     }
 
     function h5ap_columns_content_only_audioplayer($column_name, $post_ID){
-        if ($column_name == 'shortcode') { 
-            ?>
-                <div class='h5ap_front_shortcode'><input style='text-align: center; border: none; outline: none; background-color: #1e8cbe; color: #fff; padding: 4px 10px; border-radius: 3px;' value='[player id="<?php echo esc_attr($post_ID) ?>"]'><span class='htooltip'>Copy To Clipboard</span></div>
-            <?php
+        if ($column_name == 'shortcode') {
+            echo \H5APPlayer\Helper\ShortcodeChip::html('[player id="' . absint($post_ID) . '"]'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped inside ShortcodeChip.
         }
     }
 
    function h5ap_shortcode_area() {
         global $post;
         if ($post->post_type == 'audioplayer') {
-            ?>
-            <style>
-                .h5ap_shortcode {
-                    margin-top: 16px;
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                    background: #ffffff;
-                    padding-left: 10px;
-                }
-                .h5ap_shortcode .shortcode_copy {
-                    display: inline-block;
-                    padding: 6px 10px;
-                    font-family: monospace;
-                    font-size: 13px;
-                    background: #f6f7f7;
-                    border: 1px solid #dcdcde;
-                    border-radius: 4px;
-                    cursor: pointer;
-                    transition: 0.15s ease;
-                }
-                .h5ap_shortcode .shortcode_copy:hover {
-                    background-color: #f0f0f1;
-                    border-color: #2271b1;
-                }
-                .h5ap_shortcode .shortcode_desc {
-                    font-size: 16px;
-                    font-weight: bold;
-                    color: #646970;
-                }
-            </style>
-            <div class="h5ap_shortcode">
-                <p class="shortcode_desc">
-                    <?php echo esc_html__("Copy this shortcode and paste it into your post, page, or text widget content:", "html5-audio-player") ?>
-                </p>
-                 <code 
-                    class="shortcode_copy" 
-                    data-code="[player id='<?php echo esc_attr($post->ID); ?>']">
-                    [player id='<?php echo esc_attr($post->ID); ?>']
-                </code>
-            </div>
-            <?php
+            echo \H5APPlayer\Helper\ShortcodeChip::box('[player id="' . absint($post->ID) . '"]'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped inside ShortcodeChip.
         }
     }
 

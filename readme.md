@@ -5,7 +5,7 @@
 [![WordPress Support](https://img.shields.io/badge/WordPress-5.8+-blue.svg?style=flat-square&logo=wordpress)](https://wordpress.org/plugins/html5-audio-player/)
 [![PHP Support](https://img.shields.io/badge/PHP-7.1+-777bb4.svg?style=flat-square&logo=php)](./readme.txt)
 [![GPLv2 License](https://img.shields.io/badge/License-GPLv2-green.svg?style=flat-square)](./readme.txt)
-[![Stable Version](https://img.shields.io/badge/Version-2.8.9-blue.svg?style=flat-square)](./readme.txt)
+[![Stable Version](https://img.shields.io/badge/Version-2.9.0-blue.svg?style=flat-square)](./readme.txt)
 
 **HTML5 Audio Player** is a powerful, lightweight, and fully responsive audio player plugin for WordPress. It lets you embed MP3 and OGG audio files into posts, pages, widget areas, or template files using shortcodes or the intuitive Gutenberg block—no coding required!
 
@@ -29,6 +29,7 @@ Watch our comprehensive video guide exploring the latest podcast features, RSS f
 
 ### 💎 Core Functionality (Free)
 Everything you need to build a professional audio experience on your site:
+- **Audio Analytics (New)**: Built-in, privacy-friendly analytics dashboard (no cookies, IP never stored) with total plays, listening time, daily chart (Today & Last 7 days), top 5 tracks and broken audio alerts.
 - **Advanced Player Layouts**: Includes Standard Player, Sticky Player (fixed bottom/top), and the newly unlocked Audio Playlist Player.
 - **Subscribe Links**: Add customizable subscribe buttons to podcast playlists directing users to Spotify, Apple Podcasts, YouTube, Amazon Music, and RSS feeds.
 - **Playlist Filter & Search**: Enable filter options for audio playlists to quickly search and sort tracks.
@@ -46,6 +47,7 @@ Everything you need to build a professional audio experience on your site:
 
 ### 👑 Premium Power (Pro)
 Unlock advanced functionality for high-performing podcasts, music sites, and audio courses:
+- **Advanced Audio Analytics (New)**: Unlock Last 30/90 days and custom date ranges, comparison with the previous period, average listen time, completion rate, unique listeners, top 10 tracks with filters & sorting, per-track listen-depth reports, per-player stats, "Plays" column, edit screen metabox and the list of broken audio files.
 - **Advanced Playlist Skins**: Access premium Narrow and Extensive playlist layouts with collapsible track descriptions.
 - **Playback Speed & Skip Controls**: Full playback speed adjustment (0.5x - 2x) and fast-forward / rewind skip duration buttons across Narrow and Extensive playlist skins.
 - **Podcast Episode Search & Filter**: Real-time frontend keyword search to filter and find specific episodes inside playlist layers.

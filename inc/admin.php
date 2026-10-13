@@ -17,7 +17,8 @@ if (!class_exists('H5APAdmin')) {
 		}
 
 		function adminEnqueueScripts($hook){
-			if (strpos($hook, 'html5-audio-player') !== false) {
+			// The Analytics page ships its own app, the dashboard bundle has nothing to mount there.
+			if (strpos($hook, 'html5-audio-player') !== false && strpos($hook, 'html5-audio-player-analytics') === false) {
 				wp_enqueue_style('h5ap-admin-style', H5AP_PLUGIN_DIR . 'build/dashboard.css', [], H5AP_VERSION);
 
 				wp_enqueue_script('h5ap-admin-script', H5AP_PLUGIN_DIR . 'build/dashboard.js', ['react', 'react-dom',  'wp-components', 'wp-i18n', 'wp-api', 'wp-util', 'lodash', 'wp-media-utils', 'wp-data', 'wp-core-data', 'wp-api-request'], H5AP_VERSION, true);
@@ -215,6 +216,8 @@ if (!class_exists('H5APAdmin')) {
 					} elseif ($item[2] === 'edit-tags.php?taxonomy=audio-player-tags&post_type=audioplayer') {
 						$submenu['html5-audio-player'][$key][0] = __('Tags', 'html5-audio-player');
 						$submenu['html5-audio-player'][$key][4] = 'h5ap-group-divider';
+					} elseif ($item[2] === 'html5-audio-player-analytics') {
+						$submenu['html5-audio-player'][$key][4] = 'h5ap-group-divider';
 					} elseif ($item[2] === 'html5-audio-player-help-demo') {
 						$submenu['html5-audio-player'][$key][0] = __('Help & Demos', 'html5-audio-player');
 					} elseif ($item[2] === 'html5-audio-player-settings') {
@@ -230,6 +233,7 @@ if (!class_exists('H5APAdmin')) {
 					'html5-radio-player-add-new',
 					'edit-tags.php?taxonomy=audio-player-category&post_type=audioplayer',
 					'edit-tags.php?taxonomy=audio-player-tags&post_type=audioplayer',
+					'html5-audio-player-analytics',
 					'html5-audio-player-settings',
 					'html5-audio-player-help-demo',
 				);

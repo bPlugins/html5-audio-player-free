@@ -262,7 +262,7 @@ class Simple extends Widget_Base
 
 ?>
 
-		<div class="skin_simple h5ap_standard_player" data-options='<?php echo wp_json_encode($options) ?>'>
+		<div class="skin_simple h5ap_standard_player" data-options='<?php echo esc_attr(wp_json_encode($options)) ?>'>
 			<audio controls id="bplayer_id" src="<?php echo esc_url($settings['baudio_url'] . '?download=false') ?>" preload="<?php echo esc_attr($preload); ?>" <?php echo esc_attr($arm); ?>>
 				<source src="<?php echo esc_url($settings['baudio_url'] . '?download=false') ?>" type="<?php echo esc_attr(h5ap_get_audio_type($settings['baudio_url'])) ?>">
 			</audio>

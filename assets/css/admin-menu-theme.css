@@ -1,0 +1,84 @@
+/* ==========================================================================
+   HTML5 Audio Player: admin menu theme (navy + bPlugins green)
+   Loaded on top of admin-menu.css and only overrides colours and states.
+   To go back to the previous look, delete this file or return false from
+   the "h5ap_admin_menu_theme" filter; admin-menu.css is left untouched.
+   ========================================================================== */
+
+/* Parent item while one of its pages is open: brand green instead of WP blue */
+#adminmenu li[id^="toplevel_page_html5-audio-player"].wp-has-current-submenu > a.wp-has-current-submenu,
+#adminmenu li[id^="toplevel_page_html5-audio-player"].current > a.current {
+    background-color: #04a504 !important;
+    color: #ffffff !important;
+}
+
+#adminmenu li[id^="toplevel_page_html5-audio-player"].wp-has-current-submenu > a.wp-has-current-submenu .wp-menu-image::before {
+    color: #ffffff !important;
+}
+
+/* Submenu panel: keep the navy, give the list a little more air */
+#adminmenu li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu {
+    background-color: #091E42 !important;
+    padding: 8px 0 !important;
+}
+
+/* Softer group dividers */
+#adminmenu li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li.h5ap-group-divider,
+#adminmenu li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:has(a[href*="html5-audio-player-add-new"]),
+#adminmenu li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:has(a[href*="html5-radio-player-add-new"]),
+#adminmenu li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:has(a[href*="html5-audio-playlist-add-new"]),
+#adminmenu li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:has(a[href*="audio-player-tags"]) {
+    border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Items (the Upgrade button keeps its own size) */
+#adminmenu li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a:not([href*="pricing"]) {
+    color: rgba(255, 255, 255, 0.72) !important;
+    padding: 8px 12px !important;
+    margin: 1px 10px !important;
+    border-radius: 0 !important;
+}
+
+#adminmenu li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a::before {
+    width: 16px !important;
+    text-align: center !important;
+    opacity: 0.6;
+    transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+/* Hover */
+#adminmenu li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a:not([href*="pricing"]):hover,
+#adminmenu li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a:not([href*="pricing"]):focus-visible {
+    background-color: rgba(255, 255, 255, 0.07) !important;
+    color: #ffffff !important;
+}
+
+/* WordPress adds a white bar on hover; only the current page gets a (green) bar here */
+#adminmenu li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li:not(.current) a:not(.current):not([href*="pricing"]):hover {
+    box-shadow: none !important;
+}
+
+#adminmenu li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a:hover::before {
+    opacity: 1;
+}
+
+/* Current page: green bar on the left, soft green fill, bright icon */
+#adminmenu li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li.current a:not([href*="pricing"]),
+#adminmenu li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a.current:not([href*="pricing"]) {
+    background-color: rgba(4, 165, 4, 0.18) !important;
+    box-shadow: inset 3px 0 0 #04a504 !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+
+#adminmenu li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li.current a::before,
+#adminmenu li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a.current::before {
+    color: #3fd13f !important;
+    opacity: 1 !important;
+}
+
+/* Keyboard focus stays visible (admin-menu.css removes outlines on click) */
+#adminmenu li[id^="toplevel_page_html5-audio-player"] ul.wp-submenu li a:focus-visible {
+    box-shadow: inset 0 0 0 2px #04a504 !important;
+}
+

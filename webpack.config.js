@@ -14,6 +14,7 @@ const entry = {
   dashboard: "./src/dashboard/admin.js",
   player: "./src/js/player.js",
   "h5ap-all": "./src/js/h5ap-all.js",
+  analytics: "./src/analytics/index.js",
 };
 
 module.exports = {

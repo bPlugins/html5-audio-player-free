@@ -4,7 +4,7 @@ Tags: mp3 player, audio, audio player, player, podcast
 Donate link: https://www.buymeacoffee.com/abuhayat/  
 Requires at least: 6.5
 Tested up to: 7.1
-Stable tag: 2.8.9
+Stable tag: 2.9.0
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -30,6 +30,7 @@ Watch our in-depth video walkthrough showcasing the latest podcast features, RSS
 https://www.youtube.com/watch?v=jR1IS1OLmIA
 
 ### Key Features – Free Version
+* **Audio Analytics (New)**: Built-in, privacy-friendly analytics dashboard (no cookies, IP never stored) with total plays, listening time, daily chart (Today & Last 7 days), top 5 tracks and broken audio alerts.
 * **Advanced Player Layouts**: Choose from Standard Player, Sticky Player (fixed bottom/top), and the newly unlocked Audio Playlist Player.
 * **Subscribe Links**: Add customizable subscribe buttons to podcast playlists linking directly to Spotify, Apple Podcasts, Amazon Music, YouTube Podcasts, and custom RSS feeds.
 * **Podcast RSS Feed Import**: Easily import podcast channels from any RSS feed URL (fetch and play unlimited episodes with custom fetch limits).
@@ -47,6 +48,7 @@ https://www.youtube.com/watch?v=jR1IS1OLmIA
 Upgrade to the [**Pro version**](https://bplugins.com/products/html5-audio-player/pricing) for full control over design, layouts, advanced podcast features, and unlimited streams.
 
 **What’s Included in Pro:**
+* **Advanced Audio Analytics (New)**: Unlock Last 30/90 days and custom date ranges, comparison with the previous period, average listen time, completion rate, unique listeners, top 10 tracks with filters & sorting, per-track listen-depth reports, per-player stats, "Plays" column, edit screen metabox and the list of broken audio files.
 * **Advanced Playlist Skins**: Access premium Narrow and Extensive playlist layouts with collapsible track descriptions and customized styling.
 * **Playback Speed & Skip Controls**: Full playback speed selector (0.5x, 0.75x, 1x, 1.25x, 1.5x, 1.75x, 2x) and fast-forward / rewind skip buttons across all playlist skins (Narrow & Extensive layouts).
 * **Podcast Episode Search & Filter**: Real-time frontend keyword search to let users filter and find specific episodes inside playlist layers.
@@ -227,9 +229,19 @@ e.g.
 
 == Changelog ==
 
-= 2.8.9 - 11 October, 2026 =
+= 2.9.0 - 13 October, 2026 =
+* **New:** Added built-in Audio Analytics: a new HTML5 Audio Player → Analytics dashboard that shows plays, listening time and top tracks of your audio and radio players. Privacy-friendly: no cookies, no third-party services and IP addresses are never stored.
+* **New:** Analytics works with the Audio Player block, `[audio_player]` shortcode, player shortcodes, Audio Playlist block, radio players and the Elementor widget.
+* **New:** Daily chart of plays and listening time with Today and Last 7 days ranges.
+* **New:** Top 5 most played tracks list.
+* **New:** Broken audio alert that warns when audio files fail to play for visitors.
+* **New:** Added an Analytics settings tab to enable or disable tracking, exclude administrators and automatically delete old listen records (30–730 days).
+* **New:** Added an option to delete all analytics data, a privacy policy text suggestion, and analytics data cleanup on uninstall when "Delete Data on Uninstall" is enabled.
+* **Improvement:** Redesigned the shortcode box on the Add/Edit Player screen with a one-click copy button.
+* **Improvement:** Added a copy shortcode button in the All Players and All Radio Players lists.
+* **Improvement:** Redesigned the HTML5 Audio Player admin menu for a cleaner, modern look.
 * **Security:** Fixed a Stored Cross-Site Scripting (XSS) vulnerability (CVE-2026-62039) that allowed users with Contributor or higher role to inject scripts through player titles, artist names and other text fields.
-* **Security:** Added output escaping to all player, playlist and radio player skins, and blocked unsafe `javascript:` URLs in poster, download and subscribe links.
+* **Security:** Added output escaping to all player, playlist and radio player skins and Elementor widgets, and blocked unsafe `javascript:` URLs in poster, download and subscribe links.
 * **Security:** Added server-side sanitization for player text fields and `[audio_player]` shortcode attributes (`width`, `preload`, `skin`).
 * **Security:** Fixed authorization bypass vulnerability in post duplication action.
 

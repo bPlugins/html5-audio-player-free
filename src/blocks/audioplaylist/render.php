@@ -39,5 +39,6 @@ $wrapper_attributes = get_block_wrapper_attributes(['class' => 'wp-block-h5ap-ta
     id="<?php echo esc_attr($uniqueId); ?>"
     data-id="<?php echo esc_attr($uniqueId); ?>"
     data-attributes="<?php echo esc_attr($encoded_attributes); ?>"
+    <?php echo class_exists('\H5APPlayer\Analytics\Analytics') ? \H5APPlayer\Analytics\Analytics::ref_attr($attributes) : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- value escaped inside ref_attr(). ?>
     <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 </div>

@@ -19,6 +19,7 @@ class Init {
             Services\EnqueueAssets::class,
             Model\GlobalChanges::class,
             Helper\Functions::class,
+            Analytics\Analytics::class,
         ];
     }
 

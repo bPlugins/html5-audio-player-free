@@ -378,11 +378,14 @@ class AudioPlayer
         ),
 
         // --- Transcript (Standard Player) ---
-        \H5APPlayer\Helper\Transcript::metabox_field('heading'),
-        \H5APPlayer\Helper\Transcript::metabox_field('show'),
-        \H5APPlayer\Helper\Transcript::metabox_field('text'),
-        \H5APPlayer\Helper\Transcript::metabox_field('search'),
-        \H5APPlayer\Helper\Transcript::metabox_field('open'),
+        // Transcript: Standard and Sticky players.
+        \H5APPlayer\Helper\Transcript::metabox_field('heading', ['opt-1']),
+        \H5APPlayer\Helper\Transcript::metabox_field('heading', ['opt-3']),
+        \H5APPlayer\Helper\Transcript::metabox_field('show', ['opt-1', 'opt-3']),
+        \H5APPlayer\Helper\Transcript::metabox_field('text', ['opt-1', 'opt-3']),
+        \H5APPlayer\Helper\Transcript::metabox_field('search', ['opt-1', 'opt-3']),
+        \H5APPlayer\Helper\Transcript::metabox_field('open', ['opt-1', 'opt-3']),
+        \H5APPlayer\Helper\Transcript::metabox_field('radius_list', ['opt-3']),
 
         // --- Standard Pro Notice Box ---
         array(
@@ -429,6 +432,7 @@ class AudioPlayer
                         <div style="display: flex; align-items: center; gap: 30px; margin: 20px 0; flex-wrap: wrap;">
                             <div style="flex: 1; min-width: 250px;">
                                 <ul class="h5ap-pro-notice-list" style="margin-top: 0;">
+                                    <li><strong>Playlist Transcripts <span style="background:#2563eb;color:#fff;font-size:10px;padding:2px 6px;border-radius:4px;margin-left:6px;font-weight:600;">NEW</span>:</strong> Give every track its own read-along transcript (search, click a line to jump), write it with AI in one click, and let visitors download it as .vtt or .txt.</li>
                                     <li><strong>Playlist Skins:</strong> Choose between beautiful Narrow or Extensive list designs.</li>
                                     <li><strong>Podcast RSS Feed Import <span style="background:#2563eb;color:#fff;font-size:10px;padding:2px 6px;border-radius:4px;margin-left:6px;font-weight:600;">NEW</span>:</strong> Import and stream full podcast channels directly into Narrow or Extensive playlist skins using any RSS feed URL.</li>
                                     <li><strong>Podcast Search &amp; Filter <span style="background:#2563eb;color:#fff;font-size:10px;padding:2px 6px;border-radius:4px;margin-left:6px;font-weight:600;">NEW</span>:</strong> Allow listeners to search podcast episodes live and filter by publication date or order.</li>
@@ -468,6 +472,8 @@ class AudioPlayer
                         <h4 class="h5ap-pro-notice-title">Unlock More with HTML5 Audio Player Pro</h4>
                         <p class="h5ap-pro-notice-desc">Upgrade to use these features in your Sticky Player:</p>
                         <ul class="h5ap-pro-notice-list">
+                            <li><strong>AI Transcript <span style="background:#2563eb;color:#fff;font-size:10px;padding:2px 6px;border-radius:4px;margin-left:6px;font-weight:600;">NEW</span>:</strong> Write the transcript from the audio in one click. No API key needed.</li>
+                            <li><strong>Transcript Download <span style="background:#2563eb;color:#fff;font-size:10px;padding:2px 6px;border-radius:4px;margin-left:6px;font-weight:600;">NEW</span>:</strong> Let visitors download the transcript as .vtt or .txt.</li>
                             <li><strong>Pro Skin:</strong> Unlock the clean and minimal Simple skin for your sticky player.</li>
                             <li><strong>Background Color:</strong> Set a custom background color for your sticky player.</li>
                             <li><strong>Repeat:</strong> Loop the audio to play continuously.</li>

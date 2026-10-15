@@ -278,3 +278,118 @@
         color: #1d2327;
     }
 }
+
+// A playlist prints one box per track; the boxes of other tracks are hidden.
+.h5ap-transcript[hidden],
+.h5ap-transcript-dock[hidden] {
+    display: none !important;
+}
+
+// Track name next to "Transcript" in a playlist box.
+.h5ap-transcript__track {
+    overflow: hidden;
+    min-width: 0;
+    font-weight: 400;
+    opacity: 0.65;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &::before {
+        content: "\00b7";
+        margin-right: 8px;
+    }
+}
+
+// Sticky player: a "Transcript" button above the fixed bar opens the transcript in a panel.
+.h5ap-transcript-dock {
+    --h5ap-dock-bottom: 96px;
+
+    position: fixed;
+    right: 16px;
+    bottom: var(--h5ap-dock-bottom);
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    max-width: calc(100vw - 32px);
+
+    &__toggle {
+        order: 2;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0;
+        padding: 9px 16px;
+        border: 0;
+        border-radius: 999px;
+        background: #1d2327;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        color: #fff;
+        font: inherit;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1.2;
+        cursor: pointer;
+
+        &::before {
+            content: "";
+            width: 16px;
+            height: 16px;
+            background: currentColor;
+            -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z'/%3E%3Cpath d='M14 3v6h6M8 13h8M8 17h5'/%3E%3C/svg%3E") center / contain no-repeat;
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z'/%3E%3Cpath d='M14 3v6h6M8 13h8M8 17h5'/%3E%3C/svg%3E") center / contain no-repeat;
+        }
+
+        &:hover,
+        &:focus {
+            background: #000;
+            color: #fff;
+        }
+
+        &:focus-visible {
+            outline: 2px solid #fff;
+            outline-offset: -4px;
+        }
+    }
+
+    // The panel: a real box (the page behind it may have any color).
+    .h5ap-transcript {
+        order: 1;
+        width: 420px;
+        max-width: 100%;
+        margin: 0;
+        background: #fff;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.22);
+        color: #1d2327;
+    }
+
+    &:not(.is-open) .h5ap-transcript {
+        display: none;
+    }
+
+    .h5ap-transcript .h5ap-transcript__lines {
+        max-height: min(340px, 45vh);
+    }
+
+    // Closing arrow points down in the dock.
+    .h5ap-transcript[open] > .h5ap-transcript__summary::after {
+        transform: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .h5ap-transcript-dock {
+        right: 8px;
+        left: 8px;
+        align-items: stretch;
+
+        &__toggle {
+            align-self: flex-end;
+        }
+
+        .h5ap-transcript {
+            width: auto;
+        }
+    }
+}

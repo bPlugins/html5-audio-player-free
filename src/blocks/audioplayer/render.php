@@ -68,6 +68,8 @@ $h5ap_transcript_args = [
     'search' => ($attributes['transcriptSearch'] ?? true) !== false,
     'open'   => ($attributes['transcriptOpen'] ?? true) !== false,
     'radius' => (int) ($attributes['transcriptRadius'] ?? 0),
+    // Only these skins can be sticky (see Common/AudioPlayer.js); a sticky player shows the transcript in a dock above the bar.
+    'sticky' => !empty($attributes['isSticky']) && in_array($attributes['skin'] ?? 'Default', ['Default', 'Fusion', 'Stamp', 'Wave'], true),
 ];
 unset($attributes['transcript'], $attributes['showTranscript'], $attributes['transcriptSearch'], $attributes['transcriptOpen'], $attributes['transcriptRadius']);
 

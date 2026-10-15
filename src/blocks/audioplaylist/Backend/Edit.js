@@ -3,6 +3,7 @@ import { useBlockProps } from '@wordpress/block-editor';
 import Settings from "./settings";
 import Playlist from '../Common/Playlist';
 import OnlyBackend from '../../components/OnlyBackend';
+import PlaylistTranscriptPreview from '../../components/Transcript/PlaylistTranscriptPreview.js';
 
 
 const Edit = (props) => {
@@ -68,6 +69,7 @@ const Edit = (props) => {
       <div {...blockProps}>
         <OnlyBackend />
         <Playlist {...{ attributes: effectiveAttributes, id: `block-${clientId}` }} />
+        <PlaylistTranscriptPreview attributes={attributes} />
       </div>
     </Fragment>
   );

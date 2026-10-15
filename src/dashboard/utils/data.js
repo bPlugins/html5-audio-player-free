@@ -251,7 +251,7 @@ export const demoInfo = {
 }
 
 export const welcomeInfo = (adminUrl, isElementorActive) => ({
-    keywords: ['Audio Player', 'Gutenberg Block', 'Shortcode', 'Playlist', 'Podcast', 'Radio Player'],
+    keywords: ['Audio Player', 'Transcript', 'Gutenberg Block', 'Shortcode', 'Playlist', 'Podcast', 'Radio Player'],
     keywordsLabel: 'Features',
     gettingStarted: {
         tabs: [
@@ -344,6 +344,18 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
     },
     changelogs: [
         {
+            version: '2.10.0 - 15 October, 2026',
+            type: 'new',
+            list: [
+                '<strong>New:</strong> Interactive Transcript: show the text of your audio under the player. The line being spoken is highlighted, visitors click a line to jump to that moment and search inside the audio. Import SRT/VTT captions or type it in. Works in the Audio Player block, the <code>[player]</code> shortcode and the Elementor widget.',
+                '<strong>New:</strong> Transcript for the Audio Playlist block: every track has its own transcript, and the box follows the track that is playing.',
+                '<strong>New:</strong> Transcript for the Sticky Player (block and <code>[player]</code> shortcode): a "Transcript" button above the bar opens it in a panel.',
+                '<strong>New:</strong> Transcript options: search box, open by default, corner radius, and a live preview in the block editor.',
+                '<strong>Improvement:</strong> Help texts in the block settings now open from a "?" icon, and the Pro notices have a cleaner design.',
+                '<strong>Improvement:</strong> Clearer focus color for the Categories and Tags tabs in the admin menu.'
+            ]
+        },
+        {
             version: '2.9.0 - 13 October, 2026',
             type: 'new',
             list: [
@@ -365,9 +377,12 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
             ]
         }
     ],
-    changelogsLimit: 1,
+    changelogsLimit: 2,
     changelogsReadMoreLabel: 'View More Changelogs',
     proFeatures: [
+        'AI Transcript Generator (Whisper AI, runs in your browser, no API key)',
+        'AI Transcripts for Every Playlist Track',
+        'Transcript Download (.vtt / .txt)',
         'Advanced Audio Analytics (30/90 Days, Custom Range & Comparison)',
         'Avg. Listen Time, Completion Rate & Unique Listeners',
         'Per-Track Listen Depth & Per-Player Analytics Reports',

@@ -5,7 +5,7 @@
 [![WordPress Support](https://img.shields.io/badge/WordPress-5.8+-blue.svg?style=flat-square&logo=wordpress)](https://wordpress.org/plugins/html5-audio-player/)
 [![PHP Support](https://img.shields.io/badge/PHP-7.1+-777bb4.svg?style=flat-square&logo=php)](./readme.txt)
 [![GPLv2 License](https://img.shields.io/badge/License-GPLv2-green.svg?style=flat-square)](./readme.txt)
-[![Stable Version](https://img.shields.io/badge/Version-2.9.0-blue.svg?style=flat-square)](./readme.txt)
+[![Stable Version](https://img.shields.io/badge/Version-2.10.0-blue.svg?style=flat-square)](./readme.txt)
 
 **HTML5 Audio Player** is a powerful, lightweight, and fully responsive audio player plugin for WordPress. It lets you embed MP3 and OGG audio files into posts, pages, widget areas, or template files using shortcodes or the intuitive Gutenberg block—no coding required!
 
@@ -29,6 +29,7 @@ Watch our comprehensive video guide exploring the latest podcast features, RSS f
 
 ### 💎 Core Functionality (Free)
 Everything you need to build a professional audio experience on your site:
+- **Interactive Transcript – Read Along (New)**: Turn your audio into text that visitors can read, search and click. The line being spoken is highlighted, a click on any line jumps the audio to that moment, and the search box finds any word inside the audio. Works with the Standard player, the Sticky player (a "Transcript" button above the bar) and the Audio Playlist (every track has its own transcript, and the box follows the track that is playing). Import SRT/VTT captions or type it in. The transcript is real HTML, so search engines can index every word of your podcast or audio (SEO), and it makes your audio accessible for deaf and hard-of-hearing visitors. Works in the Gutenberg blocks, the `[player]` shortcode and the Elementor widget.
 - **Audio Analytics (New)**: Built-in, privacy-friendly analytics dashboard (no cookies, IP never stored) with total plays, listening time, daily chart (Today & Last 7 days), top 5 tracks and broken audio alerts.
 - **Advanced Player Layouts**: Includes Standard Player, Sticky Player (fixed bottom/top), and the newly unlocked Audio Playlist Player.
 - **Subscribe Links**: Add customizable subscribe buttons to podcast playlists directing users to Spotify, Apple Podcasts, YouTube, Amazon Music, and RSS feeds.
@@ -47,6 +48,8 @@ Everything you need to build a professional audio experience on your site:
 
 ### 👑 Premium Power (Pro)
 Unlock advanced functionality for high-performing podcasts, music sites, and audio courses:
+- **AI Transcript Generator (New)**: Stop typing transcripts by hand. Click "Generate with AI" and the transcript of your audio is written for you, for a single audio or for every track of a playlist. It uses the open-source Whisper AI model and runs right in your browser: no API key, no monthly fee, no per-minute cost, and your audio is never uploaded anywhere. Choose Fast or Accurate, pick from about 99 languages (or let it detect the language), and watch the progress bar until it is done.
+- **Transcripts for Every Playlist & Download (New)**: Show a read-along transcript for each track of the Narrow and Extensive playlists and the `[player]` Playlist type (including your saved Playlists), and let visitors download any transcript as .vtt or .txt.
 - **Advanced Audio Analytics (New)**: Unlock Last 30/90 days and custom date ranges, comparison with the previous period, average listen time, completion rate, unique listeners, top 10 tracks with filters & sorting, per-track listen-depth reports, per-player stats, "Plays" column, edit screen metabox and the list of broken audio files.
 - **Advanced Playlist Skins**: Access premium Narrow and Extensive playlist layouts with collapsible track descriptions.
 - **Playback Speed & Skip Controls**: Full playback speed adjustment (0.5x - 2x) and fast-forward / rewind skip duration buttons across Narrow and Extensive playlist skins.

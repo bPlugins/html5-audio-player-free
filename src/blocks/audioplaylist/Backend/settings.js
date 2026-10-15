@@ -10,6 +10,8 @@ import { ProModal, AdvertiseCard, PremiumBadge, PremiumPanel } from './../../../
 import NewBadge from '../../components/NewBadge/NewBadge.js';
 import { produce } from 'immer';
 import LabelWithHelp from '../../components/LabelWithHelp/LabelWithHelp.js';
+import PlaylistTranscriptPanel, { TranscriptStylePanel } from '../../components/Transcript/PlaylistTranscriptPanel.js';
+import TrackTranscript from '../../components/Transcript/TrackTranscript.js';
 
 const Settings = (props) => {
   const { attributes, setAttributes, clientId, siteUrl } = props;
@@ -151,6 +153,9 @@ const Settings = (props) => {
                         <ItemsPanel {...{ attributes, setAttributes, clientId, arrKey: 'audios', newItem: { source: '' }, ItemSettings, itemLabel: 'Item', activeIndex, setActiveIndex, design: 'sortable', }} />
                       )}
                     </PanelBody>
+                    {attributes.sourceType !== 'podcast' && (
+                      <PlaylistTranscriptPanel {...{ attributes, setAttributes, isPremium }} />
+                    )}
 
                     <PanelBody
                       className='bPlPanelBody'
@@ -290,6 +295,7 @@ const Settings = (props) => {
                         defaultColor="rgb(245, 158, 11, var(--tw-bg-opacity, 1))"
                       />
                     </PanelBody>
+                    <TranscriptStylePanel {...{ attributes, setAttributes }} />
                   </Panel>
                 </span>
               )}
@@ -369,5 +375,6 @@ export const ItemSettings = ({ attributes, arrKey, index, setAttributes }) => {
     <PanelRow>
       <TextControl label={__("Artist", 'html5-audio-player-pro')} placeholder={__("Artist", 'html5-audio-player-pro')} value={artist} onChange={(artist) => handleList("artist", artist, index)} />
     </PanelRow>
+    <TrackTranscript transcript={attributes[arrKey]?.[index]?.transcript} source={attributes[arrKey]?.[index]?.source} onChange={(cues) => handleList('transcript', cues, index)} />
   </>
 }

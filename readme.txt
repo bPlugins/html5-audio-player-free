@@ -4,7 +4,7 @@ Tags: mp3 player, audio, audio player, player, podcast
 Donate link: https://www.buymeacoffee.com/abuhayat/  
 Requires at least: 6.5
 Tested up to: 7.1
-Stable tag: 2.9.0
+Stable tag: 2.10.0
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -30,7 +30,7 @@ Watch our in-depth video walkthrough showcasing the latest podcast features, RSS
 https://www.youtube.com/watch?v=jR1IS1OLmIA
 
 ### Key Features – Free Version
-* **Interactive Transcript (New)**: Show the text of your audio under the player. Visitors read along while the current line is highlighted, click any line to jump to that moment, and search inside the audio. Import SRT/VTT captions or write the transcript yourself. The text is plain HTML, so search engines can index what is said in your audio (SEO) and it helps accessibility. Works in the Gutenberg block, the [player] shortcode and the Elementor widget.
+* **Interactive Transcript – Read Along (New)**: Turn your audio into text that visitors can read, search and click. The line being spoken is highlighted, a click on any line jumps the audio to that moment, and the search box finds any word inside the audio. Works with the Standard player, the Sticky player (a "Transcript" button above the bar) and the Audio Playlist (every track has its own transcript, and the box follows the track that is playing). Import SRT/VTT captions or type it in. The transcript is real HTML, so search engines can index every word of your podcast or audio (SEO), and it makes your audio accessible for deaf and hard-of-hearing visitors. Works in the Gutenberg blocks, the [player] shortcode and the Elementor widget.
 * **Audio Analytics (New)**: Built-in, privacy-friendly analytics dashboard (no cookies, IP never stored) with total plays, listening time, daily chart (Today & Last 7 days), top 5 tracks and broken audio alerts.
 * **Advanced Player Layouts**: Choose from Standard Player, Sticky Player (fixed bottom/top), and the newly unlocked Audio Playlist Player.
 * **Subscribe Links**: Add customizable subscribe buttons to podcast playlists linking directly to Spotify, Apple Podcasts, Amazon Music, YouTube Podcasts, and custom RSS feeds.
@@ -49,7 +49,8 @@ https://www.youtube.com/watch?v=jR1IS1OLmIA
 Upgrade to the [**Pro version**](https://bplugins.com/products/html5-audio-player/pricing) for full control over design, layouts, advanced podcast features, and unlimited streams.
 
 **What’s Included in Pro:**
-* **AI Transcript (New)**: Create the transcript from your audio in one click with the open-source Whisper AI model. It runs in your browser: no API key, no monthly cost, and the audio is not uploaded anywhere. Choose a fast or an accurate model and the audio language (about 99 languages), then let visitors download the transcript as .vtt or .txt.
+* **AI Transcript Generator (New)**: Stop typing transcripts by hand. Click "Generate with AI" and the transcript of your audio is written for you, for a single audio or for every track of a playlist. It uses the open-source Whisper AI model and runs right in your browser: no API key, no monthly fee, no per-minute cost, and your audio is never uploaded anywhere. Choose Fast or Accurate, pick from about 99 languages (or let it detect the language), and watch the progress bar until it is done.
+* **Transcripts for Every Playlist & Download (New)**: Show a read-along transcript for each track of the Narrow and Extensive playlists and the [player] Playlist type (including your saved Playlists), and let visitors download any transcript as .vtt or .txt.
 * **Advanced Audio Analytics (New)**: Unlock Last 30/90 days and custom date ranges, comparison with the previous period, average listen time, completion rate, unique listeners, top 10 tracks with filters & sorting, per-track listen-depth reports, per-player stats, "Plays" column, edit screen metabox and the list of broken audio files.
 * **Advanced Playlist Skins**: Access premium Narrow and Extensive playlist layouts with collapsible track descriptions and customized styling.
 * **Playback Speed & Skip Controls**: Full playback speed selector (0.5x, 0.75x, 1x, 1.25x, 1.5x, 1.75x, 2x) and fast-forward / rewind skip buttons across all playlist skins (Narrow & Extensive layouts).
@@ -191,6 +192,9 @@ Yes, you can configure the player to show a sample or preview clip for digital p
 = Can I use this plugin to sell audio files? =
 Yes, you can use the plugin to showcase previews and link to purchase/download pages. Integration with eCommerce plugins can be handled separately.
 
+= Can I show a transcript (the text) of my audio? =
+Yes. Turn on "Show transcript" in the block, the [player] settings or the Elementor widget, then import an SRT/VTT file or type the text with times (for example: 1:15 Welcome to the show.). Visitors can read along, search and click a line to jump there. It also works for every track of a playlist and for the Sticky player. In the Pro version, "Generate with AI" writes the transcript for you, in your browser, with no API key or extra cost.
+
 = Does this plugin support playlists? =
 Yes, you can create playlists with multiple audio files. Different player types are available, including standard, playlist, and sticky player.
 
@@ -230,6 +234,14 @@ e.g.
 
 
 == Changelog ==
+
+= 2.10.0 - 15 October, 2026 =
+* **New:** Interactive Transcript: show the text of your audio under the player. The line being spoken is highlighted, visitors click a line to jump to that moment and search inside the audio. Import SRT/VTT captions or type it in. Works in the Audio Player block, the `[player]` shortcode and the Elementor widget.
+* **New:** Transcript for the Audio Playlist block: every track has its own transcript, and the box follows the track that is playing.
+* **New:** Transcript for the Sticky Player (block and `[player]` shortcode): a "Transcript" button above the bar opens it in a panel.
+* **New:** Transcript options: search box, open by default, corner radius, and a live preview in the block editor.
+* **Improvement:** Help texts in the block settings now open from a "?" icon, and the Pro notices have a cleaner design.
+* **Improvement:** Clearer focus color for the Categories and Tags tabs in the admin menu.
 
 = 2.9.0 - 13 October, 2026 =
 * **New:** Added built-in Audio Analytics: a new HTML5 Audio Player → Analytics dashboard that shows plays, listening time and top tracks of your audio and radio players. Privacy-friendly: no cookies, no third-party services and IP addresses are never stored.

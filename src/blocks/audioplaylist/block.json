@@ -24,6 +24,22 @@
         "height": {
             "type": "string",
             "default": "auto"
+        },
+        "showTranscript": {
+          "type": "boolean",
+          "default": false
+        },
+        "transcriptSearch": {
+          "type": "boolean",
+          "default": true
+        },
+        "transcriptOpen": {
+          "type": "boolean",
+          "default": true
+        },
+        "transcriptRadius": {
+          "type": "number",
+          "default": 0
         },
         "audios": {
             "type": "array",

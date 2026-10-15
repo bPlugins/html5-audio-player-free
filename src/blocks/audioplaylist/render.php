@@ -31,6 +31,25 @@ if (isset($attributes['sourceType']) && $attributes['sourceType'] === 'podcast')
     }
 }
 
+// Transcripts (off unless "Show transcript" is on): one box per track, printed after the player;
+// transcript.js shows the box of the track that is playing. Podcast episodes come from the feed, so they have none.
+$h5ap_transcript_tracks = (!empty($attributes['showTranscript']) && ($attributes['sourceType'] ?? '') !== 'podcast' && isset($attributes['audios']) && is_array($attributes['audios'])) ? $attributes['audios'] : [];
+$h5ap_transcript_width = $attributes['width'] ?? '100%';
+if (is_array($h5ap_transcript_width)) {
+    $h5ap_transcript_width = isset($h5ap_transcript_width['number'], $h5ap_transcript_width['unit']) ? $h5ap_transcript_width['number'] . $h5ap_transcript_width['unit'] : '100%';
+}
+$h5ap_transcript_args = [
+    'align'  => $attributes['alignment'] ?? 'left',
+    'width'  => is_string($h5ap_transcript_width) ? $h5ap_transcript_width : '100%',
+    'search' => ($attributes['transcriptSearch'] ?? true) !== false,
+    'open'   => ($attributes['transcriptOpen'] ?? true) !== false,
+    'radius' => (int) ($attributes['transcriptRadius'] ?? 0),
+];
+if (isset($attributes['audios'])) {
+    $attributes['audios'] = \H5APPlayer\Helper\Transcript::strip_track_transcripts($attributes['audios']);
+}
+unset($attributes['showTranscript'], $attributes['transcriptSearch'], $attributes['transcriptOpen'], $attributes['transcriptRadius']);
+
 $encoded_attributes = esc_attr(wp_json_encode($attributes, JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS));
 $wrapper_attributes = get_block_wrapper_attributes(['class' => 'wp-block-h5ap-tailwind']);
 
@@ -42,3 +61,7 @@ $wrapper_attributes = get_block_wrapper_attributes(['class' => 'wp-block-h5ap-ta
     <?php echo class_exists('\H5APPlayer\Analytics\Analytics') ? \H5APPlayer\Analytics\Analytics::ref_attr($attributes) : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- value escaped inside ref_attr(). ?>
     <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 </div>
+<?php
+if ($h5ap_transcript_tracks) {
+    echo \H5APPlayer\Helper\Transcript::render_playlist($h5ap_transcript_tracks, $uniqueId, $h5ap_transcript_args); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped inside render().
+}

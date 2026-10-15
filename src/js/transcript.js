@@ -7,6 +7,22 @@ import '../css/transcript.scss';
 
 const AUTO_SCROLL_PAUSE = 4000;
 
+// The file the <audio> is playing now.
+const currentSource = (media) => media.currentSrc || media.getAttribute('src') || media.querySelector('source')?.src || '';
+
+// Same file? Compares the address without query string or hash (players add things like ?download=false).
+const sameSource = (a, b) => {
+    const clean = (url) => {
+        try {
+            const parsed = new URL(url, window.location.href);
+            return decodeURIComponent(parsed.origin + parsed.pathname).toLowerCase();
+        } catch (e) {
+            return String(url).split(/[?#]/)[0].toLowerCase();
+        }
+    };
+    return clean(a) === clean(b);
+};
+
 const setupTranscript = (box) => {
     box.dataset.ready = '1';
 
@@ -18,6 +34,8 @@ const setupTranscript = (box) => {
 
     const starts = lines.map((line) => parseFloat(line.dataset.start) || 0);
     const texts = lines.map((line) => line.querySelector('.h5ap-transcript__text')?.textContent || '');
+    // Playlists print one box per track (data-source = the track's file); only the playing track's box is shown.
+    const trackSource = box.dataset.source || '';
     let audio = null;
     let active = -1;
     let userScrolledAt = 0;
@@ -29,7 +47,18 @@ const setupTranscript = (box) => {
         list.scrollTo({ top: line.offsetTop - list.clientHeight / 3, behavior: 'smooth' });
     };
 
+    const clearActive = () => {
+        if (active > -1) {
+            lines[active].classList.remove('is-active');
+            lines[active].removeAttribute('aria-current');
+        }
+        active = -1;
+    };
+
     const sync = () => {
+        if (!audio || (trackSource && box.hidden)) {
+            return;
+        }
         const time = audio.currentTime;
         let index = -1;
         // Nothing is highlighted until the audio has started (the player sets the time to 0 when it loads).
@@ -53,28 +82,66 @@ const setupTranscript = (box) => {
         }
     };
 
+    // Track boxes: show this box only while the player is on its track.
+    const updateTrack = () => {
+        if (!trackSource) {
+            return;
+        }
+        const playing = audio ? currentSource(audio) : '';
+        const isMine = Boolean(playing) && sameSource(playing, trackSource);
+        if (box.hidden === isMine) {
+            box.hidden = !isMine;
+        }
+        if (!isMine) {
+            clearActive();
+        }
+    };
+
+    const onSourceChange = () => {
+        updateTrack();
+        sync();
+    };
+
+    const attach = (media) => {
+        if (media === audio) {
+            return;
+        }
+        if (audio) {
+            ['timeupdate', 'seeked'].forEach((type) => audio.removeEventListener(type, sync));
+            ['loadstart', 'emptied', 'loadedmetadata'].forEach((type) => audio.removeEventListener(type, onSourceChange));
+        }
+        audio = media;
+        if (audio) {
+            ['timeupdate', 'seeked'].forEach((type) => audio.addEventListener(type, sync));
+            ['loadstart', 'emptied', 'loadedmetadata'].forEach((type) => audio.addEventListener(type, onSourceChange));
+        }
+        onSourceChange();
+    };
+
+    const findAudio = () => {
+        const root = document.getElementById(box.dataset.player);
+        return root ? root.querySelector('audio') : null;
+    };
+
     // The player is mounted by React (sometimes lazily), so look for its <audio> when needed.
     const getAudio = () => {
-        if (audio && audio.isConnected) {
-            return audio;
-        }
-        const root = document.getElementById(box.dataset.player);
-        audio = root ? root.querySelector('audio') : null;
-        if (audio) {
-            audio.addEventListener('timeupdate', sync);
-            audio.addEventListener('seeked', sync);
+        if (!audio || !audio.isConnected) {
+            attach(findAudio());
         }
         return audio;
     };
 
+    // Keep watching: playlists rebuild their player (a new <audio>) after a search, filter or page change.
     const root = document.getElementById(box.dataset.player);
-    if (!getAudio() && root && typeof MutationObserver !== 'undefined') {
-        const observer = new MutationObserver(() => {
-            if (getAudio()) {
-                observer.disconnect();
+    attach(findAudio());
+    if (root && typeof MutationObserver !== 'undefined') {
+        new MutationObserver(() => {
+            if (!audio || !audio.isConnected) {
+                attach(findAudio());
+            } else {
+                updateTrack();
             }
-        });
-        observer.observe(root, { childList: true, subtree: true });
+        }).observe(root, { childList: true, subtree: true });
     }
 
     // Before the audio has loaded, the player resets the time to its Start Time when metadata arrives,
@@ -183,8 +250,50 @@ const setupTranscript = (box) => {
     });
 };
 
+/**
+ * Sticky player: the transcript sits in a dock above the fixed bar, opened with the "Transcript" button.
+ * The dock follows the bar's height and is hidden while the bar is hidden (closed by the visitor).
+ */
+const setupDock = (dock) => {
+    dock.dataset.ready = '1';
+    const toggle = dock.querySelector('.h5ap-transcript-dock__toggle');
+    const panel = dock.querySelector('.h5ap-transcript');
+    const root = document.getElementById(dock.dataset.player);
+    if (!toggle || !panel || !root) {
+        return;
+    }
+
+    const setOpen = (open) => {
+        dock.classList.toggle('is-open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        panel.open = open;
+    };
+    setOpen(dock.dataset.open === '1');
+    toggle.addEventListener('click', () => setOpen(!dock.classList.contains('is-open')));
+    // The panel's own header also closes it.
+    panel.querySelector('.h5ap-transcript__summary')?.addEventListener('click', (event) => {
+        event.preventDefault();
+        setOpen(false);
+    });
+
+    const place = () => {
+        const bar = root.querySelector('.h5ap-sticky');
+        const visible = Boolean(bar) && bar.getClientRects().length > 0 && getComputedStyle(bar).visibility !== 'hidden';
+        dock.hidden = !visible;
+        if (visible) {
+            dock.style.setProperty('--h5ap-dock-bottom', `${Math.round(bar.getBoundingClientRect().height) + 12}px`);
+        }
+    };
+    place();
+    if (typeof MutationObserver !== 'undefined') {
+        new MutationObserver(place).observe(root, { childList: true, subtree: true, attributes: true, attributeFilter: ['style', 'class'] });
+    }
+    window.addEventListener('resize', place);
+};
+
 const initTranscripts = () => {
     document.querySelectorAll('.h5ap-transcript[data-player]:not([data-ready])').forEach(setupTranscript);
+    document.querySelectorAll('.h5ap-transcript-dock[data-player]:not([data-ready])').forEach(setupDock);
 };
 
 if (document.readyState === 'loading') {

@@ -45,9 +45,18 @@
       $(".h5ap_single_button .pause").hide();
     });
 
-    // Transcript: "Import SRT / VTT file" button next to the transcript box in the player settings.
-    $(".h5ap-transcript-textarea").each(function () {
+    // Transcript: "Import SRT / VTT file" button next to every transcript box in the player settings
+    // (the Standard/Sticky player's box and each playlist track's box).
+    const toolsDone = typeof WeakSet !== "undefined" ? new WeakSet() : null;
+    const addTranscriptTools = function () {
+      // Skip Codestar's hidden row template: new rows are copied from it.
+      if ((toolsDone && toolsDone.has(this)) || $(this).closest(".csf-cloneable-hidden").length) {
+        return;
+      }
+      toolsDone?.add(this);
       const textarea = $(this);
+      // A row made with Codestar's "Clone" copies the toolbar of the row it came from; replace it.
+      textarea.prevAll(".h5ap-transcript-tools").remove();
       const i18n = window.h5apAdmin?.transcript || {};
       const fileInput = $('<input type="file" accept=".srt,.vtt,text/vtt,application/x-subrip" hidden>');
       const button = $('<button type="button" class="button h5ap-transcript-import"></button>').text(i18n.import || "Import SRT / VTT file");
@@ -83,7 +92,16 @@
           .appendTo(tools);
       }
       tools.insertBefore(textarea);
-    });
+      // The Pro AI script fills new slots too.
+      document.dispatchEvent(new CustomEvent("h5ap:transcript-tools", { detail: { tools: tools[0] } }));
+    };
+    $(".h5ap-transcript-textarea").each(addTranscriptTools);
+
+    // Playlist tracks added later (Codestar "Add" / "Clone") get the buttons too.
+    const metabox = document.getElementById("_h5ap_plyr") || document.querySelector(".csf-metabox");
+    if (metabox && typeof MutationObserver !== "undefined") {
+      new MutationObserver(() => $(metabox).find(".h5ap-transcript-textarea").each(addTranscriptTools)).observe(metabox, { childList: true, subtree: true });
+    }
 
     const style = $(".h5ap_single_button").data("settings");
 

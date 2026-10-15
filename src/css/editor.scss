@@ -105,3 +105,163 @@
 //       z-index: 10;
 //     }
 // }
+
+// Transcript panel in the block sidebar: three parts (text, AI, visitor options) split by a line.
+.h5ap-transcript-panel {
+    .components-toggle-control .components-base-control__help {
+        margin-top: 6px;
+        color: #757575;
+        font-size: 12px;
+        line-height: 1.5;
+    }
+}
+
+.h5ap-transcript-panel__section {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.h5ap-transcript-panel__title {
+    margin: 0 0 10px;
+    color: #1e1e1e;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+    text-transform: uppercase;
+}
+
+.h5ap-transcript-panel__help {
+    margin: -4px 0 12px;
+    color: #757575;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+// "No transcript yet" / "34 lines added, up to 2:05"
+.h5ap-transcript-panel__summary {
+    margin-bottom: 12px;
+    padding: 10px 12px;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+    background: #fafafa;
+    color: #50575e;
+    font-size: 12px;
+    line-height: 1.5;
+
+    &.is-ready {
+        border-style: solid;
+        border-color: #b8e6bf;
+        background: #edfaef;
+        color: #1e4620;
+        font-weight: 500;
+    }
+}
+
+.h5ap-transcript-panel__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+
+    .components-button {
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+.h5ap-transcript-panel__remove.components-button {
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.h5ap-transcript-panel__options {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.h5ap-transcript-panel__pro {
+    margin-top: 20px;
+}
+
+// The AI feature named in the Pro notice
+.h5ap-transcript-panel__highlight {
+    padding: 1px 5px;
+    border-radius: 3px;
+    background: #ffe2bf;
+    color: #7a3500;
+    white-space: nowrap;
+}
+
+// "Generate with AI" box (Pro): a blue accent so it stands out in the panel
+.h5ap-transcript-panel__title.is-ai::before {
+    content: "\2728";
+    margin-right: 6px;
+    font-size: 12px;
+}
+
+.h5ap-transcript-ai {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid #dbe4ff;
+    border-left: 3px solid #3858e9;
+    border-radius: 4px;
+    background: #f5f8ff;
+
+    .components-base-control__label,
+    .components-input-control__label {
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+}
+
+.h5ap-transcript-ai__run {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .components-button.is-primary {
+        flex: 1;
+        justify-content: center;
+    }
+}
+
+.h5ap-transcript-ai__status {
+    margin: 0;
+    color: #1e1e1e;
+    font-size: 12px;
+}
+
+.h5ap-transcript-ai__note {
+    margin: 0;
+    padding-top: 10px;
+    border-top: 1px solid #e0e0e0;
+    color: #757575;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+// "Edit transcript" window
+.h5ap-transcript-modal {
+    &__help {
+        margin: 0 0 12px;
+        color: #50575e;
+    }
+
+    &__textarea textarea {
+        font-family: Consolas, Monaco, monospace;
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    &__actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+        margin-top: 16px;
+    }
+}

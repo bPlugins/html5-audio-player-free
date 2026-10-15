@@ -1,0 +1,48 @@
+// Label + "?" tooltip used by the block settings instead of help lines under the controls.
+// Inline, so when a label wraps the "?" stays next to its last word instead of dropping to its own line.
+.h5ap-label-help {
+    display: inline;
+}
+
+// Labels that carry a NEW badge are built as a flex span; keep them inline so the "?" can sit beside them.
+.h5ap-label-help > span[style*="flex"] {
+    display: inline-flex !important;
+    vertical-align: middle;
+}
+
+.h5ap-label-help__icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    margin-left: 6px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    color: #949494;
+    cursor: help;
+    vertical-align: -3px;
+
+    svg {
+        width: 16px;
+        height: 16px;
+        fill: currentColor;
+    }
+
+    &:hover,
+    &:focus {
+        color: #3858e9;
+        outline: none;
+    }
+
+    &:focus-visible {
+        box-shadow: 0 0 0 2px #3858e9;
+    }
+}
+
+// Long help text wraps onto a few lines instead of one very wide line.
+.components-tooltip.h5ap-label-help__tip {
+    max-width: 260px;
+    padding: 6px 10px;
+    line-height: 1.5;
+    text-align: left;
+    white-space: normal;
+}

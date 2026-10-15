@@ -292,6 +292,8 @@ class AudioPlayer
           'default' => 10,
           'dependency' => array('h5ap_player_type', '==', 'opt-1')
         ),
+        // Shown only when the transcript is on.
+        \H5APPlayer\Helper\Transcript::metabox_field('radius'),
 
         // --- Section Header 4: Playback Behavior & Options ---
         array(
@@ -375,15 +377,24 @@ class AudioPlayer
           ),
         ),
 
+        // --- Transcript (Standard Player) ---
+        \H5APPlayer\Helper\Transcript::metabox_field('heading'),
+        \H5APPlayer\Helper\Transcript::metabox_field('show'),
+        \H5APPlayer\Helper\Transcript::metabox_field('text'),
+        \H5APPlayer\Helper\Transcript::metabox_field('search'),
+        \H5APPlayer\Helper\Transcript::metabox_field('open'),
+
         // --- Standard Pro Notice Box ---
         array(
           'type' => 'content',
           'dependency' => array('h5ap_player_type', '==', 'opt-1'),
           'content' => '
                     <div class="h5ap-pro-notice-box">
-                        <h4 class="h5ap-pro-notice-title">🚀 Get More with Pro Version</h4>
-                        <p class="h5ap-pro-notice-desc">The following features are available in the Pro Version:</p>
+                        <h4 class="h5ap-pro-notice-title">Unlock More with HTML5 Audio Player Pro</h4>
+                        <p class="h5ap-pro-notice-desc">Upgrade to use these features in your Standard Player:</p>
                         <ul class="h5ap-pro-notice-list">
+                            <li><strong>AI Transcript</strong><span style="background:#2563eb;color:#fff;font-size:10px;padding:2px 6px;border-radius:4px;margin-left:6px;font-weight:600;">NEW</span><strong>:</strong> Generate the transcript from the audio automatically with AI.</li>
+                            <li><strong>Transcript Download</strong><span style="background:#2563eb;color:#fff;font-size:10px;padding:2px 6px;border-radius:4px;margin-left:6px;font-weight:600;">NEW</span><strong>:</strong> Let visitors download the transcript as .vtt or .txt.</li>
                             <li><strong>Pro Skins:</strong> Unlock 7 additional beautifully designed pro player skins.</li>
                             <li><strong>Primary Color:</strong> Set a custom primary theme color for your player.</li>
                             <li><strong>Background Color:</strong> Set a custom background color for your player.</li>
@@ -395,8 +406,11 @@ class AudioPlayer
                             <li><strong>Disable Pause:</strong> Prevent users from pausing the audio playback.</li>
                             <li><strong>Save State:</strong> Save the player\'s time state so it resumes from where the user left off.</li>
                         </ul>
-                        <a href="' . admin_url('admin.php?page=html5-audio-player-help-demo#/pricing') . '" 
-                        class="h5ap-pro-notice-button"> ' . $h5ap_crown_icon . ' Get Pro</a>
+                        <div class="h5ap-pro-notice-cta">
+                            <a href="' . admin_url('admin.php?page=html5-audio-player-help-demo#/pricing') . '" 
+                            class="h5ap-pro-notice-button"> ' . $h5ap_crown_icon . ' Upgrade to Pro</a>
+                            <span class="h5ap-pro-notice-note">Your players and settings are kept.</span>
+                        </div>
                     </div>
                 ',
         ),
@@ -409,8 +423,8 @@ class AudioPlayer
           'dependency' => array('h5ap_player_type', '==', 'opt-2'),
           'content' => '
                     <div class="h5ap-pro-notice-box">
-                        <h4 class="h5ap-pro-notice-title">🚀 Get More with Pro Version</h4>
-                        <p class="h5ap-pro-notice-desc">The Playlist Player and all of its powerful features are available exclusively in the Pro Version:</p>
+                        <h4 class="h5ap-pro-notice-title">Unlock More with HTML5 Audio Player Pro</h4>
+                        <p class="h5ap-pro-notice-desc">The Playlist Player is part of Pro. Upgrade to use it with everything below:</p>
                         
                         <div style="display: flex; align-items: center; gap: 30px; margin: 20px 0; flex-wrap: wrap;">
                             <div style="flex: 1; min-width: 250px;">
@@ -426,8 +440,11 @@ class AudioPlayer
                                     <li><strong>Source Selection:</strong> Build playlists manually or generate them dynamically from your custom post types.</li>
                                 </ul>
                                 <div style="margin-top: 20px;">
-                                    <a href="' . admin_url('admin.php?page=html5-audio-player-help-demo#/pricing') . '" 
-                                    class="h5ap-pro-notice-button" style="display: inline-block;"> ' . $h5ap_crown_icon . ' Get Pro</a>
+                                    <div class="h5ap-pro-notice-cta">
+                                        <a href="' . admin_url('admin.php?page=html5-audio-player-help-demo#/pricing') . '" 
+                                        class="h5ap-pro-notice-button" style="display: inline-block;"> ' . $h5ap_crown_icon . ' Upgrade to Pro</a>
+                                        <span class="h5ap-pro-notice-note">Your players and settings are kept.</span>
+                                    </div>
                                 </div>
                             </div>
                             <div style="flex-shrink: 0; max-width: 400px; width: 100%; margin-top:-70px;">
@@ -448,8 +465,8 @@ class AudioPlayer
           'dependency' => array('h5ap_player_type', '==', 'opt-3'),
           'content'    => '
                     <div class="h5ap-pro-notice-box">
-                        <h4 class="h5ap-pro-notice-title">🚀 Get More with Pro Version</h4>
-                        <p class="h5ap-pro-notice-desc">The following features are available in the Pro Version:</p>
+                        <h4 class="h5ap-pro-notice-title">Unlock More with HTML5 Audio Player Pro</h4>
+                        <p class="h5ap-pro-notice-desc">Upgrade to use these features in your Sticky Player:</p>
                         <ul class="h5ap-pro-notice-list">
                             <li><strong>Pro Skin:</strong> Unlock the clean and minimal Simple skin for your sticky player.</li>
                             <li><strong>Background Color:</strong> Set a custom background color for your sticky player.</li>
@@ -458,8 +475,11 @@ class AudioPlayer
                             <li><strong>Download Button:</strong> Allow users to download the audio file directly.</li>
                             <li><strong>Initial Volume:</strong> Set the initial volume level of the player.</li>
                         </ul>
-                        <a href="' . admin_url('admin.php?page=html5-audio-player-help-demo#/pricing') . '" 
-                        class="h5ap-pro-notice-button"> ' . $h5ap_crown_icon . ' Get Pro</a>
+                        <div class="h5ap-pro-notice-cta">
+                            <a href="' . admin_url('admin.php?page=html5-audio-player-help-demo#/pricing') . '" 
+                            class="h5ap-pro-notice-button"> ' . $h5ap_crown_icon . ' Upgrade to Pro</a>
+                            <span class="h5ap-pro-notice-note">Your players and settings are kept.</span>
+                        </div>
                     </div>
                 ',
         ),

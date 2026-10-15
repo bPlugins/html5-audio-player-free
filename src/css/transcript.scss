@@ -1,0 +1,280 @@
+// Transcript box shown under the audio player (front end and editor preview).
+// Every color comes from the theme's text color (currentColor), so it fits light and dark themes.
+// Corners are square by default; "Corner radius" sets --h5ap-tr-radius (inner parts use a smaller radius).
+.h5ap-transcript {
+    --h5ap-tr-radius: 0px;
+    --h5ap-tr-inner-radius: min(var(--h5ap-tr-radius), 6px);
+    --h5ap-tr-line: rgba(127, 127, 127, 0.22);
+
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    max-width: 100%;
+    margin: 12px 0 0;
+    overflow: hidden;
+    border: 1px solid var(--h5ap-tr-line);
+    border-radius: var(--h5ap-tr-radius);
+    background: rgba(127, 127, 127, 0.03);
+    color: inherit;
+    font-size: 15px;
+    line-height: 1.6;
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    &--center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    &--right {
+        margin-left: auto;
+    }
+
+    // Header: document icon, title, and a chevron that turns when the box opens.
+    &__summary {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 16px;
+        font-size: 15px;
+        font-weight: 600;
+        list-style: none;
+        cursor: pointer;
+        user-select: none;
+
+        &::-webkit-details-marker {
+            display: none;
+        }
+
+        &::before,
+        &::after {
+            content: "";
+            flex: none;
+            background: currentColor;
+        }
+
+        &::before {
+            width: 18px;
+            height: 18px;
+            opacity: 0.7;
+            -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z'/%3E%3Cpath d='M14 3v6h6M8 13h8M8 17h5'/%3E%3C/svg%3E") center / contain no-repeat;
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z'/%3E%3Cpath d='M14 3v6h6M8 13h8M8 17h5'/%3E%3C/svg%3E") center / contain no-repeat;
+        }
+
+        &::after {
+            width: 16px;
+            height: 16px;
+            margin-left: auto;
+            opacity: 0.6;
+            transition: transform 0.2s ease;
+            -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") center / contain no-repeat;
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") center / contain no-repeat;
+        }
+
+        &:focus-visible {
+            outline: 2px solid currentColor;
+            outline-offset: -4px;
+        }
+    }
+
+    &[open] > &__summary::after {
+        transform: rotate(180deg);
+    }
+
+    // Search field with a magnifier inside it.
+    &__search {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0 16px 12px;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: calc(50% - 6px);
+            left: 28px;
+            width: 16px;
+            height: 16px;
+            transform: translateY(-50%);
+            background: currentColor;
+            opacity: 0.5;
+            pointer-events: none;
+            -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-3.5-3.5'/%3E%3C/svg%3E") center / contain no-repeat;
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-3.5-3.5'/%3E%3C/svg%3E") center / contain no-repeat;
+        }
+    }
+
+    & &__input {
+        flex: 1;
+        min-width: 0;
+        height: 40px;
+        margin: 0;
+        padding: 0 12px 0 38px;
+        border: 1px solid rgba(127, 127, 127, 0.35);
+        border-radius: var(--h5ap-tr-inner-radius);
+        background: transparent;
+        box-shadow: none;
+        color: inherit;
+        font: inherit;
+        font-size: 14px;
+        line-height: 40px;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+        &::placeholder {
+            color: inherit;
+            opacity: 0.55;
+        }
+
+        &:focus {
+            border-color: rgba(127, 127, 127, 0.75);
+            box-shadow: 0 0 0 3px rgba(127, 127, 127, 0.15);
+            outline: none;
+        }
+    }
+
+    &__count {
+        flex: none;
+        padding: 2px 10px;
+        border-radius: 999px;
+        background: rgba(127, 127, 127, 0.12);
+        font-size: 12px;
+        white-space: nowrap;
+
+        &:empty {
+            display: none;
+        }
+    }
+
+    & &__lines {
+        position: relative;
+        list-style: none;
+        margin: 0;
+        padding: 8px;
+        max-height: 340px;
+        overflow-y: auto;
+        border-top: 1px solid var(--h5ap-tr-line);
+        scrollbar-width: thin;
+        scrollbar-color: rgba(127, 127, 127, 0.4) transparent;
+
+        &::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 8px;
+            background: rgba(127, 127, 127, 0.4);
+        }
+    }
+
+    & &__line {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        margin: 0;
+        padding: 8px 10px;
+        border-radius: var(--h5ap-tr-inner-radius);
+        cursor: pointer;
+        transition: background-color 0.15s ease;
+
+        &:hover {
+            background: rgba(127, 127, 127, 0.08);
+        }
+
+        &.is-active {
+            background: rgba(127, 127, 127, 0.14);
+            box-shadow: inset 3px 0 0 currentColor;
+        }
+
+        &[hidden] {
+            display: none;
+        }
+    }
+
+    // Timestamp as a small pill. Theme button styles are reset so it looks the same everywhere.
+    & &__time {
+        flex: none;
+        min-width: 3.6em;
+        margin: 2px 0 0;
+        padding: 1px 8px;
+        border: 0;
+        border-radius: 999px;
+        background: rgba(127, 127, 127, 0.12);
+        box-shadow: none;
+        color: inherit;
+        font: inherit;
+        font-size: 12px;
+        font-variant-numeric: tabular-nums;
+        letter-spacing: normal;
+        line-height: 1.7;
+        text-align: center;
+        text-transform: none;
+        cursor: pointer;
+
+        &:hover,
+        &:focus {
+            background: rgba(127, 127, 127, 0.22);
+            color: inherit;
+        }
+
+        &:focus-visible {
+            outline: 2px solid currentColor;
+            outline-offset: 1px;
+        }
+    }
+
+    // The line that is playing now: a darker, bold time pill.
+    & &__line.is-active &__time {
+        background: rgba(127, 127, 127, 0.3);
+        font-weight: 600;
+    }
+
+    &__text {
+        flex: 1;
+        min-width: 0;
+    }
+
+    &__download {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 16px;
+        border-top: 1px solid var(--h5ap-tr-line);
+        font-size: 13px;
+
+        span {
+            opacity: 0.75;
+        }
+    }
+
+    & &__file {
+        margin: 0;
+        padding: 3px 12px;
+        border: 1px solid rgba(127, 127, 127, 0.4);
+        border-radius: 999px;
+        background: transparent;
+        box-shadow: none;
+        color: inherit;
+        font: inherit;
+        font-size: 12px;
+        text-transform: none;
+        cursor: pointer;
+
+        &:hover,
+        &:focus {
+            background: rgba(127, 127, 127, 0.12);
+            color: inherit;
+        }
+    }
+
+    mark {
+        padding: 0 2px;
+        border-radius: 2px;
+        background: #ffe58a;
+        color: #1d2327;
+    }
+}

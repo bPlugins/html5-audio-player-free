@@ -134,4 +134,9 @@ $block = [
     'innerHTML' => '',
     'innerContent' => [],
 ];
+
+// Transcript (off unless "Show Transcript" is turned on for this player).
+if ($type === 'opt-1') {
+    $block['attrs'] = array_merge($block['attrs'], \H5APPlayer\Helper\Transcript::block_attrs_from_meta($meta));
+}
 // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

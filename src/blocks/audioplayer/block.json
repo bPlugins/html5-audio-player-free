@@ -190,6 +190,26 @@
       "type": "string",
       "default": "default"
     },
+    "showTranscript": {
+      "type": "boolean",
+      "default": false
+    },
+    "transcript": {
+      "type": "array",
+      "default": []
+    },
+    "transcriptSearch": {
+      "type": "boolean",
+      "default": true
+    },
+    "transcriptOpen": {
+      "type": "boolean",
+      "default": true
+    },
+    "transcriptRadius": {
+      "type": "number",
+      "default": 0
+    },
     "defaultValue": {
       "type": "object",
       "default": {

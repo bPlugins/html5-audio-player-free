@@ -45,6 +45,46 @@
       $(".h5ap_single_button .pause").hide();
     });
 
+    // Transcript: "Import SRT / VTT file" button next to the transcript box in the player settings.
+    $(".h5ap-transcript-textarea").each(function () {
+      const textarea = $(this);
+      const i18n = window.h5apAdmin?.transcript || {};
+      const fileInput = $('<input type="file" accept=".srt,.vtt,text/vtt,application/x-subrip" hidden>');
+      const button = $('<button type="button" class="button h5ap-transcript-import"></button>').text(i18n.import || "Import SRT / VTT file");
+      const message = $('<span class="h5ap-transcript-import__msg" role="status"></span>');
+
+      button.on("click", () => fileInput.trigger("click"));
+      fileInput.on("change", function () {
+        const file = this.files && this.files[0];
+        this.value = "";
+        if (!file) {
+          return;
+        }
+        if (file.size > 2 * 1024 * 1024) {
+          message.text(i18n.tooBig || "This file is larger than 2 MB.");
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = () => {
+          textarea.val(reader.result).trigger("change");
+          message.text(i18n.imported || "Imported. Click Update to save.");
+        };
+        reader.readAsText(file);
+      });
+
+      const tools = $('<div class="h5ap-transcript-tools"></div>');
+      $('<div class="h5ap-transcript-import"></div>').append(button, message, fileInput).appendTo(tools);
+
+      // "Generate with AI" is part of the Pro version: link to the upgrade page.
+      if (i18n.proUrl) {
+        $('<div class="h5ap-transcript-ai-locked"></div>')
+          .append($('<a class="button" target="_blank" rel="noopener"></a>').attr("href", i18n.proUrl).text(i18n.aiLocked || "Generate with AI").append(' <span class="h5ap-pro-badge">PRO</span>'))
+          .append($('<span class="h5ap-transcript-import__msg"></span>').text(i18n.aiLockedHelp || ""))
+          .appendTo(tools);
+      }
+      tools.insertBefore(textarea);
+    });
+
     const style = $(".h5ap_single_button").data("settings");
 
     if (!style) return false;

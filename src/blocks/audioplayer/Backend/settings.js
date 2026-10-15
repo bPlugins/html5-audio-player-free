@@ -4,10 +4,12 @@ import { compose } from '@wordpress/compose';
 import { Fragment, useEffect } from 'react'
 import PanelItem from "../../components/PanelItem/PanelItem";
 import { ColorControl, InlineMediaUpload, Notice } from './../../../../../bpl-tools/Components'
-import { TabPanel, Panel, PanelBody, PanelRow, ToggleControl, __experimentalUnitControl as UnitControl, SelectControl, RadioControl } from '@wordpress/components';
+import { TabPanel, Panel, PanelBody, PanelRow, ToggleControl, __experimentalUnitControl as UnitControl, SelectControl, RadioControl, RangeControl } from '@wordpress/components';
 import { AlignmentToolbar, BlockControls, InspectorControls } from '@wordpress/block-editor';
 import { AdvertiseCard } from '../../../../../bpl-tools/ProControls/index.js';
 import NewBadge from '../../components/NewBadge/NewBadge.js';
+import TranscriptPanel from './TranscriptPanel';
+import LabelWithHelp from '../../components/LabelWithHelp/LabelWithHelp.js';
 
 const Settings = ({ attributes, setAttributes, siteUrl }) => {
   const { source, controls, primaryColor, bgColor, controlColor, poster, hideThumbnail, skin, alignment, isSticky, title, artist, repeat, preload, radius, autoplay, muted, loader, width, lazyLoad, waveType = "equalizer" } = attributes;
@@ -111,12 +113,10 @@ const Settings = ({ attributes, setAttributes, siteUrl }) => {
                               <InlineMediaUpload className='mt10' label={__("Poster/Thumbnail", "h5ap")} value={poster} type={["image"]} onChange={(poster) => setAttributes({ poster })} />
                             )}
                             {skin === "Fusion" && (
-                              <ToggleControl className="mt10" label={
-                                <span style={{ display: 'flex', alignItems: 'center' }}>
+                              <ToggleControl className="mt10" label={<LabelWithHelp label={<span style={{ display: 'flex', alignItems: 'center' }}>
                                   {__("Hide Thumbnail", "h5ap")}
                                   <NewBadge />
-                                </span>
-                              } help={__("Show the player without any image.", "h5ap")} checked={!!hideThumbnail} onChange={() => setAttributes({ hideThumbnail: !hideThumbnail })} />
+                                </span>} help={__("Show the player without any image.", "h5ap")} />} checked={!!hideThumbnail} onChange={() => setAttributes({ hideThumbnail: !hideThumbnail })} />
                             )}
                           </Fragment>
                         )}
@@ -163,7 +163,7 @@ const Settings = ({ attributes, setAttributes, siteUrl }) => {
                           onChange={(value) => setAttributes({ preload: value })}
                         />
 
-                        <ToggleControl help={__("This behavior may vary depending on the browser.", "h5ap")} className="mt10" label={__("Autoplay", "h5ap")} id="autoplay" checked={autoplay} onChange={() => setAttributes({ autoplay: !autoplay })} />
+                        <ToggleControl className="mt10" label={<LabelWithHelp label={__("Autoplay", "h5ap")} help={__("This behavior may vary depending on the browser.", "h5ap")} />} id="autoplay" checked={autoplay} onChange={() => setAttributes({ autoplay: !autoplay })} />
 
                         <ToggleControl className="mt10" label={__("Repeat", "h5ap")} id="repeat" checked={repeat} onChange={() => setAttributes({ repeat: !repeat })} />
 
@@ -174,8 +174,7 @@ const Settings = ({ attributes, setAttributes, siteUrl }) => {
                         {!isSticky && (
                           <SelectControl
                             className='mt10'
-                            label={__("Lazy Load", 'h5ap')}
-                            help={__("Load player only when in viewport. (Unavailable when 'Enable Sticky' is active).", "h5ap")}
+                            label={<LabelWithHelp label={__("Lazy Load", 'h5ap')} help={__("Load player only when in viewport. (Unavailable when 'Enable Sticky' is active).", "h5ap")} />}
                             value={lazyLoad}
                             options={[
                               { label: __('Inherit (Global Settings)', 'h5ap'), value: 'default' },
@@ -187,10 +186,11 @@ const Settings = ({ attributes, setAttributes, siteUrl }) => {
                         )}
 
                         {["Default", "Fusion", "Stamp", "Wave", "Simple-1", "Simple-2"].includes(skin) &&
-                          <ToggleControl help={__("Keep player visible while scrolling. (Hides Lazy Load since sticky players must load immediately).", "h5ap")} className="mt15" label={__("Enable Sticky", "h5ap")} id="isSticky" checked={isSticky} onChange={() => setAttributes({ isSticky: !isSticky })} />
+                          <ToggleControl className="mt15" label={<LabelWithHelp label={__("Enable Sticky", "h5ap")} help={__("Keep player visible while scrolling. (Hides Lazy Load since sticky players must load immediately).", "h5ap")} />} id="isSticky" checked={isSticky} onChange={() => setAttributes({ isSticky: !isSticky })} />
                         }
                         <Notice status='premium' isIcon={true} className="mt15">{getSettingsPremiumNoticeText()}</Notice>
                       </PanelBody>
+                      <TranscriptPanel {...{ attributes, setAttributes, proUrl: pricingURL }} />
                     </Panel>
                   </span>
                 )}
@@ -259,6 +259,23 @@ const Settings = ({ attributes, setAttributes, siteUrl }) => {
                         <Notice status='premium' isIcon={true}>{getStylePremiumNoticeText()}</Notice>
                       </PanelBody>
                     </Panel>
+                    {attributes.showTranscript && (
+                      <Panel>
+                        <PanelBody className="bPlPanelBody" title={<>{__('Transcript', 'h5ap')}<NewBadge /></>} initialOpen={true}>
+                          <PanelRow>
+                            <UnitControl
+                              label={<LabelWithHelp label={__('Radius', 'h5ap')} help={__('Round the corners of the transcript box. 0 keeps them square.', 'h5ap')} />}
+                              labelPosition="side"
+                              units={[{ value: 'px', label: 'px', default: 0 }]}
+                              min={0}
+                              max={40}
+                              value={`${attributes.transcriptRadius || 0}px`}
+                              onChange={(value) => setAttributes({ transcriptRadius: Math.max(0, Math.min(40, parseInt(value, 10) || 0)) })}
+                            />
+                          </PanelRow>
+                        </PanelBody>
+                      </Panel>
+                    )}
                   </span>
                 )}
               </span>

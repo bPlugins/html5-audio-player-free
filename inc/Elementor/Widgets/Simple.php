@@ -40,7 +40,20 @@ class Simple extends Widget_Base
 
 	public function get_script_depends()
 	{
-		return ['h5ap-player', 'bplugins-plyrio'];
+		return array_merge(['h5ap-player', 'bplugins-plyrio'], $this->transcript_preview_depends());
+	}
+
+	/**
+	 * In the Elementor editor preview, load the transcript assets up front so the transcript works while editing.
+	 * On the live site they are loaded only when a transcript is shown.
+	 */
+	private function transcript_preview_depends()
+	{
+		if (class_exists('\\H5APPlayer\\Helper\\Transcript') && isset(\Elementor\Plugin::$instance->preview) && \Elementor\Plugin::$instance->preview->is_preview_mode()) {
+			\H5APPlayer\Helper\Transcript::register_assets();
+			return ['h5ap-transcript'];
+		}
+		return [];
 	}
 
 	/**
@@ -48,7 +61,7 @@ class Simple extends Widget_Base
 	 */
 	public function get_style_depends()
 	{
-		return ['h5ap-player', 'bplugins-plyrio'];
+		return array_merge(['h5ap-player', 'bplugins-plyrio'], $this->transcript_preview_depends());
 	}
 
 	protected function register_controls()
@@ -145,6 +158,11 @@ class Simple extends Widget_Base
 
 
 		$this->end_controls_section();
+
+		// Transcript (off by default).
+		if (class_exists('\\H5APPlayer\\Helper\\Transcript')) {
+			\H5APPlayer\Helper\Transcript::register_elementor_controls($this);
+		}
 
 		$this->start_controls_section('style', [
 			'label' => esc_html__("Style", "html5-audio-player"),
@@ -262,12 +280,15 @@ class Simple extends Widget_Base
 
 ?>
 
-		<div class="skin_simple h5ap_standard_player" data-options='<?php echo esc_attr(wp_json_encode($options)) ?>'>
+		<div id="<?php echo esc_attr('h5ap-el-' . $this->get_id()); ?>" class="skin_simple h5ap_standard_player" data-options='<?php echo esc_attr(wp_json_encode($options)) ?>'>
 			<audio controls id="bplayer_id" src="<?php echo esc_url($settings['baudio_url'] . '?download=false') ?>" preload="<?php echo esc_attr($preload); ?>" <?php echo esc_attr($arm); ?>>
 				<source src="<?php echo esc_url($settings['baudio_url'] . '?download=false') ?>" type="<?php echo esc_attr(h5ap_get_audio_type($settings['baudio_url'])) ?>">
 			</audio>
 		</div>
 
 <?php
+		if (class_exists('\\H5APPlayer\\Helper\\Transcript')) {
+			echo \H5APPlayer\Helper\Transcript::render_elementor($settings, 'h5ap-el-' . $this->get_id(), $this); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped inside render().
+		}
 	}
 }

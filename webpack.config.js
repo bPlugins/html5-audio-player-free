@@ -15,6 +15,7 @@ const entry = {
   player: "./src/js/player.js",
   "h5ap-all": "./src/js/h5ap-all.js",
   analytics: "./src/analytics/index.js",
+  transcript: "./src/js/transcript.js",
 };
 
 module.exports = {

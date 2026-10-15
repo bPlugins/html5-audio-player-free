@@ -30,6 +30,7 @@ Watch our in-depth video walkthrough showcasing the latest podcast features, RSS
 https://www.youtube.com/watch?v=jR1IS1OLmIA
 
 ### Key Features – Free Version
+* **Interactive Transcript (New)**: Show the text of your audio under the player. Visitors read along while the current line is highlighted, click any line to jump to that moment, and search inside the audio. Import SRT/VTT captions or write the transcript yourself. The text is plain HTML, so search engines can index what is said in your audio (SEO) and it helps accessibility. Works in the Gutenberg block, the [player] shortcode and the Elementor widget.
 * **Audio Analytics (New)**: Built-in, privacy-friendly analytics dashboard (no cookies, IP never stored) with total plays, listening time, daily chart (Today & Last 7 days), top 5 tracks and broken audio alerts.
 * **Advanced Player Layouts**: Choose from Standard Player, Sticky Player (fixed bottom/top), and the newly unlocked Audio Playlist Player.
 * **Subscribe Links**: Add customizable subscribe buttons to podcast playlists linking directly to Spotify, Apple Podcasts, Amazon Music, YouTube Podcasts, and custom RSS feeds.
@@ -48,6 +49,7 @@ https://www.youtube.com/watch?v=jR1IS1OLmIA
 Upgrade to the [**Pro version**](https://bplugins.com/products/html5-audio-player/pricing) for full control over design, layouts, advanced podcast features, and unlimited streams.
 
 **What’s Included in Pro:**
+* **AI Transcript (New)**: Create the transcript from your audio in one click with the open-source Whisper AI model. It runs in your browser: no API key, no monthly cost, and the audio is not uploaded anywhere. Choose a fast or an accurate model and the audio language (about 99 languages), then let visitors download the transcript as .vtt or .txt.
 * **Advanced Audio Analytics (New)**: Unlock Last 30/90 days and custom date ranges, comparison with the previous period, average listen time, completion rate, unique listeners, top 10 tracks with filters & sorting, per-track listen-depth reports, per-player stats, "Plays" column, edit screen metabox and the list of broken audio files.
 * **Advanced Playlist Skins**: Access premium Narrow and Extensive playlist layouts with collapsible track descriptions and customized styling.
 * **Playback Speed & Skip Controls**: Full playback speed selector (0.5x, 0.75x, 1x, 1.25x, 1.5x, 1.75x, 2x) and fast-forward / rewind skip buttons across all playlist skins (Narrow & Extensive layouts).

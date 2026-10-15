@@ -77,6 +77,7 @@ final class Register
 		wp_register_script('h5ap-player', H5AP_PLUGIN_DIR . 'build/player.js', array('jquery', 'bplugins-plyrio'), H5AP_VERSION, true);
 		wp_register_style('h5ap-player', H5AP_PLUGIN_DIR . 'build/player.css', array('bplugins-plyrio'), H5AP_VERSION);
 		wp_localize_script('h5ap-player', 'h5ap_i18n', LocalizeScript::translatedText());
+		\H5APPlayer\Helper\Transcript::register_assets();
 
 		wp_localize_script('h5ap-player', 'h5apPlayer', [
 			'speed' => explode(',', Functions::getSetting('speed', '0.5, 1, 1.5, 2.0, 2.5')),

@@ -15,6 +15,7 @@ import dashboardSkin from './../skins/DashboardStyle.png';
 import { withSelect } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 import NewBadge from '../../components/NewBadge/NewBadge.js';
+import LabelWithHelp from '../../components/LabelWithHelp/LabelWithHelp.js';
 
 const Settings = ({ attributes, siteUrl, setAttributes, isPremium }) => {
   const { source, sourceType, statusText, poster, skin, alignment, isSticky, title, subtitle, lazyLoad, autoplay } = attributes;
@@ -128,8 +129,7 @@ const Settings = ({ attributes, siteUrl, setAttributes, isPremium }) => {
                       {!isSticky && (
                         <SelectControl
                           className='mt15'
-                          label={__("Lazy Load", 'html5-audio-player-pro')}
-                          help={__("Only load the player and audio resources when it enters the viewport.", "html5-audio-player-pro")}
+                          label={<LabelWithHelp label={__("Lazy Load", 'html5-audio-player-pro')} help={__("Only load the player and audio resources when it enters the viewport.", "html5-audio-player-pro")} />}
                           value={lazyLoad}
                           options={[
                             { label: __('Inherit (Global Settings)', 'html5-audio-player-pro'), value: 'default' },
@@ -142,19 +142,16 @@ const Settings = ({ attributes, siteUrl, setAttributes, isPremium }) => {
 
                       <ToggleControl
                         className="mt10"
-                        label={
-                          <span style={{ display: 'flex', alignItems: 'center' }}>
+                        label={<LabelWithHelp label={<span style={{ display: 'flex', alignItems: 'center' }}>
                             {__("Autoplay", "h5ap")}
                             <NewBadge />
-                          </span>
-                        }
-                        help={__("Autoplay behaves differently depending on the browser. Streams will start muted if autoplay is enabled.", "h5ap")}
+                          </span>} help={__("Autoplay behaves differently depending on the browser. Streams will start muted if autoplay is enabled.", "h5ap")} />}
                         checked={autoplay}
                         onChange={() => setAttributes({ autoplay: !autoplay })}
                       />
 
                       {["Default", "Fusion", "Stamp", "Wave", "Simple-1", "Simple-2"].includes(skin) &&
-                        <ToggleControl isPremium={isPremium} help={__("Keep player visible while scrolling. (Hides Lazy Load since sticky players must load immediately).", "h5ap")} className="mb5" label={__("Enable Sticky", "h5ap")} id="isSticky" checked={isSticky} onChange={() => setAttributes({ isSticky: !isSticky })} />
+                        <ToggleControl isPremium={isPremium} className="mb5" label={<LabelWithHelp label={__("Enable Sticky", "h5ap")} help={__("Keep player visible while scrolling. (Hides Lazy Load since sticky players must load immediately).", "h5ap")} />} id="isSticky" checked={isSticky} onChange={() => setAttributes({ isSticky: !isSticky })} />
                       }
 
                       <Notice status='premium' isIcon={true} className="mt15">

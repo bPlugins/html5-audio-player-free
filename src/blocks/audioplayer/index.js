@@ -3,6 +3,7 @@ import { registerBlockType } from "@wordpress/blocks";
 import metadata from "./block.json";
 import Edit from "./Backend/Edit";
 import "./../../css/editor.scss";
+import "./../../css/transcript.scss"; // transcript preview in the editor
 
 
 registerBlockType(metadata, {

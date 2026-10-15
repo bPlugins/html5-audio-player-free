@@ -4,6 +4,7 @@ import { useBlockProps } from '@wordpress/block-editor';
 import Settings from "./settings";
 import AudioPlayer from '../Common/AudioPlayer';
 import OnlyBackend from '../../components/OnlyBackend';
+import TranscriptPreview from './TranscriptPreview';
 
 const Edit = (props) => {
   const { attributes, setAttributes, clientId } = props;
@@ -25,7 +26,10 @@ const Edit = (props) => {
     }
   }, [skin])
 
-  const blockProps = useBlockProps({ className: 'wp-block-h5ap-tailwind' });
+  const hasTranscript = attributes.showTranscript && attributes.transcript?.length > 0;
+
+  // The player wrapper is a flex row; let the transcript preview wrap onto its own line.
+  const blockProps = useBlockProps({ className: 'wp-block-h5ap-tailwind', style: hasTranscript ? { flexWrap: 'wrap' } : undefined });
 
   return (
     <Fragment>
@@ -33,6 +37,7 @@ const Edit = (props) => {
       <div {...blockProps}>
         <OnlyBackend />
         <AudioPlayer {...{ attributes, containerRef, id: `block-${clientId}`, isBackend: true }} />
+        {hasTranscript && <TranscriptPreview attributes={attributes} />}
       </div>
     </Fragment>
   );

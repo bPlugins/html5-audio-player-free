@@ -38,6 +38,9 @@ class EnqueueAssets
 
         wp_register_script('h5ap-all', H5AP_PLUGIN_DIR . 'build/h5ap-all.js', array(), H5AP_VERSION, true);
 
+        // Transcript script/style: registered here, enqueued only when a transcript is shown.
+        \H5APPlayer\Helper\Transcript::register_assets();
+
         wp_enqueue_style('bplugins-plyrio', H5AP_PLUGIN_DIR . 'assets/css/plyr-v3.7.2.css', array(), H5AP_VERSION, 'all');
 
         $h5ap_settings = [
@@ -93,7 +96,15 @@ class EnqueueAssets
 
             wp_localize_script('h5ap-admin', 'h5apAdmin', array(
                 'ajaxUrl' => admin_url('admin-ajax.php'),
-                'website' => site_url()
+                'website' => site_url(),
+                'transcript' => array(
+                    'import'   => __('Import SRT / VTT file', 'html5-audio-player'),
+                    'tooBig'   => __('This file is larger than 2 MB. Please choose a smaller SRT or VTT file.', 'html5-audio-player'),
+                    'imported' => __('Imported. Click Update to save.', 'html5-audio-player'),
+                    'proUrl'   => \H5APPlayer\Helper\Transcript::pro_url(),
+                    'aiLocked' => __('Generate with AI', 'html5-audio-player'),
+                    'aiLockedHelp' => __('Write the transcript from the audio automatically. Available in Pro.', 'html5-audio-player'),
+                ),
             ));
 
             // Expose player settings (incl. ajaxUrl) on the admin player/Plyr scripts so the

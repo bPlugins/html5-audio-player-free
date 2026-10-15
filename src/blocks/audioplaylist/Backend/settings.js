@@ -9,6 +9,7 @@ import { ColorControl, InlineMediaUpload, ItemsPanel, Notice } from './../../../
 import { ProModal, AdvertiseCard, PremiumBadge, PremiumPanel } from './../../../../../bpl-tools/ProControls';
 import NewBadge from '../../components/NewBadge/NewBadge.js';
 import { produce } from 'immer';
+import LabelWithHelp from '../../components/LabelWithHelp/LabelWithHelp.js';
 
 const Settings = (props) => {
   const { attributes, setAttributes, clientId, siteUrl } = props;
@@ -68,13 +69,10 @@ const Settings = (props) => {
                   <Panel>
                     <PanelBody className="bPlPanelBody" title={__("Tracks", 'html5-audio-player-pro')}>
                       <SelectControl
-                        label={
-                          <span style={{ display: 'flex', alignItems: 'center' }}>
+                        label={<LabelWithHelp label={<span style={{ display: 'flex', alignItems: 'center' }}>
                             {__("Source Type", 'html5-audio-player-pro')}
                             <NewBadge />
-                          </span>
-                        }
-                        help={__("Choose 'Self-Hosted Audio (Default)' for custom audio tracks or 'Podcast RSS Feed (NEW)' to automatically import episodes from an RSS feed.", 'html5-audio-player-pro')}
+                          </span>} help={__("Choose 'Self-Hosted Audio (Default)' for custom audio tracks or 'Podcast RSS Feed (NEW)' to automatically import episodes from an RSS feed.", 'html5-audio-player-pro')} />}
                         value={attributes.sourceType || 'self-hosted'}
                         options={[
                           { label: __('Self-Hosted Audio (Default)', 'html5-audio-player-pro'), value: 'self-hosted' },
@@ -127,13 +125,10 @@ const Settings = (props) => {
                           />
                           <TextControl
                             className="mt10"
-                            label={
-                              <span style={{ display: 'flex', alignItems: 'center' }}>
+                            label={<LabelWithHelp label={<span style={{ display: 'flex', alignItems: 'center' }}>
                                 {__("Episode Fetch Limit", 'html5-audio-player-pro')}
                                 <NewBadge />
-                              </span>
-                            }
-                            help={__("Set to 0 to load all episodes.", 'html5-audio-player-pro')}
+                              </span>} help={__("Set to 0 to load all episodes.", 'html5-audio-player-pro')} />}
                             type="number"
                             value={attributes.podcastLimit || 0}
                             onChange={(podcastLimit) => setAttributes({ podcastLimit: parseInt(podcastLimit) || 0 })}
@@ -188,8 +183,7 @@ const Settings = (props) => {
                       >
                         <ToggleControl
                           className='mt10'
-                          label= {__("Enable Subscribe Button", 'html5-audio-player-pro')}
-                          help={__("Show subscribe button on player to let users listen on Spotify, Apple Podcasts, etc.", 'html5-audio-player-pro')}
+                          label={<LabelWithHelp label={__("Enable Subscribe Button", 'html5-audio-player-pro')} help={__("Show subscribe button on player to let users listen on Spotify, Apple Podcasts, etc.", 'html5-audio-player-pro')} />}
                           checked={attributes.enableSubscribe === true}
                           onChange={(enableSubscribe) => setAttributes({ enableSubscribe })}
                         />
@@ -244,8 +238,7 @@ const Settings = (props) => {
                     <PanelBody title={__("Options", "h5vp")} className='bPlPanelBody' initialOpen={false}>
                       <SelectControl
                         className='mt10'
-                        label={__("Lazy Load", 'html5-audio-player-pro')}
-                        help={__("Only load the player and audio resources when it enters the viewport.", "html5-audio-player-pro")}
+                        label={<LabelWithHelp label={__("Lazy Load", 'html5-audio-player-pro')} help={__("Only load the player and audio resources when it enters the viewport.", "html5-audio-player-pro")} />}
                         value={lazyLoad}
                         options={[
                           { label: __('Inherit (Global Settings)', 'html5-audio-player-pro'), value: 'default' },

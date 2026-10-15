@@ -60,6 +60,17 @@ if (!isset($attributes['bgColor']) && !isset($attributes['textColor']) && isset(
     $attributes = wp_parse_args($attributes['defaultValue'][$skin], $attributes);
 }
 
+// The transcript is printed as HTML below the player (readable by search engines), so the JS player doesn't need it.
+$h5ap_transcript = (!empty($attributes['showTranscript']) && !empty($attributes['transcript']) && is_array($attributes['transcript'])) ? $attributes['transcript'] : [];
+$h5ap_transcript_args = [
+    'align'  => $attributes['alignment'] ?? 'left',
+    'width'  => (isset($attributes['width']) && is_string($attributes['width'])) ? $attributes['width'] : '100%',
+    'search' => ($attributes['transcriptSearch'] ?? true) !== false,
+    'open'   => ($attributes['transcriptOpen'] ?? true) !== false,
+    'radius' => (int) ($attributes['transcriptRadius'] ?? 0),
+];
+unset($attributes['transcript'], $attributes['showTranscript'], $attributes['transcriptSearch'], $attributes['transcriptOpen'], $attributes['transcriptRadius']);
+
 $encoded_attributes = esc_attr(wp_json_encode($attributes, JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS));
 $wrapper_attributes = get_block_wrapper_attributes(['class' => 'wp-block-h5ap-tailwind']);
 
@@ -76,4 +87,7 @@ $wrapper_attributes = get_block_wrapper_attributes(['class' => 'wp-block-h5ap-ta
             <div class='bar bar-1'></div>
         </div>
     <?php } ?>
-</div>
+</div><?php
+if (!empty($h5ap_transcript) && class_exists('\\H5APPlayer\\Helper\\Transcript')) {
+    echo \H5APPlayer\Helper\Transcript::render($h5ap_transcript, $uniqueId, $h5ap_transcript_args); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped inside render().
+}

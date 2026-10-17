@@ -49,7 +49,7 @@ https://www.youtube.com/watch?v=jR1IS1OLmIA
 Upgrade to the [**Pro version**](https://bplugins.com/products/html5-audio-player/pricing) for full control over design, layouts, advanced podcast features, and unlimited streams.
 
 **What’s Included in Pro:**
-* **AI Transcript Generator (New)**: Stop typing transcripts by hand. Click "Generate with AI" and the transcript of your audio is written for you, for a single audio or for every track of a playlist. It uses the open-source Whisper AI model and runs right in your browser: no API key, no monthly fee, no per-minute cost, and your audio is never uploaded anywhere. Choose Fast or Accurate, pick from about 99 languages (or let it detect the language), and watch the progress bar until it is done.
+* **AI Transcript Generator (New)**: Stop typing transcripts by hand. Click "Generate with AI" and the transcript of your audio is written for you, for a single audio or for every track of a playlist. It uses the open-source Whisper AI model and runs right in your browser: no API key, no monthly fee, no per-minute cost, and your audio is never uploaded anywhere. Choose Fast or Accurate, pick one of 18 common languages or let it detect the language automatically (about 99 languages supported), and watch the progress bar until it is done.
 * **Transcripts for Every Playlist & Download (New)**: Show a read-along transcript for each track of the Narrow and Extensive playlists and the [player] Playlist type (including your saved Playlists), and let visitors download any transcript as .vtt or .txt.
 * **Advanced Audio Analytics (New)**: Unlock Last 30/90 days and custom date ranges, comparison with the previous period, average listen time, completion rate, unique listeners, top 10 tracks with filters & sorting, per-track listen-depth reports, per-player stats, "Plays" column, edit screen metabox and the list of broken audio files.
 * **Advanced Playlist Skins**: Access premium Narrow and Extensive playlist layouts with collapsible track descriptions and customized styling.
@@ -235,7 +235,7 @@ e.g.
 
 == Changelog ==
 
-= 2.10.0 - 15 October, 2026 =
+= 2.10.0 - 17 October, 2026 =
 * **New:** Interactive Transcript: show the text of your audio under the player. The line being spoken is highlighted, visitors click a line to jump to that moment and search inside the audio. Import SRT/VTT captions or type it in. Works in the Audio Player block, the `[player]` shortcode and the Elementor widget.
 * **New:** Transcript for the Audio Playlist block: every track has its own transcript, and the box follows the track that is playing.
 * **New:** Transcript for the Sticky Player (block and `[player]` shortcode): a "Transcript" button above the bar opens it in a panel.

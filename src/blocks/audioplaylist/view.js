@@ -4,9 +4,9 @@ import { createRoot } from '@wordpress/element';
 import './../tailwind.scss'
 import Playlist from './Common/Playlist';
 
-document.addEventListener('DOMContentLoaded', function () {
+function initAudioPlaylist() {
 
-    const blocks = document.querySelectorAll('.wp-block-h5ap-audioplaylist');
+    const blocks = document.querySelectorAll('.wp-block-h5ap-audioplaylist[data-attributes]');
 
     blocks.forEach((block) => {
         const attributers = JSON.parse(block.dataset.attributes);
@@ -34,5 +34,24 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
     })
+}
 
-})
+document.addEventListener('DOMContentLoaded', initAudioPlaylist);
+document.addEventListener('h5ap_init', initAudioPlaylist);
+
+if (typeof window.h5apInit === 'undefined') {
+    window.h5apInit = function () {
+        document.dispatchEvent(new Event('h5ap_init'));
+    };
+}
+
+// Elementor adds widgets (for example a Shortcode widget with [player]) after the page has loaded,
+// so start any player it adds.
+if (window.jQuery) {
+    const onElementorReady = () => window.elementorFrontend?.hooks?.addAction('frontend/element_ready/global', initAudioPlaylist);
+    if (window.elementorFrontend?.hooks) {
+        onElementorReady();
+    } else {
+        window.jQuery(window).on('elementor/frontend/init', onElementorReady);
+    }
+}

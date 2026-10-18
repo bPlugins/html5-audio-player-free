@@ -16,6 +16,7 @@ class EnqueueAssets
     {
         add_action("wp_enqueue_scripts", [$this, 'publicAssets']);
         add_action("admin_enqueue_scripts", [$this, 'adminAssets']);
+        add_action('elementor/preview/enqueue_scripts', [$this, 'elementorPreviewAssets']);
     }
 
     /**
@@ -64,6 +65,24 @@ class EnqueueAssets
         // (used to build the Google Drive proxy URL) is available wherever Plyr loads.
         wp_localize_script('bplugins-plyrio', 'h5apPlayer', $h5ap_settings);
 
+    }
+
+    /**
+     * Elementor editor preview: load the block players' scripts and styles up front, so a player added
+     * while editing (for example a Shortcode widget with [player]) can start without a page reload.
+     */
+    public function elementorPreviewAssets() {
+        foreach (\WP_Block_Type_Registry::get_instance()->get_all_registered() as $name => $block_type) {
+            if (strpos($name, 'h5ap/') !== 0) {
+                continue;
+            }
+            foreach ((array) $block_type->view_script_handles as $handle) {
+                wp_enqueue_script($handle);
+            }
+            foreach ((array) $block_type->style_handles as $handle) {
+                wp_enqueue_style($handle);
+            }
+        }
     }
 
     /**

@@ -244,6 +244,7 @@ e.g.
 * **Improvement:** Help texts in the block settings now open from a "?" icon, and the Pro notices have a cleaner design.
 * **Improvement:** Clearer focus color for the Categories and Tags tabs in the admin menu.
 * **Fix:** Updated the Freemius SDK to fix the "Undefined array key HTTP_HOST" PHP warning when using WP-CLI.
+* **Fix:** In the Elementor editor, a player added with the Shortcode widget kept showing the loader and did not start until the page was reloaded.
 
 = 2.9.0 - 13 October, 2026 =
 * **New:** Added built-in Audio Analytics: a new HTML5 Audio Player → Analytics dashboard that shows plays, listening time and top tracks of your audio and radio players. Privacy-friendly: no cookies, no third-party services and IP addresses are never stored.

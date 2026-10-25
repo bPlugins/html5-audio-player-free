@@ -354,7 +354,8 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
                 '<strong>New:</strong> Loading spinner: after play is pressed, the play button shows a spinner until the audio starts, so visitors know a large file or a Google Drive link is still loading. It can be turned off in Settings.',
                 '<strong>Improvement:</strong> Help texts in the block settings now open from a "?" icon, and the Pro notices have a cleaner design.',
                 '<strong>Improvement:</strong> Clearer focus color for the Categories and Tags tabs in the admin menu.',
-                '<strong>Fix:</strong> Updated the Freemius SDK to fix the "Undefined array key HTTP_HOST" PHP warning when using WP-CLI.'
+                '<strong>Fix:</strong> Updated the Freemius SDK to fix the "Undefined array key HTTP_HOST" PHP warning when using WP-CLI.',
+                '<strong>Fix:</strong> In the Elementor editor, a player added with the Shortcode widget kept showing the loader and did not start until the page was reloaded.'
             ]
         },
         {

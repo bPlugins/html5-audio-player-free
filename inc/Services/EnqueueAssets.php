@@ -65,6 +65,27 @@ class EnqueueAssets
         // (used to build the Google Drive proxy URL) is available wherever Plyr loads.
         wp_localize_script('bplugins-plyrio', 'h5apPlayer', $h5ap_settings);
 
+        if ( Functions::getSetting('h5ap_loading_spinner', true, true) ) {
+            $this->loadingSpinner();
+        }
+    }
+
+    /**
+     * Spinner on the play button while the audio is still loading after play is pressed.
+     * Printed next to the Plyr script, so it is only on pages that have a player.
+     */
+    protected function loadingSpinner() {
+        $dir = dirname(__DIR__, 2) . '/assets/';
+        $script = is_readable($dir . 'js/loading-spinner.js') ? file_get_contents($dir . 'js/loading-spinner.js') : ''; // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- local plugin file.
+        $style = is_readable($dir . 'css/loading-spinner.css') ? file_get_contents($dir . 'css/loading-spinner.css') : ''; // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- local plugin file.
+
+        if ($script) {
+            wp_add_inline_script('bplugins-plyrio', $script);
+            wp_add_inline_script('h5ap-all', $script); // "Apply to all audios" can load Plyr by itself.
+        }
+        if ($style) {
+            wp_add_inline_style('h5ap-public', $style);
+        }
     }
 
     /**

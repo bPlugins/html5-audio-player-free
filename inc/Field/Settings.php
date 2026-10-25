@@ -47,6 +47,13 @@ class Settings
           'default' => false,
           'desc'    => 'Enable this to only initialize and load the player and its resources when it enters the viewport.'
         ),
+        array(
+          'id'      => 'h5ap_loading_spinner',
+          'type'    => 'switcher',
+          'title'   => 'Loading spinner <span class="h5ap-an-new-badge">New</span>',
+          'default' => true,
+          'desc'    => 'Show a spinner on the play button while the audio is loading after play is pressed (for example a large file or a Google Drive link).'
+        ),
       )
     ));
   }

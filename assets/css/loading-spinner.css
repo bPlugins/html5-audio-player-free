@@ -1,0 +1,32 @@
+/* Loading spinner on the play button while the audio is still loading (see assets/js/loading-spinner.js). */
+[data-plyr="play"].h5ap-loading svg {
+	display: none !important;
+}
+
+[data-plyr="play"] .h5ap-spinner {
+	display: inline-block;
+	flex: none;
+	box-sizing: border-box;
+	min-width: 12px;
+	min-height: 12px;
+	margin: 0;
+	padding: 0;
+	vertical-align: middle;
+	border: 2px solid currentColor;
+	border-right-color: transparent !important;
+	border-radius: 50%;
+	animation: h5ap-spinner-rotate 0.8s linear infinite;
+	pointer-events: none;
+}
+
+@keyframes h5ap-spinner-rotate {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	[data-plyr="play"] .h5ap-spinner {
+		animation-duration: 2s;
+	}
+}

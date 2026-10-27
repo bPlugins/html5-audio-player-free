@@ -235,7 +235,7 @@ e.g.
 
 == Changelog ==
 
-= 2.10.0 - 25 October, 2026 =
+= 2.10.0 - 27 October, 2026 =
 * **New:** Interactive Transcript: show the text of your audio under the player. The line being spoken is highlighted, visitors click a line to jump to that moment and search inside the audio. Import SRT/VTT captions or type it in. Works in the Audio Player block, the `[player]` shortcode and the Elementor widget.
 * **New:** Transcript for the Audio Playlist block: every track has its own transcript, and the box follows the track that is playing.
 * **New:** Transcript for the Sticky Player (block and `[player]` shortcode): a "Transcript" button above the bar opens it in a panel.

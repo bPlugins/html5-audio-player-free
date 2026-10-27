@@ -4,18 +4,15 @@
   "description": "Best audio player plugin with multiple playlist layouts, playlist shortcode, audio player widget, and 6 plus advanced feature.",
   "main": "src/player.js",
   "scripts": {
+    "start": "wp-scripts start --webpack-copy-php",
     "packages-update": "wp-scripts packages-update",
     "lint": "eslint src",
     "lint:css": "wp-scripts lint-style",
     "lint:js": "wp-scripts lint-js",
     "format": "wp-scripts format",
-    "start": "wp-scripts start --webpack-copy-php",
-    "build": "wp-scripts build --webpack-copy-php && (npm run i18n || node -e \"console.log('i18n failed')\")",
     "i18n": "node scripts/i18n.js --pot=languages/h5ap.pot --po=languages/h5ap-en_US.po",
-    "bundle": "gulp bundle",
-    "zip": "gulp zip",
-    "make-zip": "wp-scripts build --webpack-copy-php && (npm run i18n || node -e \"console.log('i18n failed')\") && gulp bundle && gulp zip && node -e \"require('fs').rmSync('bundled', { recursive: true, force: true })\"",
-    "start:css": "NODE_ENV=production npx tailwindcss -o ./src/blocks/audioplayer/Common/output.css --watch"
+    "start:css": "NODE_ENV=production npx tailwindcss -o ./src/blocks/audioplayer/Common/output.css --watch",
+    "build": "wp-scripts build --webpack-copy-php && (npm run i18n || node -e \"console.log('i18n failed')\") && gulp bundle && gulp zip && node -e \"require('fs').rmSync('bundled', { recursive: true, force: true })\""
   },
   "keywords": [
     "audio",

@@ -92,7 +92,30 @@ if (!hasMbstring(env)) {
 	}
 }
 
-const run = (command) => execSync(command, { env, stdio: 'inherit' });
+// WP-CLI with 1 GB of memory: make-pot parses the large built JS files and runs out with PHP's default 128 MB.
+// On Windows `wp` is a .bat that calls `php wp-cli.phar` without settings, so call the phar directly.
+function wpCommand() {
+	try {
+		const found = execSync(process.platform === 'win32' ? 'where wp' : 'command -v wp', {
+			env,
+			encoding: 'utf8',
+			stdio: ['ignore', 'pipe', 'ignore'],
+		})
+			.split(/\r?\n/)
+			.map((line) => line.trim())
+			.find(Boolean);
+		const phar = /\.(bat|cmd)$/i.test(found) ? path.join(path.dirname(found), 'wp-cli.phar') : found;
+		if (phar && fs.existsSync(phar)) {
+			return `php -d memory_limit=1G "${phar}"`;
+		}
+	} catch (e) {
+		// fall back to plain `wp`
+	}
+	return 'wp';
+}
+const wp = wpCommand();
+
+const run = (command) => execSync(command.replace(/^wp /, `${wp} `), { env, stdio: 'inherit' });
 
 try {
 	// bundled/ is gulp's staging copy of the whole plugin; scanning it duplicates every JS translation file.

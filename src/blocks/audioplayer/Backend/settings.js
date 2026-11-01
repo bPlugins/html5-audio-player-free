@@ -9,6 +9,7 @@ import { AlignmentToolbar, BlockControls, InspectorControls } from '@wordpress/b
 import { AdvertiseCard } from '../../../../../bpl-tools/ProControls/index.js';
 import NewBadge from '../../components/NewBadge/NewBadge.js';
 import TranscriptPanel from './TranscriptPanel';
+import TranscriptColors from '../../components/Transcript/TranscriptColors.js';
 import LabelWithHelp from '../../components/LabelWithHelp/LabelWithHelp.js';
 
 const Settings = ({ attributes, setAttributes, siteUrl }) => {
@@ -273,6 +274,7 @@ const Settings = ({ attributes, setAttributes, siteUrl }) => {
                               onChange={(value) => setAttributes({ transcriptRadius: Math.max(0, Math.min(40, parseInt(value, 10) || 0)) })}
                             />
                           </PanelRow>
+                          <TranscriptColors {...{ attributes, setAttributes }} />
                         </PanelBody>
                       </Panel>
                     )}

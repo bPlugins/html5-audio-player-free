@@ -1,12 +1,13 @@
 import { __ } from '@wordpress/i18n';
 import { formatTime } from '../../../utils/transcript';
+import { transcriptColorVars } from '../../components/Transcript/TranscriptColors.js';
 
 // Editor-only preview. It uses the same markup and classes as render.php so it looks the same as the front end.
 const TranscriptPreview = ({ attributes }) => {
   const { transcript = [], transcriptSearch, alignment = 'left', width, transcriptRadius = 0 } = attributes;
 
   return (
-    <details className={`h5ap-transcript h5ap-transcript--${alignment}`} open style={{ width: typeof width === 'string' ? width : undefined, '--h5ap-tr-radius': `${transcriptRadius}px` }}>
+    <details className={`h5ap-transcript h5ap-transcript--${alignment}`} open style={{ width: typeof width === 'string' ? width : undefined, '--h5ap-tr-radius': `${transcriptRadius}px`, ...transcriptColorVars(attributes) }}>
       <summary className="h5ap-transcript__summary">{__('Transcript', 'html5-audio-player')}</summary>
       {transcriptSearch !== false && (
         <div className="h5ap-transcript__search">

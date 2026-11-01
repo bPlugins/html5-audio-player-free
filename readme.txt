@@ -4,7 +4,7 @@ Tags: mp3 player, audio, audio player, player, podcast
 Donate link: https://www.buymeacoffee.com/abuhayat/  
 Requires at least: 6.5
 Tested up to: 7.1
-Stable tag: 2.10.0
+Stable tag: 2.11.0
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -234,6 +234,9 @@ e.g.
 
 
 == Changelog ==
+
+= 2.11.0 - 1 November, 2026 =
+* **New:** Transcript line colors: choose the text and background color of the transcript lines, their text and background color when the mouse is over a line, and the background of the line that is playing. In the Audio Player and Audio Playlist blocks, the `[player]` shortcode settings (Standard and Sticky) and the Elementor widget. Colors left empty keep the current look.
 
 = 2.10.0 - 27 October, 2026 =
 * **New:** Interactive Transcript: show the text of your audio under the player. The line being spoken is highlighted, visitors click a line to jump to that moment and search inside the audio. Import SRT/VTT captions or type it in. Works in the Audio Player block, the `[player]` shortcode and the Elementor widget.

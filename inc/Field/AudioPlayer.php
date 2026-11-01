@@ -294,6 +294,7 @@ class AudioPlayer
         ),
         // Shown only when the transcript is on.
         \H5APPlayer\Helper\Transcript::metabox_field('radius'),
+        \H5APPlayer\Helper\Transcript::metabox_field('colors'),
 
         // --- Section Header 4: Playback Behavior & Options ---
         array(
@@ -386,6 +387,7 @@ class AudioPlayer
         \H5APPlayer\Helper\Transcript::metabox_field('search', ['opt-1', 'opt-3']),
         \H5APPlayer\Helper\Transcript::metabox_field('open', ['opt-1', 'opt-3']),
         \H5APPlayer\Helper\Transcript::metabox_field('radius_list', ['opt-3']),
+        \H5APPlayer\Helper\Transcript::metabox_field('colors_list', ['opt-3']),
 
         // --- Standard Pro Notice Box ---
         array(

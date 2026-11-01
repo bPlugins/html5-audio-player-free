@@ -68,10 +68,11 @@ $h5ap_transcript_args = [
     'search' => ($attributes['transcriptSearch'] ?? true) !== false,
     'open'   => ($attributes['transcriptOpen'] ?? true) !== false,
     'radius' => (int) ($attributes['transcriptRadius'] ?? 0),
+    'colors' => $attributes['transcriptColors'] ?? [],
     // Only these skins can be sticky (see Common/AudioPlayer.js); a sticky player shows the transcript in a dock above the bar.
     'sticky' => !empty($attributes['isSticky']) && in_array($attributes['skin'] ?? 'Default', ['Default', 'Fusion', 'Stamp', 'Wave'], true),
 ];
-unset($attributes['transcript'], $attributes['showTranscript'], $attributes['transcriptSearch'], $attributes['transcriptOpen'], $attributes['transcriptRadius']);
+unset($attributes['transcript'], $attributes['showTranscript'], $attributes['transcriptSearch'], $attributes['transcriptOpen'], $attributes['transcriptRadius'], $attributes['transcriptColors']);
 
 $encoded_attributes = esc_attr(wp_json_encode($attributes, JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS));
 $wrapper_attributes = get_block_wrapper_attributes(['class' => 'wp-block-h5ap-tailwind']);

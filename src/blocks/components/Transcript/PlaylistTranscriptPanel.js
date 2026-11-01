@@ -4,6 +4,7 @@ import { PanelBody, ToggleControl, PanelRow, __experimentalUnitControl as UnitCo
 import { Notice } from '../../../../../bpl-tools/Components';
 import NewBadge from '../NewBadge/NewBadge.js';
 import LabelWithHelp from '../LabelWithHelp/LabelWithHelp.js';
+import TranscriptColors from './TranscriptColors.js';
 
 const countTracks = (audios) => (Array.isArray(audios) ? audios : []).filter((track) => Array.isArray(track?.transcript) && track.transcript.length).length;
 
@@ -97,6 +98,7 @@ export const TranscriptStylePanel = ({ attributes, setAttributes }) => {
           onChange={(value) => setAttributes({ transcriptRadius: Math.max(0, Math.min(40, parseInt(value, 10) || 0)) })}
         />
       </PanelRow>
+      <TranscriptColors {...{ attributes, setAttributes }} />
     </PanelBody>
   );
 };

@@ -1,6 +1,8 @@
 // Transcript box shown under the audio player (front end and editor preview).
 // Every color comes from the theme's text color (currentColor), so it fits light and dark themes.
 // Corners are square by default; "Corner radius" sets --h5ap-tr-radius (inner parts use a smaller radius).
+// The line color options (only the transcript lines) set --h5ap-tr-line-color, --h5ap-tr-line-bg, --h5ap-tr-hover-color,
+// --h5ap-tr-hover and --h5ap-tr-active; a color that is not set keeps the default look.
 .h5ap-transcript {
     --h5ap-tr-radius: 0px;
     --h5ap-tr-inner-radius: min(var(--h5ap-tr-radius), 6px);
@@ -177,21 +179,29 @@
         margin: 0;
         padding: 8px 10px;
         border-radius: var(--h5ap-tr-inner-radius);
+        background: var(--h5ap-tr-line-bg, transparent);
+        color: var(--h5ap-tr-line-color, inherit);
         cursor: pointer;
-        transition: background-color 0.15s ease;
+        transition: background-color 0.15s ease, color 0.15s ease;
 
         &:hover {
-            background: rgba(127, 127, 127, 0.08);
+            background: var(--h5ap-tr-hover, rgba(127, 127, 127, 0.08));
+            color: var(--h5ap-tr-hover-color, var(--h5ap-tr-line-color, inherit));
         }
 
         &.is-active {
-            background: rgba(127, 127, 127, 0.14);
+            background: var(--h5ap-tr-active, rgba(127, 127, 127, 0.14));
             box-shadow: inset 3px 0 0 currentColor;
         }
 
         &[hidden] {
             display: none;
         }
+    }
+
+    // With a line background the lines get a small gap, so each one stands apart (0 by default: no change).
+    & &__line + &__line {
+        margin-top: var(--h5ap-tr-line-gap, 0px);
     }
 
     // Timestamp as a small pill. Theme button styles are reset so it looks the same everywhere.

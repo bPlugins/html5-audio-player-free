@@ -41,6 +41,10 @@
           "type": "number",
           "default": 0
         },
+        "transcriptColors": {
+          "type": "object",
+          "default": {}
+        },
         "audios": {
             "type": "array",
             "default": [

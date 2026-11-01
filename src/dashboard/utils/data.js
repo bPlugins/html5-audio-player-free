@@ -344,6 +344,13 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
     },
     changelogs: [
         {
+            version: '2.11.0 - 1 November, 2026',
+            type: 'new',
+            list: [
+                '<strong>New:</strong> Transcript line colors: choose the text and background color of the transcript lines, their text and background color when the mouse is over a line, and the background of the line that is playing. In the Audio Player and Audio Playlist blocks, the <code>[player]</code> shortcode settings (Standard and Sticky) and the Elementor widget. Colors left empty keep the current look.',
+            ]
+        },
+        {
             version: '2.10.0 - 27 October, 2026',
             type: 'new',
             list: [

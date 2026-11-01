@@ -1,6 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { formatTime } from '../../../utils/transcript';
 import '../../../css/transcript.scss';
+import { transcriptColorVars } from './TranscriptColors.js';
 
 /**
  * Editor-only preview for the playlist blocks: the transcript of the first track that has one.
@@ -18,7 +19,7 @@ const PlaylistTranscriptPreview = ({ attributes }) => {
   const boxWidth = typeof width === 'string' ? width : (width?.number && width?.unit ? `${width.number}${width.unit}` : undefined);
 
   return (
-    <details className={`h5ap-transcript h5ap-transcript--${alignment}`} open style={{ width: boxWidth, '--h5ap-tr-radius': `${transcriptRadius}px` }}>
+    <details className={`h5ap-transcript h5ap-transcript--${alignment}`} open style={{ width: boxWidth, '--h5ap-tr-radius': `${transcriptRadius}px`, ...transcriptColorVars(attributes) }}>
       <summary className="h5ap-transcript__summary">
         {__('Transcript', 'html5-audio-player')}
         {track.title && <> <span className="h5ap-transcript__track">{track.title}</span></>}

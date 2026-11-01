@@ -188,6 +188,7 @@ class Transcript
      * @param array  $cues      Transcript cues.
      * @param string $player_id The id of the element that contains the player's <audio>.
      * @param array  $args      align (left|center|right), width (CSS length), search (bool), open (bool),
+     *                          radius (px), colors (see color_options()),
      *                          source (track file, for playlists), title (track name), hidden (bool),
      *                          sticky (bool: show it in a dock above a sticky player).
      */
@@ -198,7 +199,7 @@ class Transcript
             return '';
         }
 
-        $args = wp_parse_args($args, ['align' => 'left', 'width' => '100%', 'search' => true, 'open' => true, 'radius' => 0, 'source' => '', 'title' => '', 'hidden' => false, 'sticky' => false]);
+        $args = wp_parse_args($args, ['align' => 'left', 'width' => '100%', 'search' => true, 'open' => true, 'radius' => 0, 'colors' => [], 'source' => '', 'title' => '', 'hidden' => false, 'sticky' => false]);
         $align = in_array($args['align'], ['left', 'center', 'right'], true) ? $args['align'] : 'left';
         $width = (is_string($args['width']) && preg_match('/^\d+(\.\d+)?(px|%|em|rem|vw)$/', $args['width'])) ? $args['width'] : '100%';
 
@@ -215,7 +216,7 @@ class Transcript
 
         ob_start();
         ?>
-<details class="h5ap-transcript h5ap-transcript--<?php echo esc_attr($align); ?>" data-player="<?php echo esc_attr($player_id); ?>" style="width: <?php echo esc_attr($width); ?>; --h5ap-tr-radius: <?php echo esc_attr($radius); ?>px"<?php echo $source !== '' ? ' data-source="' . esc_url($source) . '"' : ''; ?><?php echo $open ? ' open' : ''; ?><?php echo $args['hidden'] ? ' hidden' : ''; ?>>
+<details class="h5ap-transcript h5ap-transcript--<?php echo esc_attr($align); ?>" data-player="<?php echo esc_attr($player_id); ?>" style="width: <?php echo esc_attr($width); ?>; --h5ap-tr-radius: <?php echo esc_attr($radius); ?>px<?php echo esc_attr(self::color_style($args['colors'])); ?>"<?php echo $source !== '' ? ' data-source="' . esc_url($source) . '"' : ''; ?><?php echo $open ? ' open' : ''; ?><?php echo $args['hidden'] ? ' hidden' : ''; ?>>
     <summary class="h5ap-transcript__summary"><?php esc_html_e('Transcript', 'html5-audio-player'); ?><?php if ($title !== '') { ?> <span class="h5ap-transcript__track"><?php echo esc_html($title); ?></span><?php } ?></summary>
     <?php if ($args['search']) { ?>
     <div class="h5ap-transcript__search">
@@ -250,6 +251,66 @@ class Transcript
             . '<button type="button" class="h5ap-transcript-dock__toggle" aria-expanded="false">' . esc_html__('Transcript', 'html5-audio-player') . '</button>'
             . $html
             . '</div>';
+    }
+
+    /**
+     * Colors of the transcript lines (only the lines, not the box): key => [CSS variable, label].
+     * A color that is not set keeps the default look.
+     */
+    public static function color_options()
+    {
+        return [
+            'text'       => ['--h5ap-tr-line-color', __('Text', 'html5-audio-player')],
+            'bg'         => ['--h5ap-tr-line-bg', __('Background', 'html5-audio-player')],
+            'hover_text' => ['--h5ap-tr-hover-color', __('Hover Text', 'html5-audio-player')],
+            'hover'      => ['--h5ap-tr-hover', __('Hover Background', 'html5-audio-player')],
+            'active'     => ['--h5ap-tr-active', __('Playing Line', 'html5-audio-player')],
+        ];
+    }
+
+    /**
+     * A CSS color (hex, rgb(a), hsl(a) or transparent), or '' for anything else.
+     */
+    public static function sanitize_color($value)
+    {
+        $value = is_string($value) ? trim($value) : '';
+        if (preg_match('/^#([0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})$/i', $value) || preg_match('/^(rgba?|hsla?)\(\s*[0-9.,%\s\/]+\)$/i', $value) || strtolower($value) === 'transparent') {
+            return $value;
+        }
+        return '';
+    }
+
+    /**
+     * Only the known, valid colors (from a block attribute or the metabox).
+     */
+    public static function sanitize_colors($colors)
+    {
+        $clean = [];
+        foreach (array_keys(self::color_options()) as $key) {
+            $color = is_array($colors) && isset($colors[$key]) ? self::sanitize_color($colors[$key]) : '';
+            if ($color !== '') {
+                $clean[$key] = $color;
+            }
+        }
+        return $clean;
+    }
+
+    /**
+     * "; --h5ap-tr-line-bg: #fff" for the colors that are set ('' when none is), added to the box's style.
+     */
+    private static function color_style($colors)
+    {
+        $style = '';
+        $options = self::color_options();
+        $clean = self::sanitize_colors($colors);
+        foreach ($clean as $key => $color) {
+            $style .= '; ' . $options[$key][0] . ': ' . $color;
+        }
+        // With a line background, a small gap keeps the lines apart.
+        if (isset($clean['bg'])) {
+            $style .= '; --h5ap-tr-line-gap: 6px';
+        }
+        return $style;
     }
 
     /**
@@ -390,6 +451,22 @@ class Transcript
                     'default'    => 0,
                     'dependency' => $shown,
                 ];
+            case 'colors':
+            case 'colors_list':
+                // Two ids, like the radius: the Standard Player's field and the Sticky one sit in different sections.
+                $options = [];
+                foreach (self::color_options() as $key => $option) {
+                    $options[$key] = $option[1];
+                }
+                return [
+                    'id'         => $name === 'colors' ? 'transcript_colors' : 'transcript_colors_list',
+                    'type'       => 'color_group',
+                    'title'      => __('Transcript Line Colors', 'html5-audio-player') . ' <span class="h5ap-new-badge" style="background:#2563eb;color:#fff;font-size:10px;padding:2px 6px;border-radius:4px;margin-left:6px;font-weight:600;">' . esc_html__('NEW', 'html5-audio-player') . '</span>',
+                    'desc'       => __('Colors of the transcript lines only: their text and background, the colors when the mouse is over a line, and the background of the line that is playing. Leave a color empty to keep the default look.', 'html5-audio-player'),
+                    'options'    => $options,
+                    'sanitize'   => [__CLASS__, 'sanitize_colors'],
+                    'dependency' => $shown,
+                ];
         }
         return [];
     }
@@ -439,6 +516,7 @@ class Transcript
             'transcriptSearch' => $meta('transcript_search', true, true),
             'transcriptOpen'   => $meta('transcript_open', true, true),
             'transcriptRadius' => (int) $meta($type === 'opt-1' ? 'transcript_radius' : 'transcript_radius_list', 0),
+            'transcriptColors' => self::sanitize_colors($meta($type === 'opt-1' ? 'transcript_colors' : 'transcript_colors_list', [])),
         ];
         if ($type === 'opt-2') {
             unset($attrs['transcript']); // a playlist keeps the text with each track
@@ -516,6 +594,22 @@ class Transcript
             'default'     => ['unit' => 'px', 'size' => 0],
             'description' => esc_html__('Round the corners of the transcript box, in pixels. 0 keeps them square.', 'html5-audio-player'),
         ]);
+
+        $widget->add_control('h5ap_transcript_colors_heading', [
+            'label'     => esc_html__('Line Colors', 'html5-audio-player'),
+            'type'      => \Elementor\Controls_Manager::HEADING,
+            'separator' => 'before',
+        ]);
+
+        // Elementor prints these as CSS, so global colors work too. Empty keeps the default look.
+        foreach (self::color_options() as $key => $option) {
+            $widget->add_control('h5ap_transcript_' . $key . '_color', [
+                'label'     => esc_html($option[1]),
+                'type'      => \Elementor\Controls_Manager::COLOR,
+                // With a line background, a small gap keeps the lines apart.
+                'selectors' => ['{{WRAPPER}} .h5ap-transcript' => $option[0] . ': {{VALUE}};' . ($key === 'bg' ? ' --h5ap-tr-line-gap: 6px;' : '')],
+            ]);
+        }
 
         $widget->end_controls_section();
     }

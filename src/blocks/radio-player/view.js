@@ -7,6 +7,13 @@ function initRadioPlayer() {
     const blocks = document.querySelectorAll('.wp-block-h5ap-radio-player[data-attributes]');
 
     blocks.forEach((block) => {
+        // Elementor runs this again for every element on the page: start each player only once,
+        // or a lazy player gets one more observer (and one more player) each time.
+        if (block.dataset.h5apStarted) {
+            return;
+        }
+        block.dataset.h5apStarted = '1';
+
         const attributers = JSON.parse(block.dataset.attributes);
         const id = block.dataset.id;
         const nonce = block.dataset.nonce;

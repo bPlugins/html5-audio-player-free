@@ -344,6 +344,13 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
     },
     changelogs: [
         {
+            version: '2.10.2 - 11 November, 2026',
+            type: 'new',
+            list: [
+                '<strong>Fix:</strong> Players and playlists on Elementor pages with Lazy Load were started many times and stopped playing.',
+            ]
+        },
+        {
             version: '2.10.1 - 1 November, 2026',
             type: 'new',
             list: [

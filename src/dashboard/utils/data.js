@@ -344,6 +344,13 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
     },
     changelogs: [
         {
+            version: '2.10.3 - 17 Nov, 2026',
+            type: 'enhancement',
+            list: [
+                '<strong>Enhancement:</strong> Added Black Friday promotional banner and campaign notices.'
+            ]
+        },
+        {
             version: '2.10.2 - 11 November, 2026',
             type: 'new',
             list: [
@@ -371,30 +378,9 @@ export const welcomeInfo = (adminUrl, isElementorActive) => ({
                 '<strong>Fix:</strong> Updated the Freemius SDK to fix the "Undefined array key HTTP_HOST" PHP warning when using WP-CLI.',
                 '<strong>Fix:</strong> In the Elementor editor, a player added with the Shortcode widget kept showing the loader and did not start until the page was reloaded.'
             ]
-        },
-        {
-            version: '2.9.0 - 13 October, 2026',
-            type: 'new',
-            list: [
-                '<strong>New:</strong> Added built-in Audio Analytics: a new HTML5 Audio Player → Analytics dashboard that shows plays, listening time and top tracks of your audio and radio players. Privacy-friendly: no cookies, no third-party services and IP addresses are never stored.',
-                '<strong>New:</strong> Analytics works with the Audio Player block, <code>[audio_player]</code> shortcode, player shortcodes, Audio Playlist block, radio players and the Elementor widget.',
-                '<strong>New:</strong> Daily chart of plays and listening time with Today and Last 7 days ranges.',
-                '<strong>New:</strong> Top 5 most played tracks list.',
-                '<strong>New:</strong> Broken audio alert that warns when audio files fail to play for visitors.',
-                '<strong>New:</strong> Added an Analytics settings tab to enable or disable tracking, exclude administrators and automatically delete old listen records (30–730 days).',
-                '<strong>New:</strong> Added an option to delete all analytics data, a privacy policy text suggestion, and analytics data cleanup on uninstall when "Delete Data on Uninstall" is enabled.',
-                '<strong>Improvement:</strong> Redesigned the shortcode box on the Add/Edit Player screen with a one-click copy button.',
-                '<strong>Improvement:</strong> Added a copy shortcode button in the All Players and All Radio Players lists.',
-                '<strong>Improvement:</strong> Redesigned the HTML5 Audio Player admin menu for a cleaner, modern look.',
-                '<strong>Fix:</strong> Restored the Title and Poster fields for the Sticky Player.',
-                '<strong>Security:</strong> Fixed a Stored Cross-Site Scripting (XSS) vulnerability that allowed users with Contributor or higher role to inject scripts through player titles, artist names and other text fields.',
-                '<strong>Security:</strong> Added output escaping to all player, playlist and radio player skins and Elementor widgets, and blocked unsafe <code>javascript:</code> URLs in poster, download and subscribe links.',
-                '<strong>Security:</strong> Added server-side sanitization for player text fields and <code>[audio_player]</code> shortcode attributes.',
-                '<strong>Security:</strong> Fixed authorization bypass vulnerability in post duplication action.'
-            ]
         }
     ],
-    changelogsLimit: 2,
+    changelogsLimit: 4,
     changelogsReadMoreLabel: 'View More Changelogs',
     proFeatures: [
         'AI Transcript Generator (Whisper AI, runs in your browser, no API key)',

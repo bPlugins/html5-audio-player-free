@@ -3,8 +3,7 @@ Contributors: bplugins, abuhayat, freemius, shamim10, farazi1
 Tags: mp3 player, audio, audio player, player, podcast
 Donate link: https://www.buymeacoffee.com/abuhayat/  
 Requires at least: 6.5
-Tested up to: 7.1
-Stable tag: 2.10.2
+Stable tag: 2.10.3
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -234,6 +233,9 @@ e.g.
 
 
 == Changelog ==
+
+= 2.10.3 - 17 Nov, 2026 =
+* **Enhancement:** Added Black Friday promotional campaign banner and special discount upgrade link.
 
 = 2.10.2 - 11 November, 2026 =
 * **Fix:** Players and playlists on Elementor pages with Lazy Load were started many times and stopped playing.

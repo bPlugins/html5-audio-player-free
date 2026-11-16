@@ -5,7 +5,6 @@
  * Description: You can easily integrate html5 audio player in your WordPress website using this plugin.
  * Version: 2.10.3
  * Requires at least: 6.5
- * Tested up to: 7.1
  * Requires PHP: 7.1
  * Author: bPlugins
  * Author URI: http://bPlugins.com
